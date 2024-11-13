@@ -1,0 +1,62 @@
+# =============== #
+# Unity Generated #
+# =============== #
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+# Exclude the following if using Unity Cloud Build
+/[Cc]ache/
+
+# ============ #
+# Auto-Generated #
+# ============ #
+/Assets/AssetStoreTools*
+
+# ================= #
+# Visual Studio / Rider #
+# ================= #
+.vscode/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+.vscode/settings.json
+
+# ============= #
+# OS Specific #
+# ============= #
+
+# Windows
+[Dd]esktop.ini
+[Tt]humbs.db
+*.DS_Store
+
+# macOS
+._*
+.AppleDouble
+.LSOverride
+Icon
+__MACOSX/
+
+# =============== #
+# Version Control #
+# =============== #
+*.meta
+*.unity
+*.unitypackage
+
