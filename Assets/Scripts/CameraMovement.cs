@@ -6,14 +6,14 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        // 获取用户输入
-        float moveHorizontal = Input.GetAxis("Horizontal"); // A 和 D 控制左右移动
-        float moveVertical = Input.GetAxis("Vertical"); // W 和 S 控制前后移动
+        // get input of users
+        float moveHorizontal = Input.GetAxis("Horizontal"); // control A and D
+        float moveVertical = Input.GetAxis("Vertical"); // control W and S
 
-        // 计算移动方向
+        // calculate translate
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         
-        // 移动相机
+        // move it
         transform.Translate(movement * moveSpeed * Time.deltaTime, Space.World);
     }
 }
