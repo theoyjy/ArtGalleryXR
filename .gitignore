@@ -9,6 +9,7 @@
 [Ll]ogs/
 [Mm]emoryCaptures/
 
+
 # Exclude the following if using Unity Cloud Build
 /[Cc]ache/
 
@@ -36,6 +37,8 @@
 *.opendb
 *.VC.db
 .vscode/settings.json
+.utmp/
+.vs/
 
 # ============= #
 # OS Specific #

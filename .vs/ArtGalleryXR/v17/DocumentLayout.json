@@ -3,44 +3,48 @@
   "WorkspaceRootPath": "D:\\Code\\ArtGalleryXR\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2334F883-C9A9-925E-5AE2-01A23ACEDD5C}|VRMP.csproj|d:\\code\\artgalleryxr\\assets\\vrmpassets\\scripts\\gameplay\\drawing\\pentrail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2334F883-C9A9-925E-5AE2-01A23ACEDD5C}|VRMP.csproj|solutionrelative:assets\\vrmpassets\\scripts\\gameplay\\drawing\\pentrail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|d:\\code\\artgalleryxr\\assets\\samples\\xr interaction toolkit\\3.0.7\\starter assets\\scripts\\controllerinputactionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|solutionrelative:assets\\samples\\xr interaction toolkit\\3.0.7\\starter assets\\scripts\\controllerinputactionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2334F883-C9A9-925E-5AE2-01A23ACEDD5C}|VRMP.csproj|d:\\code\\artgalleryxr\\assets\\vrmpassets\\scripts\\gameplay\\drawing\\simplepen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2334F883-C9A9-925E-5AE2-01A23ACEDD5C}|VRMP.csproj|solutionrelative:assets\\vrmpassets\\scripts\\gameplay\\drawing\\simplepen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2334F883-C9A9-925E-5AE2-01A23ACEDD5C}|VRMP.csproj|d:\\code\\artgalleryxr\\assets\\vrmpassets\\scripts\\gameplay\\roommusic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2334F883-C9A9-925E-5AE2-01A23ACEDD5C}|VRMP.csproj|solutionrelative:assets\\vrmpassets\\scripts\\gameplay\\roommusic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2334F883-C9A9-925E-5AE2-01A23ACEDD5C}|VRMP.csproj|d:\\code\\artgalleryxr\\assets\\vrmpassets\\scripts\\gameplay\\networkobjectdestroyer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2334F883-C9A9-925E-5AE2-01A23ACEDD5C}|VRMP.csproj|solutionrelative:assets\\vrmpassets\\scripts\\gameplay\\networkobjectdestroyer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2334F883-C9A9-925E-5AE2-01A23ACEDD5C}|VRMP.csproj|d:\\code\\artgalleryxr\\assets\\vrmpassets\\scripts\\player\\jointbasedhand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2334F883-C9A9-925E-5AE2-01A23ACEDD5C}|VRMP.csproj|solutionrelative:assets\\vrmpassets\\scripts\\player\\jointbasedhand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2334F883-C9A9-925E-5AE2-01A23ACEDD5C}|VRMP.csproj|d:\\code\\artgalleryxr\\assets\\vrmpassets\\scripts\\player\\keyboardcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2334F883-C9A9-925E-5AE2-01A23ACEDD5C}|VRMP.csproj|solutionrelative:assets\\vrmpassets\\scripts\\player\\keyboardcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|d:\\code\\artgalleryxr\\assets\\samples\\xr interaction toolkit\\3.0.6\\spatial keyboard\\scripts\\xrkeyboardkey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|solutionrelative:assets\\samples\\xr interaction toolkit\\3.0.6\\spatial keyboard\\scripts\\xrkeyboardkey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|d:\\code\\artgalleryxr\\assets\\samples\\xr interaction toolkit\\3.0.6\\spatial keyboard\\scripts\\xrkeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|solutionrelative:assets\\samples\\xr interaction toolkit\\3.0.6\\spatial keyboard\\scripts\\xrkeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|d:\\code\\artgalleryxr\\assets\\samples\\xr interaction toolkit\\3.0.6\\spatial keyboard\\scripts\\globalnonnativekeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|solutionrelative:assets\\samples\\xr interaction toolkit\\3.0.6\\spatial keyboard\\scripts\\globalnonnativekeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|d:\\code\\artgalleryxr\\assets\\samples\\xr interaction toolkit\\3.0.6\\spatial keyboard\\scripts\\keyfunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|solutionrelative:assets\\samples\\xr interaction toolkit\\3.0.6\\spatial keyboard\\scripts\\keyfunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,11 +54,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "ControllerInputActionManager.cs",
+              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
+              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
+              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
+              "ViewState": "AQIAACkAAAAAAAAAAAAewEAAAABFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T12:29:50.298Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "SimplePen.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs",
               "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs",
@@ -62,25 +79,22 @@
               "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:04:45.206Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T12:04:45.206Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "PenTrail.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
               "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
               "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
               "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAAAowAcAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:00:35.967Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T12:00:35.967Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "RoomMusic.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs",
               "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs",
@@ -88,12 +102,11 @@
               "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAC0AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:00:04.587Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T12:00:04.587Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "NetworkObjectDestroyer.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs",
               "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs",
@@ -101,12 +114,11 @@
               "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:00:02.28Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T12:00:02.28Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "JointBasedHand.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs",
               "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs",
@@ -114,12 +126,11 @@
               "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs",
               "ViewState": "AQIAAMQAAAAAAAAAAAAwwOIAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:59:25.703Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T11:59:25.703Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "KeyboardControl.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs",
               "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs",
@@ -127,12 +138,11 @@
               "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:59:10.149Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T11:59:10.149Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "XRKeyboardKey.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs",
               "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs",
@@ -140,12 +150,11 @@
               "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:58:26.084Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T11:58:26.084Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "XRKeyboard.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs",
               "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs",
@@ -153,8 +162,7 @@
               "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs",
               "ViewState": "AQIAADQAAAAAAAAAAAAkwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:57:57.49Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T11:57:57.49Z"
             },
             {
               "$type": "Document",
@@ -166,12 +174,11 @@
               "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAQwAcAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:56:51.945Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T11:56:51.945Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "GlobalNonNativeKeyboard.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs",
               "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs",
@@ -179,8 +186,7 @@
               "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:56:07.671Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T11:56:07.671Z"
             }
           ]
         }
