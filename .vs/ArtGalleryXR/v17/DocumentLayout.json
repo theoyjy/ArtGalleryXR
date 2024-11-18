@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "D:\\Code\\ArtGalleryXR\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|d:\\code\\artgalleryxr\\assets\\samples\\xr interaction toolkit\\3.0.7\\starter assets\\scripts\\controllerinputactionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|solutionrelative:assets\\samples\\xr interaction toolkit\\3.0.7\\starter assets\\scripts\\controllerinputactionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,20 +31,24 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CF03857-8362-D964-8961-01F5734A38CF}|Unity.XR.Interaction.Toolkit.Samples.SpatialKeyboard.csproj|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -59,15 +63,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ContinuousMoveProvider.cs",
+              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
+              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
+              "ToolTip": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
+              "RelativeToolTip": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T15:10:39.799Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "ControllerInputActionManager.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
               "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
               "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
               "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
-              "ViewState": "AQIAACkAAAAAAAAAAAAewEAAAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T12:29:50.298Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-18T12:29:50.298Z"
             },
             {
               "$type": "Document",
