@@ -1,10 +1,6 @@
 using System.Collections;
-using Microsoft.Unity.VisualStudio.Editor;
-using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
 
 public class CanvasUpdater : MonoBehaviour
 {
@@ -12,8 +8,7 @@ public class CanvasUpdater : MonoBehaviour
     public Material[] materials;
     public Texture2D current_canvas_texture;
 
-    public RawImage texture_image;
-    public string texture_url = "https://cdn.britannica.com/33/194733-050-4CF75F31/Girl-with-a-Pearl-Earring-canvas-Johannes-1665.jpg";
+    public string texture_url = "https://d6be0271-d571-42d8-a09b-305d7f148d1f.client-api.unity3dusercontent.com/client_api/v1/environments/a692e5af-8842-4289-bb91-ad105fd3e95d/buckets/29e6096a-5d6c-4985-a63c-ed8a16000af9/entries/3a3cd862-6ada-4fe9-b7ae-dac3d386abc1/versions/f83c7f17-f247-4d82-89a0-d4df005bd1ef/content/";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,9 +21,7 @@ public class CanvasUpdater : MonoBehaviour
     {
         if (is_Changed)
         {
-            is_Changed = false;
             StartCoroutine(fetchTexture(texture_url));
-            materials[1].mainTexture = current_canvas_texture;
         }
     }
 
@@ -41,11 +34,13 @@ public class CanvasUpdater : MonoBehaviour
             {
                 Texture2D texture = DownloadHandlerTexture.GetContent(req);
                 current_canvas_texture = texture;
+                materials[1].mainTexture = current_canvas_texture;
             }
             else
             {
 
             }
+            is_Changed = false;
         }
     }
 }

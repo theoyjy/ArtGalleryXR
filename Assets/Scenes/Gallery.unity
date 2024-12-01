@@ -563,7 +563,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   is_Changed: 0
   materials: []
-  current_canvas_texture: {fileID: 0}
+  current_canvas_texture: {fileID: 2800000, guid: 15d55b98aad8e42a09fd46f4d79b77d1, type: 3}
+  texture_url: https://d6be0271-d571-42d8-a09b-305d7f148d1f.client-api.unity3dusercontent.com/client_api/v1/environments/production/buckets/29e6096a-5d6c-4985-a63c-ed8a16000af9/release_by_badge/latest/entry_by_path/content/?path=image.jpg
 --- !u!1001 &847330728
 PrefabInstance:
   m_ObjectHideFlags: 0
