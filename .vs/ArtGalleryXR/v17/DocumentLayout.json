@@ -1,78 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Code\\ArtGalleryXR\\",
+  "WorkspaceRootPath": "F:\\Unity\\ArtGalleryXR\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|f:\\unity\\artgalleryxr\\assets\\playfabeditorextensions\\editor\\scripts\\utils\\editorcoroutine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|solutionrelative:assets\\playfabeditorextensions\\editor\\scripts\\utils\\editorcoroutine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|d:\\code\\artgalleryxr\\assets\\samples\\xr interaction toolkit\\3.0.7\\starter assets\\scripts\\controllerinputactionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|solutionrelative:assets\\samples\\xr interaction toolkit\\3.0.7\\starter assets\\scripts\\controllerinputactionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|f:\\unity\\artgalleryxr\\assets\\playfabeditorextensions\\editor\\scripts\\utils\\playfabeditorhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|solutionrelative:assets\\playfabeditorextensions\\editor\\scripts\\utils\\playfabeditorhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|D:\\Code\\ArtGalleryXR\\assets\\samples\\xr interaction toolkit\\3.0.7\\starter assets\\scripts\\dynamicmoveprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|solutionrelative:assets\\samples\\xr interaction toolkit\\3.0.7\\starter assets\\scripts\\dynamicmoveprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|f:\\unity\\artgalleryxr\\assets\\playfabeditorextensions\\editor\\playfabeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|solutionrelative:assets\\playfabeditorextensions\\editor\\playfabeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|D:\\Code\\ArtGalleryXR\\assets\\scripts\\objectmovementwithcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\objectmovementwithcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|F:\\Unity\\ArtGalleryXR\\assets\\scripts\\playfabhello.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playfabhello.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\ContinuousTurnProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\ContinuousTurnProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|D:\\Code\\ArtGalleryXR\\assets\\scripts\\cameramovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cameramovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|f:\\unity\\artgalleryxr\\assets\\scripts\\playfabusage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playfabusage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -87,219 +35,67 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "XROrigin.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs",
-              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs",
-              "RelativeToolTip": "Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs",
-              "ViewState": "AQIAAIwAAAAAAAAAAAAiwAYBAAAaAAAA",
+              "Title": "EditorCoroutine.cs",
+              "DocumentMoniker": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\EditorCoroutine.cs",
+              "RelativeDocumentMoniker": "Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\EditorCoroutine.cs",
+              "ToolTip": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\EditorCoroutine.cs",
+              "RelativeToolTip": "Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\EditorCoroutine.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAIA1wGcAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T12:54:18.929Z",
+              "WhenOpened": "2024-11-26T16:20:01.165Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ControllerInputActionManager.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
-              "ViewState": "AQIAALgBAAAAAAAAAGBiwMwBAAAFAAAA",
+              "Title": "PlayFabEditorHelper.cs",
+              "DocumentMoniker": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\PlayFabEditorHelper.cs",
+              "RelativeDocumentMoniker": "Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\PlayFabEditorHelper.cs",
+              "ToolTip": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\PlayFabEditorHelper.cs",
+              "RelativeToolTip": "Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\PlayFabEditorHelper.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAIA1wIwAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T12:29:50.298Z",
+              "WhenOpened": "2024-11-26T16:19:48.621Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "DynamicMoveProvider.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\DynamicMoveProvider.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\DynamicMoveProvider.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\DynamicMoveProvider.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\DynamicMoveProvider.cs",
-              "ViewState": "AQIAAFoAAAAAAAAAAAAowC4AAAAPAAAA",
+              "Title": "PlayFabEditor.cs",
+              "DocumentMoniker": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\PlayFabEditor.cs",
+              "RelativeDocumentMoniker": "Assets\\PlayFabEditorExtensions\\Editor\\PlayFabEditor.cs",
+              "ToolTip": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\PlayFabEditor.cs",
+              "RelativeToolTip": "Assets\\PlayFabEditorExtensions\\Editor\\PlayFabEditor.cs",
+              "ViewState": "AgIAAPEAAAAAAAAAAAAlwAIBAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T11:22:06.599Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SnapTurnProvider.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs",
-              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs",
-              "RelativeToolTip": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T11:25:15.356Z"
+              "WhenOpened": "2024-11-26T16:07:22.236Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ContinuousTurnProvider.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\ContinuousTurnProvider.cs",
-              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\ContinuousTurnProvider.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\ContinuousTurnProvider.cs",
-              "RelativeToolTip": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\ContinuousTurnProvider.cs",
-              "ViewState": "AQIAAFwAAAAAAAAAAAAnwJcAAAARAAAA",
+              "Title": "PlayFabUsage.cs",
+              "DocumentMoniker": "F:\\Unity\\ArtGalleryXR\\Assets\\Scripts\\PlayFabUsage.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayFabUsage.cs",
+              "ToolTip": "F:\\Unity\\ArtGalleryXR\\Assets\\Scripts\\PlayFabUsage.cs",
+              "RelativeToolTip": "Assets\\Scripts\\PlayFabUsage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T11:42:27.133Z"
+              "WhenOpened": "2024-11-19T15:59:51.592Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ObjectMovementWithCamera.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Scripts\\ObjectMovementWithCamera.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\ObjectMovementWithCamera.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Scripts\\ObjectMovementWithCamera.cs",
-              "RelativeToolTip": "Assets\\Scripts\\ObjectMovementWithCamera.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "Title": "PlayFabHello.cs",
+              "DocumentMoniker": "F:\\Unity\\ArtGalleryXR\\Assets\\Scripts\\PlayFabHello.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayFabHello.cs",
+              "ToolTip": "F:\\Unity\\ArtGalleryXR\\Assets\\Scripts\\PlayFabHello.cs",
+              "RelativeToolTip": "Assets\\Scripts\\PlayFabHello.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAIA1wCYAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T12:27:07.855Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CameraMovement.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Scripts\\CameraMovement.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\CameraMovement.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Scripts\\CameraMovement.cs",
-              "RelativeToolTip": "Assets\\Scripts\\CameraMovement.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T16:26:17.635Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ContinuousMoveProvider.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
-              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
-              "RelativeToolTip": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAzAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T15:10:39.799Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "SimplePen.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs",
-              "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs",
-              "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:04:45.206Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "PenTrail.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
-              "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
-              "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:00:35.967Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "RoomMusic.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs",
-              "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs",
-              "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC0AAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:00:04.587Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "NetworkObjectDestroyer.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs",
-              "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs",
-              "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:00:02.28Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "JointBasedHand.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs",
-              "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs",
-              "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs",
-              "ViewState": "AQIAAMQAAAAAAAAAAAAwwOIAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:59:25.703Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "KeyboardControl.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs",
-              "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs",
-              "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:59:10.149Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "XRKeyboardKey.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:58:26.084Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "XRKeyboard.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs",
-              "ViewState": "AQIAADQAAAAAAAAAAAAkwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:57:57.49Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "KeyFunction.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAQwAcAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:56:51.945Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "GlobalNonNativeKeyboard.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:56:07.671Z"
+              "WhenOpened": "2024-11-20T11:52:58.538Z",
+              "EditorCaption": ""
             }
           ]
         }
