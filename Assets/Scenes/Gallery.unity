@@ -183,6 +183,18 @@ PrefabInstance:
       propertyPath: m_Type
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -2357884022608881519, guid: 5b0306287ea204014973b5df628108ec, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 65dae42f5498cbc4295896541fa7519e, type: 2}
+    - target: {fileID: -2357884022608881519, guid: 5b0306287ea204014973b5df628108ec, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 175e68496b9216c4ea272db7259a65ed, type: 2}
+    - target: {fileID: -1461304994638716399, guid: 5b0306287ea204014973b5df628108ec, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f03f2a4baad497240900417e85fe2e3a, type: 2}
     - target: {fileID: -516098083770646512, guid: 5b0306287ea204014973b5df628108ec, type: 3}
       propertyPath: m_Name
       value: Painting
