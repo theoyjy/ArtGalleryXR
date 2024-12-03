@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Unity.Services.Core;
+#if SERVER_BUILD
 using Unity.Services.Multiplay;
+#endif
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using System.Threading.Tasks;
@@ -13,12 +15,13 @@ public class MultiplayManager : MonoBehaviour
     [SerializeField] private string ipAddress;
     [SerializeField] private ushort port;
 
+#if SERVER_BUILD
     private IServerQueryHandler serverQueryHandler;
+#endif
 
     private async void Start()
     {
-        if (Application.platform == RuntimePlatform.LinuxServer)
-        {
+#if SERVER_BUILD
             Application.targetFrameRate = 60;
 
             await UnityServices.InitializeAsync();
@@ -33,24 +36,21 @@ public class MultiplayManager : MonoBehaviour
 
                 await MultiplayService.Instance.ReadyServerForPlayersAsync();
             }
-        }
-        else
-        {
-            JoinToServer();
-        }
+#endif
+        JoinToServer();
     }
 
     private async void Update()
     {
-        if (Application.platform == RuntimePlatform.LinuxServer)
-        {
+#if SERVER_BUILD
+        
             if (serverQueryHandler != null)
             {
                 serverQueryHandler.CurrentPlayers = (ushort)NetworkManager.Singleton.ConnectedClientsIds.Count;
                 serverQueryHandler.UpdateServerCheck();
                 await Task.Delay(100);
             }
-        }
+#endif
     }
 
     public void JoinToServer()
