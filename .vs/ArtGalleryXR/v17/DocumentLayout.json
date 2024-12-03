@@ -1,105 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\",
+  "WorkspaceRootPath": "D:\\Code\\ArtGalleryXR\\",
   "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\ClientNetworkTransform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\CustomPrefabsAndScripts\\ClientNetworkTransform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{78C7E7F5-403C-4E4D-F302-289B90BC486B}|ChatChannelSample.csproj|D:\\Code\\ArtGalleryXR\\assets\\samples\\vivox\\16.5.3\\chat channel sample\\assets\\chatchannelsample\\scripts\\managers\\vivoxvoicemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{78C7E7F5-403C-4E4D-F302-289B90BC486B}|ChatChannelSample.csproj|solutionrelative:assets\\samples\\vivox\\16.5.3\\chat channel sample\\assets\\chatchannelsample\\scripts\\managers\\vivoxvoicemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
     {
       "AbsoluteMoniker": "D:0:0:{78C7E7F5-403C-4E4D-F302-289B90BC486B}|ChatChannelSample.csproj|d:\\code\\artgalleryxr\\assets\\samples\\vivox\\16.5.3\\chat channel sample\\assets\\chatchannelsample\\scripts\\ui\\loginscreenui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{78C7E7F5-403C-4E4D-F302-289B90BC486B}|ChatChannelSample.csproj|solutionrelative:assets\\samples\\vivox\\16.5.3\\chat channel sample\\assets\\chatchannelsample\\scripts\\ui\\loginscreenui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.services.vivox\\Runtime\\VivoxServiceInternal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.services.vivox\\Runtime\\VivoxServiceInternal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|D:\\Code\\ArtGalleryXR\\assets\\samples\\xr interaction toolkit\\3.0.7\\starter assets\\scripts\\controllerinputactionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|solutionrelative:assets\\samples\\xr interaction toolkit\\3.0.7\\starter assets\\scripts\\controllerinputactionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.services.vivox\\Runtime\\SDK\\Utils\\VivoxLogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.services.vivox\\Runtime\\SDK\\Utils\\VivoxLogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Library\\PackageCache\\com.unity.render-pipelines.universal\\Runtime\\Passes\\AdditionalLightsShadowCasterPass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.render-pipelines.universal\\Runtime\\Passes\\AdditionalLightsShadowCasterPass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{78C7E7F5-403C-4E4D-F302-289B90BC486B}|ChatChannelSample.csproj|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\Managers\\VivoxVoiceManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78C7E7F5-403C-4E4D-F302-289B90BC486B}|ChatChannelSample.csproj|solutionrelative:Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\Managers\\VivoxVoiceManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\CameraMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\CustomPrefabsAndScripts\\CameraMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\PlayerCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\CustomPrefabsAndScripts\\PlayerCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\PlayerMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\CustomPrefabsAndScripts\\PlayerMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\Scripts\\CameraMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\CameraMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\MultiplayerManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\MultiplayerManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\PlayerMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\PlayerMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ObjectSpawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ObjectSpawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\PlayerCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\PlayerCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\Computer_Graphics\\NewFinalProj\\my_camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\HostBroadcaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\HostBroadcaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\ClientListener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\ClientListener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\NetworkHUD.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\NetworkHUD.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\IPAddressHelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\IPAddressHelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Scripts\\CameraMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\CameraMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{78C7E7F5-403C-4E4D-F302-289B90BC486B}|ChatChannelSample.csproj|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LobbyScreenUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78C7E7F5-403C-4E4D-F302-289B90BC486B}|ChatChannelSample.csproj|solutionrelative:Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LobbyScreenUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -109,428 +30,68 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "LoginScreenUI.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LoginScreenUI.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LoginScreenUI.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LoginScreenUI.cs",
-              "RelativeToolTip": "Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LoginScreenUI.cs",
-              "ViewState": "AQIAAKAAAAAAAAAAAAAuwLkAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T15:32:50.357Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ClientNetworkTransform.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\ClientNetworkTransform.cs",
-              "RelativeDocumentMoniker": "Assets\\CustomPrefabsAndScripts\\ClientNetworkTransform.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\ClientNetworkTransform.cs",
-              "RelativeToolTip": "Assets\\CustomPrefabsAndScripts\\ClientNetworkTransform.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T15:35:02.254Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AdditionalLightsShadowCasterPass.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Library\\PackageCache\\com.unity.render-pipelines.universal\\Runtime\\Passes\\AdditionalLightsShadowCasterPass.cs",
-              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.render-pipelines.universal\\Runtime\\Passes\\AdditionalLightsShadowCasterPass.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Library\\PackageCache\\com.unity.render-pipelines.universal\\Runtime\\Passes\\AdditionalLightsShadowCasterPass.cs",
-              "RelativeToolTip": "Library\\PackageCache\\com.unity.render-pipelines.universal\\Runtime\\Passes\\AdditionalLightsShadowCasterPass.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T14:53:15.062Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "VivoxVoiceManager.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\Managers\\VivoxVoiceManager.cs",
               "RelativeDocumentMoniker": "Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\Managers\\VivoxVoiceManager.cs",
               "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\Managers\\VivoxVoiceManager.cs",
               "RelativeToolTip": "Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\Managers\\VivoxVoiceManager.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAE0AAAA4AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAE0AAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T15:02:03.59Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "XROrigin.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs",
-              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs",
-              "RelativeToolTip": "Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs",
-              "ViewState": "AQIAAIwAAAAAAAAAAAAiwAYBAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T12:54:18.929Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ControllerInputActionManager.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
-              "ViewState": "AQIAALgBAAAAAAAAAGBiwMwBAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T12:29:50.298Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DynamicMoveProvider.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\DynamicMoveProvider.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\DynamicMoveProvider.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\DynamicMoveProvider.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\DynamicMoveProvider.cs",
-              "ViewState": "AQIAAFoAAAAAAAAAAAAowC4AAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T14:53:15.062Z"
+              "WhenOpened": "2024-12-03T16:00:14.214Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MultiplayerManager.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs",
-              "RelativeDocumentMoniker": "Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs",
-              "RelativeToolTip": "Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA0AAAANAAAAAAAAAA==",
+              "Title": "VivoxServiceInternal.cs",
+              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.services.vivox\\Runtime\\VivoxServiceInternal.cs",
+              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.services.vivox\\Runtime\\VivoxServiceInternal.cs",
+              "ToolTip": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.services.vivox\\Runtime\\VivoxServiceInternal.cs",
+              "RelativeToolTip": "Library\\PackageCache\\com.unity.services.vivox\\Runtime\\VivoxServiceInternal.cs",
+              "ViewState": "AQIAAGEEAAAAAAAAAAAiwHQEAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T13:53:55.632Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-03T15:58:16.874Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CameraMovement.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\CameraMovement.cs",
-              "RelativeDocumentMoniker": "Assets\\CustomPrefabsAndScripts\\CameraMovement.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\CameraMovement.cs",
-              "RelativeToolTip": "Assets\\CustomPrefabsAndScripts\\CameraMovement.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "VivoxLogger.cs",
+              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.services.vivox\\Runtime\\SDK\\Utils\\VivoxLogger.cs",
+              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.services.vivox\\Runtime\\SDK\\Utils\\VivoxLogger.cs",
+              "ToolTip": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.services.vivox\\Runtime\\SDK\\Utils\\VivoxLogger.cs",
+              "RelativeToolTip": "Library\\PackageCache\\com.unity.services.vivox\\Runtime\\SDK\\Utils\\VivoxLogger.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAB7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T14:25:33.136Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "SnapTurnProvider.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs",
-              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs",
-              "RelativeToolTip": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T11:25:15.356Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ContinuousTurnProvider.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\ContinuousTurnProvider.cs",
-              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\ContinuousTurnProvider.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\ContinuousTurnProvider.cs",
-              "RelativeToolTip": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\ContinuousTurnProvider.cs",
-              "ViewState": "AQIAAFwAAAAAAAAAAAAnwJcAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T11:42:27.133Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ObjectMovementWithCamera.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Scripts\\ObjectMovementWithCamera.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\ObjectMovementWithCamera.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Scripts\\ObjectMovementWithCamera.cs",
-              "RelativeToolTip": "Assets\\Scripts\\ObjectMovementWithCamera.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T14:25:33.136Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PlayerMovement.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\PlayerMovement.cs",
-              "RelativeDocumentMoniker": "Assets\\CustomPrefabsAndScripts\\PlayerMovement.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\PlayerMovement.cs",
-              "RelativeToolTip": "Assets\\CustomPrefabsAndScripts\\PlayerMovement.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T14:24:24.006Z"
+              "WhenOpened": "2024-12-03T15:56:10.472Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "PlayerCamera.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\PlayerCamera.cs",
-              "RelativeDocumentMoniker": "Assets\\CustomPrefabsAndScripts\\PlayerCamera.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\PlayerCamera.cs",
-              "RelativeToolTip": "Assets\\CustomPrefabsAndScripts\\PlayerCamera.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "LobbyScreenUI.cs",
+              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LobbyScreenUI.cs",
+              "RelativeDocumentMoniker": "Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LobbyScreenUI.cs",
+              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LobbyScreenUI.cs",
+              "RelativeToolTip": "Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LobbyScreenUI.cs",
+              "ViewState": "AQIAAD0AAAAAAAAAAAAiwD4AAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T13:41:34.203Z"
+              "WhenOpened": "2024-12-03T15:41:19.609Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "CameraMovement.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\Scripts\\CameraMovement.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\CameraMovement.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\Scripts\\CameraMovement.cs",
-              "RelativeToolTip": "Assets\\Scripts\\CameraMovement.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T13:41:21.393Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ObjectSpawner.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ObjectSpawner.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ObjectSpawner.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ObjectSpawner.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ObjectSpawner.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-22T09:41:57.069Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "my_camera.h",
-              "DocumentMoniker": "D:\\TCD_Courses\\Computer_Graphics\\NewFinalProj\\my_camera.h",
-              "RelativeDocumentMoniker": "..\\..\\Computer_Graphics\\NewFinalProj\\my_camera.h",
-              "ToolTip": "D:\\TCD_Courses\\Computer_Graphics\\NewFinalProj\\my_camera.h",
-              "RelativeToolTip": "..\\..\\Computer_Graphics\\NewFinalProj\\my_camera.h",
-              "ViewState": "AQIAAIEAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-21T23:40:58.172Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "PlayerCamera.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\PlayerCamera.cs",
-              "RelativeDocumentMoniker": "Assets\\PlayerCamera.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\PlayerCamera.cs",
-              "RelativeToolTip": "Assets\\PlayerCamera.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAABAAAA",
-              "WhenOpened": "2024-11-19T16:26:17.635Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ContinuousMoveProvider.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
-              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
-              "RelativeToolTip": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAzAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T15:10:39.799Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "SimplePen.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs",
-              "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs",
-              "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:04:45.206Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "PenTrail.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
-              "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
-              "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:00:35.967Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "RoomMusic.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs",
-              "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs",
-              "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC0AAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:00:04.587Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "NetworkObjectDestroyer.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs",
-              "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs",
-              "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs",
+              "DocumentIndex": 0,
+              "Title": "LoginScreenUI.cs",
+              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LoginScreenUI.cs",
+              "RelativeDocumentMoniker": "Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LoginScreenUI.cs",
+              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LoginScreenUI.cs",
+              "RelativeToolTip": "Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LoginScreenUI.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:00:02.28Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "JointBasedHand.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs",
-              "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs",
-              "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs",
-              "ViewState": "AQIAAMQAAAAAAAAAAAAwwOIAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T13:23:05.298Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "PlayerMovement.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\PlayerMovement.cs",
-              "RelativeDocumentMoniker": "Assets\\PlayerMovement.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\PlayerMovement.cs",
-              "RelativeToolTip": "Assets\\PlayerMovement.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAACIAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T12:54:12.069Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MultiplayerManager.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\MultiplayerManager.cs",
-              "RelativeDocumentMoniker": "Assets\\MultiplayerManager.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\MultiplayerManager.cs",
-              "RelativeToolTip": "Assets\\MultiplayerManager.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T11:46:08.603Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ClientListener.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\ClientListener.cs",
-              "RelativeDocumentMoniker": "Assets\\ClientListener.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\ClientListener.cs",
-              "RelativeToolTip": "Assets\\ClientListener.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T17:17:07.081Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "KeyboardControl.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs",
-              "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs",
-              "RelativeToolTip": "Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T17:17:07.081Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "HostBroadcaster.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\HostBroadcaster.cs",
-              "RelativeDocumentMoniker": "Assets\\HostBroadcaster.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\HostBroadcaster.cs",
-              "RelativeToolTip": "Assets\\HostBroadcaster.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T17:16:46.508Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "XRKeyboardKey.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T17:16:46.508Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "IPAddressHelper.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\IPAddressHelper.cs",
-              "RelativeDocumentMoniker": "Assets\\IPAddressHelper.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\IPAddressHelper.cs",
-              "RelativeToolTip": "Assets\\IPAddressHelper.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T17:02:48.916Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "XRKeyboard.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs",
-              "ViewState": "AQIAADQAAAAAAAAAAAAkwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T17:02:48.916Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "NetworkHUD.cs",
-              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\NetworkHUD.cs",
-              "RelativeDocumentMoniker": "Assets\\NetworkHUD.cs",
-              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\NetworkHUD.cs",
-              "RelativeToolTip": "Assets\\NetworkHUD.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T16:21:40.22Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "KeyFunction.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAQwAcAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:56:51.945Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "GlobalNonNativeKeyboard.cs",
-              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs",
-              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:56:07.671Z"
+              "WhenOpened": "2024-12-03T15:40:59.293Z",
+              "EditorCaption": ""
             }
           ]
         }

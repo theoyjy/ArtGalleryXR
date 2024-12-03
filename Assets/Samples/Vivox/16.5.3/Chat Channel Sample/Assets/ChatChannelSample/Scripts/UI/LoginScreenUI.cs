@@ -21,7 +21,6 @@ public class LoginScreenUI : MonoBehaviour
     void Start()
     {
         StartCoroutine(Setup());
-
     }
 
     IEnumerator Setup()
@@ -178,7 +177,6 @@ public class LoginScreenUI : MonoBehaviour
             ParticipantUpdateFrequency = ParticipantPropertyUpdateFrequency.FivePerSecond
         };
         await VivoxService.Instance.LoginAsync(loginOptions);
-        Debug.Log("Successfully login to vivox!");
     }
 
     void OnUserLoggedIn()
