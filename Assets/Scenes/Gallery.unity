@@ -367,6 +367,14 @@ PrefabInstance:
       propertyPath: m_StartingInteractionOverridesMap.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8511945688171016591, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 412197992
+      objectReference: {fileID: 0}
+    - target: {fileID: 8511945688171016591, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2610715822
+      objectReference: {fileID: 0}
     - target: {fileID: 8877177980677234388, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_EnableFarCasting
       value: 1
@@ -1223,7 +1231,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1989356452}
-    PlayerPrefab: {fileID: 0}
+    PlayerPrefab: {fileID: 398194923}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 686a3fb7302a9497a85aafd2a8b462c4, type: 2}
