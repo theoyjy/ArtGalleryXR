@@ -56,6 +56,10 @@ ExportedObj/
 *.unitypackage.meta
 *.app
 
+# Mike builds format
+ServerBuild/
+AndroidBuild/
+
 # Crashlytics generated file
 crashlytics-build.properties
 

@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TestVRControl.unity
     guid: eb4e5fd81a871a2479484f199459cf1c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Network.unity
     guid: 5e40ffd205fe94e3d8fb892f61d2f28d
   m_configObjects:
