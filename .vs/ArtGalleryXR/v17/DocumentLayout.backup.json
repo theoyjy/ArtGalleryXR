@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "F:\\Unity\\ArtGalleryXR\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|F:\\Unity\\ArtGalleryXR\\assets\\scripts\\playfabusage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playfabusage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|f:\\unity\\artgalleryxr\\assets\\playfabeditorextensions\\editor\\scripts\\panels\\playfabeditorsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|solutionrelative:assets\\playfabeditorextensions\\editor\\scripts\\panels\\playfabeditorsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|F:\\Unity\\ArtGalleryXR\\assets\\scripts\\playfabhello.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playfabhello.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|F:\\Unity\\ArtGalleryXR\\assets\\playfabeditorextensions\\editor\\scripts\\utils\\editorcoroutine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|solutionrelative:assets\\playfabeditorextensions\\editor\\scripts\\utils\\editorcoroutine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|F:\\Unity\\ArtGalleryXR\\assets\\playfabeditorextensions\\editor\\scripts\\utils\\playfabeditorhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|solutionrelative:assets\\playfabeditorextensions\\editor\\scripts\\utils\\playfabeditorhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|F:\\Unity\\ArtGalleryXR\\assets\\playfabeditorextensions\\editor\\playfabeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181BB632-D59F-8C2E-D97D-D3DDDADF0CA7}|PlayFabEditorExtensions.csproj|solutionrelative:assets\\playfabeditorextensions\\editor\\playfabeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|F:\\Unity\\ArtGalleryXR\\assets\\scripts\\playfabusage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playfabusage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,15 +39,63 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PlayFabEditorSettings.cs",
+              "DocumentMoniker": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Panels\\PlayFabEditorSettings.cs",
+              "RelativeDocumentMoniker": "Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Panels\\PlayFabEditorSettings.cs",
+              "ToolTip": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Panels\\PlayFabEditorSettings.cs",
+              "RelativeToolTip": "Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Panels\\PlayFabEditorSettings.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAA2wGoAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T14:16:54.392Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EditorCoroutine.cs",
+              "DocumentMoniker": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\EditorCoroutine.cs",
+              "RelativeDocumentMoniker": "Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\EditorCoroutine.cs",
+              "ToolTip": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\EditorCoroutine.cs",
+              "RelativeToolTip": "Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\EditorCoroutine.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAIA1wGcAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T16:20:01.165Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PlayFabEditorHelper.cs",
+              "DocumentMoniker": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\PlayFabEditorHelper.cs",
+              "RelativeDocumentMoniker": "Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\PlayFabEditorHelper.cs",
+              "ToolTip": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\PlayFabEditorHelper.cs",
+              "RelativeToolTip": "Assets\\PlayFabEditorExtensions\\Editor\\Scripts\\Utils\\PlayFabEditorHelper.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAIA1wIwAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T16:19:48.621Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PlayFabEditor.cs",
+              "DocumentMoniker": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\PlayFabEditor.cs",
+              "RelativeDocumentMoniker": "Assets\\PlayFabEditorExtensions\\Editor\\PlayFabEditor.cs",
+              "ToolTip": "F:\\Unity\\ArtGalleryXR\\Assets\\PlayFabEditorExtensions\\Editor\\PlayFabEditor.cs",
+              "RelativeToolTip": "Assets\\PlayFabEditorExtensions\\Editor\\PlayFabEditor.cs",
+              "ViewState": "AgIAAPEAAAAAAAAAAAAlwAIBAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T16:07:22.236Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "PlayFabUsage.cs",
               "DocumentMoniker": "F:\\Unity\\ArtGalleryXR\\Assets\\Scripts\\PlayFabUsage.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayFabUsage.cs",
               "ToolTip": "F:\\Unity\\ArtGalleryXR\\Assets\\Scripts\\PlayFabUsage.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayFabUsage.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAQwCUBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T15:59:51.592Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-19T15:59:51.592Z"
             },
             {
               "$type": "Document",
@@ -41,9 +105,10 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayFabHello.cs",
               "ToolTip": "F:\\Unity\\ArtGalleryXR\\Assets\\Scripts\\PlayFabHello.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayFabHello.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAB8AAAAAAAAAAAA2wEMAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T11:52:58.538Z"
+              "WhenOpened": "2024-11-20T11:52:58.538Z",
+              "EditorCaption": ""
             }
           ]
         }

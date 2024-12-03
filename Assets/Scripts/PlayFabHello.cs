@@ -17,7 +17,7 @@ public class PlayFabHello : MonoBehaviour
     {
         if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.TitleId))
         {
-            PlayFabSettings.staticSettings.TitleId = "6A28D";
+            PlayFabSettings.staticSettings.TitleId = "D41B8";
         }
 
         var request = new LoginWithCustomIDRequest 
@@ -76,7 +76,7 @@ public class PlayFabHello : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            PlayFabUsage.PurchaseHealthPotion(itemInstanceId =>
+            PlayFabUsage.PurchasePotion(itemInstanceId =>
             {
                 _itemInstanceId = itemInstanceId;
             });

@@ -78,8 +78,7 @@ public class PlayFabUsage : MonoBehaviour
     {
         var debugData = new Dictionary<string, object>()
         {
-            {"Atk", 100},
-            {"Hp", 1000},
+            { "Artist Achieve", true }
         };
         var dataList = new List<SetObject>()
         {
@@ -129,14 +128,14 @@ public class PlayFabUsage : MonoBehaviour
 
     #region BuyThings
 
-    public static void PurchaseHealthPotion(Action<string> onPurchaseFinish)
+    public static void PurchasePotion(Action<string> onPurchaseFinish)
     {
         var purchaseItemRequest = new PlayFab.ClientModels.PurchaseItemRequest
         {
             CatalogVersion = "Items",
             ItemId = "HealthPotion",
             Price = 10,
-            VirtualCurrency = "CN"
+            VirtualCurrency = "Euro"
         };
 
         PlayFab.PlayFabClientAPI.PurchaseItem(purchaseItemRequest, result =>
