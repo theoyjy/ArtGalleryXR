@@ -222,10 +222,6 @@ PrefabInstance:
       propertyPath: m_CameraYOffset
       value: 1.325
       objectReference: {fileID: 0}
-    - target: {fileID: 1578434800357102325, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-      propertyPath: AuthorityMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_Name
       value: XR Player Prefab Variant
@@ -344,7 +340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8511945688171016591, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 4063213942
+      value: 412197992
       objectReference: {fileID: 0}
     - target: {fileID: 8511945688171016591, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
