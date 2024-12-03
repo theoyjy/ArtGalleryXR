@@ -34,10 +34,6 @@ public class MultiplayManager : MonoBehaviour
                 await MultiplayService.Instance.ReadyServerForPlayersAsync();
             }
         }
-        else
-        {
-            JoinToServer();
-        }
     }
 
     private async void Update()

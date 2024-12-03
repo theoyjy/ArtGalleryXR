@@ -8,8 +8,6 @@
 [Bb]uilds/
 [Ll]ogs/
 [Mm]emoryCaptures/
-[Uu]ser[Ss]ettings/
-[Rr]ecordings/
 
 
 # Exclude the following if using Unity Cloud Build
@@ -23,7 +21,6 @@
 # ================= #
 # Visual Studio / Rider #
 # ================= #
-ExportedObj/
 .vscode/
 .idea/
 *.csproj
@@ -37,35 +34,11 @@ ExportedObj/
 *.booproj
 *.svd
 *.pdb
-*.mdb
 *.opendb
 *.VC.db
 .vscode/settings.json
 .utmp/
 .vs/
-
-# Unity3D generated meta files
-*.pidb.meta
-*.pdb.meta
-*.mdb.meta
-
-# Builds
-*.apk
-*.aab
-*.unitypackage
-*.unitypackage.meta
-*.app
-
-# Crashlytics generated file
-crashlytics-build.properties
-
-# Packed Addressables
-/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
-
-# Temporary auto-generated Android Assets
-/[Aa]ssets/[Ss]treamingAssets/aa.meta
-/[Aa]ssets/[Ss]treamingAssets/aa/*
-
 
 # ============= #
 # OS Specific #
