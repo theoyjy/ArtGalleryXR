@@ -3,11 +3,19 @@
   "WorkspaceRootPath": "D:\\Code\\ArtGalleryXR\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{78C7E7F5-403C-4E4D-F302-289B90BC486B}|ChatChannelSample.csproj|D:\\Code\\ArtGalleryXR\\assets\\samples\\vivox\\16.5.3\\chat channel sample\\assets\\chatchannelsample\\scripts\\managers\\vivoxvoicemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78C7E7F5-403C-4E4D-F302-289B90BC486B}|ChatChannelSample.csproj|solutionrelative:assets\\samples\\vivox\\16.5.3\\chat channel sample\\assets\\chatchannelsample\\scripts\\managers\\vivoxvoicemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78C7E7F5-403C-4E4D-F302-289B90BC486B}|ChatChannelSample.csproj|d:\\code\\artgalleryxr\\assets\\samples\\vivox\\16.5.3\\chat channel sample\\assets\\chatchannelsample\\scripts\\ui\\loginscreenui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78C7E7F5-403C-4E4D-F302-289B90BC486B}|ChatChannelSample.csproj|solutionrelative:assets\\samples\\vivox\\16.5.3\\chat channel sample\\assets\\chatchannelsample\\scripts\\ui\\loginscreenui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|d:\\code\\artgalleryxr\\assets\\samples\\xr interaction toolkit\\3.0.7\\starter assets\\scripts\\controllerinputactionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|D:\\Code\\ArtGalleryXR\\assets\\samples\\xr interaction toolkit\\3.0.7\\starter assets\\scripts\\controllerinputactionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2C6C9BBC-C25E-833C-D576-CA2801EFDA09}|Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj|solutionrelative:assets\\samples\\xr interaction toolkit\\3.0.7\\starter assets\\scripts\\controllerinputactionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -25,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|D:\\Code\\ArtGalleryXR\\assets\\scripts\\cameramovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7425862B-CB1D-2E35-8849-A205DC8E669F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cameramovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -73,6 +77,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\ArtGalleryXR\\Assets\\Scripts\\CameraMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\CameraMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -82,11 +90,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginScreenUI.cs",
+              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LoginScreenUI.cs",
+              "RelativeDocumentMoniker": "Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LoginScreenUI.cs",
+              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LoginScreenUI.cs",
+              "RelativeToolTip": "Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\UI\\LoginScreenUI.cs",
+              "ViewState": "AQIAAKAAAAAAAAAAAAAuwLkAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T15:32:50.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "VivoxVoiceManager.cs",
+              "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\Managers\\VivoxVoiceManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\Managers\\VivoxVoiceManager.cs",
+              "ToolTip": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\Managers\\VivoxVoiceManager.cs",
+              "RelativeToolTip": "Assets\\Samples\\Vivox\\16.5.3\\Chat Channel Sample\\Assets\\ChatChannelSample\\Scripts\\Managers\\VivoxVoiceManager.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAE0AAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T15:02:03.59Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "XROrigin.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs",
               "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs",
@@ -94,12 +128,11 @@
               "RelativeToolTip": "Library\\PackageCache\\com.unity.xr.core-utils\\Runtime\\XROrigin.cs",
               "ViewState": "AQIAAIwAAAAAAAAAAAAiwAYBAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T12:54:18.929Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-20T12:54:18.929Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "ControllerInputActionManager.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
               "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
@@ -107,12 +140,11 @@
               "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ControllerInputActionManager.cs",
               "ViewState": "AQIAALgBAAAAAAAAAGBiwMwBAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T12:29:50.298Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-18T12:29:50.298Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "DynamicMoveProvider.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\DynamicMoveProvider.cs",
               "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\DynamicMoveProvider.cs",
@@ -124,7 +156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "SnapTurnProvider.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs",
               "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\SnapTurnProvider.cs",
@@ -136,7 +168,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "ContinuousTurnProvider.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\ContinuousTurnProvider.cs",
               "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Turning\\ContinuousTurnProvider.cs",
@@ -148,7 +180,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "ObjectMovementWithCamera.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Scripts\\ObjectMovementWithCamera.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ObjectMovementWithCamera.cs",
@@ -160,7 +192,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 19,
               "Title": "CameraMovement.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Scripts\\CameraMovement.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CameraMovement.cs",
@@ -172,7 +204,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "ContinuousMoveProvider.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
               "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.xr.interaction.toolkit\\Runtime\\Locomotion\\Movement\\ContinuousMoveProvider.cs",
@@ -184,7 +216,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "SimplePen.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs",
               "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\SimplePen.cs",
@@ -196,7 +228,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "PenTrail.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
               "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\Drawing\\PenTrail.cs",
@@ -207,7 +239,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "RoomMusic.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs",
               "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\RoomMusic.cs",
@@ -219,7 +251,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "NetworkObjectDestroyer.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs",
               "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Gameplay\\NetworkObjectDestroyer.cs",
@@ -231,7 +263,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "JointBasedHand.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs",
               "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Player\\JointBasedHand.cs",
@@ -243,7 +275,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "KeyboardControl.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs",
               "RelativeDocumentMoniker": "Assets\\VRMPAssets\\Scripts\\Player\\KeyboardControl.cs",
@@ -255,7 +287,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "XRKeyboardKey.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs",
               "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboardKey.cs",
@@ -267,7 +299,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "XRKeyboard.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs",
               "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\XRKeyboard.cs",
@@ -279,7 +311,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "KeyFunction.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs",
               "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\KeyFunction.cs",
@@ -291,7 +323,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "GlobalNonNativeKeyboard.cs",
               "DocumentMoniker": "D:\\Code\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs",
               "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.6\\Spatial Keyboard\\Scripts\\GlobalNonNativeKeyboard.cs",
