@@ -613,7 +613,7 @@ MonoBehaviour:
   ConnectionData:
     Address: 20.33.110.17
     Port: 9000
-    ServerListenAddress: 127.0.0.1
+    ServerListenAddress: 0.0.0.0
   DebugSimulator:
     PacketDelayMS: 0
     PacketJitterMS: 0

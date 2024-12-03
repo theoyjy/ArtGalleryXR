@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\ClientNetworkTransform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\CustomPrefabsAndScripts\\ClientNetworkTransform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Library\\PackageCache\\com.unity.render-pipelines.universal\\Runtime\\Passes\\AdditionalLightsShadowCasterPass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.render-pipelines.universal\\Runtime\\Passes\\AdditionalLightsShadowCasterPass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\PlayerMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\CustomPrefabsAndScripts\\PlayerMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\Scripts\\CameraMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -74,6 +78,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ClientNetworkTransform.cs",
+              "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\ClientNetworkTransform.cs",
+              "RelativeDocumentMoniker": "Assets\\CustomPrefabsAndScripts\\ClientNetworkTransform.cs",
+              "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\ClientNetworkTransform.cs",
+              "RelativeToolTip": "Assets\\CustomPrefabsAndScripts\\ClientNetworkTransform.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T15:35:02.254Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "AdditionalLightsShadowCasterPass.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Library\\PackageCache\\com.unity.render-pipelines.universal\\Runtime\\Passes\\AdditionalLightsShadowCasterPass.cs",
               "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.render-pipelines.universal\\Runtime\\Passes\\AdditionalLightsShadowCasterPass.cs",
@@ -81,25 +98,24 @@
               "RelativeToolTip": "Library\\PackageCache\\com.unity.render-pipelines.universal\\Runtime\\Passes\\AdditionalLightsShadowCasterPass.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T14:53:15.062Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-03T14:53:15.062Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "MultiplayerManager.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs",
               "RelativeDocumentMoniker": "Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs",
               "ToolTip": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs",
               "RelativeToolTip": "Assets\\CustomPrefabsAndScripts\\MultiplayerManager.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-03T13:53:55.632Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "CameraMovement.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\CameraMovement.cs",
               "RelativeDocumentMoniker": "Assets\\CustomPrefabsAndScripts\\CameraMovement.cs",
@@ -107,12 +123,11 @@
               "RelativeToolTip": "Assets\\CustomPrefabsAndScripts\\CameraMovement.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T14:25:33.136Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T14:25:33.136Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "PlayerMovement.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\PlayerMovement.cs",
               "RelativeDocumentMoniker": "Assets\\CustomPrefabsAndScripts\\PlayerMovement.cs",
@@ -120,12 +135,11 @@
               "RelativeToolTip": "Assets\\CustomPrefabsAndScripts\\PlayerMovement.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T14:24:24.006Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T14:24:24.006Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "PlayerCamera.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\CustomPrefabsAndScripts\\PlayerCamera.cs",
               "RelativeDocumentMoniker": "Assets\\CustomPrefabsAndScripts\\PlayerCamera.cs",
@@ -133,12 +147,11 @@
               "RelativeToolTip": "Assets\\CustomPrefabsAndScripts\\PlayerCamera.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T13:41:34.203Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T13:41:34.203Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "CameraMovement.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\Scripts\\CameraMovement.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CameraMovement.cs",
@@ -150,7 +163,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "ObjectSpawner.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ObjectSpawner.cs",
               "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.0.7\\Starter Assets\\Scripts\\ObjectSpawner.cs",
@@ -162,7 +175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "my_camera.h",
               "DocumentMoniker": "D:\\TCD_Courses\\Computer_Graphics\\NewFinalProj\\my_camera.h",
               "RelativeDocumentMoniker": "..\\..\\Computer_Graphics\\NewFinalProj\\my_camera.h",
@@ -174,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "PlayerCamera.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\PlayerCamera.cs",
               "RelativeDocumentMoniker": "Assets\\PlayerCamera.cs",
@@ -186,7 +199,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "PlayerMovement.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\PlayerMovement.cs",
               "RelativeDocumentMoniker": "Assets\\PlayerMovement.cs",
@@ -198,7 +211,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "MultiplayerManager.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\MultiplayerManager.cs",
               "RelativeDocumentMoniker": "Assets\\MultiplayerManager.cs",
@@ -209,7 +222,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "ClientListener.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\ClientListener.cs",
               "RelativeDocumentMoniker": "Assets\\ClientListener.cs",
@@ -221,7 +234,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "HostBroadcaster.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\HostBroadcaster.cs",
               "RelativeDocumentMoniker": "Assets\\HostBroadcaster.cs",
@@ -233,7 +246,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "IPAddressHelper.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\IPAddressHelper.cs",
               "RelativeDocumentMoniker": "Assets\\IPAddressHelper.cs",
@@ -245,7 +258,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "NetworkHUD.cs",
               "DocumentMoniker": "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\Assets\\NetworkHUD.cs",
               "RelativeDocumentMoniker": "Assets\\NetworkHUD.cs",
