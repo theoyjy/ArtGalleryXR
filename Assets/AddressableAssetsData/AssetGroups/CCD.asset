@@ -14,12 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: CCD
   m_GUID: 6a37f62bd180840ac871be53c79a2f63
-  m_SerializeEntries:
-  - m_GUID: 15d55b98aad8e42a09fd46f4d79b77d1
-    m_Address: Assets/Materials/Canvas/starrynight.jpg
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ad7a0474f0d014331b89b881ecfa70a8, type: 2}
   m_SchemaSet:

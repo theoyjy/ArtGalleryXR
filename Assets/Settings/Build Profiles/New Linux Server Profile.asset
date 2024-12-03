@@ -26,8 +26,6 @@ MonoBehaviour:
     m_path: Assets/Scenes/Gallery.unity
   - m_enabled: 0
     m_path: Assets/Scenes/TestVRControl.unity
-  - m_enabled: 0
-    m_path: Assets/Scenes/Network.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []
