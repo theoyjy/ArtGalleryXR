@@ -21,6 +21,7 @@ public class LoginScreenUI : MonoBehaviour
     void Start()
     {
         StartCoroutine(Setup());
+
     }
 
     IEnumerator Setup()
@@ -44,6 +45,7 @@ public class LoginScreenUI : MonoBehaviour
         var resizedDisplayName = systInfoDeviceName.Substring(0, Math.Min(k_DefaultMaxStringLength, systInfoDeviceName.Length));
         // If the name is still somehow empty, pop in a temporary name so it doesn't stop platforms like consoles from signing in.
         DisplayNameInput.text = string.IsNullOrEmpty(resizedDisplayName) ? "Temp" : resizedDisplayName;
+        LoginToVivoxService();
     }
 
     void OnDestroy()
@@ -176,6 +178,7 @@ public class LoginScreenUI : MonoBehaviour
             ParticipantUpdateFrequency = ParticipantPropertyUpdateFrequency.FivePerSecond
         };
         await VivoxService.Instance.LoginAsync(loginOptions);
+        Debug.Log("Successfully login to vivox!");
     }
 
     void OnUserLoggedIn()
