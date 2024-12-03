@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 249834811}
   - component: {fileID: 249834810}
   m_Layer: 0
-  m_Name: Server
+  m_Name: 'NetworkManager '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,6 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e013e0aedde4ad1a4be5ccf6a7f1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ipAddress: 
+  port: 0
 --- !u!4 &1079393023
 Transform:
   m_ObjectHideFlags: 0

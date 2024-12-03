@@ -7,7 +7,6 @@ using Unity.Services.Multiplay;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using System.Threading.Tasks;
-using System.Net;
 
 public class MultiplayManager : MonoBehaviour
 {
@@ -21,19 +20,19 @@ public class MultiplayManager : MonoBehaviour
         if (Application.platform == RuntimePlatform.LinuxServer)
         {
             Application.targetFrameRate = 60;
-        }
 
-        await UnityServices.InitializeAsync();
+            await UnityServices.InitializeAsync();
 
-        ServerConfig serverConfig = MultiplayService.Instance.ServerConfig;
-        serverQueryHandler = await MultiplayService.Instance.StartServerQueryHandlerAsync(10, "MyServer", "MyGameType", "0", "TestMap");
+            ServerConfig serverConfig = MultiplayService.Instance.ServerConfig;
+            serverQueryHandler = await MultiplayService.Instance.StartServerQueryHandlerAsync(10, "MyServer", "MyGameType", "0", "TestMap");
 
-        if (serverConfig.AllocationId != string.Empty)
-        {
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData("0.0.0.0", serverConfig.Port, "0.0.0.0");
-            NetworkManager.Singleton.StartServer();
+            if (serverConfig.AllocationId != string.Empty)
+            {
+                NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData("0.0.0.0", serverConfig.Port, "0.0.0.0");
+                NetworkManager.Singleton.StartServer();
 
-            await MultiplayService.Instance.ReadyServerForPlayersAsync();
+                await MultiplayService.Instance.ReadyServerForPlayersAsync();
+            }
         }
     }
 
