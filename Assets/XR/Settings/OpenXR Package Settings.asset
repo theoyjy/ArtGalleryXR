@@ -184,7 +184,7 @@ MonoBehaviour:
   - {fileID: -5886653017436852255}
   - {fileID: -7364603386001440624}
   - {fileID: 2573385081579164075}
-  - {fileID: -5155132110086540630}
+  - {fileID: -2083005592611304673}
   m_renderMode: 1
   m_autoColorSubmissionMode: 1
   m_colorSubmissionModes:
@@ -649,7 +649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 056125dd64c0ed540b40a4af74f7b495, type: 3}
   m_Name: RuntimeDebuggerOpenXRFeature Android
   m_EditorClassIdentifier: 
-  m_enabled: 1
+  m_enabled: 0
   nameUi: Runtime Debugger
   version: 1
   featureIdInternal: com.unity.openxr.features.runtimedebugger
@@ -1008,7 +1008,7 @@ MonoBehaviour:
   - {fileID: 2664258575712548102}
   - {fileID: 8943050371995651237}
   - {fileID: 5891782292304877503}
-  - {fileID: -7255015029888277676}
+  - {fileID: -2164353022974027303}
   - {fileID: 4784553990694581011}
   - {fileID: 1233709842922125791}
   - {fileID: -6591338210868410147}
@@ -1019,7 +1019,7 @@ MonoBehaviour:
   - {fileID: 5675976584443682725}
   - {fileID: -4329917921921201007}
   - {fileID: 974343057954244026}
-  - {fileID: 2428483208219600825}
+  - {fileID: -5450339552790887602}
   m_renderMode: 1
   m_autoColorSubmissionMode: 1
   m_colorSubmissionModes:
@@ -1152,7 +1152,7 @@ MonoBehaviour:
   - {fileID: -3174899824922769279}
   - {fileID: 4294157079023990344}
   - {fileID: 1303078446001158678}
-  - {fileID: 3564947743118760839}
+  - {fileID: -3425009501010621859}
   - {fileID: -4954960691715237666}
   - {fileID: 4394272426299623921}
   - {fileID: -7054991587555097804}
@@ -1163,7 +1163,7 @@ MonoBehaviour:
   - {fileID: 6618136291377627757}
   - {fileID: 8191373015904306611}
   - {fileID: -7783926370511358898}
-  - {fileID: -4709327752016130389}
+  - {fileID: 1008317008937149309}
   m_renderMode: 1
   m_autoColorSubmissionMode: 1
   m_colorSubmissionModes:
@@ -1316,9 +1316,9 @@ MonoBehaviour:
   Values:
   - {fileID: -1043711015591485997}
   - {fileID: 5980910971841721631}
-  - {fileID: -8905460540879806341}
-  - {fileID: -1805097204039816964}
-  - {fileID: -6491393568175947094}
+  - {fileID: -1856717567413583563}
+  - {fileID: -8286785564438351019}
+  - {fileID: 8269366401282410270}
 --- !u!114 &354116845428880235
 MonoBehaviour:
   m_ObjectHideFlags: 0

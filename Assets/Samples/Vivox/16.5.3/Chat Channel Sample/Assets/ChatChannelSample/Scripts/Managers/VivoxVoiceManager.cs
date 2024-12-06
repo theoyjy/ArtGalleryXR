@@ -38,15 +38,21 @@ public class VivoxVoiceManager : MonoBehaviour
                 if (m_Instance == null)
                 {
                     // Search for existing instance.
+                    Debug.Log("Searching for existing VivoxVoiceManager instance...");
                     m_Instance = (VivoxVoiceManager)FindObjectOfType(typeof(VivoxVoiceManager));
 
                     // Create new instance if one doesn't already exist.
                     if (m_Instance == null)
                     {
                         // Need to create a new GameObject to attach the singleton to.
+                        Debug.Log("No existing instance found. Creating a new one...");
                         var singletonObject = new GameObject();
                         m_Instance = singletonObject.AddComponent<VivoxVoiceManager>();
                         singletonObject.name = typeof(VivoxVoiceManager).ToString() + " (Singleton)";
+                    }
+                    else
+                    {
+                        Debug.Log("Build m_Instance successfully");
                     }
                 }
                 // Make instance persistent even if its already in the scene
@@ -58,6 +64,15 @@ public class VivoxVoiceManager : MonoBehaviour
 
     async void Awake()
     {
+        if (m_Instance == null)
+        {
+            var _ = Instance;
+            if(_ == null)
+            {
+                Debug.LogError("m_Instance is null.");
+            }
+        }
+
         if (m_Instance != this && m_Instance != null)
         {
             Debug.LogWarning(
@@ -68,10 +83,34 @@ public class VivoxVoiceManager : MonoBehaviour
         if (CheckManualCredentials())
         {
             options.SetVivoxCredentials(_server, _domain, _issuer, _key);
+            Debug.Log($"Server: {_server}, Domain: {_domain}, Issuer: {_issuer}, Key: {_key}");
         }
 
-        await UnityServices.InitializeAsync(options);
-        await VivoxService.Instance.InitializeAsync();
+        try
+        {
+            await UnityServices.InitializeAsync(options);
+            Debug.Log("UnityServices initialized successfully.");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"UnityServices initialization failed: {ex.Message}");
+        }
+
+        try
+        {
+            if (VivoxService.Instance == null)
+            {
+                Debug.LogError("VivoxService.Instance is null. Make sure UnityServices is initialized.");
+                return;
+            }
+
+            await VivoxService.Instance.InitializeAsync();
+            Debug.Log("VivoxService initialized successfully.");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"VivoxService initialization failed: {ex.Message}");
+        }
 
     }
 
@@ -89,6 +128,10 @@ public class VivoxVoiceManager : MonoBehaviour
 
     bool CheckManualCredentials()
     {
+        if (_server == null || _domain == null || _issuer == null || _key == null)
+        {
+            Debug.LogError($"Credentials are missing. Server: {_server}, Domain: {_domain}, Issuer: {_issuer}, Key: {_key}");
+        }
         return !(string.IsNullOrEmpty(_issuer) && string.IsNullOrEmpty(_domain) && string.IsNullOrEmpty(_server));
     }
 }

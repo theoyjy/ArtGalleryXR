@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0018b0f21d24ba84396c31099b8532ef, type: 3}
+  m_Name: UnityCloudPlayerSettings
+  m_EditorClassIdentifier: 
+  AppId: d6be0271-d571-42d8-a09b-305d7f148d1f
+  AppName: default
+  AppDisplayName: Default
+  AppOrganizationID: Default
+  AppNamespace: com.unity.cloud
