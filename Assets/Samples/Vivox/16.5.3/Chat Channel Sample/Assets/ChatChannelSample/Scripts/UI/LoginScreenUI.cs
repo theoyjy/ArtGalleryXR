@@ -39,11 +39,12 @@ public class LoginScreenUI : MonoBehaviour
 #endif
         LoginButton.onClick.AddListener(() => { LoginToVivoxService(); });
 
-        OnUserLoggedOut();
+        //OnUserLoggedOut();
         var systInfoDeviceName = String.IsNullOrWhiteSpace(SystemInfo.deviceName) == false ? SystemInfo.deviceName : Environment.MachineName;
         var resizedDisplayName = systInfoDeviceName.Substring(0, Math.Min(k_DefaultMaxStringLength, systInfoDeviceName.Length));
         // If the name is still somehow empty, pop in a temporary name so it doesn't stop platforms like consoles from signing in.
         DisplayNameInput.text = string.IsNullOrEmpty(resizedDisplayName) ? "Temp" : resizedDisplayName;
+        Debug.Log(DisplayNameInput.text);
         LoginToVivoxService();
     }
 
