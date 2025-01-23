@@ -9,7 +9,8 @@ public class StatusBar : MonoBehaviour
 
     private Camera _cam;
 
-    [SerializeField] private Image loudSpearker;
+    [SerializeField] private Image loudSpearkerMute;
+    [SerializeField] private Image loudSpearkerLoud;
     [SerializeField] private GameObject test;
 
     private bool Speaking;
@@ -25,17 +26,11 @@ public class StatusBar : MonoBehaviour
     void Update()
     {
         //transform.rotation = Quaternion.LookRotation(transform.position - _cam.transform.position);
-        loudSpearker.gameObject.SetActive(Speaking);
+        loudSpearkerMute.gameObject.SetActive(!Speaking);
+        loudSpearkerLoud.gameObject.SetActive(Speaking);
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Speaking = !Speaking;
-        }
-
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            //Debug.Log(_cam.transform.position);
-            //Debug.Log(test.transform.rotation);
-            Debug.Log(transform.eulerAngles);
         }
 
     }

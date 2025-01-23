@@ -92,6 +92,7 @@ public class RosterManager : MonoBehaviour
             m_RosterObjects.Add(participant.ChannelName, thisChannelList);
         }
         CleanRoster(participant.ChannelName);
+        Debug.Log(thisChannelList);
     }
 
     void OnParticipantRemoved(VivoxParticipant participant)
