@@ -2,12 +2,25 @@ using UnityEngine;
 
 public class ObjectMovementWithCamera : MonoBehaviour
 {
+
+    [SerializeField] private GameObject body;
+
     public float moveSpeed = 5.0f; // 物体移动速度
     public float rotationSpeed = 3.0f; // 视角旋转速度
 
     public Transform cameraTransform; // 绑定的相机Transform
     private float yaw = 0.0f; // 水平角度
     private float pitch = 0.0f; // 垂直角度
+
+    void Start()
+    {
+        // 初始化 yaw 和 pitch 为当前相机角度
+        if (cameraTransform != null)
+        {
+            yaw = cameraTransform.eulerAngles.y;
+            pitch = cameraTransform.eulerAngles.x;
+        }
+    }
 
     void Update()
     {
@@ -20,9 +33,10 @@ public class ObjectMovementWithCamera : MonoBehaviour
             // 限制垂直旋转范围
             pitch = Mathf.Clamp(pitch, -90f, 90f);
 
-            // 更新相机旋转
-            transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
         }
+
+        cameraTransform.transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+        body.transform.eulerAngles = new Vector3(0.0f, yaw, 0.0f);
 
         // 键盘输入控制物体移动
         float moveHorizontal = Input.GetAxis("Horizontal"); // A 和 D 键，左右移动
