@@ -33,6 +33,8 @@ public class StatusBar : MonoBehaviour
             Speaking = !Speaking;
         }
 
+        transform.rotation = Quaternion.LookRotation(transform.position - _cam.transform.position);
+
     }
 
     public void isSpeaking(bool isSpeaking)
