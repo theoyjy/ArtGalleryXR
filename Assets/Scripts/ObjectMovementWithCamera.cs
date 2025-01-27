@@ -6,10 +6,10 @@ public class ObjectMovementWithCamera : MonoBehaviour
     public float rotationSpeed = 3.0f; // 视角旋转速度
 
     public Transform cameraTransform; // 绑定的相机Transform
-    private float yaw = 0.0f; // 水平角度
-    private float pitch = 0.0f; // 垂直角度
+    public float yaw = 0.0f; // 水平角度
+    public float pitch = 0.0f; // 垂直角度
 
-    void Update()
+    public void Update()
     {
         // 鼠标拖动控制视角
         if (Input.GetMouseButton(0)) // 按住鼠标左键
