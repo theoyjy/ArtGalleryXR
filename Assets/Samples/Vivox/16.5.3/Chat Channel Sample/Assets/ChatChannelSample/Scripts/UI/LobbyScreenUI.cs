@@ -60,11 +60,14 @@ public class LobbyScreenUI : MonoBehaviour
 
     void OnDestroy()
     {
-        VivoxService.Instance.LoggedIn -= OnUserLoggedIn;
-        VivoxService.Instance.LoggedOut -= OnUserLoggedOut;
-        VivoxService.Instance.ConnectionRecovered -= OnConnectionRecovered;
-        VivoxService.Instance.ConnectionRecovering -= OnConnectionRecovering;
-        VivoxService.Instance.ConnectionFailedToRecover -= OnConnectionFailedToRecover;
+        if(VivoxService.Instance != null)
+        { 
+            VivoxService.Instance.LoggedIn -= OnUserLoggedIn;
+            VivoxService.Instance.LoggedOut -= OnUserLoggedOut;
+            VivoxService.Instance.ConnectionRecovered -= OnConnectionRecovered;
+            VivoxService.Instance.ConnectionRecovering -= OnConnectionRecovering;
+            VivoxService.Instance.ConnectionFailedToRecover -= OnConnectionFailedToRecover;
+        }
 
         LogoutButton.onClick.RemoveAllListeners();
     }

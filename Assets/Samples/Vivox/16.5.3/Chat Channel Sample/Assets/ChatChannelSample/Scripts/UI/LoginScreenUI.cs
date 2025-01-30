@@ -50,8 +50,11 @@ public class LoginScreenUI : MonoBehaviour
 
     void OnDestroy()
     {
-        VivoxService.Instance.LoggedIn -= OnUserLoggedIn;
-        VivoxService.Instance.LoggedOut -= OnUserLoggedOut;
+        if (VivoxService.Instance != null)
+        { 
+            VivoxService.Instance.LoggedIn -= OnUserLoggedIn;
+            VivoxService.Instance.LoggedOut -= OnUserLoggedOut;
+        }
 
         LoginButton.onClick.RemoveAllListeners();
 #if UNITY_STANDALONE || UNITY_IOS || UNITY_ANDROID || UNITY_WEBGL
