@@ -171,13 +171,32 @@ public class LoginScreenUI : MonoBehaviour
             Debug.LogError("Please enter a display name.");
             return;
         }
-        await VivoxVoiceManager.Instance.InitializeAsync(DisplayNameInput.text);
+
+        try
+        {
+            await VivoxVoiceManager.Instance.InitializeAsync(DisplayNameInput.text);
+            await VivoxService.Instance.InitializeAsync();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"VivoxVoiceManager.Instance.InitializeAsync failed: {ex.Message}");
+        }
+
         var loginOptions = new LoginOptions()
         {
             DisplayName = DisplayNameInput.text,
             ParticipantUpdateFrequency = ParticipantPropertyUpdateFrequency.FivePerSecond
         };
-        await VivoxService.Instance.LoginAsync(loginOptions);
+
+        try
+        {
+            await VivoxService.Instance.LoginAsync(loginOptions);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"VivoxService.Instance.LoginAsync failed: {ex.Message}");
+        }
+
     }
 
     void OnUserLoggedIn()
