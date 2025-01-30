@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ObjectMovementWithCamera : MonoBehaviour
 {
@@ -8,12 +9,13 @@ public class ObjectMovementWithCamera : MonoBehaviour
     public Transform cameraTransform; // 绑定的相机Transform
     public float yaw = 0.0f; // 水平角度
     public float pitch = 0.0f; // 垂直角度
-
-    public void Update()
-    {
+    public void Update() {
+        InputSystem.Update();
+    
         // 鼠标拖动控制视角
-        if (Input.GetMouseButton(0)) // 按住鼠标左键
+        if (Mouse.current.leftButton.isPressed) // 按住鼠标左键
         {
+       
             yaw += Input.GetAxis("Mouse X") * rotationSpeed; // 水平旋转
             pitch -= Input.GetAxis("Mouse Y") * rotationSpeed; // 垂直旋转
 

@@ -1,10 +1,22 @@
 using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.TestTools;
 
-public class MovementTestScript
+public class MovementTestScript : InputTestFixture
 {
+    private Mouse testMouse;
+
+    [SetUp]
+    public override void Setup()
+    {
+        base.Setup();
+        testMouse = InputSystem.AddDevice<Mouse>(); // Add a virtual mouse device
+    }
+
     [Test]
     public void test_ObjectMovementWithCamera()
     {
@@ -33,6 +45,30 @@ public class MovementTestScript
         // Calculate expected movement
         float deltaTime = 0.1f;
         Time.timeScale = deltaTime; // Mock time step
+    }
+
+    [Test]
+    public void test_PitchClampWithCamera()
+    {
+        var gameObject = new GameObject("Player");
+        var movementScript = gameObject.AddComponent<ObjectMovementWithCamera>();
+        
+
+        var cameraObject = new GameObject("Camera");
+        movementScript.cameraTransform = cameraObject.transform;
+
+        // Simulate camera position and orientation
+        cameraObject.transform.position = Vector3.zero;
+        cameraObject.transform.rotation = Quaternion.identity;
+
+        //movementScript.isMoving = true;
+        Press(testMouse.leftButton);
+        movementScript.pitch = 100.0f;
+        movementScript.Update();
+        Assert.AreEqual(movementScript.pitch, 90.0f);
+        Vector3 testVector = new Vector3(90, 0, 0);
+        //Assert.AreEqual(gameObject.transform.eulerAngles, testVector);
+
     }
 
     [Test]
