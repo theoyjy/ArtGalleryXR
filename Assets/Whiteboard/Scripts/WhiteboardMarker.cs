@@ -8,6 +8,7 @@ public class WhiteboardMarker : MonoBehaviour
 {
     [SerializeField] private Transform _tip;
     [SerializeField] private int _penSize = 5;
+    [SerializeField] private Camera _mainCamera;
 
     private Renderer _renderer;
     private Color[] _colors;
@@ -19,19 +20,104 @@ public class WhiteboardMarker : MonoBehaviour
     private bool _touchedLastFrame;
     private Quaternion _lastTouchRot;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private bool _isHolding = false;
+    private Vector3 _offset;
+    private Plane _drawPlane;
+
+    // For hovering
+    private Color _originalColor;
+    private bool _isHovering = false;
+    private Renderer _penRenderer;
+
     void Start()
     {
-        _renderer = _tip.GetComponent<Renderer>();   
+        _renderer = _tip.GetComponent<Renderer>();
         _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
         _tipHeight = _tip.localScale.y;
+
+        _mainCamera = Camera.main;
+        _drawPlane = new Plane(Vector3.forward, Vector3.zero); // Adjust if needed
+
+        // Get pen renderer for highlighting
+        _penRenderer = GetComponent<Renderer>();
+        _originalColor = _penRenderer.material.color;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Draw();
+        CheckForHover();
+
+        if (Input.GetMouseButtonDown(1)) // Left-click to grab/drop
+        {
+            if (_isHolding)
+            {
+                DropPen();
+            }
+            else
+            {
+                TryGrabPen();
+            }
+        }
+
+        if (_isHolding)
+        {
+            MovePenWithMouse();
+            Draw();
+        }
     }
+
+    private void TryGrabPen()
+    {
+        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.collider.gameObject == gameObject)
+            {
+                _isHolding = true;
+                _offset = transform.position - hit.point;
+            }
+        }
+    }
+
+    private void DropPen()
+    {
+        _isHolding = false;
+        _whiteboard = null;
+        _touchedLastFrame = false;
+    }
+
+    private void MovePenWithMouse()
+    {
+        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (_drawPlane.Raycast(ray, out float distance))
+        {
+            transform.position = ray.GetPoint(distance) + _offset;
+        }
+    }
+
+    private void CheckForHover()
+    {
+        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.collider.gameObject == gameObject)
+            {
+                if (!_isHovering)
+                {
+                    _isHovering = true;
+                    _penRenderer.material.color = Color.yellow; // Highlight pen
+                }
+                return;
+            }
+        }
+
+        if (_isHovering)
+        {
+            _isHovering = false;
+            _penRenderer.material.color = _originalColor; // Reset pen color
+        }
+    }
+
 
     private void Draw()
     {
@@ -58,7 +144,7 @@ public class WhiteboardMarker : MonoBehaviour
 
                 if (_touchedLastFrame)
                 {
-                    _whiteboard.texture.SetPixels(x, y, _penSize,  _penSize, _colors);
+                    _whiteboard.texture.SetPixels(x, y, _penSize, _penSize, _colors);
 
                     for (float f = 0.01f; f < 1.00f; f += 0.05f)
                     {
@@ -80,6 +166,6 @@ public class WhiteboardMarker : MonoBehaviour
         }
 
         _whiteboard = null;
-        _touchedLastFrame = false; 
+        _touchedLastFrame = false;
     }
 }

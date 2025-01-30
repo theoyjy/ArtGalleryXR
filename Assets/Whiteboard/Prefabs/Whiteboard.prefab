@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8408993902178679917}
   - component: {fileID: 4302037070417857789}
   - component: {fileID: 4753916706674653192}
+  - component: {fileID: 2484486347638977743}
   m_Layer: 0
   m_Name: Whiteboard
   m_TagString: Whiteboard
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764468070164427977}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.70726866, y: -0.0004387921, z: 0.00033520255, w: 0.7069447}
+  m_LocalRotation: {x: -0.70669925, y: 0.0003330133, z: 0.00033339718, w: 0.70751387}
   m_LocalPosition: {x: 0.4533407, y: -15.48598, z: 16.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -124,3 +125,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
   textureSize: {x: 2048, y: 2048}
+--- !u!54 &2484486347638977743
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764468070164427977}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
