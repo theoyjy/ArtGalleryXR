@@ -7,7 +7,6 @@ public class MaterialConfigElement
     // 为每个 Renderer 配置多个材质
     public List<Renderer> renderers; // 需要更改材质的多个 Renderer
     public List<Material> rendererMaterials; // 每个 Renderer 对应一个材质列表
-
 }
 
 [System.Serializable]
@@ -15,9 +14,7 @@ public class MaterialConfig
 {
     // 为每个 Renderer 配置多个材质
     public List<MaterialConfigElement> OneRenaderAndTheirMats; // 需要更改材质的多个 Renderer
-
 }
-
 
 public class MaterialSwitcher : MonoBehaviour
 {
@@ -43,7 +40,6 @@ public class MaterialSwitcher : MonoBehaviour
         // 遍历当前配置中的每个 MaterialConfigElement
         foreach (var configElement in currentConfig.OneRenaderAndTheirMats)
         {
-
             // 为每个 Renderer 更新材质
             for (int i = 0; i < configElement.renderers.Count; i++)
             {
@@ -52,6 +48,9 @@ public class MaterialSwitcher : MonoBehaviour
 
                 if (renderer != null && material != null)
                 {
+                    // 输出调试信息，确认材质是否成功传递给 Renderer
+                    Debug.Log($"Setting material for {renderer.name} to {material.name}");
+
                     // 如果 Renderer 有多个材质，更新该 Renderer 的材质列表
                     if (renderer.sharedMaterials.Length > i)
                     {
@@ -61,6 +60,10 @@ public class MaterialSwitcher : MonoBehaviour
                     {
                         Debug.LogWarning($"Renderer {renderer.name} does not have enough materials.");
                     }
+                }
+                else
+                {
+                    Debug.LogError($"Renderer or material is null for index {i}");
                 }
             }
         }
