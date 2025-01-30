@@ -9,11 +9,13 @@ public class StatusBar : MonoBehaviour
 
     private Camera _cam;
 
-    [SerializeField] private Image loudSpearkerMute;
-    [SerializeField] private Image loudSpearkerLoud;
+    [SerializeField] private Image loudSpeakerMute;
+    [SerializeField] private Image loudSpeakerLoud;
     [SerializeField] private GameObject test;
 
     private bool Speaking;
+
+    private bool isMuted;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,19 +28,29 @@ public class StatusBar : MonoBehaviour
     void Update()
     {
         //transform.rotation = Quaternion.LookRotation(transform.position - _cam.transform.position);
-        loudSpearkerMute.gameObject.SetActive(!Speaking);
-        loudSpearkerLoud.gameObject.SetActive(Speaking);
+        loudSpeakerMute.gameObject.SetActive(!Speaking);
+        loudSpeakerLoud.gameObject.SetActive(Speaking);
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Speaking = !Speaking;
+            PlayerManager.Instance.test();
         }
 
-        transform.rotation = Quaternion.LookRotation(transform.position - _cam.transform.position);
+        if (_cam != null)
+        {
+            transform.rotation = Quaternion.LookRotation(transform.position - _cam.transform.position);
+        }
 
     }
 
     public void isSpeaking(bool isSpeaking)
     {
         Speaking = isSpeaking; 
+    }
+    public void SetMuteState(bool muteState)
+    {
+        isMuted = muteState;
+        loudSpeakerMute.gameObject.SetActive(isMuted);
+        loudSpeakerLoud.gameObject.SetActive(!isMuted);
     }
 }

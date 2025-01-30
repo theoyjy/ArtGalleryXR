@@ -21,6 +21,27 @@ public class RosterItem : MonoBehaviour
     const float k_maxSliderVolume = 7;
     readonly Color k_MutedColor = new Color(1, 0.624f, 0.624f, 1);
 
+    private void Start()
+    {
+        MuteButton.onClick.AddListener(ToggleMute);
+    }
+
+    private void ToggleMute()
+    {
+        if (Participant.IsMuted)
+        {
+            Participant.UnmutePlayerLocally();
+        }
+        else
+        {
+            Participant.MutePlayerLocally();
+        }
+
+        // Notify the player UI
+        PlayerManager.Instance.UpdateMuteState(Participant.DisplayName, Participant.IsMuted);
+
+
+    }
     private void UpdateChatStateImage()
     {
         if (Participant.IsMuted)
