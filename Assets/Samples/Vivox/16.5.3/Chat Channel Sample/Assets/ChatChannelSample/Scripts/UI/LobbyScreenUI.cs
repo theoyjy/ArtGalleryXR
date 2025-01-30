@@ -89,7 +89,7 @@ public class LobbyScreenUI : MonoBehaviour
         LobbyScreen.SetActive(true);
         await JoinLobbyChannel();
         LogoutButton.interactable = true;
-        m_EventSystem.SetSelectedGameObject(LogoutButton.gameObject, null);
+        //m_EventSystem.SetSelectedGameObject(LogoutButton.gameObject, null);
     }
 
     void OnUserLoggedOut()
