@@ -94,3 +94,5 @@ __MACOSX/
 # *.unity
 *.unitypackage
 
+UserSettings/Layout/*.dwlt
+
