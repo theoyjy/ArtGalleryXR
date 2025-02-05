@@ -1098,11 +1098,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &215318651 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2680348550112195680, guid: 09536e5132315fd4bbeefda7e5e75ea2, type: 3}
-  m_PrefabInstance: {fileID: 581843929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &215318662 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2680348550112195683, guid: 09536e5132315fd4bbeefda7e5e75ea2, type: 3}
@@ -5428,12 +5423,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378352ed06b09894c8de1e71f8149f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cam: {fileID: 0}
-  loudSpeakerMute: {fileID: 0}
-  loudSpeakerLoud: {fileID: 0}
-  test: {fileID: 215318651}
-  Speaking: 0
-  isMuted: 0
 --- !u!1 &903397719
 GameObject:
   m_ObjectHideFlags: 0
@@ -6503,6 +6492,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096220991}
   m_CullTransparentMesh: 0
+--- !u!1 &1108313895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1108313897}
+  - component: {fileID: 1108313896}
+  m_Layer: 0
+  m_Name: VivoxManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1108313896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108313895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ee1b49913f9f7c46a468cf4296a147b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1108313897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108313895}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.38174695, y: -9.034633, z: 91.17661}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1121922116
 GameObject:
   m_ObjectHideFlags: 0
@@ -7033,7 +7066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e013e0aedde4ad1a4be5ccf6a7f1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipAddress: 20.33.110.66
+  ipAddress: 20.33.109.146
   port: 9000
 --- !u!4 &1187899824
 Transform:
@@ -10593,7 +10626,7 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 20.33.110.66
+    Address: 20.33.109.146
     Port: 9000
     ServerListenAddress: 0.0.0.0
   DebugSimulator:
@@ -11150,3 +11183,4 @@ SceneRoots:
   - {fileID: 581843929}
   - {fileID: 1154373040}
   - {fileID: 270566551}
+  - {fileID: 1108313897}
