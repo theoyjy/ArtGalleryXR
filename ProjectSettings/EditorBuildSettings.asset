@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Gallery.unity
     guid: 88a28959bd52c41ffb60f5763e3458ac
   - enabled: 0
@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Network.unity
     guid: 5e40ffd205fe94e3d8fb892f61d2f28d
+  - enabled: 1
+    path: Assets/Rotate2DCard/Assets/Scenes/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 02f3598b1640c4b2e8e15d1f52bf2fbc, type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: 27cb7a0c542a6407a9838de7d4b3ad07, type: 2}
