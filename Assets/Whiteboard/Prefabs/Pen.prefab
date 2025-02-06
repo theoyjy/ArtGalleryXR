@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 866388375570891488}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.108, y: 0.8289902, z: -0.602}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.7, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -133,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 2512041192075824835}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7070889, y: -0.0049338546, z: -0.0049346057, w: 0.7070903}
-  m_LocalPosition: {x: -0.113, y: 1.293, z: -0.607}
+  m_LocalPosition: {x: 0, y: -1.053, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -151,6 +151,8 @@ GameObject:
   - component: {fileID: 5235948850848460999}
   - component: {fileID: 7897460533641417552}
   - component: {fileID: 4715009587817594143}
+  - component: {fileID: 8958176334704174531}
+  - component: {fileID: 6313649241007259824}
   m_Layer: 0
   m_Name: Pen
   m_TagString: Untagged
@@ -340,6 +342,41 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!114 &8958176334704174531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3608321655683205215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27aa893ef4f72be48880742b50b2b2eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tip: {fileID: 4130149277059918446}
+  _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!65 &6313649241007259824
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3608321655683205215}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7261163715159282005
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +389,7 @@ GameObject:
   - component: {fileID: 5933472930898084311}
   - component: {fileID: 3032339045731101245}
   - component: {fileID: 2743311205103403821}
+  - component: {fileID: 7217987144788567083}
   m_Layer: 0
   m_Name: Tip
   m_TagString: Untagged
@@ -368,7 +406,7 @@ Transform:
   m_GameObject: {fileID: 7261163715159282005}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1075, y: 1.5995, z: -0.6013}
+  m_LocalPosition: {x: 0, y: 0.77, z: -0}
   m_LocalScale: {x: 0.2, y: 0.07, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -450,3 +488,17 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &7217987144788567083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261163715159282005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0f08836bf226ac4a838de52f9548bf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newColor: {r: 1, g: 0, b: 0, a: 1}
+  tip: {fileID: 7261163715159282005}
