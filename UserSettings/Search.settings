@@ -9,14 +9,6 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-<<<<<<< HEAD
-	"picker_window_position_offset.075BCD15" = "139,3334;352,6667;320;550"
-=======
-	"picker_window_position_offset.075BCD15" = "23.33337;382.6667;320;550"
->>>>>>> 3abf6f7d537d2c71f61ffd29188c2f1b601110c3
-	"picker_visibility_flags.075BCD15" = "264"
-	"picker_item_size.075BCD15" = "96"
-	"picker_inspector.075BCD15" = "0"
 }
 providers = {
 	asset = {
@@ -73,8 +65,6 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
-	""
-	"Camera"
 ]
 searchItemFavorites = [
 ]
