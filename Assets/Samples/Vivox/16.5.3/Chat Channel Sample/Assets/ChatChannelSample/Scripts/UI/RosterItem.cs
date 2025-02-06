@@ -5,14 +5,16 @@
 
 //public class RosterItem : MonoBehaviour
 //{
-//    // Player specific items.
+//    // Player-specific items.
 //    public VivoxParticipant Participant;
 //    public Text PlayerNameText;
 
+//    // Chat icon to show mute, speaking, or not-speaking status.
 //    public Image ChatStateImage;
 //    public Sprite MutedImage;
 //    public Sprite SpeakingImage;
 //    public Sprite NotSpeakingImage;
+
 //    public Slider ParticipantVolumeSlider;
 //    public Button MuteButton;
 //    public Dropdown EffectDropdown;
@@ -23,30 +25,63 @@
 
 //    private void Start()
 //    {
+//        // *** FIX 1 & 4 ***  
+//        // Remove duplicate listeners: add one listener for mute toggling.
 //        MuteButton.onClick.AddListener(ToggleMute);
 //    }
 
+//    /// <summary>
+//    /// Called when the mute button is clicked.
+//    /// This toggles the mute state, updates the UI, and (if this is the local user)
+//    /// updates the global status bar.
+//    /// </summary>
 //    private void ToggleMute()
 //    {
+//        if (Participant == null)
+//        {
+//            Debug.LogError("Participant is null in RosterItem.ToggleMute. Make sure SetupRosterItem() was called.");
+//            return;
+//        }
+
 //        if (Participant.IsMuted)
 //        {
 //            Participant.UnmutePlayerLocally();
+//            MuteButton.image.color = Color.white;
 //        }
 //        else
 //        {
 //            Participant.MutePlayerLocally();
+//            MuteButton.image.color = k_MutedColor;
 //        }
 
-//        // Notify the player UI
-//        PlayerManager.Instance.UpdateMuteState(Participant.DisplayName, Participant.IsMuted);
+//        if (PlayerManager.Instance != null)
+//        {
+//            PlayerManager.Instance.UpdateMuteState(Participant.DisplayName, Participant.IsMuted);
+//        }
+//        else
+//        {
+//            Debug.LogWarning("PlayerManager.Instance is null.");
+//        }
+
 //        UpdateChatStateImage();
 
 //        if (Participant.IsSelf)
 //        {
-//            StatusBar.Instance.SetMuteState(Participant.IsMuted);
+//            if (StatusBar.Instance != null)
+//            {
+//                StatusBar.Instance.SetMuteState(Participant.IsMuted);
+//            }
+//            else
+//            {
+//                Debug.LogWarning("StatusBar.Instance is null.");
+//            }
 //        }
-
 //    }
+
+
+//    /// <summary>
+//    /// Updates the chat icon based on whether the participant is muted or speaking.
+//    /// </summary>
 //    private void UpdateChatStateImage()
 //    {
 //        if (Participant.IsMuted)
@@ -54,17 +89,14 @@
 //            ChatStateImage.sprite = MutedImage;
 //            ChatStateImage.gameObject.transform.localScale = Vector3.one;
 //        }
+//        else if (Participant.SpeechDetected)
+//        {
+//            ChatStateImage.sprite = SpeakingImage;
+//            ChatStateImage.gameObject.transform.localScale = Vector3.one;
+//        }
 //        else
 //        {
-//            if (Participant.SpeechDetected)
-//            {
-//                ChatStateImage.sprite = SpeakingImage;
-//                ChatStateImage.gameObject.transform.localScale = Vector3.one;
-//            }
-//            else
-//            {
-//                ChatStateImage.sprite = NotSpeakingImage;
-//            }
+//            ChatStateImage.sprite = NotSpeakingImage;
 //        }
 //    }
 
@@ -73,27 +105,19 @@
 //        Participant = participant;
 //        PlayerNameText.text = Participant.DisplayName;
 //        UpdateChatStateImage();
+
+//        // Subscribe to events so that if the participant’s mute state or speaking state changes,
+//        // the roster item UI (icon) is automatically updated.
 //        Participant.ParticipantMuteStateChanged += UpdateChatStateImage;
 //        Participant.ParticipantSpeechDetected += UpdateChatStateImage;
 
-//        MuteButton.onClick.AddListener(() =>
-//        {
-//            // If already muted, unmute, and vice versa.
-//            if (Participant.IsMuted)
-//            {
-//                participant.UnmutePlayerLocally();
-//                MuteButton.image.color = Color.white;
-//            }
-//            else
-//            {
-//                participant.MutePlayerLocally();
-//                MuteButton.image.color = k_MutedColor;
-//            }
-//        });
+//        // *** FIX 1 & 4 ***  
+//        // Remove duplicate mute listeners. Do not add a second listener here.
+//        // (This prevents toggling twice and canceling out the mute state.)
 
 //        if (participant.IsSelf)
 //        {
-//            // Can't change our own participant volume, so turn off the slider
+//            // Disable volume slider for yourself.
 //            ParticipantVolumeSlider.gameObject.SetActive(false);
 //        }
 //        else
@@ -107,8 +131,8 @@
 //            });
 //        }
 
+//        // Enable or disable the effect dropdown based on AudioTapsManager.
 //        EffectDropdown.gameObject.SetActive(AudioTapsManager.Instance.IsFeatureEnabled);
-
 //        EffectDropdown.onValueChanged.AddListener(delegate
 //        {
 //            EffectChanged(EffectDropdown);
@@ -127,7 +151,7 @@
 
 //        if (Participant.IsSelf)
 //        {
-//            AudioTapsManager.Instance.AddSelfCaptureEffect(effect); // TODO: Re-enable transmit effects when CaptureSink becomes supported
+//            AudioTapsManager.Instance.AddSelfCaptureEffect(effect);
 //        }
 //        else
 //        {
@@ -137,10 +161,14 @@
 
 //    void OnDestroy()
 //    {
-//        Participant.ParticipantMuteStateChanged -= UpdateChatStateImage;
-//        Participant.ParticipantSpeechDetected -= UpdateChatStateImage;
+//        if (Participant != null)
+//        {
+//            Participant.ParticipantMuteStateChanged -= UpdateChatStateImage;
+//            Participant.ParticipantSpeechDetected -= UpdateChatStateImage;
+//        }
 //        MuteButton.onClick.RemoveAllListeners();
-//        ParticipantVolumeSlider.onValueChanged.RemoveAllListeners();
+//        if (ParticipantVolumeSlider != null)
+//            ParticipantVolumeSlider.onValueChanged.RemoveAllListeners();
 //    }
 
 //    void OnParticipantVolumeChanged(float volume)
@@ -177,10 +205,12 @@ public class RosterItem : MonoBehaviour
     const float k_maxSliderVolume = 7;
     readonly Color k_MutedColor = new Color(1, 0.624f, 0.624f, 1);
 
+    // For remote participants, track mute state locally
+    private bool remoteMuteState = false;
+
     private void Start()
     {
-        // *** FIX 1 & 4 ***  
-        // Remove duplicate listeners: add one listener for mute toggling.
+        // Add one listener for mute toggling.
         MuteButton.onClick.AddListener(ToggleMute);
     }
 
@@ -197,28 +227,52 @@ public class RosterItem : MonoBehaviour
             return;
         }
 
-        if (Participant.IsMuted)
+        // Check if this roster item is for the local participant.
+        if (Participant.IsSelf)
         {
-            Participant.UnmutePlayerLocally();
-            MuteButton.image.color = Color.white;
+            // For local participant, use the provided mute methods.
+            if (Participant.IsMuted)
+            {
+                Participant.UnmutePlayerLocally();
+                MuteButton.image.color = Color.white;
+            }
+            else
+            {
+                Participant.MutePlayerLocally();
+                MuteButton.image.color = k_MutedColor;
+            }
         }
         else
         {
-            Participant.MutePlayerLocally();
-            MuteButton.image.color = k_MutedColor;
+            // For remote participants, toggle our local flag and call mute/unmute.
+            remoteMuteState = !remoteMuteState;
+            if (remoteMuteState)
+            {
+                Participant.MutePlayerLocally();
+                MuteButton.image.color = k_MutedColor;
+            }
+            else
+            {
+                Participant.UnmutePlayerLocally();
+                MuteButton.image.color = Color.white;
+            }
         }
 
+        // Notify the player UI (if you have any manager tracking this).
         if (PlayerManager.Instance != null)
         {
-            PlayerManager.Instance.UpdateMuteState(Participant.DisplayName, Participant.IsMuted);
+            PlayerManager.Instance.UpdateMuteState(Participant.DisplayName,
+                Participant.IsSelf ? Participant.IsMuted : remoteMuteState);
         }
         else
         {
             Debug.LogWarning("PlayerManager.Instance is null.");
         }
 
+        // Update the chat icon.
         UpdateChatStateImage();
 
+        // For the local participant, update the global status bar.
         if (Participant.IsSelf)
         {
             if (StatusBar.Instance != null)
@@ -232,13 +286,15 @@ public class RosterItem : MonoBehaviour
         }
     }
 
-
     /// <summary>
     /// Updates the chat icon based on whether the participant is muted or speaking.
+    /// For remote participants, use the local remoteMuteState flag.
     /// </summary>
     private void UpdateChatStateImage()
     {
-        if (Participant.IsMuted)
+        bool muted = Participant.IsSelf ? Participant.IsMuted : remoteMuteState;
+
+        if (muted)
         {
             ChatStateImage.sprite = MutedImage;
             ChatStateImage.gameObject.transform.localScale = Vector3.one;
@@ -265,13 +321,9 @@ public class RosterItem : MonoBehaviour
         Participant.ParticipantMuteStateChanged += UpdateChatStateImage;
         Participant.ParticipantSpeechDetected += UpdateChatStateImage;
 
-        // *** FIX 1 & 4 ***  
-        // Remove duplicate mute listeners. Do not add a second listener here.
-        // (This prevents toggling twice and canceling out the mute state.)
-
+        // For local participant, disable the volume slider.
         if (participant.IsSelf)
         {
-            // Disable volume slider for yourself.
             ParticipantVolumeSlider.gameObject.SetActive(false);
         }
         else
