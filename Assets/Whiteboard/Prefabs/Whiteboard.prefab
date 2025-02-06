@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8408993902178679917}
   - component: {fileID: 4302037070417857789}
   - component: {fileID: 4753916706674653192}
-  - component: {fileID: 2484486347638977743}
+  - component: {fileID: 4981175194491116137}
   m_Layer: 0
   m_Name: Whiteboard
   m_TagString: Whiteboard
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
   textureSize: {x: 2048, y: 2048}
---- !u!54 &2484486347638977743
+--- !u!54 &4981175194491116137
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,7 +148,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
