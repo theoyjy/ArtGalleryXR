@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1222317130851753243}
   serializedVersion: 2
   m_LocalRotation: {x: 0.9876767, y: -0.000000007450581, z: 0.000000018626451, w: 0.1565082}
-  m_LocalPosition: {x: -0.0002, y: 0.0165, z: 0.0555}
+  m_LocalPosition: {x: -0.0002, y: 0.0165, z: 0.072}
   m_LocalScale: {x: 0.0012986992, y: 0.0012986986, z: 0.0012986988}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,10 +44,10 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1000
+  m_Intensity: 1960.7
   m_Range: 73.84764
-  m_SpotAngle: 76.64507
-  m_InnerSpotAngle: 23.36672
+  m_SpotAngle: 73.5455
+  m_InnerSpotAngle: 29.565855
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 1851733219350713094}
   - component: {fileID: 7532330414280813287}
   - component: {fileID: 2217499368628173712}
+  - component: {fileID: 1102327574902278495}
   m_Layer: 0
   m_Name: canvas
   m_TagString: Untagged
@@ -241,6 +242,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1102327574902278495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5984634587578281755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99a44743aab224ff488ce01d4be694ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  is_Changed: 0
+  materials: []
+  current_canvas_texture: {fileID: 2800000, guid: 15d55b98aad8e42a09fd46f4d79b77d1, type: 3}
+  texture_url: https://d6be0271-d571-42d8-a09b-305d7f148d1f.client-api.unity3dusercontent.com/client_api/v1/environments/production/buckets/29e6096a-5d6c-4985-a63c-ed8a16000af9/release_by_badge/latest/entry_by_path/content/?path=image.jpg
 --- !u!1 &7325641885330552123
 GameObject:
   m_ObjectHideFlags: 0
