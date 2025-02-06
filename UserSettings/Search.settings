@@ -9,13 +9,6 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"picker_window_position_offset.075BCD15" = "23.33337;375.3333;320;550"
-	"picker_visibility_flags.075BCD15" = "264"
-	"picker_item_size.075BCD15" = "96"
-	"picker_inspector.075BCD15" = "0"
-	"last_search.66F56946" = "Interaction Layer Mask"
-	"OpenInspectorPreview.66F56946" = "0"
-	"currentGroup.66F56946" = "asset"
 }
 providers = {
 	asset = {
@@ -72,9 +65,6 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
-	"Interaction Layer Mask"
-	""
-	"Camera"
 ]
 searchItemFavorites = [
 ]
