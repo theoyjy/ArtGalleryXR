@@ -33,7 +33,7 @@ public class StatusBar : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Speaking = !Speaking;
-            PlayerManager.Instance.test();
+            //PlayerManager.Instance.test();
         }
 
         if (_cam != null)

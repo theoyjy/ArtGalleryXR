@@ -38,7 +38,7 @@ public class RosterItem : MonoBehaviour
         }
 
         // Notify the player UI
-        PlayerManager.Instance.UpdateMuteState(Participant.DisplayName, Participant.IsMuted);
+        //PlayerManager.Instance.UpdateMuteState(Participant.DisplayName, Participant.IsMuted);
 
 
     }
