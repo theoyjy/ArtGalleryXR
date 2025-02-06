@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb3e77ab773a7e4fa108cd0758cdaff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolSpawnOffset: 10
+  ToolSpawnOffset: 0.1
   ToolUI: {fileID: 3967498396443459041, guid: fa7d98f2435a5ec4f96d5d2ad1f53ef2, type: 3}

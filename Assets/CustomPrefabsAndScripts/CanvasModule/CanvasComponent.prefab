@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2657591615601117352}
   serializedVersion: 2
   m_LocalRotation: {x: -0.055211514, y: -0, z: -0, w: 0.9984747}
-  m_LocalPosition: {x: -4, y: 18.762932, z: 45}
+  m_LocalPosition: {x: -5.7, y: 18.762932, z: 6.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -127,13 +127,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 155.33, y: 113.38787}
+    oldSize: {x: 20.480001, y: 20.481422}
     newSize: {x: 3.33, y: 5.58}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 150, y: 115}
+  m_Size: {x: 20, y: 20}
   m_EdgeRadius: 0
 --- !u!114 &4291318166722259274
 MonoBehaviour:
@@ -173,8 +173,8 @@ Transform:
   m_GameObject: {fileID: 3798015678014434411}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -4.7285457, y: -43.00707, z: 30.79982}
-  m_LocalScale: {x: 300.00006, y: 300, z: 300.00006}
+  m_LocalPosition: {x: -4.8026, y: 7.167, z: 2.7}
+  m_LocalScale: {x: 56.35712, y: 56.357113, z: 56.35712}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5114651894022085924}
@@ -210,7 +210,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2017880691270122536}
   - {fileID: 4611285308478748369}
@@ -235,7 +235,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 400, y: 400, z: 400}
+  m_Size: {x: 100, y: 70, z: 100}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5210632554572358489
 MonoBehaviour:
@@ -250,8 +250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI: {fileID: 4710502502664573676, guid: baf837d4a4e4d3d4b8907d8ae3f6e239, type: 3}
-  interactableTag: MainCamera
-  spawnOffset: 0.5
+  interactableTag: Player
+  spawnOffset: 0.2
 --- !u!54 &8655030304672800031
 Rigidbody:
   m_ObjectHideFlags: 0

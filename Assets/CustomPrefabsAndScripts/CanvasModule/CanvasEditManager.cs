@@ -95,9 +95,9 @@ public class CanvasEditManager : MonoBehaviour
         Debug.Log("Target position: " + targetTransform.position + " Rotation: " + targetTransform.rotation);
 
         playerCamera.orthographic = true;
-        playerCamera.orthographicSize = 57.1f;  // magic number
-        playerCamera.aspect = 2.74f / 2.0f;  // magic number
-        Screen.SetResolution(2740, 2000, false);
+        playerCamera.orthographicSize = 10f;  // magic number
+        playerCamera.aspect = 1f;  // magic number
+        Screen.SetResolution(2048, 2048, false);
         // hide enter edit canvas UI
         EditCanvasUI.SetActive(false);
 
