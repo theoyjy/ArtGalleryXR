@@ -8,20 +8,32 @@ public class Whiteboard : MonoBehaviour
     public Texture2D texture;
     public Vector2 textureSize = new Vector2(2048, 2048);
 
-    private string saveFileName = "testImageSave.png";
+    // Determine the save path
+    private string projectPath;
+    private string savePath;
+    private string saveFileName;
+    private Renderer whiteboardRenderer;
 
     void Start()
     {
-        var r = GetComponent<Renderer>();
+        projectPath = Application.dataPath.Replace("/Assets", "/exports/"); // Get root project folder
+        saveFileName = "testImageSave.png";
+        savePath = Path.Combine(projectPath, saveFileName);
+
+        whiteboardRenderer = GetComponent<Renderer>();
         texture = new Texture2D((int)textureSize.x, (int)textureSize.y);
-        r.material.mainTexture = texture;
+        whiteboardRenderer.material.mainTexture = texture;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             SaveTextureToPNG(saveFileName);
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            LoadImageFromFile("testImageRead.png");
         }
     }
 
@@ -36,14 +48,33 @@ public class Whiteboard : MonoBehaviour
         // Encode texture into PNG format
         byte[] bytes = texture.EncodeToPNG();
 
-        // Determine the save path
-        //string path = Path.Combine(Application.persistentDataPath, filename);
-        string path = "D:\\TCD_Courses\\ASE\\ArtGalleryXR\\exports\\" + filename;
-
         // Write to file
-        File.WriteAllBytes(path, bytes);
+        File.WriteAllBytes(savePath, bytes);
 
-        Debug.Log($"Saved whiteboard image to: {path}");
+        Debug.Log($"Saved whiteboard image to: {savePath}");
+    }
+
+    void LoadImageFromFile(string readFileName)
+    {
+        string filePath = Path.Combine(projectPath, readFileName);
+        if (!File.Exists(filePath))
+        {
+            Debug.LogError($"File not found: {filePath}");
+            return;
+        }
+
+        byte[] fileData = File.ReadAllBytes(filePath);
+        texture = new Texture2D(2048, 2048); // Ensure correct dimensions
+
+        if (texture.LoadImage(fileData)) // Load image data into texture
+        {
+            whiteboardRenderer.material.mainTexture = texture;
+            Debug.Log($"Loaded whiteboard image from: {filePath}");
+        }
+        else
+        {
+            Debug.LogError("Failed to load image file.");
+        }
     }
 
     // Test: material changing function for eg
