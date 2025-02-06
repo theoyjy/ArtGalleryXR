@@ -222,10 +222,11 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     void Update()
     {
+        _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
         transform.rotation = Quaternion.Euler(0, 90, 90);
 #if UNITY_ANDROID
         Draw();
-        Debug.Log("Android");
+        //Debug.Log("Android");
 #else
         if (_isHovering && Input.GetMouseButtonDown(0)) // Left-click when hovering
         {
@@ -243,6 +244,11 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
         {
             MovePenWithMouse();
             Draw();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            //_tip.GetComponent<MarkerColorChanger>.ChangeColor(Color.red);
         }
     #endif
     }
