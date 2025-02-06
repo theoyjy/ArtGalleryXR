@@ -15,6 +15,8 @@ public class CanvasEditManager : MonoBehaviour
     GameObject editedCanvas;
     GameObject enterEditCanvasUI;
     TeleportationProvider teleportationProvider;
+    Transform cameraTransformBeforeEnter;
+    float originAspect;
 
     [Header("UI Prefab (Must be a World-Space Canvas)")]
     [SerializeField] private GameObject ToolUI;
@@ -78,40 +80,38 @@ public class CanvasEditManager : MonoBehaviour
             return;
         }
 
+        // record the camera position before entering edit mode
+        cameraTransformBeforeEnter = playerCamera.transform.parent.transform.parent.transform;
+        originAspect = playerCamera.aspect;
+
+
+        // calculate the target position and rotation
         Vector3 CardNormal = card.GetNormal();
         Vector3 TargetCameraPosition = card.GetWorldLoc() + CardNormal * ToolSpawnOffset;
-
         GameObject tempTarget = new GameObject("TempTargetTransform");
         Transform targetTransform = tempTarget.transform;
-
         targetTransform.position = TargetCameraPosition;
-        targetTransform.rotation = Quaternion.LookRotation(-CardNormal);
+        targetTransform.rotation = Quaternion.Euler(6.33f, 0f, 0f);
         Debug.Log("Target position: " + targetTransform.position + " Rotation: " + targetTransform.rotation);
 
+        playerCamera.orthographic = true;
+        playerCamera.orthographicSize = 57.1f;  // magic number
+        playerCamera.aspect = 2.74f / 2.0f;  // magic number
+        Screen.SetResolution(2740, 2000, false);
         // hide enter edit canvas UI
         EditCanvasUI.SetActive(false);
 
         // move camera to focus on the canvas
         TeleportToTarget(targetTransform);
 
+        var trackedPoseDriver = playerCamera.transform.parent.GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>(true);
 
-        // calculate FOV
-        //float halfHeight = canvasSize.y / 2.0f;
-        //float fovRadians = Mathf.Atan(halfHeight / distanceToCanvas);
-        //float fovDegrees = fovRadians * Mathf.Rad2Deg * 2.0f;
-
-        //cam.fieldOfView = fovDegrees;
-
-        //// Optional: Match the camera's aspect ratio to the canvas
-        //cam.aspect = canvasSize.x / canvasSize.y;
-
-        // disable player movement
-
-        //GetComponent<PlayerInput>().enabled = false;
-        //GetComponent<ActionBasedContinuousMoveProvider>().enabled = false;
-        //GetComponent<ActionBasedContinuousTurnProvider>().enabled = false;
-
-        //StartCoroutine(ZoomCamera(TargetCameraPosition, CardNormal, zoomedInFOV));
+        Debug.Log("TrackedPoseDriver count: " + trackedPoseDriver.Length);
+        for (int i = 0; i < trackedPoseDriver.Length; i++)
+        {
+            trackedPoseDriver[i].enabled = false;
+        }
+        playerCamera.transform.parent.transform.parent.GetComponent<ObjectMovementWithCamera>().enabled = false;
         Instantiate(ToolUI);
 
     }
@@ -120,12 +120,19 @@ public class CanvasEditManager : MonoBehaviour
     {
         Debug.Log("Exiting edit mode");
         isEditMode = false;
-        // Zoom out
 
-        // Disable painting
+        var trackedPoseDriver = playerCamera.transform.parent.GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>(true);
 
-        // Other exit logic
-        //GetComponent<PlayerInput>().enabled = true;
+        Debug.Log("TrackedPoseDriver count: " + trackedPoseDriver.Length);
+        for (int i = 0; i < trackedPoseDriver.Length; i++)
+        {
+            trackedPoseDriver[i].enabled = true;
+        }
+        playerCamera.transform.parent.transform.parent.GetComponent<ObjectMovementWithCamera>().enabled = true;
+        playerCamera.orthographic = false;
+        playerCamera.aspect = originAspect;
+
+        TeleportToTarget(cameraTransformBeforeEnter);
 
     }
 
@@ -140,32 +147,6 @@ public class CanvasEditManager : MonoBehaviour
         }
         card.DeleteDrawing();
     }
-
-    //IEnumerator ZoomCamera(Vector3 targetPosition, Vector3 CanvasNormal, float targetFOV)
-    //{
-    //    //yield return null;
-    //    if (playerCamera == null)
-    //        playerCamera = Camera.main;
-
-    //    Vector3 startPosition = playerCamera.transform.position;
-    //    Quaternion startRotation = playerCamera.transform.rotation;
-    //    float startFOV = playerCamera.fieldOfView;
-    //    float time = 0;
-    //    float zoomSpeed = 1.0f; // Add zoomSpeed variable
-    //    Debug.Log("ZoomCamera: EditCanvasUI.active= " + editedCanvas.GetComponent<Canvas>().enabled);
-
-    //    while (time < 1)
-    //    {
-    //        time += Time.deltaTime * zoomSpeed;
-    //        playerCamera.transform.position = Vector3.Lerp(startPosition, targetPosition, time);
-
-    //        playerCamera.transform.rotation = Quaternion.Slerp(startRotation,
-    //                                                        Quaternion.LookRotation(-CanvasNormal),
-    //                                                        time);
-    //        playerCamera.fieldOfView = Mathf.Lerp(startFOV, targetFOV, time);
-    //        yield return null;
-    //    }
-    //}
 
     public void TeleportToTarget(Transform targetTransform)
     {
