@@ -24,7 +24,7 @@ public class ShowCanvasOnCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(" Trigger entered with: " + other.name);
+        Debug.Log(" Trigger entered with: " + other.tag);
         if(other.CompareTag(interactableTag))
         //if (interactableTag.CompareTo(other.name) == 1)
         {
