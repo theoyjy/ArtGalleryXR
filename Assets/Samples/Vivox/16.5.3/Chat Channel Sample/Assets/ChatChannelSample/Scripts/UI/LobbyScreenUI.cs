@@ -15,7 +15,7 @@ public class LobbyScreenUI : MonoBehaviour
     public GameObject ConnectionIndicatorDot;
     public GameObject ConnectionIndicatorText;
 
-    EventSystem m_EventSystem;
+    //EventSystem m_EventSystem;
     Image m_ConnectionIndicatorDotImage;
     Text m_ConnectionIndicatorDotText;
 
@@ -27,11 +27,11 @@ public class LobbyScreenUI : MonoBehaviour
     IEnumerator Setup()
     {
         yield return new WaitUntil(() => VivoxService.Instance != null);
-        m_EventSystem = EventSystem.current;
-        if (!m_EventSystem)
-        {
-            Debug.LogError("Unable to find EventSystem object.");
-        }
+        //m_EventSystem = EventSystem.current;
+        //if (!m_EventSystem)
+        //{
+        //    Debug.LogError("Unable to find EventSystem object.");
+        //}
         m_ConnectionIndicatorDotImage = ConnectionIndicatorDot.GetComponent<Image>();
         if (!m_ConnectionIndicatorDotImage)
         {
@@ -60,11 +60,14 @@ public class LobbyScreenUI : MonoBehaviour
 
     void OnDestroy()
     {
-        VivoxService.Instance.LoggedIn -= OnUserLoggedIn;
-        VivoxService.Instance.LoggedOut -= OnUserLoggedOut;
-        VivoxService.Instance.ConnectionRecovered -= OnConnectionRecovered;
-        VivoxService.Instance.ConnectionRecovering -= OnConnectionRecovering;
-        VivoxService.Instance.ConnectionFailedToRecover -= OnConnectionFailedToRecover;
+        if(VivoxService.Instance != null)
+        { 
+            VivoxService.Instance.LoggedIn -= OnUserLoggedIn;
+            VivoxService.Instance.LoggedOut -= OnUserLoggedOut;
+            VivoxService.Instance.ConnectionRecovered -= OnConnectionRecovered;
+            VivoxService.Instance.ConnectionRecovering -= OnConnectionRecovering;
+            VivoxService.Instance.ConnectionFailedToRecover -= OnConnectionFailedToRecover;
+        }
 
         LogoutButton.onClick.RemoveAllListeners();
     }
