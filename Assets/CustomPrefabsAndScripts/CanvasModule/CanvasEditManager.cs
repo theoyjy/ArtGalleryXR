@@ -86,7 +86,6 @@ public class CanvasEditManager : MonoBehaviour
             playerCamera = Camera.main;
 
         cameraTransformBeforeEnter = playerCamera.transform.parent.transform.parent.transform;
-        originAspect = playerCamera.aspect;
 
         // calculate the target position and rotation
         Vector3 CardNormal = card.GetNormal();
@@ -94,15 +93,16 @@ public class CanvasEditManager : MonoBehaviour
         GameObject tempTarget = new GameObject("TempTargetTransform");
         Transform targetTransform = tempTarget.transform;
         targetTransform.position = TargetCameraPosition;
-        targetTransform.rotation = Quaternion.Euler(6.33f, 0f, 0f);
+        //targetTransform.rotation = Quaternion.Euler(6.33f, 0f, 0f);
         Debug.Log("Target position: " + targetTransform.position + " Rotation: " + targetTransform.rotation);
 
         playerCamera.orthographic = true;
         playerCamera.orthographicSize = 10f;  // magic number
-        playerCamera.aspect = 1f;  // magic number
         oriWidth = Screen.width;
         oriHeight = Screen.height;
         Screen.SetResolution(2048, 2048, false);
+        playerCamera.aspect = (float)Screen.width / Screen.height;
+
         // hide enter edit canvas UI
         EditCanvasUI.SetActive(false);
 
