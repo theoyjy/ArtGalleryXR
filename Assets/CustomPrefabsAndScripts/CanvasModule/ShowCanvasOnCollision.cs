@@ -10,7 +10,8 @@ public class ShowCanvasOnCollision : MonoBehaviour
     [SerializeField] private GameObject UI;
 
     [Header("Tag to Detect (e.g., 'Interactable')")]
-    [SerializeField] private string interactableTag = "Interactable";
+    //[SerializeField] private string interactableTag = "Interactable";
+    [SerializeField] private string interactableTag = "Player";
 
     [Header("Spawn Offset from Collision (Optional)")]
     [SerializeField] public float spawnOffset = 5.0f;

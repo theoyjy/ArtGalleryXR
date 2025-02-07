@@ -81,9 +81,11 @@ public class CanvasEditManager : MonoBehaviour
         }
 
         // record the camera position before entering edit mode
+        if (playerCamera == null)
+            playerCamera = Camera.main;
+
         cameraTransformBeforeEnter = playerCamera.transform.parent.transform.parent.transform;
         originAspect = playerCamera.aspect;
-
 
         // calculate the target position and rotation
         Vector3 CardNormal = card.GetNormal();

@@ -290,7 +290,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private void Draw()
     {
         if (transform.position.z > 14.0f)
-            transform.position = new Vector3(transform.position.x, transform.position.y, 15.6f);
+            transform.position = new Vector3(transform.position.x, transform.position.y, 15.66f);
 
         if (Physics.Raycast(_tip.position, transform.up, out _touch, _tipHeight))
         {

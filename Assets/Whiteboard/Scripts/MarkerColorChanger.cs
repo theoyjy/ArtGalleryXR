@@ -6,8 +6,6 @@ public class MarkerColorChanger : MonoBehaviour
     public GameObject tip;
     private Material markerMaterial;
    
-    
-
     void Start()
     {
         // Find the material named "Marker" in the Resources folder or assigned materials
