@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    private SpriteRenderer rend;
+    private MeshRenderer rend;
 
     [SerializeField]
-    private Sprite EmptySprite;
+    private Mesh EmptyMesh;
 
     private bool coroutineAllowed;
 
     // Start is called before the first frame update
     void Start()
     {
-        rend = GetComponent<SpriteRenderer>();
-        rend.sprite = EmptySprite;
+        rend = GetComponent<MeshRenderer>();
+        //rend.mesh = EmptyMesh;
         coroutineAllowed = true;
         lastClickTime = 0;
     }
