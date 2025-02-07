@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    private MeshRenderer rend;
+    //private MeshRenderer rend;
 
-    [SerializeField]
-    private Mesh EmptyMesh;
+    //private UnityEngine.Plane plane;
+
+    //[SerializeField]
+    //private Mesh EmptyMesh;
 
     private bool coroutineAllowed;
 
     // Start is called before the first frame update
     void Start()
     {
-        rend = GetComponent<MeshRenderer>();
+        //rend = GetComponent<MeshRenderer>();
+        //plane = GetComponent<UnityEngine.Plane>();
         //rend.mesh = EmptyMesh;
         coroutineAllowed = true;
         lastClickTime = 0;
@@ -51,7 +54,7 @@ public class Card : MonoBehaviour
         Debug.Log("Trigger Canvas Flip");
         coroutineAllowed = false;
 
-        for (float i = 180f; i >= 0f; i -= 10f)
+        for (float i = 0f; i >= -180f; i -= 10f)
         {
             transform.localRotation = Quaternion.Euler(-7.7f, i, 0f);
             yield return new WaitForSeconds(0.01f);
@@ -67,7 +70,8 @@ public class Card : MonoBehaviour
 
     public Vector3 GetNormal()
     {
-        return transform.forward;
+        Vector3 normal = Quaternion.Euler(-90f, 180f, 0) * transform.forward;
+        return normal;
     }
 
 }
