@@ -134,8 +134,8 @@ public class CanvasEditManager : MonoBehaviour
             trackedPoseDriver[i].enabled = true;
         }
         playerCamera.transform.parent.transform.parent.GetComponent<ObjectMovementWithCamera>().enabled = true;
+        playerCamera.aspect = (float)Screen.width / Screen.height;
         playerCamera.orthographic = false;
-        playerCamera.aspect = originAspect;
         Screen.SetResolution(oriWidth, oriHeight, false);
         TeleportToTarget(cameraTransformBeforeEnter);
 
