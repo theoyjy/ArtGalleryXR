@@ -17,6 +17,7 @@ public class CanvasEditManager : MonoBehaviour
     TeleportationProvider teleportationProvider;
     Transform cameraTransformBeforeEnter;
     float originAspect;
+    int oriWidth, oriHeight;
 
     [Header("UI Prefab (Must be a World-Space Canvas)")]
     [SerializeField] private GameObject ToolUI;
@@ -99,6 +100,8 @@ public class CanvasEditManager : MonoBehaviour
         playerCamera.orthographic = true;
         playerCamera.orthographicSize = 10f;  // magic number
         playerCamera.aspect = 1f;  // magic number
+        oriWidth = Screen.width;
+        oriHeight = Screen.height;
         Screen.SetResolution(2048, 2048, false);
         // hide enter edit canvas UI
         EditCanvasUI.SetActive(false);
@@ -133,7 +136,7 @@ public class CanvasEditManager : MonoBehaviour
         playerCamera.transform.parent.transform.parent.GetComponent<ObjectMovementWithCamera>().enabled = true;
         playerCamera.orthographic = false;
         playerCamera.aspect = originAspect;
-
+        Screen.SetResolution(oriWidth, oriHeight, false);
         TeleportToTarget(cameraTransformBeforeEnter);
 
     }

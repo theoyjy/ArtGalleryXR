@@ -14,7 +14,7 @@ public class ShowCanvasOnCollision : MonoBehaviour
     [SerializeField] private string interactableTag = "Player";
 
     [Header("Spawn Offset from Collision (Optional)")]
-    [SerializeField] public float spawnOffset = 5.0f;
+    [SerializeField] public float spawnOffset = 0.1f;
 
 
     private Dictionary<Collider, GameObject> activeUIs = new Dictionary<Collider, GameObject>();
@@ -61,6 +61,10 @@ public class ShowCanvasOnCollision : MonoBehaviour
             uiController.SetCanvas(gameObject);
 
             // add UI to dictionary
+            if (activeUIs.ContainsKey(other))
+            {
+                Destroy(activeUIs[other]);
+            }
             activeUIs[other] = uiInstance;
 
         }
