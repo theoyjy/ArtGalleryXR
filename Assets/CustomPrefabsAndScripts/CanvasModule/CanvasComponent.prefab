@@ -104,7 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI: {fileID: 4710502502664573676, guid: baf837d4a4e4d3d4b8907d8ae3f6e239, type: 3}
   interactableTag: Player
-  spawnOffset: 0.2
+  spawnOffset: -0.25
 --- !u!54 &8655030304672800031
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -316,7 +316,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee03c139d73a61641bbdd3c39d4abe1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EmptyMesh: {fileID: 0}
 --- !u!1001 &7380390724900316226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -347,7 +346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6212125586991172346, guid: aab778226fc966f48b78e57f89ec9530, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.9038544
+      value: -5.9
       objectReference: {fileID: 0}
     - target: {fileID: 6212125586991172346, guid: aab778226fc966f48b78e57f89ec9530, type: 3}
       propertyPath: m_LocalPosition.y
@@ -355,7 +354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6212125586991172346, guid: aab778226fc966f48b78e57f89ec9530, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.817345
+      value: 6.9
       objectReference: {fileID: 0}
     - target: {fileID: 6212125586991172346, guid: aab778226fc966f48b78e57f89ec9530, type: 3}
       propertyPath: m_LocalRotation.w
