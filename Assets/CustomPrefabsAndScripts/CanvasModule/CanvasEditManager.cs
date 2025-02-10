@@ -133,6 +133,7 @@ public class CanvasEditManager : MonoBehaviour
 
 #else
         var trackedPoseDriver = playerCamera.transform.parent.GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>(true);
+        enterEditCanvasUI.SetActive(true);
 
         Debug.Log("TrackedPoseDriver count: " + trackedPoseDriver.Length);
         for (int i = 0; i < trackedPoseDriver.Length; i++)
