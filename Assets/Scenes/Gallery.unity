@@ -141,19 +141,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1709252921373675818, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.0039709876
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1709252921373675818, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1709252921373675818, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.99999213
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1709252921373675818, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1709252921373675818, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -161,12 +161,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1709252921373675818, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -179.545
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 1709252921373675818, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3370304405078971525, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+      propertyPath: _whiteboardTransform
+      value: 
+      objectReference: {fileID: 314446390}
     - target: {fileID: 5666307368449052307, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_Name
       value: CanvasComponent
@@ -1655,6 +1659,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280913026}
   m_CullTransparentMesh: 0
+--- !u!4 &314446390 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1600757073805583627, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+  m_PrefabInstance: {fileID: 1671247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &317832823
 GameObject:
   m_ObjectHideFlags: 0
@@ -6644,7 +6653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e013e0aedde4ad1a4be5ccf6a7f1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipAddress: 20.33.109.153
+  ipAddress: 20.33.109.158
   port: 9000
 --- !u!4 &1187899824
 Transform:
@@ -10275,7 +10284,7 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 20.33.109.153
+    Address: 20.33.109.158
     Port: 9000
     ServerListenAddress: 0.0.0.0
   DebugSimulator:
