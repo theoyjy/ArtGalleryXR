@@ -81,6 +81,7 @@ public class CanvasEditManager : MonoBehaviour
             return;
         }
 
+#if UNITY_ANDROID
         // record the camera position before entering edit mode
         if (playerCamera == null)
             playerCamera = Camera.main;
@@ -117,14 +118,16 @@ public class CanvasEditManager : MonoBehaviour
             trackedPoseDriver[i].enabled = false;
         }
         playerCamera.transform.parent.transform.parent.GetComponent<ObjectMovementWithCamera>().enabled = false;
-        Instantiate(ToolUI);
 
+#endif
+        Instantiate(ToolUI);
     }
 
     public void ExitEditMode()
     {
         Debug.Log("Exiting edit mode");
         isEditMode = false;
+#if UNITY_ANDROID
 
         var trackedPoseDriver = playerCamera.transform.parent.GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>(true);
 
@@ -138,7 +141,7 @@ public class CanvasEditManager : MonoBehaviour
         playerCamera.orthographic = false;
         Screen.SetResolution(oriWidth, oriHeight, false);
         TeleportToTarget(cameraTransformBeforeEnter);
-
+#endif
     }
 
     public void DeleteCanvas()
