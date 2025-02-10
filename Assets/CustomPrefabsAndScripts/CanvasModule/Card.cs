@@ -54,9 +54,9 @@ public class Card : MonoBehaviour
         Debug.Log("Trigger Canvas Flip");
         coroutineAllowed = false;
 
-        for (float i = 0f; i >= -180f; i -= 10f)
+        for (float i = 360f; i >= 180f; i -= 10f)
         {
-            transform.localRotation = Quaternion.Euler(-7.7f, i, 0f);
+            transform.localRotation = Quaternion.Euler(-90, i, 0f);
             yield return new WaitForSeconds(0.01f);
         }
 
