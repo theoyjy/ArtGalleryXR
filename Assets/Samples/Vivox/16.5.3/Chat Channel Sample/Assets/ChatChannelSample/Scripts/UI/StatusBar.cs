@@ -1,66 +1,61 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
-using System;
 
 public class StatusBar : MonoBehaviour
 {
     private Camera _cam;
     [SerializeField] private Image loudSpeakerMute;
     [SerializeField] private Image loudSpeakerLoud;
-    [SerializeField] private GameObject test;
 
-    // This StatusBar represents the local user’s mute state.
-    // Remove the “Speaking” toggle test variable because it was only used for testing.
+    // 用于标识该 StatusBar 属于哪个玩家
+    private string playerName;
+    // 当前静音状态
     private bool isMuted;
-
-    public static StatusBar Instance { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
 
     void Start()
     {
         _cam = Camera.main;
-        // Optionally, initialize the icon based on the current mute state.
+        // 初始时按当前 isMuted 状态更新图标
         SetMuteState(isMuted);
     }
 
     void Update()
     {
-        // *** FIX 2 ***
-        // Remove test code that toggles the icon with the spacebar.
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    // This was just for testing and does not update the actual Vivox UI state.
-        //    isMuted = !isMuted;
-        //    SetMuteState(isMuted);
-        //}
-
         if (_cam != null)
         {
-            // Make the status bar face the camera.
+            // 始终让该 UI 面向摄像机
             transform.rotation = Quaternion.LookRotation(transform.position - _cam.transform.position);
         }
     }
 
     /// <summary>
-    /// Call this method (from the RosterItem or elsewhere) to update the local user’s mute icon.
+    /// 初始化该 StatusBar，将其绑定到指定玩家（DisplayName）。
+    /// </summary>
+    public void Setup(string name)
+    {
+        playerName = name;
+        // 更新显示状态（如果之前状态已有设置）
+        SetMuteState(isMuted);
+    }
+
+    /// <summary>
+    /// 设置静音状态并更新显示的图片。
     /// </summary>
     public void SetMuteState(bool muteState)
     {
         isMuted = muteState;
-        loudSpeakerMute.gameObject.SetActive(isMuted);
-        loudSpeakerLoud.gameObject.SetActive(!isMuted);
+        if (loudSpeakerMute != null && loudSpeakerLoud != null)
+        {
+            loudSpeakerMute.gameObject.SetActive(isMuted);
+            loudSpeakerLoud.gameObject.SetActive(!isMuted);
+        }
+    }
+
+    /// <summary>
+    /// 返回该 StatusBar 所属玩家的姓名
+    /// </summary>
+    public string GetPlayerName()
+    {
+        return playerName;
     }
 }

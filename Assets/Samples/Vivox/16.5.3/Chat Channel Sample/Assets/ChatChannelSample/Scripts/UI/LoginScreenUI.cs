@@ -28,7 +28,6 @@ public class LoginScreenUI : MonoBehaviour
         m_EventSystem = FindObjectOfType<EventSystem>();
         yield return new WaitUntil(() => VivoxService.Instance != null);
 
-
         VivoxService.Instance.LoggedIn += OnUserLoggedIn;
         VivoxService.Instance.LoggedOut += OnUserLoggedOut;
 
@@ -39,10 +38,8 @@ public class LoginScreenUI : MonoBehaviour
 #endif
         LoginButton.onClick.AddListener(() => { LoginToVivoxService(); });
 
-        //OnUserLoggedOut();
-        var systInfoDeviceName = String.IsNullOrWhiteSpace(SystemInfo.deviceName) == false ? SystemInfo.deviceName : Environment.MachineName;
+        var systInfoDeviceName = string.IsNullOrWhiteSpace(SystemInfo.deviceName) == false ? SystemInfo.deviceName : Environment.MachineName;
         var resizedDisplayName = systInfoDeviceName.Substring(0, Math.Min(k_DefaultMaxStringLength, systInfoDeviceName.Length));
-        // If the name is still somehow empty, pop in a temporary name so it doesn't stop platforms like consoles from signing in.
         DisplayNameInput.text = string.IsNullOrEmpty(resizedDisplayName) ? "Temp" : resizedDisplayName;
         Debug.Log(DisplayNameInput.text);
         LoginToVivoxService();
@@ -64,7 +61,6 @@ public class LoginScreenUI : MonoBehaviour
         LoginScreen.SetActive(true);
         LoginButton.interactable = true;
         m_EventSystem.SetSelectedGameObject(LoginButton.gameObject, null);
-
     }
 
     void HideLoginUI()
@@ -75,11 +71,9 @@ public class LoginScreenUI : MonoBehaviour
 #if (UNITY_ANDROID && !UNITY_EDITOR) || __ANDROID__
     bool IsAndroid12AndUp()
     {
-        // android12VersionCode is hardcoded because it might not be available in all versions of Android SDK
         const int android12VersionCode = 31;
         AndroidJavaClass buildVersionClass = new AndroidJavaClass("android.os.Build$VERSION");
         int buildSdkVersion = buildVersionClass.GetStatic<int>("SDK_INT");
-
         return buildSdkVersion >= android12VersionCode;
     }
 
@@ -87,13 +81,10 @@ public class LoginScreenUI : MonoBehaviour
     {
         if (IsAndroid12AndUp())
         {
-            // UnityEngine.Android.Permission does not contain the BLUETOOTH_CONNECT permission, fetch it from Android
             AndroidJavaClass manifestPermissionClass = new AndroidJavaClass("android.Manifest$permission");
             string permissionCode = manifestPermissionClass.GetStatic<string>("BLUETOOTH_CONNECT");
-
             return permissionCode;
         }
-
         return "";
     }
 #endif
@@ -104,7 +95,6 @@ public class LoginScreenUI : MonoBehaviour
 #if (UNITY_ANDROID && !UNITY_EDITOR) || __ANDROID__
         if (IsAndroid12AndUp())
         {
-            // On Android 12 and up, we also need to ask for the BLUETOOTH_CONNECT permission for all features to work
             isGranted &= Permission.HasUserAuthorizedPermission(GetBluetoothConnectPermissionCode());
         }
 #endif
@@ -114,7 +104,6 @@ public class LoginScreenUI : MonoBehaviour
     void AskForPermissions()
     {
         string permissionCode = Permission.Microphone;
-
 #if (UNITY_ANDROID && !UNITY_EDITOR) || __ANDROID__
         if (m_PermissionAskedCount == 1 && IsAndroid12AndUp())
         {
@@ -128,7 +117,6 @@ public class LoginScreenUI : MonoBehaviour
     bool IsPermissionsDenied()
     {
 #if (UNITY_ANDROID && !UNITY_EDITOR) || __ANDROID__
-        // On Android 12 and up, we also need to ask for the BLUETOOTH_CONNECT permission
         if (IsAndroid12AndUp())
         {
             return m_PermissionAskedCount == 2;
@@ -141,13 +129,10 @@ public class LoginScreenUI : MonoBehaviour
     {
         if (IsMicPermissionGranted())
         {
-            // The user authorized use of the microphone.
             LoginToVivox();
         }
         else
         {
-            // We do not have the needed permissions.
-            // Ask for permissions or proceed without the functionality enabled if they were denied by the user
             if (IsPermissionsDenied())
             {
                 m_PermissionAskedCount = 0;
