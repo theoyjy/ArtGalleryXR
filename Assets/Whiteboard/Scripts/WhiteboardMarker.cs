@@ -242,6 +242,8 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if (Input.GetMouseButtonDown(1) && _isHolding)
         {
             _isSnapped = !_isSnapped;
+            if(!_isSnapped)
+                _touchedLastFrame = false;
 
         }
         if (_isHolding && _isSnapped)
@@ -252,7 +254,6 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
         else if(_isHolding && !_isSnapped)
         {
             MovePenWithMouse();
-            //Draw();
         }
         
 
@@ -272,6 +273,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
         _isHolding = false;
         _whiteboard = null;
         _touchedLastFrame = false;
+        _isSnapped = false;
     }
 
     private void MovePenWithMouse()
