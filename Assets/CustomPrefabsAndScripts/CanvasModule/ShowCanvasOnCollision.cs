@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-// If you're using Mirror or Netcode for GameObjects, uncomment accordingly:
-// using Mirror;
+using Unity.Netcode;
+
 
 public class ShowCanvasOnCollision : MonoBehaviour
 {
@@ -27,13 +27,32 @@ public class ShowCanvasOnCollision : MonoBehaviour
     {
         Debug.Log(" Trigger entered with: " + other.tag);
         if(other.CompareTag(interactableTag))
-        //if (interactableTag.CompareTo(other.name) == 1)
         {
+            Camera cam = other.GetComponentInChildren<Camera>();
+            foreach (var player in FindObjectsOfType<NetworkObject>())
+            {
+                if (player.IsOwner) // This is the local player
+                {
+                    var localCamera = player.GetComponentInChildren<Camera>();
+                    if(localCamera != cam)
+                    {
+                        Debug.Log("This is not the local player's camera");
+                        return;
+                    }
+                }
+            }
+
             Card card = GetComponentInChildren<Card>();
             if (card == null)
             {
                 Debug.LogError("Card component is missing from: " + gameObject.name);
                 return;
+            }
+            
+            if (activeUIs.ContainsKey(other))
+            {
+                Debug.Log("UI already exists for " + other.name + " so destroy previous");
+                Destroy(activeUIs[other]);
             }
 
             Vector3 spawnPosition = card.GetWorldLoc() + spawnOffset * card.GetNormal();
@@ -61,10 +80,6 @@ public class ShowCanvasOnCollision : MonoBehaviour
             uiController.SetCanvas(gameObject);
 
             // add UI to dictionary
-            if (activeUIs.ContainsKey(other))
-            {
-                Destroy(activeUIs[other]);
-            }
             activeUIs[other] = uiInstance;
 
         }
