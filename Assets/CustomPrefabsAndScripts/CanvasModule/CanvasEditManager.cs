@@ -82,6 +82,8 @@ public class CanvasEditManager : MonoBehaviour
         }
 
 #if UNITY_ANDROID
+
+#else
         // record the camera position before entering edit mode
         if (playerCamera == null)
             playerCamera = Camera.main;
@@ -129,6 +131,7 @@ public class CanvasEditManager : MonoBehaviour
         isEditMode = false;
 #if UNITY_ANDROID
 
+#else
         var trackedPoseDriver = playerCamera.transform.parent.GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>(true);
 
         Debug.Log("TrackedPoseDriver count: " + trackedPoseDriver.Length);

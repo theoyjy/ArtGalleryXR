@@ -25,6 +25,9 @@ public class ShowCanvasOnCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+#if UNITY_ANDROID
+
+#else
         Debug.Log(" Trigger entered with: " + other.tag);
         if(other.CompareTag(interactableTag))
         {
@@ -83,10 +86,14 @@ public class ShowCanvasOnCollision : MonoBehaviour
             activeUIs[other] = uiInstance;
 
         }
+#endif
     }
 
     public void OnTriggerExit(Collider other)
     {
+#if UNITY_ANDROID
+
+#else
         // Destroy UI and remove from dictionary
         if (activeUIs.ContainsKey(other))
         {
@@ -95,6 +102,7 @@ public class ShowCanvasOnCollision : MonoBehaviour
 
             Debug.Log($"UI removed from {other.name}");
         }
+#endif
     }
 }
 
