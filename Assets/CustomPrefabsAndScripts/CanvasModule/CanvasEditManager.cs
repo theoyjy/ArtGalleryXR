@@ -4,18 +4,18 @@ using UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation;
 using Unity.XR.CoreUtils;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
+using Unity.Netcode;
 
 public class CanvasEditManager : MonoBehaviour
 {
-    private Camera playerCamera;
     private float defaultFOV = 60.0f;
     private float zoomedInFOV = 30.0f;
     private float zoomDistance = 10.0f;
     public float ToolSpawnOffset = 100.0f;
     GameObject editedCanvas;
     GameObject enterEditCanvasUI;
-    TeleportationProvider teleportationProvider;
     Transform cameraTransformBeforeEnter;
+    NetworkObject localPlayer = null;
     float originAspect;
     int oriWidth, oriHeight;
 
@@ -29,7 +29,6 @@ public class CanvasEditManager : MonoBehaviour
     void Start()
     {
         isEditMode = false;
-        playerCamera = Camera.main;
     }
 
     void Awake()
@@ -44,15 +43,23 @@ public class CanvasEditManager : MonoBehaviour
             Destroy(gameObject);  // Only one instance of this object is allowed
             return;
         }
-        
-        if (playerCamera == null)
-            playerCamera = Camera.main;
 
-        if (teleportationProvider == null)
+    }
+
+    NetworkObject GetCurrentPlayer()
+    {
+        if(localPlayer == null)
         {
-            teleportationProvider = Object.FindAnyObjectByType<TeleportationProvider>();
-        };
-
+            foreach (var player in FindObjectsOfType<NetworkObject>())
+            {
+                if (player.IsOwner) // This is the local player
+                {
+                    localPlayer = player;
+                    break;
+                }
+            }
+        }
+        return localPlayer;
     }
 
     void Update()
@@ -85,8 +92,9 @@ public class CanvasEditManager : MonoBehaviour
 
 #else
         // record the camera position before entering edit mode
-        if (playerCamera == null)
-            playerCamera = Camera.main;
+
+        NetworkObject player = GetCurrentPlayer();
+        Camera playerCamera = player.GetComponentInChildren<Camera>();
 
         cameraTransformBeforeEnter = playerCamera.transform.parent.transform.parent.transform;
 
@@ -96,7 +104,7 @@ public class CanvasEditManager : MonoBehaviour
         GameObject tempTarget = new GameObject("TempTargetTransform");
         Transform targetTransform = tempTarget.transform;
         targetTransform.position = TargetCameraPosition;
-        //targetTransform.rotation = Quaternion.Euler(6.33f, 0f, 0f);
+        targetTransform.rotation = Quaternion.Euler(CardNormal);
         Debug.Log("Target position: " + targetTransform.position + " Rotation: " + targetTransform.rotation);
 
         playerCamera.orthographic = true;
@@ -110,7 +118,7 @@ public class CanvasEditManager : MonoBehaviour
         EditCanvasUI.SetActive(false);
 
         // move camera to focus on the canvas
-        TeleportToTarget(targetTransform);
+        MoveXRToTargetTrans(targetTransform);
 
         var trackedPoseDriver = playerCamera.transform.parent.GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>(true);
 
@@ -132,6 +140,8 @@ public class CanvasEditManager : MonoBehaviour
 #if UNITY_ANDROID
 
 #else
+        NetworkObject player = GetCurrentPlayer();
+        Camera playerCamera = player.GetComponentInChildren<Camera>();
         var trackedPoseDriver = playerCamera.transform.parent.GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>(true);
         enterEditCanvasUI.SetActive(true);
 
@@ -144,7 +154,7 @@ public class CanvasEditManager : MonoBehaviour
         playerCamera.aspect = (float)Screen.width / Screen.height;
         playerCamera.orthographic = false;
         Screen.SetResolution(oriWidth, oriHeight, false);
-        TeleportToTarget(cameraTransformBeforeEnter);
+        MoveXRToTargetTrans(cameraTransformBeforeEnter);
 #endif
     }
 
@@ -160,24 +170,12 @@ public class CanvasEditManager : MonoBehaviour
         card.DeleteDrawing();
     }
 
-    public void TeleportToTarget(Transform targetTransform)
+    public void MoveXRToTargetTrans(Transform targetTransform)
     {
-        if (teleportationProvider == null || targetTransform == null)
-        {
-            Debug.LogWarning("TeleportationProvider or Target is missing!");
-            return;
-        }
-
-        // Create the teleport request
-        TeleportRequest teleportRequest = new TeleportRequest
-        {
-            destinationPosition = targetTransform.position,
-            destinationRotation = targetTransform.rotation,
-            matchOrientation = MatchOrientation.TargetUpAndForward
-        };
-
-        // Queue the teleport request
-        teleportationProvider.QueueTeleportRequest(teleportRequest);
+        Debug.Log("Teleport to: " + targetTransform.position + " rotation: " + targetTransform.rotation);
+        NetworkObject player = GetCurrentPlayer();
+        player.transform.position = targetTransform.position;
+        player.transform.rotation = targetTransform.rotation;
     }
 
 
