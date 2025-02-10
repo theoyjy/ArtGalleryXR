@@ -118,10 +118,10 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if (_playerCamera == null) return;
 
         Vector3 mouseWorldPosition = _playerCamera.ScreenToWorldPoint(
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.5f) // Adjust depth dynamically
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, _whiteboardTransform.position.z - 0.8f) // Adjust depth dynamically
         );
 
-        transform.position = new Vector3 (mouseWorldPosition.x, mouseWorldPosition.y, _whiteboardTransform.position.z - 0.8f);
+        transform.position = mouseWorldPosition;//new Vector3 (mouseWorldPosition.x, mouseWorldPosition.y, _whiteboardTransform.position.z - 0.8f);
     }
 
     private Vector3 GetMouseWorldPosition()
