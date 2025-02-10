@@ -175,6 +175,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasComponent
       objectReference: {fileID: 0}
+    - target: {fileID: 6088654694456863773, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+      propertyPath: m_TagString
+      value: Pen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7086280231193675317, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+      propertyPath: texture
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
