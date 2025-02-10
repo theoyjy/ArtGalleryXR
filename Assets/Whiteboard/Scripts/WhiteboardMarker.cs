@@ -228,16 +228,13 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
         Draw();
         //Debug.Log("Android");
 #else
-        if (_isHovering && Input.GetMouseButtonDown(0)) // Left-click when hovering
+        if(_isHolding && Input.GetMouseButtonDown(0))
         {
-            if (_isHolding)
-            {
-                DropPen();
-            }
-            else
-            {
-                GrabPen();
-            }
+            DropPen();
+        }
+        else if (_isHovering && !_isHolding && Input.GetMouseButtonDown(0)) // Left-click when hovering
+        {
+            GrabPen();   
         }
 
         if (_isHolding)
@@ -246,10 +243,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
             Draw();
         }
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            //_tip.GetComponent<MarkerColorChanger>.ChangeColor(Color.red);
-        }
+        
     #endif
     }
 
@@ -289,7 +283,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     private void Draw()
     {
-        if (transform.position.z > 14.0f)
+        if (transform.position.z > 15.0f)
             transform.position = new Vector3(transform.position.x, transform.position.y, 16.1f);
 
         if (Physics.Raycast(_tip.position, transform.up, out _touch, _tipHeight))
