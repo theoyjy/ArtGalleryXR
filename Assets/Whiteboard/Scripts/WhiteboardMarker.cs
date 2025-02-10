@@ -187,6 +187,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private Camera _playerCamera;
     private bool _isHolding = false;
     private bool _isHovering = false;
+    private bool _isSnapped = false;
     private Vector3 _offset;
 
     void Start()
@@ -224,6 +225,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
         transform.rotation = Quaternion.Euler(0, 90, 90);
+        
 #if UNITY_ANDROID
         Draw();
         //Debug.Log("Android");
@@ -236,12 +238,24 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
         {
             GrabPen();   
         }
+        
+        if (Input.GetMouseButtonDown(1) && _isHolding)
+        {
+            _isSnapped = !_isSnapped;
+            if(!_isSnapped)
+                _touchedLastFrame = false;
 
-        if (_isHolding)
+        }
+        if (_isHolding && _isSnapped)
         {
             MovePenWithMouse();
             Draw();
         }
+        else if(_isHolding && !_isSnapped)
+        {
+            MovePenWithMouse();
+        }
+        
 
         
     #endif
@@ -251,6 +265,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         _isHolding = true;
         _offset = transform.position - GetMouseWorldPosition();
+        
     }
 
     private void DropPen()
@@ -258,6 +273,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
         _isHolding = false;
         _whiteboard = null;
         _touchedLastFrame = false;
+        _isSnapped = false;
     }
 
     private void MovePenWithMouse()
@@ -268,7 +284,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
             new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.5f) // Adjust depth dynamically
         );
 
-        transform.position = mouseWorldPosition;
+        transform.position = new Vector3 (mouseWorldPosition.x, mouseWorldPosition.y, _whiteboardTransform.position.z - 0.8f);
     }
 
     private Vector3 GetMouseWorldPosition()
@@ -283,9 +299,8 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     private void Draw()
     {
-        if (transform.position.z > 15.0f)
-            transform.position = new Vector3(transform.position.x, transform.position.y, 16.1f);
 
+        
         if (Physics.Raycast(_tip.position, transform.up, out _touch, _tipHeight))
         {
             if (_touch.transform.CompareTag("Whiteboard"))
