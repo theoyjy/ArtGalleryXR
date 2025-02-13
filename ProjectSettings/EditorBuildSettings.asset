@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Network.unity
     guid: 5e40ffd205fe94e3d8fb892f61d2f28d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Gallery Decagon.unity
     guid: e02836aca458341dca8455e507026293
   m_configObjects:
