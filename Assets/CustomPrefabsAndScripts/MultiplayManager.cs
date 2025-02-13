@@ -9,11 +9,13 @@ using Unity.Services.Multiplay;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 public class MultiplayManager : MonoBehaviour
 {
-    [SerializeField] private string ipAddress;
-    [SerializeField] private ushort port;
+    public string ipAddress;
+    public ushort port;
+    public bool hasServerData = false;
 
 #if SERVER_BUILD
     private IServerQueryHandler serverQueryHandler;
@@ -37,6 +39,7 @@ public class MultiplayManager : MonoBehaviour
                 await MultiplayService.Instance.ReadyServerForPlayersAsync();
             }
 #endif
+        while (!hasServerData)
         JoinToServer();
     }
 
@@ -57,7 +60,6 @@ public class MultiplayManager : MonoBehaviour
     {
         UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         transport.SetConnectionData(ipAddress, port);
-
         NetworkManager.Singleton.StartClient();
     }
 

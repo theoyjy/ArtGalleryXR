@@ -12,10 +12,16 @@ using System;
 
 public class MatchmakerManager : MonoBehaviour
 {
-    public bool waitForServer = true;
+    public bool isAllocated = false;
+    public string allocatedIpAddress;
+    public ushort allocatedPort;
 
+    public MultiplayManager mpManager;
+    
     public async void Start()
     {
+        mpManager = GetComponent<MultiplayManager>();
+
         if (Application.platform != RuntimePlatform.LinuxServer)
         {
             await UnityServices.InitializeAsync();
@@ -30,25 +36,8 @@ public class MatchmakerManager : MonoBehaviour
         var options = new CreateTicketOptions("Gallery-A", new Dictionary<string, object>());
         var ticketResponse = await MatchmakerService.Instance.CreateTicketAsync(players, options);
 
+
         Debug.Log(ticketResponse.Id);
-
-        // while (waitForServer)
-        // {
-        //     TicketStatusResponse ticketStatusResponse = await MatchmakerService.Instance.GetTicketAsync(ticketResponse.Id);
-
-        //     if (ticketStatusResponse.Type == typeof(MultiplayAssignment))
-        //     {
-        //         MultiplayAssignment assignment = (MultiplayAssignment)ticketStatusResponse.Value;
-        //         if (assignment.Status == MultiplayAssignment.StatusOptions.Found)
-        //         {
-        //             Debug.Log("Match found! Server IP: " + assignment.Ip + " | Port: " + assignment.Port);
-        //             waitForServer = false;
-        //             return;
-        //         }
-        //     }
-
-        //     await Task.Delay(1000);
-        // }
 
         MultiplayAssignment assignment = null;
 
@@ -58,7 +47,7 @@ public class MatchmakerManager : MonoBehaviour
             await Task.Delay(TimeSpan.FromSeconds(2f));
 
             // Poll ticket
-            var ticketStatus = await MatchmakerService.Instance.GetTicketAsync("<ticket id here>");
+            var ticketStatus = await MatchmakerService.Instance.GetTicketAsync(ticketResponse.Id);
             if (ticketStatus == null)
             {
                 continue;
@@ -74,24 +63,30 @@ public class MatchmakerManager : MonoBehaviour
             {
                 case MultiplayAssignment.StatusOptions.Found:
                     Debug.Log("Match found! Server IP: " + assignment.Ip + " | Port: " + assignment.Port);
-                    waitForServer = false;
+                    allocatedIpAddress = assignment.Ip;
+                    allocatedPort = (ushort) assignment.Port;
+                    isAllocated = true;
                     break;
                 case MultiplayAssignment.StatusOptions.InProgress:
                     //...
                     break;
                 case MultiplayAssignment.StatusOptions.Failed:
-                    waitForServer = true;
+                    isAllocated = false;
                     Debug.LogError("Failed to get ticket status. Error: " + assignment.Message);
                     break;
                 case MultiplayAssignment.StatusOptions.Timeout:
-                    waitForServer = true;
+                    isAllocated = false;
                     Debug.LogError("Failed to get ticket status. Ticket timed out.");
                     break;
                 default:
                     throw new InvalidOperationException();
             }
 
-        } while (waitForServer);
+        } while (!isAllocated);
+
+        mpManager.ipAddress = allocatedIpAddress;
+        mpManager.port = (ushort) allocatedPort;
+        mpManager.hasServerData = isAllocated;
 
     }
 
