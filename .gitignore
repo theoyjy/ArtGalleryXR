@@ -55,8 +55,6 @@ ExportedObj/
 *.unitypackage
 *.unitypackage.meta
 *.app
-
-# Mike builds format
 ServerBuild/
 AndroidBuild/
 

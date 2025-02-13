@@ -121,7 +121,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
             new Vector3(Input.mousePosition.x, Input.mousePosition.y, _whiteboardTransform.position.z - 0.8f) // Adjust depth dynamically
         );
 
-        transform.position = mouseWorldPosition;//new Vector3 (mouseWorldPosition.x, mouseWorldPosition.y, _whiteboardTransform.position.z - 0.8f);
+        transform.position = new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, _whiteboardTransform.position.z - 0.8f);
     }
 
     private Vector3 GetMouseWorldPosition()
@@ -137,7 +137,11 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private void Draw()
     {
 
-        
+#if UNITY_ANDROID
+        if (transform.position.z > _whiteboardTransform.position.z - 2.0f ||
+            transform.position.z <= _whiteboardTransform.position.z - 0.8f)
+            transform.position = new Vector3(transform.position.x, transform.position.y, _whiteboardTransform.position.z - 0.8f);
+#endif
         if (Physics.Raycast(_tip.position, transform.up, out _touch, _tipHeight))
         {
             if (_touch.transform.CompareTag("Whiteboard"))

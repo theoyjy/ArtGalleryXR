@@ -25,22 +25,15 @@ public class Whiteboard : MonoBehaviour
 
         // Create a small white texture (1x1) instead of modifying every pixel manually
         Texture2D whiteTex = new Texture2D(1, 1, TextureFormat.RGBA32, false);
-        whiteTex.SetPixel(0, 0, Color.white);
-        whiteTex.Apply();
 
-        // Create a new blank 2048x2048 texture
-        texture = new Texture2D((int)textureSize.x, (int)textureSize.y, TextureFormat.RGBA32, false);
-
-        // Use Graphics.Blit() to efficiently fill the texture using GPU
-        RenderTexture rt = new RenderTexture(texture.width, texture.height, 0);
-        Graphics.Blit(whiteTex, rt);
-
-        // Copy RenderTexture to Texture2D
-        RenderTexture.active = rt;
-        texture.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0);
-        texture.Apply();
-        RenderTexture.active = null;
-        rt.Release();
+        // Fill the texture with white
+        Color[] whitePixels = new Color[(int)(textureSize.x * textureSize.y)];
+        for (int i = 0; i < whitePixels.Length; i++)
+        {
+            whitePixels[i] = Color.white;
+        }
+        texture.SetPixels(whitePixels);
+        texture.Apply(); // Apply the changes
 
         // Assign the texture to the material
         r.material.mainTexture = texture;
