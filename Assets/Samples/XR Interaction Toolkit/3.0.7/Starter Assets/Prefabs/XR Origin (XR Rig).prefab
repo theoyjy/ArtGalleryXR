@@ -982,10 +982,7 @@ GameObject:
   - component: {fileID: 1578434800357102325}
   - component: {fileID: 8605652654753635889}
   - component: {fileID: 7310116122382833944}
-  - component: {fileID: 7626470288793271311}
-  - component: {fileID: 8716740994807746151}
   - component: {fileID: 8577194993757631434}
-  - component: {fileID: 2035895976786848643}
   - component: {fileID: 409853464010642450}
   - component: {fileID: 5741682870019374755}
   m_Layer: 2
@@ -1191,37 +1188,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerPrefab: {fileID: 0}
---- !u!114 &7626470288793271311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717954561962503725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 323b4daee9878f940bc5eefd59f6d9a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  playerCamera: {fileID: 1767192439}
---- !u!114 &8716740994807746151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717954561962503725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59d391f1764a3456bbd4b99f12d52b14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  rotationSpeed: 3
-  cameraTransform: {fileID: 1767192434}
-  yaw: 0
-  pitch: 0
 --- !u!114 &8577194993757631434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1235,20 +1201,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerPrefab: {fileID: 0}
---- !u!114 &2035895976786848643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717954561962503725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 323b4daee9878f940bc5eefd59f6d9a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  playerCamera: {fileID: 1767192439}
 --- !u!54 &409853464010642450
 Rigidbody:
   m_ObjectHideFlags: 0
