@@ -13,13 +13,15 @@ public class PlayFabLogin : MonoBehaviour
 
     private void Start()
     {
+        PlayFabSettings.TitleId = "D41B8";  
+
         errorText.text = ""; 
     }
 
     public void OnLoginButtonPressed()
     {
         string email = emailInput.text;
-        string password = emailInput.text;
+        string password = passwordInput.text;
 
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         {
