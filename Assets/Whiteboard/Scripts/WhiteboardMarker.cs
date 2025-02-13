@@ -141,7 +141,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if (transform.position.z > _whiteboardTransform.position.z - 2.0f ||
             transform.position.z <= _whiteboardTransform.position.z - 0.8f)
             transform.position = new Vector3(transform.position.x, transform.position.y, _whiteboardTransform.position.z - 0.8f);
-#else
+#endif
         if (Physics.Raycast(_tip.position, transform.up, out _touch, _tipHeight))
         {
             if (_touch.transform.CompareTag("Whiteboard"))
@@ -185,7 +185,6 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
                 return;
             }
         }
-#endif
         _whiteboard = null;
         _touchedLastFrame = false;
     }
