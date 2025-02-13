@@ -19,14 +19,13 @@ public class Whiteboard : MonoBehaviour
         projectPath = Application.dataPath.Replace("/Assets", "/exports/"); // Get root project folder
         saveFileName = "testImageSave.png";
         savePath = Path.Combine(projectPath, saveFileName);
-        whiteboardRenderer = GetComponent<Renderer>();
+        var r = GetComponent<Renderer>();
+        texture = new Texture2D((int)textureSize.x, (int)textureSize.y);    
 
-        var r = GetComponent<Renderer>();       
-
-        // Create a small white texture (1x1) instead of modifying every pixel manually
+        //// Create a small white texture (1x1) instead of modifying every pixel manually
         Texture2D whiteTex = new Texture2D(1, 1, TextureFormat.RGBA32, false);
 
-        // Fill the texture with white
+        //// Fill the texture with white
         Color[] whitePixels = new Color[(int)(textureSize.x * textureSize.y)];
         for (int i = 0; i < whitePixels.Length; i++)
         {
@@ -35,7 +34,7 @@ public class Whiteboard : MonoBehaviour
         texture.SetPixels(whitePixels);
         texture.Apply(); // Apply the changes
 
-        // Assign the texture to the material
+        //// Assign the texture to the material
         r.material.mainTexture = texture;
     }
 
