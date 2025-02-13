@@ -29,6 +29,10 @@ public class CanvasEditManager : MonoBehaviour
     void Start()
     {
         isEditMode = false;
+        cameraTransformBeforeEnter = new GameObject("CameraTransformBeforeEnter").transform;
+        cameraTransformBeforeEnter.position = Vector3.zero;
+        cameraTransformBeforeEnter.rotation = Quaternion.identity;
+        cameraTransformBeforeEnter.localScale = Vector3.one;
     }
 
     void Awake()
@@ -45,7 +49,6 @@ public class CanvasEditManager : MonoBehaviour
         }
 
     }
-
     NetworkObject GetCurrentPlayer()
     {
         if(localPlayer == null)
@@ -62,13 +65,14 @@ public class CanvasEditManager : MonoBehaviour
         return localPlayer;
     }
 
-    void Update()
-    {
-
-    }
-
     public void EnterEditMode(GameObject EditCanvasUI)
     {
+        if (isEditMode)
+        {
+            Debug.Log("Already in Edit Mode");
+            return;
+        }
+
         enterEditCanvasUI = EditCanvasUI;
         EnterEditController UIController = EditCanvasUI.GetComponent<EnterEditController>();
         if (UIController == null)
@@ -96,7 +100,9 @@ public class CanvasEditManager : MonoBehaviour
         NetworkObject player = GetCurrentPlayer();
         Camera playerCamera = player.GetComponentInChildren<Camera>();
 
-        cameraTransformBeforeEnter = playerCamera.transform.parent.transform.parent.transform;
+        // struct value copy
+        cameraTransformBeforeEnter.position = player.transform.position;
+        cameraTransformBeforeEnter.rotation = player.transform.rotation;
 
         // calculate the target position and rotation
         Vector3 CardNormal = card.GetNormal();
