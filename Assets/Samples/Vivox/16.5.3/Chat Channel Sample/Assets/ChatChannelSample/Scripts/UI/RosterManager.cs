@@ -17,7 +17,6 @@ public class RosterManager : MonoBehaviour
         VivoxService.Instance.LoggedOut += OnUserLoggedOut;
         VivoxService.Instance.ChannelLeft += OnChannelDisconnected;
     }
-
     private void OnDestroy()
     {
         VivoxService.Instance.ParticipantAddedToChannel -= OnParticipantAdded;
@@ -25,7 +24,7 @@ public class RosterManager : MonoBehaviour
         VivoxService.Instance.LoggedOut -= OnUserLoggedOut;
         VivoxService.Instance.ChannelLeft -= OnChannelDisconnected;
     }
-
+    
     public void ClearAllRosters()
     {
         foreach (List<RosterItem> rosterList in m_RosterObjects.Values)
@@ -92,7 +91,7 @@ public class RosterManager : MonoBehaviour
             m_RosterObjects.Add(participant.ChannelName, thisChannelList);
         }
         CleanRoster(participant.ChannelName);
-        Debug.Log(thisChannelList);
+        //Debug.Log(thisChannelList);
     }
 
     void OnParticipantRemoved(VivoxParticipant participant)

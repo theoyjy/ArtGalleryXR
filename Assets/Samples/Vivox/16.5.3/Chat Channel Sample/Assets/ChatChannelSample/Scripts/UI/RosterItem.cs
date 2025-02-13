@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using Unity.Services.Vivox;
 using System.Linq;
+using UnityEngine.Playables;
 
 public class RosterItem : MonoBehaviour
 {
@@ -36,11 +37,7 @@ public class RosterItem : MonoBehaviour
         {
             Participant.MutePlayerLocally();
         }
-
-        // Notify the player UI
-        PlayerManager.Instance.UpdateMuteState(Participant.DisplayName, Participant.IsMuted);
-
-
+            
     }
     private void UpdateChatStateImage()
     {
