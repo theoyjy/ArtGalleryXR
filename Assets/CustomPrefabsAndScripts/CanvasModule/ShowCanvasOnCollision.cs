@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-// If you're using Mirror or Netcode for GameObjects, uncomment accordingly:
-// using Mirror;
+using Unity.Netcode;
+
 
 public class ShowCanvasOnCollision : MonoBehaviour
 {
@@ -10,10 +10,11 @@ public class ShowCanvasOnCollision : MonoBehaviour
     [SerializeField] private GameObject UI;
 
     [Header("Tag to Detect (e.g., 'Interactable')")]
-    [SerializeField] private string interactableTag = "Interactable";
+    //[SerializeField] private string interactableTag = "Interactable";
+    [SerializeField] private string interactableTag = "Player";
 
     [Header("Spawn Offset from Collision (Optional)")]
-    [SerializeField] public float spawnOffset = 5.0f;
+    [SerializeField] public float spawnOffset = 0.1f;
 
 
     private Dictionary<Collider, GameObject> activeUIs = new Dictionary<Collider, GameObject>();
@@ -24,15 +25,37 @@ public class ShowCanvasOnCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+#if UNITY_ANDROID
+
+#else
         Debug.Log(" Trigger entered with: " + other.tag);
         if(other.CompareTag(interactableTag))
-        //if (interactableTag.CompareTo(other.name) == 1)
         {
+            Camera cam = other.GetComponentInChildren<Camera>();
+            foreach (var player in FindObjectsOfType<NetworkObject>())
+            {
+                if (player.IsOwner) // This is the local player
+                {
+                    var localCamera = player.GetComponentInChildren<Camera>();
+                    if(localCamera != cam)
+                    {
+                        Debug.Log("This is not the local player's camera");
+                        return;
+                    }
+                }
+            }
+
             Card card = GetComponentInChildren<Card>();
             if (card == null)
             {
                 Debug.LogError("Card component is missing from: " + gameObject.name);
                 return;
+            }
+            
+            if (activeUIs.ContainsKey(other))
+            {
+                Debug.Log("UI already exists for " + other.name + " so destroy previous");
+                Destroy(activeUIs[other]);
             }
 
             Vector3 spawnPosition = card.GetWorldLoc() + spawnOffset * card.GetNormal();
@@ -63,10 +86,14 @@ public class ShowCanvasOnCollision : MonoBehaviour
             activeUIs[other] = uiInstance;
 
         }
+#endif
     }
 
     public void OnTriggerExit(Collider other)
     {
+#if UNITY_ANDROID
+
+#else
         // Destroy UI and remove from dictionary
         if (activeUIs.ContainsKey(other))
         {
@@ -75,6 +102,7 @@ public class ShowCanvasOnCollision : MonoBehaviour
 
             Debug.Log($"UI removed from {other.name}");
         }
+#endif
     }
 }
 

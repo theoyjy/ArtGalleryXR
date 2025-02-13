@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2680348550112195683, guid: 09536e5132315fd4bbeefda7e5e75ea2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -144.1
+      value: -24.61
       objectReference: {fileID: 0}
     - target: {fileID: 2680348550112195683, guid: 09536e5132315fd4bbeefda7e5e75ea2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -250,14 +250,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasEditManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6844833827583694135, guid: 7fbbf77ff3a8a2f48a4cf7d1b84d0c23, type: 3}
-      propertyPath: ToolUI
-      value: 
-      objectReference: {fileID: 3967498396443459041, guid: fa7d98f2435a5ec4f96d5d2ad1f53ef2, type: 3}
-    - target: {fileID: 6844833827583694135, guid: 7fbbf77ff3a8a2f48a4cf7d1b84d0c23, type: 3}
-      propertyPath: ToolSpawnOffset
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 8709431471492689335, guid: 7fbbf77ff3a8a2f48a4cf7d1b84d0c23, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4
@@ -312,18 +304,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1709252921373675818, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709252921373675818, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709252921373675818, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709252921373675818, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -363,29 +343,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1709252921373675818, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2017880691270122536, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 43
-      objectReference: {fileID: 0}
-    - target: {fileID: 5210632554572358489, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
-      propertyPath: spawnOffset
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5210632554572358489, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
-      propertyPath: interactableTag
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 5666307368449052307, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_Name
       value: CanvasComponent
-      objectReference: {fileID: 0}
-    - target: {fileID: 5666307368449052307, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
