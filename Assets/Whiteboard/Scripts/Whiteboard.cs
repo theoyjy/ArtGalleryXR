@@ -67,6 +67,8 @@ public class Whiteboard : MonoBehaviour
         Debug.Log($"Saved whiteboard image to: {savePath}");
     }
 
+    
+
     void LoadImageFromFile(string readFileName)
     {
         string filePath = Path.Combine(projectPath, readFileName);
