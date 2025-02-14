@@ -982,9 +982,9 @@ GameObject:
   - component: {fileID: 1578434800357102325}
   - component: {fileID: 8605652654753635889}
   - component: {fileID: 7310116122382833944}
-  - component: {fileID: 8577194993757631434}
   - component: {fileID: 409853464010642450}
   - component: {fileID: 5741682870019374755}
+  - component: {fileID: 3095560665723242555}
   m_Layer: 2
   m_Name: XR Origin (XR Rig)
   m_TagString: Player
@@ -1188,19 +1188,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerPrefab: {fileID: 0}
---- !u!114 &8577194993757631434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717954561962503725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff4b8a4ec7b9ebb44936578c7b92a717, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controllerPrefab: {fileID: 0}
 --- !u!54 &409853464010642450
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1249,6 +1236,20 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3095560665723242555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717954561962503725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 323b4daee9878f940bc5eefd59f6d9a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  playerCamera: {fileID: 1767192439}
 --- !u!1 &2022982607167218687
 GameObject:
   m_ObjectHideFlags: 0
