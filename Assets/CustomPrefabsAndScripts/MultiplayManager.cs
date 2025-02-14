@@ -39,9 +39,14 @@ public class MultiplayManager : MonoBehaviour
                 await MultiplayService.Instance.ReadyServerForPlayersAsync();
             }
 #endif
-        while (!hasServerData)
+        StartCoroutine(waitForServerConfiguration());
+    }
+
+    IEnumerator waitForServerConfiguration() {
+        yield return new WaitUntil(() => hasServerData);
         JoinToServer();
     }
+
 
     private async void Update()
     {
@@ -61,6 +66,7 @@ public class MultiplayManager : MonoBehaviour
         UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         transport.SetConnectionData(ipAddress, port);
         NetworkManager.Singleton.StartClient();
+        Debug.Log("join to server called");
     }
 
 }

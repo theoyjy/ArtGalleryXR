@@ -9389,8 +9389,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e013e0aedde4ad1a4be5ccf6a7f1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipAddress: 20.33.109.153
-  port: 9000
+  ipAddress: 
+  port: 0
+  hasServerData: 0
 --- !u!4 &1187899824
 Transform:
   m_ObjectHideFlags: 0
@@ -9418,7 +9419,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07c10b20c94d4a3396584d5a7487748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitForServer: 1
+  isAllocated: 0
+  allocatedIpAddress: 
+  allocatedPort: 0
+  mpManager: {fileID: 0}
 --- !u!1 &1190616309
 GameObject:
   m_ObjectHideFlags: 0
