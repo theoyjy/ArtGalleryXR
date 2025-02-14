@@ -4,6 +4,8 @@ using Unity.Services.Multiplay;
 using Unity.Services.Core;
 using Unity.Services.Matchmaker;
 using Unity.Services.Matchmaker.Models;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
 using Unity.Services.Authentication;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,6 +17,7 @@ public class MatchmakerManager : MonoBehaviour
     public bool isAllocated = false;
     public string allocatedIpAddress;
     public ushort allocatedPort;
+    public bool isServerAvaliable = false;
 
     public MultiplayManager mpManager;
     
@@ -27,7 +30,9 @@ public class MatchmakerManager : MonoBehaviour
             await UnityServices.InitializeAsync();
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
         }
-        ClientJoin();
+        await QueryAvailableServers();
+        if(isServerAvaliable)
+            ClientJoin();
     }
 
     public async void ClientJoin()
@@ -89,5 +94,44 @@ public class MatchmakerManager : MonoBehaviour
         mpManager.hasServerData = isAllocated;
 
     }
+    async Task QueryAvailableServers()
+    {
+        
+        QueryLobbiesOptions queryOptions = new QueryLobbiesOptions
+        {
+            Count = 25
+        };
 
+        try
+        {
+            QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync(queryOptions);
+            Debug.Log("Quered " + queryResponse.Results.Count + " Lobbies¡£");
+
+            if (queryResponse.Results.Count > 0)
+            {
+                foreach (Lobby lobby in queryResponse.Results)
+                {
+                    //  Default extraction of Lobby ID and server information stored in Data (e.g. ¡®ip¡¯ and ¡®port¡¯)
+                    string lobbyId = lobby.Id;
+                    string serverIp = lobby.Data != null && lobby.Data.ContainsKey("ip")
+                        ? lobby.Data["ip"].Value
+                        : "Unknown";
+                    string serverPort = lobby.Data != null && lobby.Data.ContainsKey("port")
+                        ? lobby.Data["port"].Value
+                        : "Unknown";
+
+                    Debug.Log($"Lobby ID: {lobbyId} - Server IP: {serverIp} | Port: {serverPort}");
+                    isServerAvaliable = true;
+                }
+            }
+            else
+            {
+                Debug.Log("NO AVALIABLE SERVER CURRENTLY");
+            }
+        }
+        catch (LobbyServiceException ex)
+        {
+            Debug.LogError("Error querying Lobby:" + ex.Message);
+        }
+    }
 }
