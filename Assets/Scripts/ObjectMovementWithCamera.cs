@@ -13,6 +13,36 @@ public class ObjectMovementWithCamera : MonoBehaviour
     private Vector2 lastMousePosition; // 记录上一次鼠标位置
     private bool isDragging = false; // 是否正在拖动
 
+    private void Awake()
+    {
+        cameraTransform = FindChildTransformByName(transform, "Main Camera");
+
+        if (cameraTransform == null)
+        {
+            Debug.LogWarning("Main Camera not found in the hierarchy.");
+        }
+    }
+
+    // 递归查找子对象
+    private Transform FindChildTransformByName(Transform parent, string name)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.name == name)
+            {
+                return child;
+            }
+
+            Transform found = FindChildTransformByName(child, name);
+            if (found != null)
+            {
+                return found;
+            }
+        }
+        return null;
+    }
+
+
     public void Update()
     {
         InputSystem.Update();
