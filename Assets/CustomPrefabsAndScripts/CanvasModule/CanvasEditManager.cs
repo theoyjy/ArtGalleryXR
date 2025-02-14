@@ -14,7 +14,8 @@ public class CanvasEditManager : MonoBehaviour
     public float ToolSpawnOffset = 100.0f;
     GameObject editedCanvas;
     GameObject enterEditCanvasUI;
-    Transform cameraTransformBeforeEnter;
+    Vector3 cameraBeforeEnterPosition;
+    Quaternion cameraBeforeEnterRotation;
     NetworkObject localPlayer = null;
     float originAspect;
     int oriWidth, oriHeight;
@@ -29,10 +30,8 @@ public class CanvasEditManager : MonoBehaviour
     void Start()
     {
         isEditMode = false;
-        cameraTransformBeforeEnter = new GameObject("CameraTransformBeforeEnter").transform;
-        cameraTransformBeforeEnter.position = Vector3.zero;
-        cameraTransformBeforeEnter.rotation = Quaternion.identity;
-        cameraTransformBeforeEnter.localScale = Vector3.one;
+        cameraBeforeEnterPosition = Vector3.zero;
+        cameraBeforeEnterRotation = Quaternion.identity;
     }
 
     void Awake()
@@ -101,17 +100,16 @@ public class CanvasEditManager : MonoBehaviour
         Camera playerCamera = player.GetComponentInChildren<Camera>();
 
         // struct value copy
-        cameraTransformBeforeEnter.position = player.transform.position;
-        cameraTransformBeforeEnter.rotation = player.transform.rotation;
+        cameraBeforeEnterPosition = player.transform.position;
+        cameraBeforeEnterRotation = player.transform.rotation;
 
         // calculate the target position and rotation
         Vector3 CardNormal = card.GetNormal();
         Vector3 TargetCameraPosition = card.GetWorldLoc() + CardNormal * ToolSpawnOffset;
         GameObject tempTarget = new GameObject("TempTargetTransform");
-        Transform targetTransform = tempTarget.transform;
-        targetTransform.position = TargetCameraPosition;
-        targetTransform.rotation = Quaternion.Euler(CardNormal);
-        Debug.Log("Target position: " + targetTransform.position + " Rotation: " + targetTransform.rotation);
+
+        Quaternion TargetCameraRotation = card.GetWorldQuatRot();
+        Debug.Log("Target position: " + TargetCameraPosition + " Rotation: " + TargetCameraRotation);
 
         playerCamera.orthographic = true;
         playerCamera.orthographicSize = 10f;  // magic number
@@ -124,7 +122,7 @@ public class CanvasEditManager : MonoBehaviour
         EditCanvasUI.SetActive(false);
 
         // move camera to focus on the canvas
-        MoveXRToTargetTrans(targetTransform);
+        MoveXRToTargetTrans(TargetCameraPosition, TargetCameraRotation);
 
         var trackedPoseDriver = playerCamera.transform.parent.GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>(true);
 
@@ -160,7 +158,7 @@ public class CanvasEditManager : MonoBehaviour
         playerCamera.aspect = (float)Screen.width / Screen.height;
         playerCamera.orthographic = false;
         Screen.SetResolution(oriWidth, oriHeight, false);
-        MoveXRToTargetTrans(cameraTransformBeforeEnter);
+        MoveXRToTargetTrans(cameraBeforeEnterPosition, cameraBeforeEnterRotation);
 #endif
     }
 
@@ -176,12 +174,12 @@ public class CanvasEditManager : MonoBehaviour
         card.DeleteDrawing();
     }
 
-    public void MoveXRToTargetTrans(Transform targetTransform)
+    public void MoveXRToTargetTrans(Vector3 CameraPosition, Quaternion CameraRotation)
     {
-        Debug.Log("Teleport to: " + targetTransform.position + " rotation: " + targetTransform.rotation);
+        Debug.Log("Teleport to: " + CameraPosition + " rotation: " + CameraRotation);
         NetworkObject player = GetCurrentPlayer();
-        player.transform.position = targetTransform.position;
-        player.transform.rotation = targetTransform.rotation;
+        player.transform.position = CameraPosition;
+        player.transform.rotation = CameraRotation;
     }
 
 

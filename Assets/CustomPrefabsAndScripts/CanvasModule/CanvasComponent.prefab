@@ -104,7 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI: {fileID: 4710502502664573676, guid: baf837d4a4e4d3d4b8907d8ae3f6e239, type: 3}
   interactableTag: Player
-  spawnOffset: -0.25
+  spawnOffset: -0.2
 --- !u!54 &8655030304672800031
 Rigidbody:
   m_ObjectHideFlags: 0

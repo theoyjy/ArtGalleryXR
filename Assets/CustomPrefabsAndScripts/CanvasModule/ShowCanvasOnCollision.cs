@@ -77,7 +77,15 @@ public class ShowCanvasOnCollision : MonoBehaviour
             }
 
             // move the button to the spawn position
+            Quaternion cardRotation = new Quaternion(0, 0.707106829f, 0.707106829f, 0);
+
             myButton.transform.position = spawnPosition;
+            myButton.transform.rotation = card.GetWorldQuatRot();
+
+            RectTransform rt = myButton.GetComponent<RectTransform>();
+            rt.position = spawnPosition;
+            rt.rotation = myButton.transform.rotation;
+            Debug.Log("Button position: " + myButton.transform.position + " rotation: " + rt.rotation);
 
             // Store the canvas in the UI controller to later pass to the CanvasEditManager
             uiController.SetCanvas(gameObject);
