@@ -57,6 +57,8 @@ ExportedObj/
 *.app
 ServerBuild/
 AndroidBuild/
+LinuxRelease_Data/
+server_build_data/
 
 # Crashlytics generated file
 crashlytics-build.properties
@@ -69,7 +71,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Exports
-/exports/*
+/exports/
 
 
 # ============= #
@@ -95,5 +97,5 @@ __MACOSX/
 # *.unity
 *.unitypackage
 
-UserSettings/Layout/*.dwlt
+UserSettings/Layouts/*.dwlt
 
