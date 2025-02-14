@@ -58,7 +58,8 @@ ExportedObj/
 ServerBuild/
 AndroidBuild/
 LinuxRelease_Data/
-server_build_data/
+server_build_Data/
+server/
 
 # Crashlytics generated file
 crashlytics-build.properties
