@@ -157,9 +157,27 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
 
 #if UNITY_ANDROID
-        if (transform.position.z > _whiteboardTransform.position.z - 2.0f ||
-            transform.position.z <= _whiteboardTransform.position.z - 0.8f)
-            transform.position = new Vector3(transform.position.x, transform.position.y, _whiteboardTransform.position.z - 0.8f);
+        if (_playerCamera == null || _whiteboardTransform == null) return;
+
+        // Get the normal of the whiteboard
+        card = transform.parent.GetComponentInChildren<Card>();
+        Vector3 whiteboardNormal = card.GetNormal(); // Assuming forward is the normal direction
+
+        // Create a plane representing the whiteboard's surface
+        Plane whiteboardPlane = new Plane(whiteboardNormal, _whiteboardTransform.position);
+        
+        // Convert VR controller position to world space ray
+        Ray ray = new Ray(transform.position, -transform.forward);
+
+        // Find intersection of the ray with the whiteboard's plane
+        if (whiteboardPlane.Raycast(ray, out float distance))
+        {
+            // Get the world position where the mouse ray hits the whiteboard plane
+            Vector3 hitPoint = ray.GetPoint(distance);
+
+            // Set the pen's position to the hit point (so it "snaps" onto the board)
+            transform.position = hitPoint - 0.8f * whiteboardNormal;
+        }
 #endif
         if (Physics.Raycast(_tip.position, transform.up, out _touch, _tipHeight))
         {
