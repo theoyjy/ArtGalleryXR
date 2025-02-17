@@ -68,10 +68,17 @@ public class Card : MonoBehaviour
         return transform.position;
     }
 
+    public Quaternion GetWorldQuatRot()
+    {
+        Quaternion quat = transform.parent.transform.rotation; // parent's world rotation
+        quat *= Quaternion.Euler(0f, 180f, 0f);
+        return quat;
+    }
+
     public Vector3 GetNormal()
     {
-        Vector3 normal = Quaternion.Euler(-90f, 180f, 0) * transform.forward;
-        return normal;
+        Quaternion quat = GetWorldQuatRot();
+        return quat * Vector3.forward;
     }
 
 }
