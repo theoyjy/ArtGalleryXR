@@ -125,6 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
   textureSize: {x: 2048, y: 2048}
+  whiteboardRenderer: {fileID: 8408993902178679917}
 --- !u!54 &4981175194491116137
 Rigidbody:
   m_ObjectHideFlags: 0

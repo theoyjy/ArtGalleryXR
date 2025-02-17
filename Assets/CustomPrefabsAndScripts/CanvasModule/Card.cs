@@ -47,6 +47,9 @@ public class Card : MonoBehaviour
     {
         Debug.Log("DeleteDrawing");
         StartCoroutine(RotateCard());
+
+        Whiteboard wbm = transform.parent.GetComponentInChildren<Whiteboard>();
+        wbm.ClearWhiteboard();
     }
 
     private IEnumerator RotateCard()
