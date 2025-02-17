@@ -5,11 +5,11 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     //private MeshRenderer rend;
-
+    private MeshFilter meshFilter;
     //private UnityEngine.Plane plane;
 
-    //[SerializeField]
-    //private Mesh EmptyMesh;
+    [SerializeField]
+    private Mesh EmptyMesh;
 
     private bool coroutineAllowed;
 
@@ -19,6 +19,19 @@ public class Card : MonoBehaviour
         //rend = GetComponent<MeshRenderer>();
         //plane = GetComponent<UnityEngine.Plane>();
         //rend.mesh = EmptyMesh;
+        
+        // Get the MeshFilter component from the GameObject.
+        meshFilter = GetComponent<MeshFilter>();
+        if (meshFilter != null && EmptyMesh != null)
+        {
+            // Initialize the canvas with an empty mesh.
+            meshFilter.mesh = EmptyMesh;
+        }
+        else
+        {
+            Debug.LogWarning("MeshFilter or EmptyMesh not assigned on " + gameObject.name);
+        }
+
         coroutineAllowed = true;
         lastClickTime = 0;
     }
@@ -43,10 +56,37 @@ public class Card : MonoBehaviour
         lastClickTime = Time.time;
     }
 
+
     public void DeleteDrawing()
     {
         Debug.Log("DeleteDrawing");
+
+        Whiteboard whiteboard = GetComponentInChildren<Whiteboard>();
+        if (whiteboard != null)
+        {
+            whiteboard.ClearWhiteboard();
+        }
+        else
+        {
+            Debug.LogWarning("Whiteboard component not found on Card or its children.");
+        }
+
+        ClearCanvas();
         StartCoroutine(RotateCard());
+    }
+
+    // Resets the MeshFilter's mesh to the empty mesh.
+    private void ClearCanvas()
+    {
+        if (meshFilter != null && EmptyMesh != null)
+        {
+            meshFilter.mesh = EmptyMesh;
+            Debug.Log("Canvas cleared");
+        }
+        else
+        {
+            Debug.LogWarning("Cannot clear canvas. MeshFilter or EmptyMesh not assigned.");
+        }
     }
 
     private IEnumerator RotateCard()
