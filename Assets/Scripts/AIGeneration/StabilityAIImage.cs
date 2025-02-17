@@ -3,10 +3,11 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using System.Text;
+using System;
 
 public class StabilityAIImage : MonoBehaviour
 {
-    public string apiKey = "sk-zNW9yQyq5FMqC1EVsqfxoKxnhst4qYGDa6s7meKf2QfdJmxd"; // 你的 Stability AI API Key
+    public string apiKey = Environment.GetEnvironmentVariable("STABILITY_API_KEY");
     public string prompt = "A futuristic city with neon lights"; // 你的 AI 画作描述
     public Renderer targetRenderer; // 绑定你的 Unity 画布 Renderer
 
