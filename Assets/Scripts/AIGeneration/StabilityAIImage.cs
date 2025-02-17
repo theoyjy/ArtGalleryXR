@@ -7,18 +7,20 @@ using System;
 
 public class StabilityAIImage : MonoBehaviour
 {
-    public string apiKey = Environment.GetEnvironmentVariable("STABILITY_API_KEY");
-    public string prompt = "A futuristic city with neon lights"; // 你的 AI 画作描述
-    public Renderer targetRenderer; // 绑定你的 Unity 画布 Renderer
+    public string apiKey;
+    public string prompt = "A futuristic city with neon lights";
+    public Renderer targetRenderer;
 
     void Start()
     {
+        //Run CMD. setx STABILITY_API_KEY "your-api-key"
+        apiKey = Environment.GetEnvironmentVariable("STABILITY_API_KEY");
         StartCoroutine(GenerateAIImage());
     }
 
     IEnumerator GenerateAIImage()
     {
-        string url = "https://api.stability.ai/v2beta/stable-image/generate/ultra";
+        string url = "https://api.stability.ai/v2beta/stable-image/generate/core";
 
         string boundary = "----UnityBoundary" + System.Guid.NewGuid().ToString();
 
