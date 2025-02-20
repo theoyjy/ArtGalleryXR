@@ -116,6 +116,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private void MovePenWithMouse()
     {
         if (_playerCamera == null) return;
+        if (_playerCamera.orthographic == false) return;
 
         Vector3 mouseWorldPosition = _playerCamera.ScreenToWorldPoint(
             new Vector3(Input.mousePosition.x, Input.mousePosition.y, _whiteboardTransform.position.z - 0.8f) // Adjust depth dynamically
