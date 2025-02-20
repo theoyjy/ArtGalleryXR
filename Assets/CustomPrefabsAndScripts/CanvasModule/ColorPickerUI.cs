@@ -11,9 +11,9 @@ public class ColorPickerUI : MonoBehaviour
     public Button confirmButton;          // 确认按钮
     public Image selectedColorPreview;    // 预览颜色
 
-    public Color SendColor = Color.white;
+    public Color SendColor = Color.red;
 
-    private Color selectedColor = Color.white;
+    private Color selectedColor = Color.red;
     private MarkerColorChanger markerColorChanger;
 
     private GameObject canvasComponent;
@@ -67,6 +67,11 @@ public class ColorPickerUI : MonoBehaviour
         // 监听颜色变化
         colorPicker.onColorChange.AddListener(UpdateSelectedColor);
 
+        if (markerColorChanger != null)
+        {
+            markerColorChanger.newColor = selectedColor;
+            openColorPickerButton.image.color = selectedColor;
+        }
         // 监听按钮点击事件
         openColorPickerButton.onClick.AddListener(() => colorPickerPanel.SetActive(true));
         openColorPickerButton.onClick.AddListener(() => confirmButton.gameObject.SetActive(true));
