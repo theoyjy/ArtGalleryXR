@@ -6523,16 +6523,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3370304405078971525, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
-      propertyPath: _whiteboardTransform
-      value: 
-      objectReference: {fileID: 995313879}
     - target: {fileID: 5666307368449052307, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_Name
       value: CanvasComponent
       objectReference: {fileID: 0}
+    - target: {fileID: 8818024345940634701, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+      propertyPath: targetRenderer
+      value: 
+      objectReference: {fileID: 995313884}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9111410019944457655, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
@@ -7906,11 +7907,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3161851bc7c714c1ab424909c7b245d7, type: 3}
---- !u!4 &995313879 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1600757073805583627, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
-  m_PrefabInstance: {fileID: 797639106}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &995313884 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6277023077541216848, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
@@ -9539,7 +9535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ipAddress: 20.33.109.170
-  port: 9000
+  port: 9100
 --- !u!4 &1187899824
 Transform:
   m_ObjectHideFlags: 0
@@ -15493,7 +15489,7 @@ MonoBehaviour:
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
     Address: 20.33.109.170
-    Port: 9000
+    Port: 9100
     ServerListenAddress: 0.0.0.0
   DebugSimulator:
     PacketDelayMS: 0
@@ -15561,53 +15557,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1508804060588509405, guid: 3161851bc7c714c1ab424909c7b245d7, type: 3}
   m_PrefabInstance: {fileID: 292489337}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2026560213
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2026560215}
-  - component: {fileID: 2026560214}
-  m_Layer: 0
-  m_Name: AIImageGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2026560214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2026560213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13a1220a84ea9224590f88883e33b1e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  apiKey: 
-  prompt: A futuristic city with neon lights
-  targetRenderer: {fileID: 995313884}
---- !u!4 &2026560215
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2026560213}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.72610474, y: -5.062725, z: 40.763763}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2028560950
 GameObject:
   m_ObjectHideFlags: 0
@@ -16799,4 +16748,3 @@ SceneRoots:
   - {fileID: 797639106}
   - {fileID: 1723181882}
   - {fileID: 667979491}
-  - {fileID: 2026560215}
