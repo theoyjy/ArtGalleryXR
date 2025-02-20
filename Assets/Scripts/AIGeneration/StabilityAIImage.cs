@@ -15,7 +15,7 @@ public class StabilityAIImage : MonoBehaviour
     {
         //Run CMD. setx STABILITY_API_KEY "your-api-key"
         apiKey = Environment.GetEnvironmentVariable("STABILITY_API_KEY");
-        StartCoroutine(GenerateAIImage());
+        //StartCoroutine(GenerateAIImage());
     }
 
     IEnumerator GenerateAIImage()
