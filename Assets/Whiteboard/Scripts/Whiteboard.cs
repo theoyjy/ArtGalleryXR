@@ -38,9 +38,31 @@ public class Whiteboard : MonoBehaviour
         r.material.mainTexture = texture;
     }
 
+    public void ClearWhiteboard()
+    {
+        if (texture == null)
+        {
+            Debug.LogWarning("Whiteboard texture is null.");
+            return;
+        }
+
+        // Create an array filled with white pixels.
+        Color[] whitePixels = new Color[texture.width * texture.height];
+        for (int i = 0; i < whitePixels.Length; i++)
+        {
+            whitePixels[i] = Color.white;
+        }
+
+        // Apply the white color array to the texture and update it.
+        texture.SetPixels(whitePixels);
+        texture.Apply();
+
+        Debug.Log("Whiteboard cleared.");
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             SaveTextureToPNG(saveFileName);
         }
