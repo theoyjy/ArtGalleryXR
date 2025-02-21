@@ -9,7 +9,6 @@ using Unity.Services.Multiplay;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using System.Threading.Tasks;
-using NUnit.Framework;
 
 public class MultiplayManager : MonoBehaviour
 {
@@ -61,12 +60,29 @@ public class MultiplayManager : MonoBehaviour
 #endif
     }
 
+    private void OnApplicationQuit()
+    {
+        DisconnectFromServer();
+    }
+
     public void JoinToServer()
     {
         UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         transport.SetConnectionData(ipAddress, port);
         NetworkManager.Singleton.StartClient();
         Debug.Log("join to server called");
+    }
+
+    public void DisconnectFromServer()
+    {
+        if (Application.platform != RuntimePlatform.LinuxServer)
+        {
+            if (NetworkManager.Singleton.IsConnectedClient)
+            {
+                NetworkManager.Singleton.Shutdown(true);
+                NetworkManager.Singleton.DisconnectClient(NetworkManager.Singleton.LocalClientId);
+            }
+        }
     }
 
 }

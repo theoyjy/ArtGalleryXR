@@ -10,6 +10,9 @@ using Unity.Services.Authentication;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using NUnit.Framework;
+using Unity.VisualScripting;
+using Unity.Netcode;
 
 
 public class MatchmakerManager : MonoBehaviour
@@ -17,10 +20,15 @@ public class MatchmakerManager : MonoBehaviour
     public bool isAllocated = false;
     public string allocatedIpAddress;
     public ushort allocatedPort;
+
+    bool isDeallocating = false;
+
+    public string backfillIpAddress;
+    public ushort backfillPort;
     public bool isServerAvaliable = false;
 
     public MultiplayManager mpManager;
-    
+
     public async void Start()
     {
         mpManager = GetComponent<MultiplayManager>();
@@ -29,15 +37,58 @@ public class MatchmakerManager : MonoBehaviour
         {
             await UnityServices.InitializeAsync();
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
         }
         await QueryAvailableServers();
-        if(isServerAvaliable)
-            ClientJoin();
+        if (!isServerAvaliable)
+            AllocateServer();
     }
 
-    public async void ClientJoin()
+    private float deallocationTimer = 0f;
+    private bool isWaitingForDeallocation = false;
+
+    void Update()
     {
-        var players = new List<Player> { new("Player1", new Dictionary<string, object>()) };
+        if (NetworkManager.Singleton.ConnectedClientsList.Count == 0)
+        {
+            if (!isWaitingForDeallocation) // Start the timer only once
+            {
+                isWaitingForDeallocation = true;
+                deallocationTimer = Time.time + 60f; // Set timer for 60 seconds
+            }
+
+            if (Time.time >= deallocationTimer) // Check if 60s have passed
+            {
+                isDeallocating = true;
+                Application.Quit();
+                Debug.Log("Deallocating Server");
+            }
+        }
+        else
+        {
+            isWaitingForDeallocation = false; // Reset if a player joins
+        }
+    }
+
+
+    public async void BackfillServer()
+    {
+        var options = new CreateBackfillTicketOptions("Gallery-A", backfillIpAddress + ":" + backfillPort, new Dictionary<string, object>());
+        string ticketId = await MatchmakerService.Instance.CreateBackfillTicketAsync(options);
+    }
+
+    public async void waitForBackfillTickets()
+    {
+        // do {
+
+        // }
+    }
+
+
+
+    public async void AllocateServer()
+    {
+        var players = new List<Unity.Services.Matchmaker.Models.Player> { new("Player1", new Dictionary<string, object>()) };
         var options = new CreateTicketOptions("Gallery-A", new Dictionary<string, object>());
         var ticketResponse = await MatchmakerService.Instance.CreateTicketAsync(players, options);
 
@@ -69,7 +120,7 @@ public class MatchmakerManager : MonoBehaviour
                 case MultiplayAssignment.StatusOptions.Found:
                     Debug.Log("Match found! Server IP: " + assignment.Ip + " | Port: " + assignment.Port);
                     allocatedIpAddress = assignment.Ip;
-                    allocatedPort = (ushort) assignment.Port;
+                    allocatedPort = (ushort)assignment.Port;
                     isAllocated = true;
                     break;
                 case MultiplayAssignment.StatusOptions.InProgress:
@@ -90,13 +141,13 @@ public class MatchmakerManager : MonoBehaviour
         } while (!isAllocated);
 
         mpManager.ipAddress = allocatedIpAddress;
-        mpManager.port = (ushort) allocatedPort;
+        mpManager.port = (ushort)allocatedPort;
         mpManager.hasServerData = isAllocated;
 
     }
     async Task QueryAvailableServers()
     {
-        
+
         QueryLobbiesOptions queryOptions = new QueryLobbiesOptions
         {
             Count = 25
@@ -104,14 +155,15 @@ public class MatchmakerManager : MonoBehaviour
 
         try
         {
-            QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync(queryOptions);
-            Debug.Log("Quered " + queryResponse.Results.Count + " Lobbies¡£");
+            QueryResponse queryResponse = await LobbyService.Instance.QueryLobbiesAsync(queryOptions);
+            Debug.Log("Queried " + queryResponse.Results.Count + " Lobbies");
+            Debug.Log("Query Response: " + queryResponse.Results.Count);
 
             if (queryResponse.Results.Count > 0)
             {
                 foreach (Lobby lobby in queryResponse.Results)
                 {
-                    //  Default extraction of Lobby ID and server information stored in Data (e.g. ¡®ip¡¯ and ¡®port¡¯)
+                    //  Default extraction of Lobby ID and server information stored in Data (e.g. ï¿½ï¿½ipï¿½ï¿½ and ï¿½ï¿½portï¿½ï¿½)
                     string lobbyId = lobby.Id;
                     string serverIp = lobby.Data != null && lobby.Data.ContainsKey("ip")
                         ? lobby.Data["ip"].Value

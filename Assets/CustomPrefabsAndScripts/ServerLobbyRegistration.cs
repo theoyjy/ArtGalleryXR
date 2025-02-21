@@ -43,12 +43,12 @@ public class ServerLobbyRegistration : MonoBehaviour
             };
 
             // create a lobby with Customized name
-            Lobby lobby = await Lobbies.Instance.CreateLobbyAsync("TestGameServer", maxPlayers, options);
-            Debug.Log("Lobby created£¬ID£º" + lobby.Id);
+            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync("TestGameServer", maxPlayers, options);
+            Debug.Log("Lobby createdID" + lobby.Id);
         }
         catch (LobbyServiceException ex)
         {
-            Debug.LogError("Lobby goes ERROR when created£º" + ex.Message);
+            Debug.LogError("Lobby goes ERROR when created" + ex.Message);
         }
     }
 }
