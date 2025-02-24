@@ -43,7 +43,7 @@ public class MultiplayManager : MonoBehaviour
     private async void Update()
     {
 #if SERVER_BUILD
-        
+
             if (serverQueryHandler != null)
             {
                 serverQueryHandler.CurrentPlayers = (ushort)NetworkManager.Singleton.ConnectedClientsIds.Count;

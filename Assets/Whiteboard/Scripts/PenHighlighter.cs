@@ -14,13 +14,23 @@ public class PenHighlighter : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         _originalColor = _penRenderer.material.color;
     }
 
+    //void Update()
+    //{
+    //
+    //}
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _penRenderer.material.color = _highlightColor; // Change to highlight color
+        if (!GetComponent<WhiteboardMarker>()._isHolding)
+        {
+            _originalColor = _penRenderer.material.color;
+            _penRenderer.material.color = _highlightColor; // Change to highlight color
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _penRenderer.material.color = _originalColor; // Restore original color
+        if (!GetComponent<WhiteboardMarker>()._isHolding)
+            _penRenderer.material.color = _originalColor; // Restore original color
     }
 }

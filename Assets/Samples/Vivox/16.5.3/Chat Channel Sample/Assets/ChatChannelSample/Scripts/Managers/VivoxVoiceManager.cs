@@ -64,21 +64,23 @@ public class VivoxVoiceManager : MonoBehaviour
 
     async void Awake()
     {
+        // Singleton initialization
         if (m_Instance == null)
         {
             var _ = Instance;
-            if(_ == null)
+            if (_ == null)
             {
                 Debug.LogError("m_Instance is null.");
             }
         }
-
         if (m_Instance != this && m_Instance != null)
         {
-            Debug.LogWarning(
-                "Multiple VivoxVoiceManager detected in the scene. Only one VivoxVoiceManager can exist at a time. The duplicate VivoxVoiceManager will be destroyed.");
+            Debug.LogWarning("Multiple VivoxVoiceManager instances detected. Only one will be kept.");
             Destroy(this);
+            return;
         }
+
+        // Set up initialization options with credentials if provided.
         var options = new InitializationOptions();
         if (CheckManualCredentials())
         {
@@ -86,6 +88,7 @@ public class VivoxVoiceManager : MonoBehaviour
             Debug.Log($"Server: {_server}, Domain: {_domain}, Issuer: {_issuer}, Key: {_key}");
         }
 
+        // Initialize Unity Services
         try
         {
             await UnityServices.InitializeAsync(options);
@@ -94,25 +97,35 @@ public class VivoxVoiceManager : MonoBehaviour
         catch (Exception ex)
         {
             Debug.LogError($"UnityServices initialization failed: {ex.Message}");
+            return;
         }
 
-        try
+        // Optionally log UnityServices state
+        Debug.Log($"UnityServices state: {UnityServices.State}");
+
+        // Wait for VivoxService.Instance to become available (with a timeout)
+        const int maxAttempts = 20;
+        int attempt = 0;
+        while (VivoxService.Instance == null && attempt < maxAttempts)
         {
-            if (VivoxService.Instance == null)
-            {
-                Debug.LogError("VivoxService.Instance is null. Make sure UnityServices is initialized.");
-                return;
-            }
-
-            await VivoxService.Instance.InitializeAsync();
-            Debug.Log("VivoxService initialized successfully.");
+            Debug.Log("Waiting for VivoxService.Instance to become available...");
+            await Task.Delay(500); // wait half a second
+            attempt++;
         }
-        catch (Exception ex)
+
+        if (VivoxService.Instance == null)
         {
-            Debug.LogError($"VivoxService initialization failed: {ex.Message}");
+            Debug.LogError("VivoxService.Instance is null. Ensure UnityServices initialization has completed and your Vivox configuration is correct.");
+            return;
+        }
+        else
+        {
+            Debug.Log("VivoxService.Instance is available.");
         }
 
+        // Proceed with any additional Vivox initialization logic here.
     }
+
 
     public async Task InitializeAsync(string playerName)
     {

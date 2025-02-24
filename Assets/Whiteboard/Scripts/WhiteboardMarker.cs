@@ -4,12 +4,14 @@ using System.Linq;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Unity.Netcode;
 
 public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Transform _tip;
     [SerializeField] private int _penSize = 5;
     [SerializeField] private Transform _whiteboardTransform;
+    public NetworkedCanvas networkedCanvas;
 
     private Renderer _renderer;
     private Color[] _colors;
@@ -22,7 +24,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     //private Quaternion _lastTouchRot;
 
     private Camera _playerCamera;
-    private bool _isHolding = false;
+    public bool _isHolding = false;
     private bool _isHovering = false;
     private bool _isSnapped = false;
     private Vector3 _offset;
@@ -95,10 +97,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
         else if(_isHolding && !_isSnapped)
         {
             MovePenWithMouse();
-        }
-        
-
-        
+        }     
     #endif
     }
 
@@ -218,9 +217,20 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
                     _whiteboard.texture.Apply();
                 }
 
+                // Send to network
+                if (networkedCanvas != null)
+                {
+                    Vector2 currentPos = new Vector2(x, y);
+                    networkedCanvas.SendDrawCommandServerRpc(_lastTouchPos, currentPos, _colors, _penSize);
+                }
+                else
+                    Debug.Log("NetworkedCanvas is NULL");
+
+                // Set for next iterations
                 _lastTouchPos = new Vector2(x, y);
                 //_lastTouchRot = transform.rotation;
                 _touchedLastFrame = true;
+
                 return;
             }
         }
