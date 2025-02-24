@@ -25,18 +25,19 @@ public class ShowCanvasOnCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-#if UNITY_ANDROID
+//#if UNITY_ANDROID
 
-#else
+//#else
         Debug.Log(" Trigger entered with: " + other.tag);
-        if(other.CompareTag(interactableTag))
+        Camera localCamera = Camera.main;
+        if (other.CompareTag(interactableTag))
         {
             Camera cam = other.GetComponentInChildren<Camera>();
             foreach (var player in FindObjectsOfType<NetworkObject>())
             {
                 if (player.IsOwner) // This is the local player
                 {
-                    var localCamera = player.GetComponentInChildren<Camera>();
+                    localCamera = player.GetComponentInChildren<Camera>();
                     if(localCamera != cam)
                     {
                         Debug.Log("This is not the local player's camera");
@@ -62,46 +63,66 @@ public class ShowCanvasOnCollision : MonoBehaviour
             Debug.Log("Spawn position: " + spawnPosition);
 
             // Spawn the UI *locally* (no network spawn)
-            GameObject uiInstance = Instantiate(UI, spawnPosition, Quaternion.identity);
+            GameObject uiInstance = Instantiate(UI, spawnPosition, card.GetWorldQuatRot());
 
             EnterEditController uiController = uiInstance.GetComponent<EnterEditController>();
-            Button myButton = uiInstance.transform.Find("Button").GetComponent<Button>();
-            if(myButton == null)
-            {
-                Debug.LogError("Button component is missing from: " + uiInstance.name);
-                return;
-            }
-            if(uiController == null)
-            {
-                Debug.LogError("UIController component is missing from: " + uiInstance.name);
-            }
+            //Button myButton = uiInstance.transform.Find("Button").GetComponent<Button>();
+            //if(myButton == null)
+            //{
+            //    Debug.LogError("Button component is missing from: " + uiInstance.name);
+            //    return;
+            //}
+            //if(uiController == null)
+            //{
+            //    Debug.LogError("UIController component is missing from: " + uiInstance.name);
+            //}
 
             // move the button to the spawn position
-            Quaternion cardRotation = new Quaternion(0, 0.707106829f, 0.707106829f, 0);
+            //Quaternion cardRotation = new Quaternion(0, 0.707106829f, 0.707106829f, 0);
 
-            myButton.transform.position = spawnPosition;
-            myButton.transform.rotation = card.GetWorldQuatRot();
+            //myButton.transform.position = spawnPosition;
+            //myButton.transform.rotation = card.GetWorldQuatRot();
 
-            RectTransform rt = myButton.GetComponent<RectTransform>();
-            rt.position = spawnPosition;
-            rt.rotation = myButton.transform.rotation;
-            Debug.Log("Button position: " + myButton.transform.position + " rotation: " + rt.rotation);
+            //uiInstance.transform.position = spawnPosition;
+            //uiInstance.transform.rotation = card.GetWorldQuatRot();
+
+            RectTransform rt = uiInstance.GetComponent<RectTransform>();
+            rt.anchoredPosition = spawnPosition;
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            uiInstance.transform.localScale = Vector3.one * 0.7f;
+            rt.ForceUpdateRectTransforms();
+            //rt.rotation = uiInstance.transform.rotation;
+            Debug.Log("UI position: " + uiInstance.transform.position + " rotation: " + rt.rotation);
 
             // Store the canvas in the UI controller to later pass to the CanvasEditManager
             uiController.SetCanvas(gameObject);
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rt);
+            Canvas.ForceUpdateCanvases();
+            
+
+            Canvas canvas = uiInstance.GetComponent<Canvas>();
+            canvas.enabled = false;
+            canvas.enabled = true;
+            canvas.worldCamera = localCamera;
+
+            GraphicRaycaster gr = uiInstance.GetComponent<GraphicRaycaster>();
+            if (gr != null) Destroy(gr);
+            uiInstance.AddComponent<GraphicRaycaster>();
+
 
             // add UI to dictionary
             activeUIs[other] = uiInstance;
 
         }
-#endif
+//#endif
     }
 
     public void OnTriggerExit(Collider other)
     {
-#if UNITY_ANDROID
+//#if UNITY_ANDROID
 
-#else
+//#else
         // Destroy UI and remove from dictionary
         if (activeUIs.ContainsKey(other))
         {
@@ -110,7 +131,7 @@ public class ShowCanvasOnCollision : MonoBehaviour
 
             Debug.Log($"UI removed from {other.name}");
         }
-#endif
+//#endif
     }
 }
 
