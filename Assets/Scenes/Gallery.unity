@@ -6563,6 +6563,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5210632554572358489, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+      propertyPath: ToolUI
+      value: 
+      objectReference: {fileID: 3967498396443459041, guid: fa7d98f2435a5ec4f96d5d2ad1f53ef2, type: 3}
+    - target: {fileID: 5210632554572358489, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+      propertyPath: spawnOffset
+      value: -0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 5666307368449052307, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_Name
       value: CanvasComponent
@@ -9575,7 +9583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ipAddress: 20.47.115.206
-  port: 9000
+  port: 9500
 --- !u!4 &1187899824
 Transform:
   m_ObjectHideFlags: 0
@@ -15529,7 +15537,7 @@ MonoBehaviour:
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
     Address: 20.47.115.206
-    Port: 9000
+    Port: 9500
     ServerListenAddress: 0.0.0.0
   DebugSimulator:
     PacketDelayMS: 0

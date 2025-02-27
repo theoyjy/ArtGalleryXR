@@ -17,6 +17,7 @@ public class ShowCanvasOnCollision : MonoBehaviour
     [SerializeField] public float spawnOffset = 0.1f;
 
 
+    [SerializeField] GameObject ToolUI;
     private Dictionary<Collider, GameObject> activeUIs = new Dictionary<Collider, GameObject>();
 
 
@@ -25,9 +26,8 @@ public class ShowCanvasOnCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-//#if UNITY_ANDROID
 
-//#else
+
         Debug.Log(" Trigger entered with: " + other.tag);
         Camera localCamera = Camera.main;
         if (other.CompareTag(interactableTag))
@@ -38,13 +38,45 @@ public class ShowCanvasOnCollision : MonoBehaviour
                 if (player.IsOwner) // This is the local player
                 {
                     localCamera = player.GetComponentInChildren<Camera>();
-                    if(localCamera != cam)
+                    if (localCamera != cam)
                     {
                         Debug.Log("This is not the local player's camera");
                         return;
                     }
                 }
             }
+
+#if UNITY_ANDROID
+            Card card = GetComponentInChildren<Card>();
+            Vector3 spawnPosition = card.GetWorldLoc() + spawnOffset * card.GetNormal();
+
+            Canvas canvas = ToolUI.GetComponent<Canvas>();
+            canvas.enabled = false;
+            canvas.enabled = true;
+            canvas.renderMode = RenderMode.WorldSpace;
+            canvas.worldCamera = localCamera;
+            canvas.transform.localScale = Vector3.one * 0.02f;
+            activeUIs[other] = Instantiate(ToolUI);
+            RectTransform rt = ToolUI.GetComponent<RectTransform>();
+            Quaternion spawnRotation = card.GetWorldQuatRot();
+            rt.position = spawnPosition;
+            rt.rotation = spawnRotation;
+
+            //rt.anchoredPosition = spawnPosition;
+            //rt.pivot = new Vector2(0.5f, 0.5f);
+            ToolUI.transform.localScale = Vector3.one * 0.02f;
+            rt.ForceUpdateRectTransforms();
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rt);
+            Canvas.ForceUpdateCanvases();
+            
+
+            
+
+            GraphicRaycaster gr = ToolUI.GetComponent<GraphicRaycaster>();
+            if (gr != null) Destroy(gr);
+            ToolUI.AddComponent<GraphicRaycaster>();
+#else
 
             Card card = GetComponentInChildren<Card>();
             if (card == null)
@@ -114,8 +146,8 @@ public class ShowCanvasOnCollision : MonoBehaviour
             // add UI to dictionary
             activeUIs[other] = uiInstance;
 
+#endif
         }
-//#endif
     }
 
     public void OnTriggerExit(Collider other)
