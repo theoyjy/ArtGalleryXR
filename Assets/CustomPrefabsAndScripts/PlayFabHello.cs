@@ -20,10 +20,10 @@ public class PlayFabHello : MonoBehaviour
             PlayFabSettings.staticSettings.TitleId = "D41B8";
         }
 
-        var request = new LoginWithCustomIDRequest 
-        { 
-            CustomId = _customId, 
-            CreateAccount = true 
+        var request = new LoginWithCustomIDRequest
+        {
+            CustomId = _customId,
+            CreateAccount = true
         };
 
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
@@ -31,12 +31,12 @@ public class PlayFabHello : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             PlayFabUsage.GetTitleData();
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.M))
         {
             if (string.IsNullOrEmpty(_loginUserId) || string.IsNullOrEmpty(_loginTime))
             {
@@ -73,45 +73,6 @@ public class PlayFabHello : MonoBehaviour
 
             PlayFabUsage.GetEntityObject(_entityId, _entityType);
         }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            PlayFabUsage.PurchasePotion(itemInstanceId =>
-            {
-                _itemInstanceId = itemInstanceId;
-            });
-        }
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            PlayFabUsage.GetUserInventory();
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            if (string.IsNullOrEmpty(_itemInstanceId))
-            {
-                Debug.LogError("Please buy things first");
-                return;
-            }
-
-            PlayFabUsage.ConsumePotion(_itemInstanceId);
-        }
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            PlayFabUsage.SubmitHighScore(UnityEngine.Random.Range(0, 1000));
-        }
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            PlayFabUsage.GetLeaderboard(10);
-        }
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            PlayFabUsage.GetLeaderboardAroundPlayer(10);
-        }
     }
 
     private void OnLoginSuccess(LoginResult result)
@@ -123,6 +84,12 @@ public class PlayFabHello : MonoBehaviour
 
         _entityId = result.EntityToken.Entity.Id;
         _entityType = result.EntityToken.Entity.Type;
+
+        PlayFabUsage.LoadOrCreateGallery(_entityId, _entityType, (galleryId, canvasId) =>
+        {
+            Debug.Log("Gallery ID: {galleryId}");
+            Debug.Log("Canvas ID: {canvasId}");
+        });
     }
 
     private void OnLoginFailure(PlayFabError error)

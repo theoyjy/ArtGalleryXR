@@ -52,6 +52,15 @@ public class PlayFabUsage : MonoBehaviour
         );
     }
 
+    [Serializable]
+    private class GalleryData
+    {
+        public string galleryId;
+        public string canvasId;
+        public string owner;
+        public string createdAt;
+    }
+
     public static void GetUserDataRequest()
     {
         var request = new PlayFab.ClientModels.GetUserDataRequest();
@@ -96,7 +105,7 @@ public class PlayFabUsage : MonoBehaviour
         };
         PlayFabDataAPI.SetObjects(newSetObjectRequest, setResult =>
         {
-            Debug.Log($"SetEntityObject == Success with version {setResult.ProfileVersion}");
+            Debug.Log("SetEntityObject == Success with version {setResult.ProfileVersion}");
         },
             error =>
             {
@@ -112,10 +121,10 @@ public class PlayFabUsage : MonoBehaviour
         };
         PlayFabDataAPI.GetObjects(newGetObjectRequest, getResult =>
         {
-            Debug.Log($"GetEntityObject == Success with version {getResult.ProfileVersion}");
+            Debug.Log("GetEntityObject == Success with version {getResult.ProfileVersion}");
             foreach (var dataPair in getResult.Objects)
             {
-                Debug.Log($"GetEntityObject == {dataPair.Key} == {dataPair.Value.DataObject}");
+                Debug.Log("GetEntityObject == {dataPair.Key} == {dataPair.Value.DataObject}");
             }
         },
             error =>
@@ -126,147 +135,67 @@ public class PlayFabUsage : MonoBehaviour
 
     #endregion
 
-    #region BuyThings
-
-    public static void PurchasePotion(Action<string> onPurchaseFinish)
+    private static void CreateGallery(string entityId, string entityType, Action<string, string> onGalleryCreated)
     {
-        var purchaseItemRequest = new PlayFab.ClientModels.PurchaseItemRequest
+        string galleryId = "GALLERY_" + Guid.NewGuid();
+        string canvasId = "CANVAS_" + Guid.NewGuid();
+
+        var galleryData = new GalleryData
         {
-            CatalogVersion = "Items",
-            ItemId = "HealthPotion",
-            Price = 10,
-            VirtualCurrency = "Euro"
+            galleryId = galleryId,
+            canvasId = canvasId,
+            owner = entityId,
+            createdAt = DateTime.UtcNow.ToString("o")
         };
 
-        PlayFab.PlayFabClientAPI.PurchaseItem(purchaseItemRequest, result =>
+        var request = new SetObjectsRequest
         {
-            Debug.Log($"PurchaseHealthPotion == {result.Request.GetType().Name} Success {result.Items[0].ItemId}");
-            onPurchaseFinish?.Invoke(result.Items[0].ItemInstanceId);
-        },
-            error =>
-            {
-                Debug.LogError($"PurchaseHealthPotion == {error.GenerateErrorReport()}");
-                onPurchaseFinish?.Invoke(string.Empty);
-            }
-        );
-    }
-
-    public static void GetUserInventory()
-    {
-        var request = new PlayFab.ClientModels.GetUserInventoryRequest();
-
-        PlayFab.PlayFabClientAPI.GetUserInventory(request, result =>
+            Entity = new PlayFab.DataModels.EntityKey { Id = entityId, Type = entityType },
+            Objects = new List<SetObject>
         {
-            foreach (var item in result.Inventory)
-            {
-                Debug.Log($"GetUserInventory == {item.ItemId} == {item.DisplayName} : {item.ItemInstanceId} count: {(item.RemainingUses.HasValue ? item.RemainingUses.Value : 0)}");
-            }
-        },
-            error =>
-            {
-                Debug.LogError($"GetUserInventory == {error.GenerateErrorReport()}");
-            }
-        );
-    }
-
-    public static void ConsumePotion(string itemInstanceId)
-    {
-        var consumeItemRequest = new PlayFab.ClientModels.ConsumeItemRequest
-        {
-            ItemInstanceId = itemInstanceId,
-            ConsumeCount = 1
+            new SetObject { ObjectName = "GalleryData", DataObject = galleryData }
+        }
         };
 
-        PlayFab.PlayFabClientAPI.ConsumeItem(consumeItemRequest, result =>
+        PlayFabDataAPI.SetObjects(request, result =>
         {
-            Debug.Log($"ConsumePotion == {result.Request.GetType().Name}-{itemInstanceId} Success");
+            Debug.Log("New Gallery created: {galleryId}, Canvas ID: {canvasId}");
+
+            onGalleryCreated?.Invoke(galleryId, canvasId);
         },
-            error =>
-            {
-                Debug.LogError($"ConsumePotion == {error.GenerateErrorReport()}");
-            }
-        );
+        error =>
+        {
+            Debug.LogError("Error creating gallery: {error.GenerateErrorReport()}");
+        });
     }
 
-    #endregion
 
-    #region UseRanking
-
-    public static void SubmitHighScore(int highScore)
+    public static void LoadOrCreateGallery(string entityId, string entityType, Action<string, string> onGalleryLoaded)
     {
-        var request = new PlayFab.ClientModels.UpdatePlayerStatisticsRequest
+        var request = new GetObjectsRequest
         {
-            Statistics = new List<PlayFab.ClientModels.StatisticUpdate>
-            {
-                new PlayFab.ClientModels.StatisticUpdate
-                {
-                    StatisticName = "Daily High Score",
-                    Value = highScore
-                }
-            }
+            Entity = new PlayFab.DataModels.EntityKey { Id = entityId, Type = entityType }
         };
 
-        PlayFab.PlayFabClientAPI.UpdatePlayerStatistics(request, result =>
+        PlayFabDataAPI.GetObjects(request, result =>
         {
-            Debug.Log($"SubmitHighScore == {result.Request.GetType().Name} Success");
-        },
-            error =>
+            if (result.Objects != null && result.Objects.ContainsKey("GalleryData"))
             {
-                Debug.LogError($"SubmitHighScore == {error.GenerateErrorReport()}");
+                var galleryData = JsonUtility.FromJson<GalleryData>(result.Objects["GalleryData"].DataObject.ToString());
+                Debug.Log("Gallery loaded: {galleryData.galleryId}, Canvas ID: {galleryData.canvasId}");
+
+                onGalleryLoaded?.Invoke(galleryData.galleryId, galleryData.canvasId);
             }
-        );
-    }
-
-    public static void GetLeaderboard(int highScoreCount)
-    {
-        var request = new PlayFab.ClientModels.GetLeaderboardRequest
-        {
-            StatisticName = "Daily High Score",
-            StartPosition = 0,
-            MaxResultsCount = 10
-        };
-
-        PlayFab.PlayFabClientAPI.GetLeaderboard(request, result =>
-        {
-            Debug.Log($"GetLeaderboard == {result.Request.GetType().Name} Success");
-
-            foreach (var player in result.Leaderboard)
+            else
             {
-                Debug.Log($"GetLeaderboard == {player.Position} == {player.PlayFabId} == {player.StatValue}");
+                CreateGallery(entityId, entityType, onGalleryLoaded);
             }
         },
-            error =>
-            {
-                Debug.LogError($"GetLeaderboard == {error.GenerateErrorReport()}");
-            }
-        );
-    }
-
-    public static void GetLeaderboardAroundPlayer(int highScoreCount)
-    {
-        var request = new PlayFab.ClientModels.GetLeaderboardAroundPlayerRequest
+        error =>
         {
-            StatisticName = "Daily High Score",
-            MaxResultsCount = highScoreCount
-        };
-
-        PlayFab.PlayFabClientAPI.GetLeaderboardAroundPlayer(request, result =>
-        {
-            Debug.Log($"GetLeaderboardAroundPlayer == {result.Request.GetType().Name} Success");
-
-            foreach (var player in result.Leaderboard)
-            {
-                Debug.Log($"GetLeaderboardAroundPlayer == {player.Position} == {player.PlayFabId} == {player.StatValue}");
-            }
-        },
-            error =>
-            {
-                Debug.LogError($"GetLeaderboardAroundPlayer == {error.GenerateErrorReport()}");
-            }
-        );
+            Debug.LogError("Error fetching gallery: {error.GenerateErrorReport()}");
+        });
     }
-
-    #endregion
 
     #region User Authentication (Login/Registration)
 
