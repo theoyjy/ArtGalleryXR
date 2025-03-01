@@ -91,50 +91,19 @@ public class CanvasEditManager : MonoBehaviour
             return;
         }
 
-//#if UNITY_ANDROID
-
-//#else
         // record the camera position before entering edit mode
 
         NetworkObject player = GetCurrentPlayer();
         Camera playerCamera = player.GetComponentInChildren<Camera>();
-
-        // struct value copy
-        cameraBeforeEnterPosition = player.transform.position;
-        cameraBeforeEnterRotation = player.transform.rotation;
-
-        // calculate the target position and rotation
-        Vector3 CardNormal = card.GetNormal();
-        Vector3 TargetCameraPosition = card.GetWorldLoc() + CardNormal * ToolSpawnOffset;
-        GameObject tempTarget = new GameObject("TempTargetTransform");
-
-        Quaternion TargetCameraRotation = card.GetWorldQuatRot();
-        Debug.Log("Target position: " + TargetCameraPosition + " Rotation: " + TargetCameraRotation);
-
-        playerCamera.orthographic = true;
-        playerCamera.orthographicSize = 10f;  // magic number
-        oriWidth = Screen.width;
-        oriHeight = Screen.height;
-        Screen.SetResolution(2048, 2048, false);
-        playerCamera.aspect = (float)Screen.width / Screen.height;
-
-        // hide enter edit canvas UI
         EditCanvasUI.SetActive(false);
-
-        // move camera to focus on the canvas
-        MoveXRToTargetTrans(TargetCameraPosition, TargetCameraRotation);
-
-        var trackedPoseDriver = playerCamera.transform.parent.GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>(true);
-
-        Debug.Log("TrackedPoseDriver count: " + trackedPoseDriver.Length);
-        for (int i = 0; i < trackedPoseDriver.Length; i++)
+        MoveCameraToOrthographic(player, playerCamera, card);
+        
+        Canvas canvas = ToolUI.GetComponent<Canvas>();
+        canvas.enabled = true;
+        if(canvas.worldCamera == null)
         {
-            trackedPoseDriver[i].enabled = false;
+            canvas.worldCamera = playerCamera;
         }
-        playerCamera.transform.parent.transform.parent.GetComponent<ObjectMovementWithCamera>().enabled = false;
-
-//#endif
-        Instantiate(ToolUI);
     }
 
     public void ExitEditMode()
@@ -180,6 +149,43 @@ public class CanvasEditManager : MonoBehaviour
         NetworkObject player = GetCurrentPlayer();
         player.transform.position = CameraPosition;
         player.transform.rotation = CameraRotation;
+    }
+
+    public void MoveCameraToOrthographic(NetworkObject player, Camera playerCamera, Card card)
+    {
+        // struct value copy
+        cameraBeforeEnterPosition = player.transform.position;
+        cameraBeforeEnterRotation = player.transform.rotation;
+
+        // calculate the target position and rotation
+        Vector3 CardNormal = card.GetNormal();
+        Vector3 TargetCameraPosition = card.GetWorldLoc() + CardNormal * ToolSpawnOffset;
+        GameObject tempTarget = new GameObject("TempTargetTransform");
+
+        Quaternion TargetCameraRotation = card.GetWorldQuatRot();
+        Debug.Log("Target position: " + TargetCameraPosition + " Rotation: " + TargetCameraRotation);
+
+        playerCamera.orthographic = true;
+        playerCamera.orthographicSize = 10f;  // magic number
+        oriWidth = Screen.width;
+        oriHeight = Screen.height;
+        Screen.SetResolution(2048, 2048, false);
+        playerCamera.aspect = (float)Screen.width / Screen.height;
+
+        // hide enter edit canvas UI
+        
+
+        // move camera to focus on the canvas
+        MoveXRToTargetTrans(TargetCameraPosition, TargetCameraRotation);
+
+        var trackedPoseDriver = playerCamera.transform.parent.GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>(true);
+
+        Debug.Log("TrackedPoseDriver count: " + trackedPoseDriver.Length);
+        for (int i = 0; i < trackedPoseDriver.Length; i++)
+        {
+            trackedPoseDriver[i].enabled = false;
+        }
+        playerCamera.transform.parent.transform.parent.GetComponent<ObjectMovementWithCamera>().enabled = false;
     }
 
 

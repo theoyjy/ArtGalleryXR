@@ -7,10 +7,9 @@ using Unity.Netcode;
 public class ShowCanvasOnCollision : MonoBehaviour
 {
     [Header("UI Prefab (Must be a World-Space Canvas)")]
-    [SerializeField] private GameObject UI;
+    [SerializeField] private GameObject EditUI;
 
     [Header("Tag to Detect (e.g., 'Interactable')")]
-    //[SerializeField] private string interactableTag = "Interactable";
     [SerializeField] private string interactableTag = "Player";
 
     [Header("Spawn Offset from Collision (Optional)")]
@@ -46,37 +45,7 @@ public class ShowCanvasOnCollision : MonoBehaviour
                 }
             }
 
-#if UNITY_ANDROID
-            Card card = GetComponentInChildren<Card>();
-            Vector3 spawnPosition = card.GetWorldLoc() + spawnOffset * card.GetNormal();
 
-            Canvas canvas = ToolUI.GetComponent<Canvas>();
-            canvas.enabled = false;
-            canvas.enabled = true;
-            canvas.renderMode = RenderMode.WorldSpace;
-            canvas.worldCamera = localCamera;
-            canvas.transform.localScale = Vector3.one * 0.02f;
-            activeUIs[other] = Instantiate(ToolUI);
-            RectTransform rt = ToolUI.GetComponent<RectTransform>();
-            Quaternion spawnRotation = card.GetWorldQuatRot();
-            rt.position = spawnPosition;
-            rt.rotation = spawnRotation;
-
-            //rt.anchoredPosition = spawnPosition;
-            //rt.pivot = new Vector2(0.5f, 0.5f);
-            ToolUI.transform.localScale = Vector3.one * 0.02f;
-            rt.ForceUpdateRectTransforms();
-
-            LayoutRebuilder.ForceRebuildLayoutImmediate(rt);
-            Canvas.ForceUpdateCanvases();
-            
-
-            
-
-            GraphicRaycaster gr = ToolUI.GetComponent<GraphicRaycaster>();
-            if (gr != null) Destroy(gr);
-            ToolUI.AddComponent<GraphicRaycaster>();
-#else
 
             Card card = GetComponentInChildren<Card>();
             if (card == null)
@@ -94,57 +63,22 @@ public class ShowCanvasOnCollision : MonoBehaviour
             Vector3 spawnPosition = card.GetWorldLoc() + spawnOffset * card.GetNormal();
             Debug.Log("Spawn position: " + spawnPosition);
 
-            // Spawn the UI *locally* (no network spawn)
-            GameObject uiInstance = Instantiate(UI, spawnPosition, card.GetWorldQuatRot());
+#if UNITY_ANDROID
+            Canvas canvas = ToolUI.GetComponent<Canvas>();
+            canvas.enabled = true;
+            if (canvas.worldCamera == null){
+                canvas.worldCamera = localCamera;
+            }
+#else
 
-            EnterEditController uiController = uiInstance.GetComponent<EnterEditController>();
-            //Button myButton = uiInstance.transform.Find("Button").GetComponent<Button>();
-            //if(myButton == null)
-            //{
-            //    Debug.LogError("Button component is missing from: " + uiInstance.name);
-            //    return;
-            //}
-            //if(uiController == null)
-            //{
-            //    Debug.LogError("UIController component is missing from: " + uiInstance.name);
-            //}
-
-            // move the button to the spawn position
-            //Quaternion cardRotation = new Quaternion(0, 0.707106829f, 0.707106829f, 0);
-
-            //myButton.transform.position = spawnPosition;
-            //myButton.transform.rotation = card.GetWorldQuatRot();
-
-            //uiInstance.transform.position = spawnPosition;
-            //uiInstance.transform.rotation = card.GetWorldQuatRot();
-
-            RectTransform rt = uiInstance.GetComponent<RectTransform>();
-            rt.anchoredPosition = spawnPosition;
-            rt.pivot = new Vector2(0.5f, 0.5f);
-            uiInstance.transform.localScale = Vector3.one * 0.7f;
-            rt.ForceUpdateRectTransforms();
-            //rt.rotation = uiInstance.transform.rotation;
-            Debug.Log("UI position: " + uiInstance.transform.position + " rotation: " + rt.rotation);
-
-            // Store the canvas in the UI controller to later pass to the CanvasEditManager
-            uiController.SetCanvas(gameObject);
-
-            LayoutRebuilder.ForceRebuildLayoutImmediate(rt);
-            Canvas.ForceUpdateCanvases();
             
 
-            Canvas canvas = uiInstance.GetComponent<Canvas>();
-            canvas.enabled = false;
+            EnterEditController uiController = EditUI.GetComponent<EnterEditController>();
+            uiController.SetCanvas(gameObject);
+
+            Canvas canvas = EditUI.GetComponent<Canvas>();
             canvas.enabled = true;
-            canvas.worldCamera = localCamera;
-
-            GraphicRaycaster gr = uiInstance.GetComponent<GraphicRaycaster>();
-            if (gr != null) Destroy(gr);
-            uiInstance.AddComponent<GraphicRaycaster>();
-
-
-            // add UI to dictionary
-            activeUIs[other] = uiInstance;
+            
 
 #endif
         }
@@ -152,18 +86,21 @@ public class ShowCanvasOnCollision : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-//#if UNITY_ANDROID
-
-//#else
+#if UNITY_ANDROID
+        Canvas canvas = ToolUI.GetComponent<Canvas>();
+        canvas.enabled = false;
+#else
+        Canvas canvas = EditUI.GetComponent<Canvas>();
+        canvas.enabled = false;
         // Destroy UI and remove from dictionary
-        if (activeUIs.ContainsKey(other))
-        {
-            Destroy(activeUIs[other]);
-            activeUIs.Remove(other);
+        //if (activeUIs.ContainsKey(other))
+        //{
+        //    Destroy(activeUIs[other]);
+        //    activeUIs.Remove(other);
 
-            Debug.Log($"UI removed from {other.name}");
-        }
-//#endif
+        //    Debug.Log($"UI removed from {other.name}");
+        //}
+#endif
     }
 }
 
