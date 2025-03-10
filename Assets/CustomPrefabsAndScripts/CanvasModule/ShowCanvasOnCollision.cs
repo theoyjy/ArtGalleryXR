@@ -63,33 +63,44 @@ public class ShowCanvasOnCollision : MonoBehaviour
             Vector3 spawnPosition = card.GetWorldLoc() + spawnOffset * card.GetNormal();
             Debug.Log("Spawn position: " + spawnPosition);
 
-#if UNITY_ANDROID
-            Canvas canvas = ToolUI.GetComponent<Canvas>();
-            canvas.enabled = true;
-            if (canvas.worldCamera == null){
-                canvas.worldCamera = localCamera;
-            }
-#else
+//#if UNITY_ANDROID
 
-            
+           
+
+            //Canvas canvas = ToolUI.GetComponent<Canvas>();
+            //canvas.enabled = true;
+            //if (canvas.worldCamera == null){
+            //    canvas.worldCamera = localCamera;
+            //}
+
+            //EnterEditController uiController = EditUI.GetComponent<EnterEditController>();
+            //uiController.SetCanvas(gameObject);
+//#else
+
+
 
             EnterEditController uiController = EditUI.GetComponent<EnterEditController>();
             uiController.SetCanvas(gameObject);
 
             Canvas canvas = EditUI.GetComponent<Canvas>();
             canvas.enabled = true;
-            
 
-#endif
+            if (canvas.worldCamera == null)
+            {
+                 canvas.worldCamera = localCamera;
+            }
+
+
+//#endif
+            }
         }
-    }
 
     public void OnTriggerExit(Collider other)
     {
-#if UNITY_ANDROID
-        Canvas canvas = ToolUI.GetComponent<Canvas>();
-        canvas.enabled = false;
-#else
+//#if UNITY_ANDROID
+        Canvas tool_canvas = ToolUI.GetComponent<Canvas>();
+        tool_canvas.enabled = false;
+//#else
         Canvas canvas = EditUI.GetComponent<Canvas>();
         canvas.enabled = false;
         // Destroy UI and remove from dictionary
@@ -100,7 +111,7 @@ public class ShowCanvasOnCollision : MonoBehaviour
 
         //    Debug.Log($"UI removed from {other.name}");
         //}
-#endif
+//#endif
     }
 }
 

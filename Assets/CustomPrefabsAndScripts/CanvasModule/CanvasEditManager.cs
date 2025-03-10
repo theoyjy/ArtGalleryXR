@@ -69,7 +69,7 @@ public class CanvasEditManager : MonoBehaviour
         if (isEditMode)
         {
             Debug.Log("Already in Edit Mode");
-            return;
+            //return;
         }
 
         enterEditCanvasUI = EditCanvasUI;
@@ -95,9 +95,13 @@ public class CanvasEditManager : MonoBehaviour
 
         NetworkObject player = GetCurrentPlayer();
         Camera playerCamera = player.GetComponentInChildren<Camera>();
-        EditCanvasUI.SetActive(false);
+        Canvas ui_canvas = EditCanvasUI.GetComponent<Canvas>();
+        ui_canvas.enabled = false;
+#if UNITY_ANDROID
+
+#else
         MoveCameraToOrthographic(player, playerCamera, card);
-        
+#endif        
         Canvas canvas = ToolUI.GetComponent<Canvas>();
         canvas.enabled = true;
         if(canvas.worldCamera == null)
@@ -110,9 +114,9 @@ public class CanvasEditManager : MonoBehaviour
     {
         Debug.Log("Exiting edit mode");
         isEditMode = false;
-//#if UNITY_ANDROID
+#if UNITY_ANDROID
 
-//#else
+#else
         NetworkObject player = GetCurrentPlayer();
         Camera playerCamera = player.GetComponentInChildren<Camera>();
         var trackedPoseDriver = playerCamera.transform.parent.GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>(true);
@@ -128,7 +132,7 @@ public class CanvasEditManager : MonoBehaviour
         playerCamera.orthographic = false;
         Screen.SetResolution(oriWidth, oriHeight, false);
         MoveXRToTargetTrans(cameraBeforeEnterPosition, cameraBeforeEnterRotation);
-//#endif
+#endif
     }
 
     public void DeleteCanvas()
