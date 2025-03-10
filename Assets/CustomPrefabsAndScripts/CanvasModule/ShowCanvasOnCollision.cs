@@ -7,16 +7,16 @@ using Unity.Netcode;
 public class ShowCanvasOnCollision : MonoBehaviour
 {
     [Header("UI Prefab (Must be a World-Space Canvas)")]
-    [SerializeField] private GameObject UI;
+    [SerializeField] private GameObject EditUI;
 
     [Header("Tag to Detect (e.g., 'Interactable')")]
-    //[SerializeField] private string interactableTag = "Interactable";
     [SerializeField] private string interactableTag = "Player";
 
     [Header("Spawn Offset from Collision (Optional)")]
     [SerializeField] public float spawnOffset = 0.1f;
 
 
+    [SerializeField] GameObject ToolUI;
     private Dictionary<Collider, GameObject> activeUIs = new Dictionary<Collider, GameObject>();
 
 
@@ -25,25 +25,27 @@ public class ShowCanvasOnCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-#if UNITY_ANDROID
 
-#else
+
         Debug.Log(" Trigger entered with: " + other.tag);
-        if(other.CompareTag(interactableTag))
+        Camera localCamera = Camera.main;
+        if (other.CompareTag(interactableTag))
         {
             Camera cam = other.GetComponentInChildren<Camera>();
             foreach (var player in FindObjectsOfType<NetworkObject>())
             {
                 if (player.IsOwner) // This is the local player
                 {
-                    var localCamera = player.GetComponentInChildren<Camera>();
-                    if(localCamera != cam)
+                    localCamera = player.GetComponentInChildren<Camera>();
+                    if (localCamera != cam)
                     {
                         Debug.Log("This is not the local player's camera");
                         return;
                     }
                 }
             }
+
+
 
             Card card = GetComponentInChildren<Card>();
             if (card == null)
@@ -61,55 +63,43 @@ public class ShowCanvasOnCollision : MonoBehaviour
             Vector3 spawnPosition = card.GetWorldLoc() + spawnOffset * card.GetNormal();
             Debug.Log("Spawn position: " + spawnPosition);
 
-            // Spawn the UI *locally* (no network spawn)
-            GameObject uiInstance = Instantiate(UI, spawnPosition, Quaternion.identity);
-
-            EnterEditController uiController = uiInstance.GetComponent<EnterEditController>();
-            Button myButton = uiInstance.transform.Find("Button").GetComponent<Button>();
-            if(myButton == null)
-            {
-                Debug.LogError("Button component is missing from: " + uiInstance.name);
-                return;
+#if UNITY_ANDROID
+            Canvas canvas = ToolUI.GetComponent<Canvas>();
+            canvas.enabled = true;
+            if (canvas.worldCamera == null){
+                canvas.worldCamera = localCamera;
             }
-            if(uiController == null)
-            {
-                Debug.LogError("UIController component is missing from: " + uiInstance.name);
-            }
+#else
 
-            // move the button to the spawn position
-            Quaternion cardRotation = new Quaternion(0, 0.707106829f, 0.707106829f, 0);
+            
 
-            myButton.transform.position = spawnPosition;
-            myButton.transform.rotation = card.GetWorldQuatRot();
-
-            RectTransform rt = myButton.GetComponent<RectTransform>();
-            rt.position = spawnPosition;
-            rt.rotation = myButton.transform.rotation;
-            Debug.Log("Button position: " + myButton.transform.position + " rotation: " + rt.rotation);
-
-            // Store the canvas in the UI controller to later pass to the CanvasEditManager
+            EnterEditController uiController = EditUI.GetComponent<EnterEditController>();
             uiController.SetCanvas(gameObject);
 
-            // add UI to dictionary
-            activeUIs[other] = uiInstance;
+            Canvas canvas = EditUI.GetComponent<Canvas>();
+            canvas.enabled = true;
+            
 
-        }
 #endif
+        }
     }
 
     public void OnTriggerExit(Collider other)
     {
 #if UNITY_ANDROID
-
+        Canvas canvas = ToolUI.GetComponent<Canvas>();
+        canvas.enabled = false;
 #else
+        Canvas canvas = EditUI.GetComponent<Canvas>();
+        canvas.enabled = false;
         // Destroy UI and remove from dictionary
-        if (activeUIs.ContainsKey(other))
-        {
-            Destroy(activeUIs[other]);
-            activeUIs.Remove(other);
+        //if (activeUIs.ContainsKey(other))
+        //{
+        //    Destroy(activeUIs[other]);
+        //    activeUIs.Remove(other);
 
-            Debug.Log($"UI removed from {other.name}");
-        }
+        //    Debug.Log($"UI removed from {other.name}");
+        //}
 #endif
     }
 }

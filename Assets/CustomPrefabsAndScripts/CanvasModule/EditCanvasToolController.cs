@@ -34,6 +34,7 @@ public class EditCanvasToolController : MonoBehaviour
     void ExitEditMode()
     {
         CanvasEditManager.Instance.ExitEditMode();
-        Destroy(gameObject);
+        Canvas canvas= gameObject.GetComponent<Canvas>();
+        canvas.enabled = false;
     }
 }

@@ -4,22 +4,48 @@ using UnityEngine.Networking;
 using Newtonsoft.Json;
 using System.Text;
 using System;
+using UnityEngine.UI;
 
 public class StabilityAIImage : MonoBehaviour
 {
     public string apiKey;
-    public string prompt = "A futuristic city with neon lights";
+    //public string prompt = "A futuristic city with neon lights";
     public Renderer targetRenderer;
-
+    public string prompt;
+    public InputField generateImageInputField;
     void Start()
     {
         //Run CMD. setx STABILITY_API_KEY "your-api-key"
-        apiKey = Environment.GetEnvironmentVariable("STABILITY_API_KEY");
-        StartCoroutine(GenerateAIImage());
+
+        //StartCoroutine(GenerateAIImage());
+        targetRenderer = GameObject.Find("Whiteboard").GetComponent<MeshRenderer>();
+        if (generateImageInputField != null)
+        {
+            generateImageInputField.onEndEdit.AddListener(OnInputFieldSubmitted);
+        }
     }
 
-    IEnumerator GenerateAIImage()
+    void OnInputFieldSubmitted(string text)
     {
+
+        if (!string.IsNullOrEmpty(text))  // Check if there's input
+        {
+            Debug.Log("Input Submitted: " + text);
+            
+            
+            StartCoroutine(GenerateAIImage(text));  
+            
+            
+        }
+    }
+
+
+    IEnumerator GenerateAIImage(string prompt)
+    {
+        this.prompt = prompt;
+        apiKey = Environment.GetEnvironmentVariable("STABILITY_API_KEY");
+        Debug.Log("GenerateAIImage with prompt: "+prompt);
+        Debug.Log(apiKey);
         string url = "https://api.stability.ai/v2beta/stable-image/generate/core";
 
         string boundary = "----UnityBoundary" + System.Guid.NewGuid().ToString();
