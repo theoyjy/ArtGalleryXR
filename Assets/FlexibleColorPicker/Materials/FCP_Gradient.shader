@@ -1,11 +1,11 @@
 Shader "Custom/FCP_Gradient" {
 	Properties{
-		[PerRendererData][Enum(Horizontal,0,Vertical,1,Double,2,HueHorizontal,3,HueVertical,4)] _Mode("Color mode", Int) = 0
-		[PerRendererData]_Color1("Color 1", Color) = (1,1,1,1)
-		[PerRendererData]_Color2("Color 2", Color) = (1,1,1,1)
-		[PerRendererData][Enum(HS, 0, HV, 1, SH, 2, SV, 3, VH, 4, VS, 5)] _DoubleMode("Double mode", Int) = 0
-		[PerRendererData]_HSV("Complementing HSV values", Vector) = (0,0,0,1.0)
-		[PerRendererData]_HSV_MIN("Min Range value for HSV", Vector) = (0.0,0.0,0.0,0.0)
+		[Enum(Horizontal,0,Vertical,1,Double,2,HueHorizontal,3,HueVertical,4)] _Mode("Color mode", Int) = 0
+		_Color1("Color 1", Color) = (1,1,1,1)
+		_Color2("Color 2", Color) = (1,1,1,1)
+		[Enum(HS, 0, HV, 1, SH, 2, SV, 3, VH, 4, VS, 5)] _DoubleMode("Double mode", Int) = 0
+		_HSV("Complementing HSV values", Vector) = (0,0,0,1.0)
+		_HSV_MIN("Min Range value for HSV", Vector) = (0.0,0.0,0.0,0.0)
 		[PerRendererData]_HSV_MAX("Max Range value for HSV", Vector) = (1.0,1.0,1.0,1.0)
 		_StencilComp("Stencil Comparison", Float) = 8
 		_Stencil("Stencil ID", Float) = 0
@@ -95,20 +95,23 @@ Shader "Custom/FCP_Gradient" {
 						_HSV.y = lerp(_HSV_MIN.y, _HSV_MAX.y, vert.texcoord.x);
 						break;
 					case 3:
+						
 						_HSV.y = lerp(_HSV_MIN.y, _HSV_MAX.y, vert.texcoord.x);
 						_HSV.z = lerp(_HSV_MIN.z, _HSV_MAX.z, vert.texcoord.y);
 						break;
 					case 4:
+						//o.col = float4(1,1,1,1);
 						_HSV.x = lerp(_HSV_MIN.x, _HSV_MAX.x, vert.texcoord.y);
 						_HSV.z = lerp(_HSV_MIN.z, _HSV_MAX.z, vert.texcoord.x);
 						break;
 					case 5:
+						
 						_HSV.y = lerp(_HSV_MIN.y, _HSV_MAX.y, vert.texcoord.y);
 						_HSV.z = lerp(_HSV_MIN.z, _HSV_MAX.z, vert.texcoord.x);
 						break;
 					}
 
-					o.col = HSV();
+					//o.col = HSV();
 
 					break;
 				case 3:
