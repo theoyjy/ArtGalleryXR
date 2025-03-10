@@ -11,7 +11,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private Transform _tip;
     [SerializeField] private int _penSize = 5;
     [SerializeField] private Transform _whiteboardTransform;
-    public NetworkedCanvas networkedCanvas;
+    //public NetworkedCanvas networkedCanvas;
 
     private Renderer _renderer;
     private Color[] _colors;
@@ -218,13 +218,13 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
                 }
 
                 // Send to network
-                if (networkedCanvas != null)
-                {
-                    Vector2 currentPos = new Vector2(x, y);
-                    networkedCanvas.SendDrawCommandServerRpc(_lastTouchPos, currentPos, _colors, _penSize);
-                }
-                else
-                    Debug.Log("NetworkedCanvas is NULL");
+                //if (networkedCanvas != null)
+                //{
+                //    Vector2 currentPos = new Vector2(x, y);
+                //    networkedCanvas.SendDrawCommandServerRpc(_lastTouchPos, currentPos, _colors, _penSize);
+                //}
+                //else
+                //    Debug.Log("NetworkedCanvas is NULL");
 
                 // Set for next iterations
                 _lastTouchPos = new Vector2(x, y);

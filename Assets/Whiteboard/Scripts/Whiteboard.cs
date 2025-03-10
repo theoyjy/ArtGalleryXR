@@ -14,7 +14,7 @@ public class Whiteboard : MonoBehaviour
     private string saveFileName;
     public Renderer whiteboardRenderer;
 
-    void Start()
+    private void Start()
     {
         projectPath = Application.dataPath.Replace("/Assets", "/exports"); // Get root project folder
         saveFileName = "testImageSave.png";
@@ -38,16 +38,25 @@ public class Whiteboard : MonoBehaviour
         r.material.mainTexture = texture;
     }
 
+    private void Awake()
+    {
+        if(!texture)
+        {
+            texture = new Texture2D((int)textureSize.x, (int)textureSize.y);
+            Debug.Log("No texture assigned to whiteboard, creating a new one.");
+        }
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            SaveTextureToPNG(saveFileName);
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            LoadImageFromFile("testImageRead.png");
-        }
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    SaveTextureToPNG(saveFileName);
+        //}
+        //if (Input.GetKeyDown(KeyCode.I))
+        //{
+        //    LoadImageFromFile("testImageRead.png");
+        //}
     }
 
     public void ClearWhiteboard()
@@ -86,7 +95,7 @@ public class Whiteboard : MonoBehaviour
         Color[] originalPixels = texture.GetPixels();
         Color[] rotatedPixels = new Color[originalPixels.Length];
 
-        // Re-map each pixel to its 180° rotated position.
+        // Re-map each pixel to its 180?rotated position.
         // The pixel at (x, y) goes to (width - 1 - x, height - 1 - y).
         for (int y = 0; y < height; y++)
         {
@@ -135,7 +144,7 @@ public class Whiteboard : MonoBehaviour
             Color[] originalPixels = texture.GetPixels();
             Color[] rotatedPixels = new Color[originalPixels.Length];
 
-            // Re-map each pixel to its 180° rotated position.
+            // Re-map each pixel to its 180?rotated position.
             // The pixel at (x, y) goes to (width - 1 - x, height - 1 - y).
             for (int y = 0; y < height; y++)
             {

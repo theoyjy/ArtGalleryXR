@@ -27,6 +27,8 @@ public class ShowCanvasOnCollision : MonoBehaviour
     {
 #if UNITY_ANDROID
 
+#elif SERVER_BUILD
+
 #else
         Debug.Log(" Trigger entered with: " + other.tag);
         if(other.CompareTag(interactableTag))
@@ -100,7 +102,7 @@ public class ShowCanvasOnCollision : MonoBehaviour
     public void OnTriggerExit(Collider other)
     {
 #if UNITY_ANDROID
-
+#elif SERVER_BUILD
 #else
         // Destroy UI and remove from dictionary
         if (activeUIs.ContainsKey(other))

@@ -297,12 +297,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 764468070164427977, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9188857434371052935}
-    - targetCorrespondingSourceObject: {fileID: 764468070164427977, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8528206708400011338}
-    - targetCorrespondingSourceObject: {fileID: 764468070164427977, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2343216361567650413}
   m_SourcePrefab: {fileID: 100100000, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
 --- !u!4 &1600757073805583627 stripped
 Transform:
@@ -326,45 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee03c139d73a61641bbdd3c39d4abe1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8528206708400011338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2969323463384779508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab6032274fc31184a89027c13ec38426, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  canvasTexture: {fileID: 0}
---- !u!114 &2343216361567650413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2969323463384779508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1269190353
-  InScenePlacedSourceGlobalObjectIdHash: 395635246
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 1
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 1
-  SceneMigrationSynchronization: 0
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1001 &7380390724900316226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -381,10 +336,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Pen
       objectReference: {fileID: 0}
-    - target: {fileID: 5235948850848460999, guid: aab778226fc966f48b78e57f89ec9530, type: 3}
-      propertyPath: networkedCanvas
-      value: 
-      objectReference: {fileID: 8528206708400011338}
     - target: {fileID: 5235948850848460999, guid: aab778226fc966f48b78e57f89ec9530, type: 3}
       propertyPath: _whiteboardTransform
       value: 

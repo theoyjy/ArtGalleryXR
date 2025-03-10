@@ -7,6 +7,13 @@ public class NetworkedCanvas : NetworkBehaviour
     public Texture2D canvasTexture;
     private Whiteboard whiteboard;
 
+    private void Start()
+    {
+#if SERVER_BUILD
+        //networkObject.Spawn();
+#endif
+    }
+
     private void Awake()
     {
         whiteboard = GetComponent<Whiteboard>();
