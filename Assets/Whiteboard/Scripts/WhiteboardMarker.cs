@@ -119,7 +119,8 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private void MovePenWithMouse()
     {
         //transform.position = new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, _whiteboardTransform.position.z - 0.8f);
-        if (_playerCamera == null || _whiteboardTransform == null) return;
+        if (_playerCamera == null || _whiteboardTransform == null) 
+            return;
 
         // Get the normal of the whiteboard
         card = transform.parent.GetComponentInChildren<Card>();
