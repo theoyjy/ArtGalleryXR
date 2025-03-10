@@ -18,7 +18,6 @@ public class StabilityAIImage : MonoBehaviour
         //Run CMD. setx STABILITY_API_KEY "your-api-key"
 
         //StartCoroutine(GenerateAIImage());
-        targetRenderer = GameObject.Find("Whiteboard").GetComponent<MeshRenderer>();
         if (generateImageInputField != null)
         {
             generateImageInputField.onEndEdit.AddListener(OnInputFieldSubmitted);
