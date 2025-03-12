@@ -171,4 +171,10 @@ public class Whiteboard : MonoBehaviour
             Debug.LogError("Failed to load image file.");
         }
     }
+
+    public void ApplyTexture(Texture2D newTexture)
+    {
+        texture = newTexture;
+        whiteboardRenderer.material.mainTexture = texture;
+    }
 }
