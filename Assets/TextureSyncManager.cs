@@ -118,7 +118,7 @@ public class TextureSyncManager : NetworkBehaviour
     private void ApplyTextureToUIOrObject(Texture2D tex)
     {
         // 示例：把贴图赋值到一个 RawImage
-        // rawImage.texture = tex;
+        whiteboard.texture = tex;
 
         // 或者赋值到一个材质
         // myRenderer.material.mainTexture = tex;

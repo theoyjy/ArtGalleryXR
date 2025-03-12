@@ -53,10 +53,10 @@ public class Whiteboard : MonoBehaviour
         //{
         //    SaveTextureToPNG(saveFileName);
         //}
-        //if (Input.GetKeyDown(KeyCode.I))
-        //{
-        //    LoadImageFromFile("testImageRead.png");
-        //}
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            LoadImageFromFile("testImageRead.png");
+        }
     }
 
     public void ClearWhiteboard()
