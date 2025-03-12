@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d0199c11aa6f514784c5c69cd8378d8, type: 3}
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
-  DevAccountEmail: 
-  DevAccountToken: 
+  DevAccountEmail: ase_vr_gallery@outlook.com
+  DevAccountToken: inb5szp9eufqzwutmah8nj8e6kb49afyizk41k5pnkz5tsdfs8bhy9q8337ikybxqsbnb3fdtceed6ejhe8fsetmq7ks9xemng5wppxj7p68a6hsf8qp9euw81fngqnzrump6mjzsusrtoqg6ugqp9gxfzqip7utfizt87oeqxs75h46njbitiqtj9c638hasm7uf4zj
   AadAuthorization: 
-  SelectedStudio: 
-  SdkPath: 
+  SelectedStudio: VR_Gallery
+  SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
