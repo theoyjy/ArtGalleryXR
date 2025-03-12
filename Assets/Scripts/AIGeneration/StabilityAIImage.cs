@@ -13,18 +13,23 @@ public class StabilityAIImage : MonoBehaviour
     public Renderer targetRenderer;
     public string prompt;
     public TMP_InputField generateImageInputField;
+
     void Start()
     {
         //Run CMD. setx STABILITY_API_KEY "your-api-key"
-
         //StartCoroutine(GenerateAIImage());
+        
         if (generateImageInputField != null)
         {
+            Debug.Log("Setting Listener");
             generateImageInputField.onEndEdit.AddListener(OnInputFieldSubmitted);
+
+           
+            //generateImageInputField.onSubmit.AddListener(OnInputFieldSubmitted);
         }
     }
 
-    void OnInputFieldSubmitted(string text)
+    public void OnInputFieldSubmitted(string text)
     {
 
         if (!string.IsNullOrEmpty(text))  // Check if there's input
@@ -36,10 +41,14 @@ public class StabilityAIImage : MonoBehaviour
             
             
         }
+        else
+        {
+            Debug.LogError("No Input text");
+        }
     }
 
 
-    IEnumerator GenerateAIImage(string prompt)
+    public IEnumerator GenerateAIImage(string prompt)
     {
         this.prompt = prompt;
         apiKey = Environment.GetEnvironmentVariable("STABILITY_API_KEY");
