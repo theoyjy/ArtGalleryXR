@@ -5,6 +5,7 @@ using System.IO.Compression;
 using System.Linq;
 using System;
 using Unity.Collections;
+using UnityEditor.Overlays;
 
 public class TextureSyncManager : NetworkBehaviour
 {
@@ -73,7 +74,7 @@ public class TextureSyncManager : NetworkBehaviour
                 "TextureMessage",
                 clientId,
                 writer,
-                NetworkDelivery.Reliable
+                NetworkDelivery.ReliableFragmentedSequenced
             );
             Debug.Log($"[Server] Sent texture to client {clientId}, size: {textureBytes.Length} bytes.");
         }
@@ -89,7 +90,7 @@ public class TextureSyncManager : NetworkBehaviour
 
         try
         {
-            byte[] texData = whiteboard.texture.EncodeToJPG(75);
+            byte[] texData = whiteboard.texture.EncodeToJPG(25);
             //byte[] texDataCompressed = Compress(texData); // Optional: Compress the data
             SendTextureToServerRpc(texData);
         }
@@ -110,7 +111,7 @@ public class TextureSyncManager : NetworkBehaviour
         // Broadcast to all clients except the sender
         ulong senderClientId = serverRpcParams.Receive.SenderClientId;
         var targetClients = NetworkManager.Singleton.ConnectedClientsIds
-            .Where(clientId => clientId != senderClientId)
+            //.Where(clientId => clientId != senderClientId)
             .ToArray();
 
         foreach (var clientId in targetClients)
@@ -138,6 +139,7 @@ public class TextureSyncManager : NetworkBehaviour
             Debug.LogWarning("[Client] Failed to load texture from received bytes!");
             return;
         }
+        File.WriteAllBytes("C:\\Users\\sky\\received.jpg", receivedTexture.EncodeToJPG());
 
         // Apply the texture to the whiteboard
         ApplyTextureToUIOrObject(receivedTexture);
