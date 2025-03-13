@@ -26,17 +26,21 @@ public class MatchmakerManager : MonoBehaviour
     public ushort backfillPort;
     public bool isServerAvailable = false;
     public MultiplayManager mpManager;
+    public AuthenticationManager authManager;
     private string backfillTicketId;
     private bool isBackfilling = false;
 
     public async void Start()
     {
         mpManager = GetComponent<MultiplayManager>();
-
+        authManager = GetComponent<AuthenticationManager>();
+        await UnityServices.InitializeAsync();
+        
+        while (!authManager.isSignedIn) {
+            await Task.Delay(1000);
+        }
         if (Application.platform != RuntimePlatform.LinuxServer)
         {
-            await UnityServices.InitializeAsync();
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
             // await QueryAvailableServers();
             if (isServerAvailable)
             BackfillServer();
@@ -50,7 +54,7 @@ public class MatchmakerManager : MonoBehaviour
     {
         int playerCount = NetworkManager.Singleton.ConnectedClientsList.Count;
 
-#if SERVER_BUILD
+        #if SERVER_BUILD
 
         if (playerCount == 0)
         {
@@ -80,7 +84,8 @@ public class MatchmakerManager : MonoBehaviour
                 backfillTicketId = backfillTicket.Id;
             }
 
-#endif
+        #endif
+
         if (Application.platform != RuntimePlatform.LinuxServer)
         {
             if (isAllocated && playerCount < 2 && !isBackfilling)

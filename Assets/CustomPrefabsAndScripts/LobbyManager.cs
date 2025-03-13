@@ -18,19 +18,20 @@ public class LobbyManager : MonoBehaviour
 
     public Lobby lobby;
 
+    public AuthenticationManager authManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public async void Start()
     {
+#if SERVER_BUILD
+        authManager = GetComponent<AuthenticationManager>();
+        await UnityServices.InitializeAsync();
+        
+        while (!authManager.isSignedIn) {
+            await Task.Delay(1000);
+        }
+
         Debug.Log("LobbyManager started");
-        try
-        {
-            await UnityServices.InitializeAsync();
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e);
-        }
 
         QueryResponse response = await LobbyService.Instance.QueryLobbiesAsync();
         Debug.Log(response.Results.Count + " lobbies found");
@@ -45,12 +46,15 @@ public class LobbyManager : MonoBehaviour
         {
             await CreateLobby();
         }
+#endif
     }
 
     // Update is called once per frame
     void Update()
     {
+#if SERVER_BUILD
         if (isLobbyServer) LobbyHeartbeat();
+#endif
     }
 
     public async Task CreateLobby()
