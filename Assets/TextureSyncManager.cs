@@ -66,16 +66,18 @@ public class TextureSyncManager : NetworkBehaviour
     // ---------- Server Sends the Latest Texture to Requesting Client ----------
     private void SendTextureToClientCustomMessage(ulong clientId, byte[] textureBytes)
     {
-        using (var writer = new FastBufferWriter(textureBytes.Length, Allocator.Temp))
+        int totalSize = textureBytes.Length;
+        using (var writer = new FastBufferWriter(totalSize + sizeof(int), Allocator.Temp))
         {
-            writer.WriteBytesSafe(textureBytes, textureBytes.Length);
+            writer.WriteValueSafe(totalSize);
+            writer.WriteBytesSafe(textureBytes, totalSize);
             NetworkManager.Singleton.CustomMessagingManager.SendNamedMessage(
                 "TextureMessage",
                 clientId,
                 writer,
                 NetworkDelivery.ReliableFragmentedSequenced
             );
-            Debug.Log($"[Server] Sent texture to client {clientId}, size: {textureBytes.Length} bytes.");
+            Debug.Log($"[Server] Sent texture to client {clientId}, size: {totalSize} bytes.");
         }
     }
 
@@ -110,7 +112,7 @@ public class TextureSyncManager : NetworkBehaviour
         // Broadcast to all clients except the sender
         ulong senderClientId = serverRpcParams.Receive.SenderClientId;
         var targetClients = NetworkManager.Singleton.ConnectedClientsIds
-            //.Where(clientId => clientId != senderClientId)
+            .Where(clientId => clientId != senderClientId)
             .ToArray();
 
         foreach (var clientId in targetClients)
@@ -125,8 +127,12 @@ public class TextureSyncManager : NetworkBehaviour
         Debug.Log("[Client] Received texture data via custom message.");
 
         // Allocate a byte array to store the received data
-        byte[] textureBytes = new byte[reader.Length];
-        reader.ReadBytesSafe(ref textureBytes, reader.Length);
+        int length;
+        reader.ReadValueSafe(out length);
+
+        byte[] textureBytes = new byte[length];
+
+        reader.ReadBytesSafe(ref textureBytes, length);
 
         // Decompress if necessary
         //textureBytes = Decompress(textureBytes); // Uncomment if you compressed the data
