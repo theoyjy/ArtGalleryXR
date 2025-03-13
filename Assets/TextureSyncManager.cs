@@ -5,7 +5,6 @@ using System.IO.Compression;
 using System.Linq;
 using System;
 using Unity.Collections;
-using UnityEditor.Overlays;
 
 public class TextureSyncManager : NetworkBehaviour
 {

@@ -6523,13 +6523,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4910605339445667040, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2856750997
+      objectReference: {fileID: 0}
     - target: {fileID: 5666307368449052307, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_Name
       value: CanvasComponent
-      objectReference: {fileID: 0}
-    - target: {fileID: 5901080292027105494, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 4066924653
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9528,7 +9528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e013e0aedde4ad1a4be5ccf6a7f1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipAddress: 127.0.0.1
+  ipAddress: 20.33.109.35
   port: 9100
 --- !u!4 &1187899824
 Transform:
@@ -15483,7 +15483,7 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 127.0.0.1
+    Address: 20.33.109.35
     Port: 9100
     ServerListenAddress: 0.0.0.0
   DebugSimulator:
@@ -15559,18 +15559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: 7777
-  NoDelay: 1
-  SendTimeout: 5000
-  ReceiveTimeout: 30000
-  serverMaxMessageSize: 16384
-  serverMaxReceivesPerTick: 10000
-  serverSendQueueLimitPerConnection: 10000
-  serverReceiveQueueLimitPerConnection: 10000
-  clientMaxMessageSize: 16384
-  clientMaxReceivesPerTick: 1000
-  clientSendQueueLimit: 10000
-  clientReceiveQueueLimit: 10000
 --- !u!4 &2018951092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1508804060588509405, guid: 3161851bc7c714c1ab424909c7b245d7, type: 3}
