@@ -62,6 +62,11 @@ public class Whiteboard : MonoBehaviour
 
     void Update()
     {
+        if (PlayFabManager.IsLoginActive)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.S))
         {
             SaveTextureToPNG(saveFileName);

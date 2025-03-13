@@ -10,8 +10,33 @@ public class PlayFabManager : MonoBehaviour
     public InputField userIDInput;
     public InputField passwordInput;
     public Text messageText;
+    public GameObject loginUI;
 
-    // Register & Login
+    public static bool IsLoginActive = true;
+
+    private void Start()
+    {
+        ShowLoginScreen(); // Block the inputs using deltaTime
+    }
+
+    private void ShowLoginScreen()
+    {
+        loginUI.SetActive(true); // Show login UI
+        IsLoginActive = true;
+        Cursor.lockState = CursorLockMode.None; // set cursor visible
+        Cursor.visible = true;
+        Time.timeScale = 0; // Pause game
+    }
+
+    private void HideLoginScreen()
+    {
+        loginUI.SetActive(false); // Hide login UI
+        IsLoginActive = false;
+        Cursor.lockState = CursorLockMode.Locked; // Hide cursor
+        Cursor.visible = false;
+        Time.timeScale = 1; // Play game
+    }
+
     public void RegisterAndLoginButton()
     {
         string username = userIDInput.text;
@@ -45,7 +70,6 @@ public class PlayFabManager : MonoBehaviour
         });
     }
 
-    // Login Button
     public void LoginButton()
     {
         string username = userIDInput.text;
@@ -73,8 +97,8 @@ public class PlayFabManager : MonoBehaviour
             messageText.text = "Login Successful";
             Debug.Log("Login Successful");
 
-            // 登录成功后的操作，如跳转界面或初始化用户数据
-            // LoadUserGallery(result.PlayFabId); // 如果你后续需要加载 gallery，可以在这里调用
+            // login successful and play game
+            HideLoginScreen();
 
         }, error =>
         {
