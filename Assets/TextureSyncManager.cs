@@ -1,9 +1,10 @@
 using Unity.Netcode;
-using System.IO.Compression;
 using UnityEngine;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System;
+using Unity.Collections;
 
 public class TextureSyncManager : NetworkBehaviour
 {
@@ -11,11 +12,22 @@ public class TextureSyncManager : NetworkBehaviour
 
     private static byte[] latestTextureData; // Store the latest texture on the server
 
-
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
         Debug.Log("TextureSyncManager spawned. IsSpawned: " + GetComponent<NetworkObject>().IsSpawned);
+
+        // Register custom message handlers
+        if (IsClient)
+        {
+            NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler(
+                "TextureMessage",
+                (ulong senderId, FastBufferReader reader) =>
+                {
+                    OnTextureMessageReceived(reader);
+                }
+            );
+        }
 
         if (IsClient && !IsHost)
         {
@@ -42,15 +54,8 @@ public class TextureSyncManager : NetworkBehaviour
         {
             Debug.Log($"[Server] Sending stored texture to new client: {requesterClientId}");
 
-            ClientRpcParams clientRpcParams = new ClientRpcParams
-            {
-                Send = new ClientRpcSendParams
-                {
-                    TargetClientIds = new ulong[] { requesterClientId }
-                }
-            };
-
-            SendLatestTextureToClientRpc(latestTextureData, clientRpcParams);
+            // Send the texture using custom messaging
+            SendTextureToClientCustomMessage(requesterClientId, latestTextureData);
         }
         else
         {
@@ -59,21 +64,19 @@ public class TextureSyncManager : NetworkBehaviour
     }
 
     // ---------- Server Sends the Latest Texture to Requesting Client ----------
-    [ClientRpc]
-    private void SendLatestTextureToClientRpc(byte[] textureBytes, ClientRpcParams clientRpcParams = default)
+    private void SendTextureToClientCustomMessage(ulong clientId, byte[] textureBytes)
     {
-        Debug.Log($"[Client] Received initial texture, size: {textureBytes.Length} bytes.");
-
-        //textureBytes = Decompress(textureBytes);
-
-        Texture2D receivedTexture = new Texture2D(2, 2);
-        if (!receivedTexture.LoadImage(textureBytes))
+        using (var writer = new FastBufferWriter(textureBytes.Length, Allocator.Temp))
         {
-            Debug.LogWarning("[Client] Failed to load texture from received bytes!");
-            return;
+            writer.WriteBytesSafe(textureBytes, textureBytes.Length);
+            NetworkManager.Singleton.CustomMessagingManager.SendNamedMessage(
+                "TextureMessage",
+                clientId,
+                writer,
+                NetworkDelivery.Reliable
+            );
+            Debug.Log($"[Server] Sent texture to client {clientId}, size: {textureBytes.Length} bytes.");
         }
-
-        ApplyTextureToUIOrObject(receivedTexture);
     }
 
     // ---------- Client Sends Texture to Server ----------
@@ -87,11 +90,7 @@ public class TextureSyncManager : NetworkBehaviour
         try
         {
             byte[] texData = whiteboard.texture.EncodeToJPG(75);
-            //File.WriteAllBytes("C:/Users/sky/BeforeSend.jpg", texData);
-            //File.WriteAllBytes("C:/Users/sky/BeforeSend.jpg", whiteboard.texture.EncodeToJPG());
-
-            //byte[] texDataCompressed = Compress(texData);
-            //File.WriteAllBytes("C:/Users/sky/BeforeSendCompressed.gz", texDataCompressed);
+            //byte[] texDataCompressed = Compress(texData); // Optional: Compress the data
             SendTextureToServerRpc(texData);
         }
         catch (Exception e)
@@ -103,45 +102,44 @@ public class TextureSyncManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void SendTextureToServerRpc(byte[] textureBytes, ServerRpcParams serverRpcParams = default)
     {
-        //ulong senderClientId = serverRpcParams.Receive.SenderClientId;
-        Debug.Log($"[Server] Received texture from client .., size: {textureBytes.Length} bytes.");
+        Debug.Log($"[Server] Received texture from client, size: {textureBytes.Length} bytes.");
 
         // Store the latest texture on the server
         latestTextureData = textureBytes;
 
         // Broadcast to all clients except the sender
-        //ClientRpcParams clientRpcParams = new ClientRpcParams
-        //{
-        //    Send = new ClientRpcSendParams
-        //    {
-        //        TargetClientIds = NetworkManager.Singleton.ConnectedClientsIds
-        //            .Where(clientId => clientId != senderClientId)
-        //            .ToArray()
-        //    }
-        //};
+        ulong senderClientId = serverRpcParams.Receive.SenderClientId;
+        var targetClients = NetworkManager.Singleton.ConnectedClientsIds
+            .Where(clientId => clientId != senderClientId)
+            .ToArray();
 
-
-        BroadcastTextureToClientRpc(textureBytes);//, clientRpcParams);
+        foreach (var clientId in targetClients)
+        {
+            SendTextureToClientCustomMessage(clientId, textureBytes);
+        }
     }
 
-    // ---------- Server Broadcasts Texture to Other Clients ----------
-    [ClientRpc]
-    private void BroadcastTextureToClientRpc(byte[] textureBytes, ClientRpcParams clientRpcParams = default)
+    // ---------- Handle Received Texture Data ----------
+    private void OnTextureMessageReceived(FastBufferReader reader)
     {
-        Debug.Log($"[Client] Received broadcasted texture, size: {textureBytes.Length} bytes.");
+        Debug.Log("[Client] Received texture data via custom message.");
 
-        textureBytes = Decompress(textureBytes);
+        // Allocate a byte array to store the received data
+        byte[] textureBytes = new byte[reader.Length];
+        reader.ReadBytesSafe(ref textureBytes, reader.Length);
 
+        // Decompress if necessary
+        //textureBytes = Decompress(textureBytes); // Uncomment if you compressed the data
 
+        // Load the texture
         Texture2D receivedTexture = new Texture2D(2, 2);
-
         if (!receivedTexture.LoadImage(textureBytes))
         {
             Debug.LogWarning("[Client] Failed to load texture from received bytes!");
             return;
         }
 
-        File.WriteAllBytes("C:/Users/sky/Recieved.jpg", receivedTexture.EncodeToJPG());
+        // Apply the texture to the whiteboard
         ApplyTextureToUIOrObject(receivedTexture);
     }
 
@@ -151,6 +149,7 @@ public class TextureSyncManager : NetworkBehaviour
         Debug.Log("[Client] Successfully applied the received texture!");
     }
 
+    // ---------- Compression/Decompression (Optional) ----------
     private byte[] Compress(byte[] data)
     {
         using (MemoryStream output = new MemoryStream())
