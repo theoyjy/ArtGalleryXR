@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4, y: 18.762932, z: 37.74982}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.6916494, y: 1.6916494, z: 1.6916494}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb3e77ab773a7e4fa108cd0758cdaff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolSpawnOffset: 0.1
-  ToolUI: {fileID: 3967498396443459041, guid: fa7d98f2435a5ec4f96d5d2ad1f53ef2, type: 3}
+  ToolSpawnOffset: -3
+  ToolUI: {fileID: 0}
