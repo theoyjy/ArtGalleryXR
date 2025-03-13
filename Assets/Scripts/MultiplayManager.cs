@@ -57,8 +57,7 @@ public class MultiplayManager : MonoBehaviour
     {
         UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         transport.SetConnectionData(ipAddress, port);
-        transport.MaxPayloadSize = 1200000;
-        NetworkManager.Singleton.StartHost();
+        NetworkManager.Singleton.StartClient();
     }
 
 }
