@@ -2,69 +2,26 @@ using Unity.Netcode;
 using System.IO.Compression;
 using UnityEngine;
 using System.IO;
+using System.Linq;
+using System;
 
 public class TextureSyncManager : NetworkBehaviour
 {
-    // 一个测试用的贴图
-    private Texture2D textureToSend;
     public Whiteboard whiteboard;
 
-    private void Start()
+    private static byte[] latestTextureData; // Store the latest texture on the server
+
+
+    public override void OnNetworkSpawn()
     {
-        // 创建一个测试用的贴图
-        textureToSend = whiteboard.texture;
-    }
+        base.OnNetworkSpawn();
+        Debug.Log("TextureSyncManager spawned. IsSpawned: " + GetComponent<NetworkObject>().IsSpawned);
 
-    private void Awake()
-    {
-        if(!textureToSend)
+        if (IsClient && !IsHost)
         {
-            textureToSend = whiteboard.texture;
+            Debug.Log("[Client] Requesting latest texture from server...");
+            RequestLatestTextureFromServerRpc();
         }
-        
-    }
-
-
-    // -------------- 客户端调用 --------------
-    // 当客户端想把贴图发送给所有其他客户端时：
-    public void SendTextureToServer()
-    {
-
-        //if (!IsClient)
-        //{
-        //    Debug.LogError("Only clients can send textures to the server!: Client" + IsClient + " Server: " + IsServer + " IsHost: " + IsHost);
-        //    return;
-        //}
-
-        if ((IsServer || IsHost) && !GetComponent<NetworkObject>().IsSpawned)
-        {
-            GetComponent<NetworkObject>().Spawn();
-            Debug.Log("TextureSyncManager spawned. IsSpawned: " + GetComponent<NetworkObject>().IsSpawned);
-        }
-
-        if (!textureToSend)
-        {
-            Debug.LogError("No texture assigned to send!1");
-            try
-            {
-                textureToSend = whiteboard.texture;
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError("Error getting texture from whiteboard: " + e.Message);
-                return;
-            }
-        }
-
-       
-        // 把贴图转为字节
-        byte[] texData = textureToSend.EncodeToPNG();
-        // Compresse the texture data
-        texData = Compress(texData);
-
-
-        // 调用 ServerRpc，把字节数据传给服务器
-        SendTextureToServerRpc(texData);
     }
 
     void Update()
@@ -75,54 +32,122 @@ public class TextureSyncManager : NetworkBehaviour
         }
     }
 
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
-        Debug.Log("TextureSyncManager spawned. IsSpawned: " + GetComponent<NetworkObject>().IsSpawned);
-        // It is now safe to call ServerRpc functions
-        SendTextureToServer();
-    }
-
-
+    // ---------- Client Requests the Latest Texture ----------
     [ServerRpc(RequireOwnership = false)]
-    private void SendTextureToServerRpc(byte[] textureBytes, ServerRpcParams serverRpcParams = default)
+    private void RequestLatestTextureFromServerRpc(ServerRpcParams serverRpcParams = default)
     {
-        // 服务器收到客户端发送的贴图后，可以做一些处理
-        // 比如保存起来、校验等，这里简单演示一下：
-        Debug.Log($"[Server] Received texture from client, size: {textureBytes.Length} bytes.");
+        ulong requesterClientId = serverRpcParams.Receive.SenderClientId;
 
-        // 然后把贴图再广播给所有客户端
-        BroadcastTextureToClientRpc(textureBytes);
+        if (latestTextureData != null && latestTextureData.Length > 0)
+        {
+            Debug.Log($"[Server] Sending stored texture to new client: {requesterClientId}");
+
+            ClientRpcParams clientRpcParams = new ClientRpcParams
+            {
+                Send = new ClientRpcSendParams
+                {
+                    TargetClientIds = new ulong[] { requesterClientId }
+                }
+            };
+
+            SendLatestTextureToClientRpc(latestTextureData, clientRpcParams);
+        }
+        else
+        {
+            Debug.Log("[Server] No stored texture available.");
+        }
     }
 
-    // -------------- 服务器广播给客户端 --------------
+    // ---------- Server Sends the Latest Texture to Requesting Client ----------
     [ClientRpc]
-    private void BroadcastTextureToClientRpc(byte[] textureBytes, ClientRpcParams clientRpcParams = default)
+    private void SendLatestTextureToClientRpc(byte[] textureBytes, ClientRpcParams clientRpcParams = default)
     {
-        Debug.Log($"[Client] Received broadcasted texture, size: {textureBytes.Length} bytes.");
+        Debug.Log($"[Client] Received initial texture, size: {textureBytes.Length} bytes.");
 
-        // 在客户端这边还原 Texture2D
-        Texture2D receivedTexture = new Texture2D(2, 2); // 初始大小随便给
-        textureBytes = Decompress(textureBytes);
-        bool isLoaded = receivedTexture.LoadImage(textureBytes);
-        if (!isLoaded)
+        //textureBytes = Decompress(textureBytes);
+
+        Texture2D receivedTexture = new Texture2D(2, 2);
+        if (!receivedTexture.LoadImage(textureBytes))
         {
             Debug.LogWarning("[Client] Failed to load texture from received bytes!");
             return;
         }
 
-        // 这里可以把这张贴图赋值给某个 UI 或 3D 物体的材质
+        ApplyTextureToUIOrObject(receivedTexture);
+    }
+
+    // ---------- Client Sends Texture to Server ----------
+    public void SendTextureToServer()
+    {
+        if ((IsServer || IsHost) && !GetComponent<NetworkObject>().IsSpawned)
+        {
+            GetComponent<NetworkObject>().Spawn();
+        }
+
+        try
+        {
+            byte[] texData = whiteboard.texture.EncodeToJPG(75);
+            //File.WriteAllBytes("C:/Users/sky/BeforeSend.jpg", texData);
+            //File.WriteAllBytes("C:/Users/sky/BeforeSend.jpg", whiteboard.texture.EncodeToJPG());
+
+            //byte[] texDataCompressed = Compress(texData);
+            //File.WriteAllBytes("C:/Users/sky/BeforeSendCompressed.gz", texDataCompressed);
+            SendTextureToServerRpc(texData);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error in SendTextureToServer: " + e.Message);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SendTextureToServerRpc(byte[] textureBytes, ServerRpcParams serverRpcParams = default)
+    {
+        //ulong senderClientId = serverRpcParams.Receive.SenderClientId;
+        Debug.Log($"[Server] Received texture from client .., size: {textureBytes.Length} bytes.");
+
+        // Store the latest texture on the server
+        latestTextureData = textureBytes;
+
+        // Broadcast to all clients except the sender
+        //ClientRpcParams clientRpcParams = new ClientRpcParams
+        //{
+        //    Send = new ClientRpcSendParams
+        //    {
+        //        TargetClientIds = NetworkManager.Singleton.ConnectedClientsIds
+        //            .Where(clientId => clientId != senderClientId)
+        //            .ToArray()
+        //    }
+        //};
+
+
+        BroadcastTextureToClientRpc(textureBytes);//, clientRpcParams);
+    }
+
+    // ---------- Server Broadcasts Texture to Other Clients ----------
+    [ClientRpc]
+    private void BroadcastTextureToClientRpc(byte[] textureBytes, ClientRpcParams clientRpcParams = default)
+    {
+        Debug.Log($"[Client] Received broadcasted texture, size: {textureBytes.Length} bytes.");
+
+        textureBytes = Decompress(textureBytes);
+
+
+        Texture2D receivedTexture = new Texture2D(2, 2);
+
+        if (!receivedTexture.LoadImage(textureBytes))
+        {
+            Debug.LogWarning("[Client] Failed to load texture from received bytes!");
+            return;
+        }
+
+        File.WriteAllBytes("C:/Users/sky/Recieved.jpg", receivedTexture.EncodeToJPG());
         ApplyTextureToUIOrObject(receivedTexture);
     }
 
     private void ApplyTextureToUIOrObject(Texture2D tex)
     {
-        // 示例：把贴图赋值到一个 RawImage
         whiteboard.ApplyTexture(tex);
-
-        // 或者赋值到一个材质
-        // myRenderer.material.mainTexture = tex;
-
         Debug.Log("[Client] Successfully applied the received texture!");
     }
 
@@ -130,9 +155,10 @@ public class TextureSyncManager : NetworkBehaviour
     {
         using (MemoryStream output = new MemoryStream())
         {
-            using (GZipStream gzip = new GZipStream(output, System.IO.Compression.CompressionLevel.Optimal))
+            using (GZipStream gzip = new GZipStream(output, System.IO.Compression.CompressionLevel.Optimal, true))
             {
                 gzip.Write(data, 0, data.Length);
+                gzip.Flush();
             }
             return output.ToArray();
         }
