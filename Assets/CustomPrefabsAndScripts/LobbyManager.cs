@@ -6,6 +6,8 @@ using UnityEngine;
 using Unity.Services.Lobbies.Models;
 using UnityEditor.Search;
 using UnityEngine.AI;
+using System.Linq.Expressions;
+using System;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -19,14 +21,23 @@ public class LobbyManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public async void Start()
     {
-        await UnityServices.InitializeAsync();
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        Debug.Log("LobbyManager started");
+        try
+        {
+            await UnityServices.InitializeAsync();
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
 
         QueryResponse response = await LobbyService.Instance.QueryLobbiesAsync();
         Debug.Log(response.Results.Count + " lobbies found");
         isLobbyServer = response.Results.Count == 0;
 
-        if (!isLobbyServer) {
+        if (!isLobbyServer)
+        {
             lobby = response.Results[0];
         }
 

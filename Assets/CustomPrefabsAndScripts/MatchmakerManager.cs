@@ -37,7 +37,7 @@ public class MatchmakerManager : MonoBehaviour
         {
             await UnityServices.InitializeAsync();
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            await QueryAvailableServers();
+            // await QueryAvailableServers();
             if (isServerAvailable)
             BackfillServer();
         }
