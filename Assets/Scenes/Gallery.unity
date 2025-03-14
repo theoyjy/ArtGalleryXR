@@ -6523,6 +6523,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3370304405078971525, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+      propertyPath: _textureSyncManager
+      value: 
+      objectReference: {fileID: 797639107}
+    - target: {fileID: 3483970869527326392, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.92
+      objectReference: {fileID: 0}
     - target: {fileID: 4910605339445667040, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2856750997
@@ -6536,6 +6544,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+--- !u!114 &797639107 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6481459381182762346, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+  m_PrefabInstance: {fileID: 797639106}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d6671701259594395f50591a42dfa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &802934789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9528,8 +9547,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e013e0aedde4ad1a4be5ccf6a7f1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipAddress: 20.33.109.35
-  port: 9100
+  ipAddress: 127.0.0.1
+  port: 9000
 --- !u!4 &1187899824
 Transform:
   m_ObjectHideFlags: 0
@@ -15453,7 +15472,6 @@ GameObject:
   - component: {fileID: 1989356454}
   - component: {fileID: 1989356453}
   - component: {fileID: 1989356452}
-  - component: {fileID: 1989356455}
   m_Layer: 0
   m_Name: 'NetworkManager '
   m_TagString: Untagged
@@ -15483,8 +15501,8 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 20.33.109.35
-    Port: 9100
+    Address: 127.0.0.1
+    Port: 9000
     ServerListenAddress: 0.0.0.0
   DebugSimulator:
     PacketDelayMS: 0
@@ -15547,18 +15565,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1989356455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989356450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2018951092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1508804060588509405, guid: 3161851bc7c714c1ab424909c7b245d7, type: 3}

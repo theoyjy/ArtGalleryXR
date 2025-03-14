@@ -36,6 +36,7 @@ public class MultiplayManager : MonoBehaviour
 
                 await MultiplayService.Instance.ReadyServerForPlayersAsync();
             }
+           
 #endif
         JoinToServer();
     }
@@ -58,6 +59,7 @@ public class MultiplayManager : MonoBehaviour
         UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         transport.SetConnectionData(ipAddress, port);
         NetworkManager.Singleton.StartClient();
+        //NetworkManager.Singleton.StartHost();
     }
 
 }

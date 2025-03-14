@@ -91,9 +91,18 @@ public class TextureSyncManager : NetworkBehaviour
 
         try
         {
-            byte[] texData = whiteboard.texture.EncodeToJPG(25);
-            //byte[] texDataCompressed = Compress(texData); // Optional: Compress the data
-            SendTextureToServerRpc(texData);
+            int rate = 75;
+            byte[] texData;
+            do
+            {
+
+                texData = whiteboard.texture.EncodeToJPG(rate);
+                rate -= 5;
+                SendTextureToServerRpc(texData);
+
+            } while (texData.Length > 65000); // after series experience, 65000 is the maximum size of a packet
+
+
         }
         catch (Exception e)
         {
@@ -144,7 +153,7 @@ public class TextureSyncManager : NetworkBehaviour
             Debug.LogWarning("[Client] Failed to load texture from received bytes!");
             return;
         }
-        File.WriteAllBytes("C:\\Users\\sky\\received.jpg", receivedTexture.EncodeToJPG());
+        //File.WriteAllBytes("C:\\Users\\sky\\received.jpg", receivedTexture.EncodeToJPG());
 
         // Apply the texture to the whiteboard
         ApplyTextureToUIOrObject(receivedTexture);
@@ -156,28 +165,47 @@ public class TextureSyncManager : NetworkBehaviour
         Debug.Log("[Client] Successfully applied the received texture!");
     }
 
-    // ---------- Compression/Decompression (Optional) ----------
-    private byte[] Compress(byte[] data)
+    // Stroke sync::::::::::::::::::::::::
+
+    // Called when a player draws on the canvas
+    [ServerRpc(RequireOwnership = false)]
+    public void SendDrawCommandServerRpc(Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize)
     {
-        using (MemoryStream output = new MemoryStream())
+        // Update the master texture on the server
+        UpdateCanvas(whiteboard.texture, posStart, posEnd, colors, brushSize);
+        latestTextureData = whiteboard.texture.EncodeToJPG(100); // default is 75
+        // Broadcast the update to all clients
+        SendDrawCommandClientRpc(posStart, posEnd, colors, brushSize);
+    }
+
+    [ClientRpc]
+    public void SendDrawCommandClientRpc(Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize)
+    {
+        // On clients, update the local texture with the same drawing command
+        if (!IsServer)
         {
-            using (GZipStream gzip = new GZipStream(output, System.IO.Compression.CompressionLevel.Optimal, true))
-            {
-                gzip.Write(data, 0, data.Length);
-                gzip.Flush();
-            }
-            return output.ToArray();
+            UpdateCanvas(whiteboard.texture, posStart, posEnd, colors, brushSize);
         }
     }
 
-    private byte[] Decompress(byte[] compressedData)
+    // Example function to update the canvas (implement your drawing logic here)
+    private void UpdateCanvas(Texture2D texture, Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize)
     {
-        using (MemoryStream input = new MemoryStream(compressedData))
-        using (GZipStream gzip = new GZipStream(input, CompressionMode.Decompress))
-        using (MemoryStream output = new MemoryStream())
+        // Convert brushSize and positions to integer values
+        int startX = Mathf.RoundToInt(posStart.x);
+        int startY = Mathf.RoundToInt(posStart.y);
+
+        // Draw at the starting position
+        texture.SetPixels(startX, startY, brushSize, brushSize, colors);
+
+        // Interpolate between start and end positions to draw a smooth line
+        for (float f = 0.01f; f < 1.0f; f += 0.05f)
         {
-            gzip.CopyTo(output);
-            return output.ToArray();
+            int lerpX = Mathf.RoundToInt(Mathf.Lerp(posStart.x, posEnd.x, f));
+            int lerpY = Mathf.RoundToInt(Mathf.Lerp(posStart.y, posEnd.y, f));
+            texture.SetPixels(lerpX, lerpY, brushSize, brushSize, colors);
         }
+
+        texture.Apply();
     }
 }
