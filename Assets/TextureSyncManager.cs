@@ -95,12 +95,11 @@ public class TextureSyncManager : NetworkBehaviour
             byte[] texData;
             do
             {
-
                 texData = whiteboard.texture.EncodeToJPG(rate);
                 rate -= 5;
-                SendTextureToServerRpc(texData);
-
             } while (texData.Length > 65000); // after series experience, 65000 is the maximum size of a packet
+            
+            SendTextureToServerRpc(texData);
 
 
         }
@@ -168,28 +167,37 @@ public class TextureSyncManager : NetworkBehaviour
     // Stroke sync::::::::::::::::::::::::
 
     // Called when a player draws on the canvas
+
     [ServerRpc(RequireOwnership = false)]
-    public void SendDrawCommandServerRpc(Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize)
+    public void SendDrawCommandServerRpc(Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize, ServerRpcParams serverRpcParams = default)
     {
+        Debug.Log($"[Server] Received draw command from client {serverRpcParams.Receive.SenderClientId}.");
+
         // Update the master texture on the server
         UpdateCanvas(whiteboard.texture, posStart, posEnd, colors, brushSize);
+
         latestTextureData = whiteboard.texture.EncodeToJPG(100); // default is 75
-        // Broadcast the update to all clients
-        SendDrawCommandClientRpc(posStart, posEnd, colors, brushSize);
+
+        // Broadcast the update to all clients except the sender
+        SendDrawCommandClientRpc(posStart, posEnd, colors, brushSize, new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams { TargetClientIds = NetworkManager.Singleton.ConnectedClientsIds.Where(id => id != serverRpcParams.Receive.SenderClientId).ToArray() }
+        });
     }
 
     [ClientRpc]
-    public void SendDrawCommandClientRpc(Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize)
+    public void SendDrawCommandClientRpc(Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize, ClientRpcParams clientRpcParams = default)
     {
-        // On clients, update the local texture with the same drawing command
         if (!IsServer)
         {
+            Debug.Log($"[Client] Received draw command from server.");
             UpdateCanvas(whiteboard.texture, posStart, posEnd, colors, brushSize);
         }
     }
 
-    // Example function to update the canvas (implement your drawing logic here)
-    private void UpdateCanvas(Texture2D texture, Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize)
+
+// Example function to update the canvas (implement your drawing logic here)
+private void UpdateCanvas(Texture2D texture, Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize)
     {
         // Convert brushSize and positions to integer values
         int startX = Mathf.RoundToInt(posStart.x);
