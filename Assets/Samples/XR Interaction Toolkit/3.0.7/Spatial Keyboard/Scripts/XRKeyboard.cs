@@ -91,6 +91,11 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
                 }
             }
         }
+        public void OverwriteText(string newText)
+        {
+            text = newText;
+        }
+
 
         [SerializeField, HideInInspector]
         TMP_InputField m_CurrentInputField;

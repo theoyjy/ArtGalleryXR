@@ -176,8 +176,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1959249818920297384}
-  - {fileID: 6647909711004394980}
   - {fileID: 1145452848567773248}
+  - {fileID: 6647909711004394980}
   - {fileID: 3140276258458577014}
   m_Father: {fileID: 7979916829122939690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2043,7 +2043,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_OptimizeOnStart: 1
-  m_Canvas: {fileID: 7979916828988463974}
   m_BatchGroupParentTransform: {fileID: 234637812713154626}
   m_ButtonParentTransform: {fileID: 4863097412243294290}
   m_ImageParentTransform: {fileID: 2176062184860990979}
