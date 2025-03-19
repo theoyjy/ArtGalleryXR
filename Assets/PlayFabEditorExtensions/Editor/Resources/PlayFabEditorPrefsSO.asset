@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
   DevAccountEmail: ase_vr_gallery@outlook.com
-  DevAccountToken: inb5szp9eufqzwutmah8nj8e6kb49afyizk41k5pnkz5tsdfs8bhy9q8337ikybxqsbnb3fdtceed6ejhe8fsetmq7ks9xemng5wppxj7p68a6hsf8qp9euw81fngqnzrump6mjzsusrtoqg6ugqp9gxfzqip7utfizt87oeqxs75h46njbitiqtj9c638hasm7uf4zj
+  DevAccountToken: rk7gjbmucfek5q5nz9a4ns78qt5rsi3ru5mh4hnktzmejkznpxd3764sazm9bbeynfoq6dppby64pu4bgdwesw3adcbdk9793fc9yo6agz4oe3gnq6oqgop6zhfuwpi798qpjscjkft16s81w9fnwfacamqesony5arpxt8y4xze9oocnhqo6pam1ocxcjc96ep3aopm
   AadAuthorization: 
   SelectedStudio: VR_Gallery
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 0
+  curMainMenuIdx: 1
   curSubMenuIdx: 0

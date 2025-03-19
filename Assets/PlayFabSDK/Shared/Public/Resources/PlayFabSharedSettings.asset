@@ -15,7 +15,7 @@ MonoBehaviour:
   TitleId: D41B8
   DeveloperSecretKey: K6U374YJKTHJD68O7OKFYPZXY8W5WAP5GA7D57ICRPENESRF35
   ProductionEnvironmentUrl: 
-  RequestType: 0
+  RequestType: 2
   DisableDeviceInfo: 0
   DisableFocusTimeCollection: 0
   RequestTimeout: 2000

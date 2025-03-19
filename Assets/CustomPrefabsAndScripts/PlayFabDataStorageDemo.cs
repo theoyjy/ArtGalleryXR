@@ -1,27 +1,23 @@
 using UnityEngine;
-using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
+using System.Collections.Generic;
 
-[System.Serializable]
-public class MyData
+public class PlayFabSharedGroupDemo : MonoBehaviour
 {
-    public int level;
-    public string characterName;
-}
+    //// 指定一个 Shared Group ID（你也可以用随机字符串）
+    //private string sharedGroupId = "TestSharedGroup";
 
-public class PlayFabDataStorageDemo : MonoBehaviour
-{
-    // 设定初始数据
-    public MyData myData = new MyData { level = 1, characterName = "Hero" };
+    //// 测试数据（JSON 格式）
+    //private string testDataJson = "{\"score\":100, \"message\":\"Hello Shared Group\"}";
 
     void Start()
     {
-        // 登录 PlayFab（这里使用匿名登录，实际项目中可根据需求更换登录方式）
+        // 登录 PlayFab（匿名登录）
         Login();
     }
 
-    // 使用自定义设备 ID 进行登录，并自动创建账号（首次登录时创建账号）
+    // 使用自定义 ID 进行登录，并自动创建账号
     void Login()
     {
         var request = new LoginWithCustomIDRequest
@@ -29,69 +25,153 @@ public class PlayFabDataStorageDemo : MonoBehaviour
             CustomId = SystemInfo.deviceUniqueIdentifier,
             CreateAccount = true
         };
+
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnError);
     }
 
-    // 登录成功回调
     void OnLoginSuccess(LoginResult result)
     {
-        Debug.Log("登录成功, PlayFab ID: " + result.PlayFabId);
-        // 登录成功后保存数据
-        SaveMyData();
-    }
-
-    // 将自定义数据序列化成 JSON 字符串后保存到 PlayFab 的 User Data
-    void SaveMyData()
-    {
-        string json = JsonUtility.ToJson(myData);
-        Debug.Log("保存数据: " + json);
-
-        var request = new UpdateUserDataRequest
+        Debug.Log("登录成功，PlayFab ID: " + result.PlayFabId);
+        SharedDataManager.CreateSharedGroup(SharedDataManager.GallerySharedGroupId, () =>
         {
-            Data = new Dictionary<string, string> {
-                { "MyCustomData", json }
-            }
+        }, error =>
+        {
+            Debug.LogError("创建 Gallery 共享组出错：" + error.GenerateErrorReport());
+        });
+
+        SharedDataManager.CreateSharedGroup(SharedDataManager.CanvaSharedGroupId, () =>
+        {
+        }, error =>
+        {
+            Debug.LogError("创建 Canva 共享组出错：" + error.GenerateErrorReport());
+        });
+
+        //向组中添加数据
+        GalleryDetail newGallery = new GalleryDetail
+        {
+            GalleryID = "gallery001",
+            GalleryName = "My First Gallery",
+            Canva = new List<string> { "canva001", "canva002" },
+            permission = "public"
         };
 
-        PlayFabClientAPI.UpdateUserData(request, OnDataUpdate, OnError);
-    }
-
-    // 数据更新成功后的回调，更新成功后读取数据进行验证
-    void OnDataUpdate(UpdateUserDataResult result)
-    {
-        Debug.Log("数据更新成功");
-        // 更新完成后加载数据以确认存储正确
-        LoadMyData();
-    }
-
-    // 读取数据
-    void LoadMyData()
-    {
-        var request = new GetUserDataRequest();
-        PlayFabClientAPI.GetUserData(request, OnDataReceived, OnError);
-    }
-
-    // 读取数据成功后的回调，将 JSON 数据反序列化回自定义对象
-    void OnDataReceived(GetUserDataResult result)
-    {
-        if (result.Data != null && result.Data.ContainsKey("MyCustomData"))
+        SharedDataManager.SaveGallery(newGallery, () =>
         {
-            string json = result.Data["MyCustomData"].Value;
-            Debug.Log("读取到数据: " + json);
-
-            // 反序列化回 MyData 对象
-            MyData loadedData = JsonUtility.FromJson<MyData>(json);
-            Debug.Log("玩家等级: " + loadedData.level + " 角色名称: " + loadedData.characterName);
-        }
-        else
+            Debug.Log("Gallery 保存成功！");
+            // 获取某个 Gallery
+            SharedDataManager.GetGallery("gallery001", gallery =>
+            {
+                if (gallery != null)
+                    Debug.Log("获取到 Gallery：" + gallery.GalleryName);
+                else
+                    Debug.Log("未找到指定 Gallery");
+            }, error =>
+            {
+                Debug.LogError("获取 Gallery 出错：" + error.GenerateErrorReport());
+            });
+        }, error =>
         {
-            Debug.Log("没有找到数据");
-        }
+            Debug.LogError("保存 Gallery 出错：" + error.GenerateErrorReport());
+        });
+
+        SharedDataManager.GetPublicGalleryIDs(galleryIds =>
+        {
+            Debug.Log("Public Gallery IDs:");
+            foreach (var id in galleryIds)
+            {
+                Debug.Log(id);
+            }
+        }, error =>
+        {
+            Debug.LogError("获取 Public Gallery IDs 出错: " + error.GenerateErrorReport());
+        });
+
+
+
+        // 保存一个 Canva 数据
+        SharedDataManager.SaveCanva("canva001", "https://example.com/image.png", () =>
+        {
+            Debug.Log("Canva 保存成功！");
+        }, error =>
+        {
+            Debug.LogError("保存 Canva 出错：" + error.GenerateErrorReport());
+        });
+
+        // 登录成功后创建共享组
+        //CreateSharedGroup();
     }
 
-    // 错误回调
+
+
+
+    //// 创建共享组（Shared Group）
+    //void CreateSharedGroup()
+    //{
+    //    var request = new CreateSharedGroupRequest
+    //    {
+    //        SharedGroupId = sharedGroupId
+    //    };
+
+    //    PlayFabClientAPI.CreateSharedGroup(request, OnCreateSharedGroupSuccess, OnError);
+    //}
+
+    //void OnCreateSharedGroupSuccess(CreateSharedGroupResult result)
+    //{
+    //    Debug.Log("共享组创建成功，Shared Group ID: " + sharedGroupId);
+    //    // 创建成功后更新共享组数据
+    //    UpdateSharedGroupData();
+    //}
+
+    //// 更新共享组数据，将 JSON 存入共享组
+    //void UpdateSharedGroupData()
+    //{
+    //    var request = new UpdateSharedGroupDataRequest
+    //    {
+    //        SharedGroupId = sharedGroupId,
+    //        Data = new Dictionary<string, string>
+    //        {
+    //            { "TestData", testDataJson }
+    //        }
+    //    };
+
+    //    PlayFabClientAPI.UpdateSharedGroupData(request, OnUpdateSharedGroupDataSuccess, OnError);
+    //}
+
+    //void OnUpdateSharedGroupDataSuccess(UpdateSharedGroupDataResult result)
+    //{
+    //    Debug.Log("共享组数据更新成功");
+    //    // 数据更新成功后，读取共享组数据
+    //    GetSharedGroupData();
+    //}
+
+    //// 从共享组中读取数据
+    //void GetSharedGroupData()
+    //{
+    //    var request = new GetSharedGroupDataRequest
+    //    {
+    //        SharedGroupId = sharedGroupId,
+    //        // Keys 为 null 表示读取所有数据
+    //        Keys = null
+    //    };
+
+    //    PlayFabClientAPI.GetSharedGroupData(request, OnGetSharedGroupDataSuccess, OnError);
+    //}
+
+    //void OnGetSharedGroupDataSuccess(GetSharedGroupDataResult result)
+    //{
+    //    if (result.Data != null && result.Data.ContainsKey("TestData"))
+    //    {
+    //        string data = result.Data["TestData"].Value;
+    //        Debug.Log("读取到共享组数据: " + data);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("未找到共享组数据");
+    //    }
+    //}
+
     void OnError(PlayFabError error)
     {
-        Debug.LogError("错误: " + error.GenerateErrorReport());
+        Debug.LogError("PlayFab 错误: " + error.GenerateErrorReport());
     }
 }
