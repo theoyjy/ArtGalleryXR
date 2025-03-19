@@ -216,16 +216,16 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
                     //transform.rotation = _lastTouchRot;
 
                     _whiteboard.texture.Apply();
+                    //Send to network
+                    //TextureSyncManager mgr = GetComponent<TextureSyncManager>();
+                    if (_textureSyncManager != null)
+                    {
+                        Vector2 currentPos = new Vector2(x, y);
+                        _textureSyncManager.SendDrawCommandServerRpc(_lastTouchPos, currentPos, _colors, _penSize);
+                    }
+                    else
+                        Debug.Log("NetworkedCanvas is NULL");
                 }
-
-                //Send to network
-                if (_textureSyncManager != null)
-                {
-                    Vector2 currentPos = new Vector2(x, y);
-                    _textureSyncManager.SendDrawCommandServerRpc(_lastTouchPos, currentPos, _colors, _penSize);
-                }
-                else
-                    Debug.Log("NetworkedCanvas is NULL");
 
                 // Set for next iterations
                 _lastTouchPos = new Vector2(x, y);

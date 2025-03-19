@@ -196,8 +196,8 @@ public class TextureSyncManager : NetworkBehaviour
     }
 
 
-// Example function to update the canvas (implement your drawing logic here)
-private void UpdateCanvas(Texture2D texture, Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize)
+    // Example function to update the canvas (implement your drawing logic here)
+    private void UpdateCanvas(Texture2D texture, Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize)
     {
         // Convert brushSize and positions to integer values
         int startX = Mathf.RoundToInt(posStart.x);
