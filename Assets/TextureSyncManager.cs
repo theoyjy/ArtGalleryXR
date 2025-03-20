@@ -5,6 +5,43 @@ using System.IO.Compression;
 using System.Linq;
 using System;
 using Unity.Collections;
+using System.Collections.Generic;
+using System.Collections;
+
+
+[System.Serializable]
+public struct StrokeCommand : INetworkSerializable
+{
+    public Vector2 posStart;
+    public Vector2 posEnd;
+    public Color[] colors;
+    public int brushSize;
+
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        serializer.SerializeValue(ref posStart);
+        serializer.SerializeValue(ref posEnd);
+        serializer.SerializeValue(ref brushSize);
+
+        int colorCount = (colors == null) ? 0 : colors.Length;
+        serializer.SerializeValue(ref colorCount);
+
+        if (serializer.IsReader)
+            colors = new Color[colorCount];
+
+        for (int i = 0; i < colorCount; i++)
+        {
+            float r = colors[i].r, g = colors[i].g, b = colors[i].b, a = colors[i].a;
+            serializer.SerializeValue(ref r);
+            serializer.SerializeValue(ref g);
+            serializer.SerializeValue(ref b);
+            serializer.SerializeValue(ref a);
+            if (serializer.IsReader)
+                colors[i] = new Color(r, g, b, a);
+        }
+    }
+}
+
 
 public class TextureSyncManager : NetworkBehaviour
 {
@@ -12,10 +49,20 @@ public class TextureSyncManager : NetworkBehaviour
 
     private static byte[] latestTextureData; // Store the latest texture on the server
 
+    private List<StrokeCommand> strokeBuffer = new List<StrokeCommand>();
+    // Update intervals for full texture and strokes.
+    private float strokeUpdateInterval = 0.1f; // 100 ms
+
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
         Debug.Log("TextureSyncManager spawned. IsSpawned: " + GetComponent<NetworkObject>().IsSpawned);
+
+        if(IsServer || IsHost)
+        {
+            StartCoroutine(ProcessStrokeBufferCoroutine());
+        }
 
         // Register custom message handlers
         if (IsClient)
@@ -43,6 +90,30 @@ public class TextureSyncManager : NetworkBehaviour
             SendTextureToServer();
         }
     }
+
+    // Coroutine that processes buffered stroke commands.
+    private IEnumerator ProcessStrokeBufferCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(strokeUpdateInterval);
+            if (strokeBuffer.Count > 0)
+            {
+                // Process all buffered strokes.
+                foreach (var stroke in strokeBuffer)
+                {
+                    ApplyStroke(whiteboard.texture, stroke);
+                }
+                whiteboard.texture.Apply();
+
+                // Clear the buffer after processing.
+                strokeBuffer.Clear();
+                latestTextureData = whiteboard.texture.EncodeToJPG(100);
+                Debug.Log("[Server] Processed and broadcasted buffered strokes.");
+            }
+        }
+    }
+
 
     // ---------- Client Requests the Latest Texture ----------
     [ServerRpc(RequireOwnership = false)]
@@ -120,7 +191,7 @@ public class TextureSyncManager : NetworkBehaviour
         // Broadcast to all clients except the sender
         ulong senderClientId = serverRpcParams.Receive.SenderClientId;
         var targetClients = NetworkManager.Singleton.ConnectedClientsIds
-            .Where(clientId => clientId != senderClientId)
+            //.Where(clientId => clientId != senderClientId)
             .ToArray();
 
         foreach (var clientId in targetClients)
@@ -172,48 +243,49 @@ public class TextureSyncManager : NetworkBehaviour
     public void SendDrawCommandServerRpc(Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize, ServerRpcParams serverRpcParams = default)
     {
         Debug.Log($"[Server] Received draw command from client {serverRpcParams.Receive.SenderClientId}.");
-
-        // Update the master texture on the server
-        UpdateCanvas(whiteboard.texture, posStart, posEnd, colors, brushSize);
-
-        latestTextureData = whiteboard.texture.EncodeToJPG(100); // default is 75
+        
+        StrokeCommand stroke = new StrokeCommand
+        {
+            posStart = posStart,
+            posEnd = posEnd,
+            colors = colors,
+            brushSize = brushSize
+        };
+        strokeBuffer.Add(stroke);
 
         // Broadcast the update to all clients except the sender
-        SendDrawCommandClientRpc(posStart, posEnd, colors, brushSize, new ClientRpcParams
+        SendDrawCommandClientRpc(stroke, new ClientRpcParams
         {
-            Send = new ClientRpcSendParams { TargetClientIds = NetworkManager.Singleton.ConnectedClientsIds.Where(id => id != serverRpcParams.Receive.SenderClientId).ToArray() }
+            Send = new ClientRpcSendParams { 
+                TargetClientIds = NetworkManager.Singleton.ConnectedClientsIds
+                //.Where(id => id != serverRpcParams.Receive.SenderClientId)
+                .ToArray() }
         });
     }
 
     [ClientRpc]
-    public void SendDrawCommandClientRpc(Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize, ClientRpcParams clientRpcParams = default)
+    public void SendDrawCommandClientRpc(StrokeCommand stroke, ClientRpcParams clientRpcParams = default)
     {
         if (!IsServer)
         {
             Debug.Log($"[Client] Received draw command from server.");
-            UpdateCanvas(whiteboard.texture, posStart, posEnd, colors, brushSize);
+            ApplyStroke(whiteboard.texture, stroke);
         }
     }
 
-
-    // Example function to update the canvas (implement your drawing logic here)
-    private void UpdateCanvas(Texture2D texture, Vector2 posStart, Vector2 posEnd, Color[] colors, int brushSize)
+    private void ApplyStroke(Texture2D texture, StrokeCommand stroke)
     {
-        // Convert brushSize and positions to integer values
-        int startX = Mathf.RoundToInt(posStart.x);
-        int startY = Mathf.RoundToInt(posStart.y);
+        int startX = Mathf.RoundToInt(stroke.posStart.x);
+        int startY = Mathf.RoundToInt(stroke.posStart.y);
+        texture.SetPixels(startX, startY, stroke.brushSize, stroke.brushSize, stroke.colors);
 
-        // Draw at the starting position
-        texture.SetPixels(startX, startY, brushSize, brushSize, colors);
-
-        // Interpolate between start and end positions to draw a smooth line
+        // Interpolate between start and end for a smooth stroke.
         for (float f = 0.01f; f < 1.0f; f += 0.05f)
         {
-            int lerpX = Mathf.RoundToInt(Mathf.Lerp(posStart.x, posEnd.x, f));
-            int lerpY = Mathf.RoundToInt(Mathf.Lerp(posStart.y, posEnd.y, f));
-            texture.SetPixels(lerpX, lerpY, brushSize, brushSize, colors);
+            int lerpX = Mathf.RoundToInt(Mathf.Lerp(stroke.posStart.x, stroke.posEnd.x, f));
+            int lerpY = Mathf.RoundToInt(Mathf.Lerp(stroke.posStart.y, stroke.posEnd.y, f));
+            texture.SetPixels(lerpX, lerpY, stroke.brushSize, stroke.brushSize, stroke.colors);
         }
-
         texture.Apply();
     }
 }
