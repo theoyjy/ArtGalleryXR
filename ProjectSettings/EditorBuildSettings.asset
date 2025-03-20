@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Samples/XR Interaction Toolkit/3.0.7/Starter Assets/DemoScene.unity
     guid: 319dafa5c80f29f428dc1e0d03f04177
+  - enabled: 0
+    path: Assets/Scenes/LoginScreen_FixedKeyboard.unity
+    guid: e6d420efaad570e49893f0e0a629756f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 02f3598b1640c4b2e8e15d1f52bf2fbc, type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: 27cb7a0c542a6407a9838de7d4b3ad07, type: 2}

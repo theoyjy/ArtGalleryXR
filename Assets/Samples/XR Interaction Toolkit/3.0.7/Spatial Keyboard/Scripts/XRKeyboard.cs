@@ -295,7 +295,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
         public int caretPosition
         {
             get => m_CaretPosition;
-            protected set => m_CaretPosition = value;
+            set => m_CaretPosition = value;
         }
 
         bool m_Shifted;
