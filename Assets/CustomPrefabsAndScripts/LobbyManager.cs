@@ -46,7 +46,9 @@ public class LobbyManager : MonoBehaviour
         lobbyCount = response.Results.Count;
 
         // TODO: remove
-        // await CreateLobby("test", false, "123", 9000);
+        await CreateLobby("test", "player", false);
+        await Task.Delay(10000);
+        await QueryAvailableLobbies();
     }
 
     public async void JoinLobby(Lobby lobby)
@@ -93,6 +95,41 @@ public class LobbyManager : MonoBehaviour
         }
 
 
+    }
+
+    async Task<List<Lobby>> QueryAvailableLobbies()
+    {
+        List<Lobby> lobbies = new List<Lobby>();
+        QueryLobbiesOptions queryOptions = new QueryLobbiesOptions { Count = 25 };
+
+        try
+        {
+            QueryResponse queryResponse = await LobbyService.Instance.QueryLobbiesAsync(queryOptions);
+            Debug.Log("Queried " + queryResponse.Results.Count + " Lobbies");
+
+            if (queryResponse.Results.Count > 0)
+            {
+                lobbies =  queryResponse.Results;
+                foreach (Lobby lobby in lobbies)
+                {
+                    string lobbyId = lobby.Id;
+                    string galleryId = lobby.Name;
+                    string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";
+                    string serverPort = lobby.Data != null && lobby.Data.ContainsKey("serverPort") ? lobby.Data["serverPort"].Value : "Unknown";
+
+                    Debug.Log($"Lobby ID: {lobbyId} attached to gallery {galleryId} - Server IP: {serverIp} | Port: {serverPort}");
+                }
+            }
+            else
+            {
+                Debug.Log("NO AVAILABLE LOBBIES FOUND");
+            }
+        }
+        catch (LobbyServiceException ex)
+        {
+            Debug.LogError("Error querying Lobby:" + ex.Message);
+        }
+        return lobbies;
     }
 
 
