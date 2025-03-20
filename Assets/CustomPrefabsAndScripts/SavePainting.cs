@@ -32,6 +32,9 @@ public class SavePainting : MonoBehaviour
             // Convert to PNG and Save
             File.WriteAllBytes(path, paintingTexture.EncodeToPNG());
             Debug.Log("Painting saved to: " + path);
+#if UNITY_ANDROID
+            RefreshAndroidGallery(path);
+#endif
         }
     }
 
@@ -63,10 +66,26 @@ public class SavePainting : MonoBehaviour
     {
 #if UNITY_EDITOR
         return EditorUtility.SaveFilePanel("Save Painting", "", "painting.png", "png");
+#elif UNITY_ANDROID
+        return Path.Combine("/storage/emulated/0/Download/", "painting.png"); // Saves to Downloads folder on Quest 2
 #else
         var extensions = new[] { new ExtensionFilter("PNG Files", "png") };
         string[] paths = StandaloneFileBrowser.SaveFilePanel("Save Painting", "", "painting", extensions);
         return paths.Length > 0 ? paths[0] : null;
 #endif
     }
+
+#if UNITY_ANDROID
+    private void RefreshAndroidGallery(string path)
+    {
+        AndroidJavaClass player = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        AndroidJavaObject activity = player.GetStatic<AndroidJavaObject>("currentActivity");
+        AndroidJavaObject context = activity.Call<AndroidJavaObject>("getApplicationContext");
+
+        AndroidJavaClass mediaScanner = new AndroidJavaClass("android.media.MediaScannerConnection");
+        mediaScanner.CallStatic("scanFile", context, new string[] { path }, null, null);
+
+        Debug.Log("Android gallery refreshed: " + path);
+    }
+#endif
 }
