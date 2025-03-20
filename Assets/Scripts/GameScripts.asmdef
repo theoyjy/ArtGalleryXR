@@ -9,7 +9,9 @@
         "Unity.InputSystem",
         "Unity.Services.Multiplayer.Multiplay",
         "Unity.Services.Multiplayer",
-        "Unity.Services.Multiplayer.Server"
+        "Unity.Services.Multiplayer.Server",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
