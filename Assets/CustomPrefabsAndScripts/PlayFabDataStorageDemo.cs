@@ -52,6 +52,7 @@ public class PlayFabSharedGroupDemo : MonoBehaviour
             GalleryID = "gallery001",
             GalleryName = "My First Gallery",
             Canva = new List<string> { "canva001", "canva002" },
+            OwnID = "Player001",
             permission = "public"
         };
 
@@ -88,7 +89,7 @@ public class PlayFabSharedGroupDemo : MonoBehaviour
 
 
 
-        // 保存一个 Canva 数据
+        // 保存1个 Canva 数据
         SharedDataManager.SaveCanva("canva001", "https://example.com/image.png", () =>
         {
             Debug.Log("Canva 保存成功！");

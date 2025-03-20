@@ -20,6 +20,7 @@ public class GalleryDetail
     public string GalleryID;           // 画廊ID
     public string GalleryName;         // 画廊名称
     public List<string> Canva;         // 包含所有 Canva ID 的列表
+    public string OwnID;
     public string permission;          // 权限，仅有 "public" 或 "private"
 }
 
