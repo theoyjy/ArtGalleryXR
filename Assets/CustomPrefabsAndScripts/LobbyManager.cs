@@ -21,7 +21,6 @@ public class LobbyManager : MonoBehaviour
 
     public string lobbyName;
     public bool isLobbyServer = false;
-    public int lobbyCapacity;
 
     public Lobby lobby;
 
@@ -46,7 +45,7 @@ public class LobbyManager : MonoBehaviour
         lobbyCount = response.Results.Count;
 
         // TODO: remove
-        await CreateLobby("test", "player", false);
+        await CreateLobby("test", "player", 8, false);
         await Task.Delay(10000);
         await QueryAvailableLobbies();
     }
@@ -71,7 +70,7 @@ public class LobbyManager : MonoBehaviour
     }
 
     // galleryId (fixed) != lobbyId (dynamic)
-    public async Task CreateLobby(string galleryId, string playerId, bool isPrivate)
+    public async Task CreateLobby(string galleryId, string playerId, int lobbyCapacity, bool isPrivate)
     {
         // TODO: maybe check if there already exists another lobby with the same galleryId
         
@@ -112,12 +111,9 @@ public class LobbyManager : MonoBehaviour
                 lobbies =  queryResponse.Results;
                 foreach (Lobby lobby in lobbies)
                 {
-                    string lobbyId = lobby.Id;
-                    string galleryId = lobby.Name;
                     string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";
                     string serverPort = lobby.Data != null && lobby.Data.ContainsKey("serverPort") ? lobby.Data["serverPort"].Value : "Unknown";
-
-                    Debug.Log($"Lobby ID: {lobbyId} attached to gallery {galleryId} - Server IP: {serverIp} | Port: {serverPort}");
+                    Debug.Log($"Lobby ID: {lobby.Id} attached to gallery {lobby.Name} with capacity {lobby.MaxPlayers} - Server IP: {serverIp} | Port: {serverPort}");
                 }
             }
             else
