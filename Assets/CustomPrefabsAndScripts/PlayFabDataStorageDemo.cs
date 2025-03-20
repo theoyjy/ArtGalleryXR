@@ -5,12 +5,6 @@ using System.Collections.Generic;
 
 public class PlayFabSharedGroupDemo : MonoBehaviour
 {
-    //// 指定一个 Shared Group ID（你也可以用随机字符串）
-    //private string sharedGroupId = "TestSharedGroup";
-
-    //// 测试数据（JSON 格式）
-    //private string testDataJson = "{\"score\":100, \"message\":\"Hello Shared Group\"}";
-
     void Start()
     {
         // 登录 PlayFab（匿名登录）
@@ -98,78 +92,22 @@ public class PlayFabSharedGroupDemo : MonoBehaviour
             Debug.LogError("保存 Canva 出错：" + error.GenerateErrorReport());
         });
 
-        // 登录成功后创建共享组
-        //CreateSharedGroup();
-    }
+        string ownID = "TestPlayer001";
+        string galleryName = "Test Gallery";
+        bool isPublic = true;
 
+        // 调用 CreateNewGallery 方法
+        SharedDataManager.CreateNewGallery(ownID, galleryName, isPublic,
+        onSuccess: () =>
+        {
+            Debug.Log("Gallery create success！");
+        },
+        onError: (error) =>
+        {
+            Debug.LogError("创建 Gallery 失败: " + error.ErrorMessage);
+        });
+}
 
-
-
-    //// 创建共享组（Shared Group）
-    //void CreateSharedGroup()
-    //{
-    //    var request = new CreateSharedGroupRequest
-    //    {
-    //        SharedGroupId = sharedGroupId
-    //    };
-
-    //    PlayFabClientAPI.CreateSharedGroup(request, OnCreateSharedGroupSuccess, OnError);
-    //}
-
-    //void OnCreateSharedGroupSuccess(CreateSharedGroupResult result)
-    //{
-    //    Debug.Log("共享组创建成功，Shared Group ID: " + sharedGroupId);
-    //    // 创建成功后更新共享组数据
-    //    UpdateSharedGroupData();
-    //}
-
-    //// 更新共享组数据，将 JSON 存入共享组
-    //void UpdateSharedGroupData()
-    //{
-    //    var request = new UpdateSharedGroupDataRequest
-    //    {
-    //        SharedGroupId = sharedGroupId,
-    //        Data = new Dictionary<string, string>
-    //        {
-    //            { "TestData", testDataJson }
-    //        }
-    //    };
-
-    //    PlayFabClientAPI.UpdateSharedGroupData(request, OnUpdateSharedGroupDataSuccess, OnError);
-    //}
-
-    //void OnUpdateSharedGroupDataSuccess(UpdateSharedGroupDataResult result)
-    //{
-    //    Debug.Log("共享组数据更新成功");
-    //    // 数据更新成功后，读取共享组数据
-    //    GetSharedGroupData();
-    //}
-
-    //// 从共享组中读取数据
-    //void GetSharedGroupData()
-    //{
-    //    var request = new GetSharedGroupDataRequest
-    //    {
-    //        SharedGroupId = sharedGroupId,
-    //        // Keys 为 null 表示读取所有数据
-    //        Keys = null
-    //    };
-
-    //    PlayFabClientAPI.GetSharedGroupData(request, OnGetSharedGroupDataSuccess, OnError);
-    //}
-
-    //void OnGetSharedGroupDataSuccess(GetSharedGroupDataResult result)
-    //{
-    //    if (result.Data != null && result.Data.ContainsKey("TestData"))
-    //    {
-    //        string data = result.Data["TestData"].Value;
-    //        Debug.Log("读取到共享组数据: " + data);
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("未找到共享组数据");
-    //    }
-    //}
 
     void OnError(PlayFabError error)
     {
