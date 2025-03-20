@@ -29,13 +29,16 @@ public class LobbyManager : MonoBehaviour
     public AuthenticationManager authManager;
     public MatchmakerManager matchManager;
 
+    public MultiplayManager mpManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public async void Start()
     {
         authManager = GetComponent<AuthenticationManager>();
         matchManager = GetComponent<MatchmakerManager>();
-        await UnityServices.InitializeAsync();
+        mpManager = GetComponent<MultiplayManager>();
 
+        await UnityServices.InitializeAsync();
         while (!authManager.isSignedIn)
         {
             await Task.Delay(1000);
@@ -61,6 +64,11 @@ public class LobbyManager : MonoBehaviour
             Debug.Log("Could not join lobby due to Exception: " + e);
         }
         Debug.Log("Joined lobby: " + lobby.Data["serverIP"].Value);
+
+        string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";
+        ushort serverPort = (ushort)(lobby.Data != null && lobby.Data.ContainsKey("serverPort") ? Convert.ToUInt16(lobby.Data["serverPort"].Value) : 0);
+
+        mpManager.JoinToServer(serverIp, serverPort);
     }
 
     // Update is called once per frame
@@ -73,7 +81,7 @@ public class LobbyManager : MonoBehaviour
     public async Task CreateLobby(string galleryId, string playerId, int lobbyCapacity, bool isPrivate)
     {
         // TODO: maybe check if there already exists another lobby with the same galleryId
-        
+
         Tuple<string, ushort> serverData = await matchManager.AllocateServer(playerId, galleryId);
         try
         {
@@ -92,8 +100,6 @@ public class LobbyManager : MonoBehaviour
             Debug.Log("Error while creating lobby");
             Debug.Log(e.Message);
         }
-
-
     }
 
     public async Task<List<Lobby>> QueryAvailableLobbies()
@@ -108,7 +114,7 @@ public class LobbyManager : MonoBehaviour
 
             if (queryResponse.Results.Count > 0)
             {
-                lobbies =  queryResponse.Results;
+                lobbies = queryResponse.Results;
                 foreach (Lobby lobby in lobbies)
                 {
                     string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";
@@ -128,9 +134,18 @@ public class LobbyManager : MonoBehaviour
         return lobbies;
     }
 
+    public async void LeaveLobby()
+    {
+        mpManager.DisconnectFromServer();
+    }
+
+    private void OnApplicationQuit()
+    {
+        LeaveLobby();
+    }
 
     // should be called periodically while inside a gallery session to keep it alive
-    private async void LobbyHeartbeat()
+    public async void PingLobby()
     {
         while (true)
         {

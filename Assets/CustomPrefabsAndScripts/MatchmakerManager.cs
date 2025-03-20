@@ -24,9 +24,6 @@ public class MatchmakerManager : MonoBehaviour
     public string allocatedIpAddress;
     public ushort allocatedPort;
 
-    // [SerializeField] private TMP_InputField lobbyNameField;
-    // [SerializeField] private Toggle isPrivateToggle;
-
     public bool isPrivate = false;
     public String lobbyName;
 
@@ -36,8 +33,6 @@ public class MatchmakerManager : MonoBehaviour
     public bool isServerAvailable = false;
     public MultiplayManager mpManager;
     public AuthenticationManager authManager;
-    private string backfillTicketId;
-    private bool isBackfilling = false;
 
     public LobbyManager lbyManager;
 
@@ -47,15 +42,10 @@ public class MatchmakerManager : MonoBehaviour
         lbyManager = GetComponent<LobbyManager>();
         authManager = GetComponent<AuthenticationManager>();
         await UnityServices.InitializeAsync();
-        
-        while (!authManager.isSignedIn) {
-            await Task.Delay(1000);
-        }
-        if (Application.platform != RuntimePlatform.LinuxServer)
+
+        while (!authManager.isSignedIn)
         {
-            // await QueryAvailableServers();
-            if (isServerAvailable)
-            BackfillServer();
+            await Task.Delay(1000);
         }
     }
 
@@ -66,7 +56,7 @@ public class MatchmakerManager : MonoBehaviour
     {
         int playerCount = NetworkManager.Singleton.ConnectedClientsList.Count;
 
-        #if SERVER_BUILD
+#if SERVER_BUILD
 
         if (playerCount == 0)
         {
@@ -88,59 +78,7 @@ public class MatchmakerManager : MonoBehaviour
             isWaitingForDeallocation = false;
         }
 
-        if (backfillTicketId != null && NetworkManager.Singleton.ConnectedClientsList.Count < 4)
-            {
-                Debug.Log("Approving backfill ticket with ID: " + backfillTicketId);
-                BackfillTicket backfillTicket = await MatchmakerService.Instance.ApproveBackfillTicketAsync(backfillTicketId);
-                Debug.Log("Backfill ticket approved: " + backfillTicket.Id);
-                backfillTicketId = backfillTicket.Id;
-            }
-
-        #endif
-
-        if (Application.platform != RuntimePlatform.LinuxServer)
-        {
-            if (isAllocated && playerCount < 2 && !isBackfilling)
-            {
-                BackfillServer();
-            }
-            else if (isBackfilling && playerCount >= 2)
-            {
-                CancelBackfill();
-            }
-        }
-
-        // await QueryAvailableServers();
-    }
-
-    public async void BackfillServer()
-    {
-        try {
-        Debug.Log($"Attempting backfill with IP: {backfillIpAddress}, Port: {backfillPort}");
-        var options = new CreateBackfillTicketOptions("Gallery-A", backfillIpAddress + ":" + backfillPort, new Dictionary<string, object>());
-        Debug.Log("Creating backfill ticket with options: " + options);
-        backfillTicketId = await MatchmakerService.Instance.CreateBackfillTicketAsync(options);
-        isBackfilling = true;
-        Debug.Log("Backfill ticket created: " + backfillTicketId);
-        }
-        catch (HttpRequestException ex)
-        {
-            Debug.LogError($"Backfill request failed: {ex.Message}");
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Unexpected error in BackfillServer: {ex}");
-        }
-    }
-
-    public async void CancelBackfill()
-    {
-        if (!string.IsNullOrEmpty(backfillTicketId))
-        {
-            await MatchmakerService.Instance.DeleteBackfillTicketAsync(backfillTicketId);
-            Debug.Log("Backfill ticket cancelled");
-        }
-        isBackfilling = false;
+#endif
     }
 
     public async Task<Tuple<string, ushort>> AllocateServer(string playerId, string galleryId)
@@ -196,9 +134,6 @@ public class MatchmakerManager : MonoBehaviour
 
         return new Tuple<string, ushort>(allocatedIpAddress, allocatedPort);
 
-        // await lbyManager.CreateLobby(lobbyName, isPrivate, allocatedIpAddress, allocatedPort);
-
     }
 
-    
 }
