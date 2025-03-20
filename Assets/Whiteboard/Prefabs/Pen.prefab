@@ -193,6 +193,8 @@ MonoBehaviour:
   _tip: {fileID: 4130149277059918446}
   _penSize: 15
   _whiteboardTransform: {fileID: 0}
+  networkedCanvas: {fileID: 0}
+  _isHolding: 0
 --- !u!54 &7897460533641417552
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -500,5 +502,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f08836bf226ac4a838de52f9548bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newColor: {r: 1, g: 0, b: 0, a: 1}
   tip: {fileID: 7261163715159282005}

@@ -73,6 +73,9 @@ public class Card : MonoBehaviour
 
         ClearCanvas();
         StartCoroutine(RotateCard());
+
+        Whiteboard wbm = transform.parent.GetComponentInChildren<Whiteboard>();
+        wbm.ClearWhiteboard();
     }
 
     // Resets the MeshFilter's mesh to the empty mesh.

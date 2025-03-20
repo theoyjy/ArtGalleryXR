@@ -65,7 +65,7 @@ public class ShowCanvasOnCollision : MonoBehaviour
 
 //#if UNITY_ANDROID
 
-           
+
 
             //Canvas canvas = ToolUI.GetComponent<Canvas>();
             //canvas.enabled = true;

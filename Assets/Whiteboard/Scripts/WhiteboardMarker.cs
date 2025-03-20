@@ -4,12 +4,14 @@ using System.Linq;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+//using Unity.Netcode;
 
 public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Transform _tip;
     [SerializeField] private int _penSize = 5;
     [SerializeField] private Transform _whiteboardTransform;
+    public TextureSyncManager _textureSyncManager;
 
     private Renderer _renderer;
     private Color[] _colors;
@@ -22,10 +24,11 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     //private Quaternion _lastTouchRot;
 
     private Camera _playerCamera;
-    private bool _isHolding = false;
+    public bool _isHolding = false;
     private bool _isHovering = false;
     private bool _isSnapped = false;
     private Vector3 _offset;
+    private Card card;
 
     void Start()
     {
@@ -61,13 +64,16 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     void Update()
     {
         _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
-        transform.rotation = Quaternion.Euler(0, 90, 90);
-        
+        transform.localRotation = Quaternion.Euler(90, 180, 0);// 90);
+        card = transform.parent.GetComponentInChildren<Card>();
+        Quaternion quat = card.GetWorldQuatRot();
+        transform.rotation *= quat;
+
 #if UNITY_ANDROID
         Draw();
         //Debug.Log("Android");
 #else
-        if(_isHolding && Input.GetMouseButtonDown(0))
+        if (_isHolding && Input.GetMouseButtonDown(0))
         {
             DropPen();
         }
@@ -91,10 +97,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
         else if(_isHolding && !_isSnapped)
         {
             MovePenWithMouse();
-        }
-        
-
-        
+        }     
     #endif
     }
 
@@ -115,13 +118,29 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     private void MovePenWithMouse()
     {
-        if (_playerCamera == null) return;
+        //transform.position = new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, _whiteboardTransform.position.z - 0.8f);
+        if (_playerCamera == null || _whiteboardTransform == null) 
+            return;
 
-        Vector3 mouseWorldPosition = _playerCamera.ScreenToWorldPoint(
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, _whiteboardTransform.position.z - 0.8f) // Adjust depth dynamically
-        );
+        // Get the normal of the whiteboard
+        card = transform.parent.GetComponentInChildren<Card>();
+        Vector3 whiteboardNormal = card.GetNormal(); // Assuming forward is the normal direction
 
-        transform.position = new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, _whiteboardTransform.position.z - 0.8f);
+        // Create a plane representing the whiteboard's surface
+        Plane whiteboardPlane = new Plane(whiteboardNormal, _whiteboardTransform.position);
+        
+        // Convert mouse position to world space ray
+        Ray ray = _playerCamera.ScreenPointToRay(Input.mousePosition);
+
+        // Find intersection of the ray with the whiteboard's plane
+        if (whiteboardPlane.Raycast(ray, out float distance))
+        {
+            // Get the world position where the mouse ray hits the whiteboard plane
+            Vector3 hitPoint = ray.GetPoint(distance);
+
+            // Set the pen's position to the hit point (so it "snaps" onto the board)
+            transform.position = hitPoint - 0.8f * whiteboardNormal;
+        }
     }
 
     private Vector3 GetMouseWorldPosition()
@@ -138,9 +157,27 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
 
 #if UNITY_ANDROID
-        if (transform.position.z > _whiteboardTransform.position.z - 2.0f ||
-            transform.position.z <= _whiteboardTransform.position.z - 0.8f)
-            transform.position = new Vector3(transform.position.x, transform.position.y, _whiteboardTransform.position.z - 0.8f);
+        if (_playerCamera == null || _whiteboardTransform == null) return;
+
+        // Get the normal of the whiteboard
+        card = transform.parent.GetComponentInChildren<Card>();
+        Vector3 whiteboardNormal = card.GetNormal(); // Assuming forward is the normal direction
+
+        // Create a plane representing the whiteboard's surface
+        Plane whiteboardPlane = new Plane(whiteboardNormal, _whiteboardTransform.position);
+        
+        // Convert VR controller position to world space ray
+        Ray ray = new Ray(transform.position, -transform.forward);
+
+        // Find intersection of the ray with the whiteboard's plane
+        if (whiteboardPlane.Raycast(ray, out float distance))
+        {
+            // Get the world position where the mouse ray hits the whiteboard plane
+            Vector3 hitPoint = ray.GetPoint(distance);
+
+            // Set the pen's position to the hit point (so it "snaps" onto the board)
+            transform.position = hitPoint - 0.8f * whiteboardNormal;
+        }
 #endif
         if (Physics.Raycast(_tip.position, transform.up, out _touch, _tipHeight))
         {
@@ -157,11 +194,12 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
                 var y = (int)(_touchPos.y * _whiteboard.textureSize.y - (_penSize / 2));
 
                 // Out of bounds check
-                if (x < 0 || x >= _whiteboard.textureSize.x ||
-                    y < 0 || y >= _whiteboard.textureSize.y)
+                if (x < 0 || x + (_penSize) > _whiteboard.textureSize.x ||
+                    y < 0 || y + (_penSize) > _whiteboard.textureSize.y)
                 {
-                    return;
+                    return; // Stop drawing if part of the pen would go out of bounds
                 }
+
 
                 if (_touchedLastFrame)
                 {
@@ -171,17 +209,29 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
                     {
                         var lerpX = (int)Mathf.Lerp(_lastTouchPos.x, x, f);
                         var lerpY = (int)Mathf.Lerp(_lastTouchPos.y, y, f);
+
                         _whiteboard.texture.SetPixels(lerpX, lerpY, _penSize, _penSize, _colors);
                     }
 
                     //transform.rotation = _lastTouchRot;
 
                     _whiteboard.texture.Apply();
+                    //Send to network
+                    //TextureSyncManager mgr = GetComponent<TextureSyncManager>();
+                    if (_textureSyncManager != null)
+                    {
+                        Vector2 currentPos = new Vector2(x, y);
+                        _textureSyncManager.SendDrawCommandServerRpc(_lastTouchPos, currentPos, _colors, _penSize);
+                    }
+                    else
+                        Debug.Log("NetworkedCanvas is NULL");
                 }
 
+                // Set for next iterations
                 _lastTouchPos = new Vector2(x, y);
                 //_lastTouchRot = transform.rotation;
                 _touchedLastFrame = true;
+
                 return;
             }
         }
