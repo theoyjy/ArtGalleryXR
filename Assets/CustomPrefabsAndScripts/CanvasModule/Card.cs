@@ -73,6 +73,18 @@ public class Card : MonoBehaviour
 
         ClearCanvas();
         StartCoroutine(RotateCard());
+
+        Whiteboard wbm = transform.parent.GetComponentInChildren<Whiteboard>();
+        wbm.ClearWhiteboard();
+
+        try
+        {
+            transform.parent.GetComponentInChildren<TextureSyncManager>().SendClearWhiteboardOprServerRpc();
+        }
+        catch(System.Exception e)
+        {
+            Debug.LogWarning("TextureSyncManager not found on Card or its children.");
+        }
     }
 
     // Resets the MeshFilter's mesh to the empty mesh.

@@ -5,7 +5,7 @@ public class MarkerColorChanger : MonoBehaviour
     public Color newColor = Color.red; // Default color
     public GameObject tip;
     private Material markerMaterial;
-   
+
     void Start()
     {
         // Find the material named "Marker" in the Resources folder or assigned materials
