@@ -1,0 +1,110 @@
+using System.Threading.Tasks;
+using Unity.Services.Authentication;
+using Unity.Services.Core;
+using Unity.Services.Lobbies;
+using UnityEngine;
+using Unity.Services.Lobbies.Models;
+using UnityEditor.Search;
+using UnityEngine.AI;
+using System.Linq.Expressions;
+using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine.Assertions.Must;
+using UnityEngine.Rendering;
+using System.Runtime.InteropServices;
+using NUnit.Framework;
+using System.Net;
+
+public class LobbyManager : MonoBehaviour
+{
+
+    public string lobbyName;
+    public bool isLobbyServer = false;
+    public int lobbyCapacity;
+
+    public Lobby lobby;
+
+    public int lobbyCount;
+
+    public AuthenticationManager authManager;
+    public MatchmakerManager matchManager;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public async void Start()
+    {
+        authManager = GetComponent<AuthenticationManager>();
+        matchManager = GetComponent<MatchmakerManager>();
+        await UnityServices.InitializeAsync();
+
+        while (!authManager.isSignedIn)
+        {
+            await Task.Delay(1000);
+        }
+
+        QueryResponse response = await LobbyService.Instance.QueryLobbiesAsync();
+        lobbyCount = response.Results.Count;
+
+        // TODO: remove
+        // await CreateLobby("test", false, "123", 9000);
+    }
+
+    public async void JoinLobby(Lobby lobby)
+    {
+        try
+        {
+            await LobbyService.Instance.JoinLobbyByIdAsync(lobby.Id);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Could not join lobby due to Exception: " + e);
+        }
+        Debug.Log("Joined lobby: " + lobby.Data["serverIP"].Value);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    // galleryId (fixed) != lobbyId (dynamic)
+    public async Task CreateLobby(string galleryId, string playerId, bool isPrivate)
+    {
+        // TODO: maybe check if there already exists another lobby with the same galleryId
+        
+        Tuple<string, ushort> serverData = await matchManager.AllocateServer(playerId, galleryId);
+        try
+        {
+            Debug.Log("attempting to create lobby");
+            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(galleryId, lobbyCapacity, new CreateLobbyOptions
+            {
+                IsPrivate = isPrivate,
+                Data = new Dictionary<string, DataObject>{
+            { "serverIP", new DataObject(DataObject.VisibilityOptions.Public, serverData.Item1) },
+            { "serverPort", new DataObject(DataObject.VisibilityOptions.Public, serverData.Item2.ToString()) }}
+            });
+            Debug.Log("Lobby created: " + lobby.Id);
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log("Error while creating lobby");
+            Debug.Log(e.Message);
+        }
+
+
+    }
+
+
+    // should be called periodically while inside a gallery session to keep it alive
+    private async void LobbyHeartbeat()
+    {
+        while (true)
+        {
+            if (lobby == null) return;
+            await LobbyService.Instance.SendHeartbeatPingAsync(lobby.Id);
+            await Task.Delay(60 * 1000);
+        }
+    }
+}
+
