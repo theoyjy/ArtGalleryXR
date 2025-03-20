@@ -96,7 +96,7 @@ public class LobbyManager : MonoBehaviour
 
     }
 
-    async Task<List<Lobby>> QueryAvailableLobbies()
+    public async Task<List<Lobby>> QueryAvailableLobbies()
     {
         List<Lobby> lobbies = new List<Lobby>();
         QueryLobbiesOptions queryOptions = new QueryLobbiesOptions { Count = 25 };

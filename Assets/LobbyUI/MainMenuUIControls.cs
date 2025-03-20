@@ -1,10 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Services.Lobbies.Models;
+using System.Collections.Generic;
 using TMPro;
+using PlayFab.ClientModels;
+using PlayFab;
+using System.Security.Cryptography;
 public class MainMenuUIControls : MonoBehaviour
 {
     // Reference to the LobbyManager GameObject
     public LobbyManager lobbyManager;
+    public bool IfLogin;
+    public string username;
 
     /*************** BUTTONS ********************/
     // Reference to refresh public lobbies button
@@ -18,10 +25,18 @@ public class MainMenuUIControls : MonoBehaviour
 
     // Reference to logout button
     public Button logoutButton;
+
+    public Button CreateGalleryButton;
     /*******************************************/
 
+    /****************** PRIVATE ****************/
+
+
+    /*******************************************/
     private void Start()
     {
+        IfLogin = false;
+        Login();
         // Set lobby manager
         lobbyManager = GetComponent<LobbyManager>();
 
@@ -38,9 +53,10 @@ public class MainMenuUIControls : MonoBehaviour
         logoutButton = transform.Find("LogoutButton").GetComponent<Button>();
         logoutButton.onClick.AddListener(OnLogoutClicked);
     }
-    private void OnRefreshPublicClicked()
+    private async void OnRefreshPublicClicked()
     {
-        //lobbyManager.
+        List<Lobby> availableLobbies = await lobbyManager.QueryAvailableLobbies();
+
         // Clear list of existing galleries (now inactive galleries will be removed)
         // publicGalleryList.clear();
 
@@ -80,5 +96,55 @@ public class MainMenuUIControls : MonoBehaviour
     {
         // Opens are you sure dialog
         // areYouSure.Open();
+    }
+
+    private void OnCreateNewGalleryClicked()
+    {
+        while(!IfLogin)
+        {
+            Debug.Log("111111111111111111111");
+            return;
+        }
+        Debug.Log("2222222222222222222222");
+
+        string ownID = "TestPlayer001";
+        string galleryName = "Test Gallery";
+        bool isPublic = true;
+
+        SharedDataManager.CreateNewGallery(ownID, galleryName, isPublic,
+        onSuccess: () =>
+        {
+            Debug.Log("Gallery create success!");
+        },
+        onError: (error) =>
+        {
+            Debug.LogError("Gallery create failed: " + error.ErrorMessage);
+        });
+    }
+
+    //playfab login
+    void Login()
+    {
+        var request = new LoginWithCustomIDRequest
+        {
+            CustomId = SystemInfo.deviceUniqueIdentifier,
+            CreateAccount = true
+        };
+
+        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnError);
+    }
+
+    void OnLoginSuccess(LoginResult result)
+    {
+        Debug.Log("PlayFab ID: " + result.PlayFabId);
+        username = result.PlayFabId;
+        IfLogin = true;
+        OnCreateNewGalleryClicked();
+    }
+
+
+    void OnError(PlayFabError error)
+    {
+        Debug.LogError("PlayFab : " + error.GenerateErrorReport());
     }
 }
