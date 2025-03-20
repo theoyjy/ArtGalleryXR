@@ -146,7 +146,7 @@ public class MatchmakerManager : MonoBehaviour
     public async Task<Tuple<string, ushort>> AllocateServer(string playerId, string galleryId)
     {
         var players = new List<Unity.Services.Matchmaker.Models.Player> { new(playerId, new Dictionary<string, object>()) };
-        var options = new CreateTicketOptions(galleryId, new Dictionary<string, object>());
+        var options = new CreateTicketOptions("Gallery-A", new Dictionary<string, object>());
         var ticketResponse = await MatchmakerService.Instance.CreateTicketAsync(players, options);
 
         Debug.Log(ticketResponse.Id);
@@ -200,39 +200,5 @@ public class MatchmakerManager : MonoBehaviour
 
     }
 
-    async Task<List<Lobby>> QueryAvailableLobbies()
-    {
-        List<Lobby> lobbies = new List<Lobby>();
-        QueryLobbiesOptions queryOptions = new QueryLobbiesOptions { Count = 25 };
-
-        try
-        {
-            QueryResponse queryResponse = await LobbyService.Instance.QueryLobbiesAsync(queryOptions);
-            Debug.Log("Queried " + queryResponse.Results.Count + " Lobbies");
-
-            if (queryResponse.Results.Count > 0)
-            {
-                lobbies =  queryResponse.Results;
-                foreach (Lobby lobby in lobbies)
-                {
-                    string lobbyId = lobby.Id;
-                    string galleryId = lobby.Name;
-                    string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";
-                    string serverPort = lobby.Data != null && lobby.Data.ContainsKey("serverPort") ? lobby.Data["serverPort"].Value : "Unknown";
-
-                    Debug.Log($"Lobby ID: {lobbyId} attached to gallery {galleryId} - Server IP: {serverIp} | Port: {serverPort}");
-                    isServerAvailable = true;
-                }
-            }
-            else
-            {
-                Debug.Log("NO AVAILABLE LOBBIES FOUND");
-            }
-        }
-        catch (LobbyServiceException ex)
-        {
-            Debug.LogError("Error querying Lobby:" + ex.Message);
-        }
-        return lobbies;
-    }
+    
 }
