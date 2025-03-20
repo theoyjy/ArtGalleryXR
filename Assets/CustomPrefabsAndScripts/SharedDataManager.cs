@@ -29,6 +29,7 @@ public static class SharedDataManager
     // 两个模块的共享组 ID
     public static readonly string GallerySharedGroupId = "gallery";
     public static readonly string CanvaSharedGroupId = "Canva";
+    public static readonly string PlayerSharedGroupId = "player"; 
 
     #region Shared Group 状态及创建函数
 
@@ -142,11 +143,39 @@ public static class SharedDataManager
 
             PlayFabClientAPI.UpdateSharedGroupData(request, result =>
             {
-                Debug.Log($"Gallery 数据更新成功（Public），GalleryID: {gallery.GalleryID}");
+                Debug.Log($"Gallery data update success（Public），GalleryID: {gallery.GalleryID}");
                 onSuccess?.Invoke();
             }, onError);
         }, onError);
     }
+
+    //create a new gallery
+    public static void CreateNewGallery(string ownID, string galleryName, bool isPublic, Action onSuccess, Action<PlayFabError> onError)
+    {
+        // 先获取所有现有 Gallery 数据，以确定当前的 Gallery 数量
+        GetAllGalleries(galleries =>
+        {
+            // 根据现有 Gallery 数量自动生成新的 GalleryID，格式为 "gallery" + 三位数字（例如："gallery001"）
+            int newGalleryNumber = galleries.Count + 1;
+            string newGalleryID = "gallery" + newGalleryNumber.ToString("D3");
+
+            GalleryDetail newGallery = new GalleryDetail
+            {
+                GalleryID = newGalleryID,
+                GalleryName = galleryName,
+                OwnID = ownID,
+                permission = isPublic ? "public" : "private",
+                Canva = new List<string>()  
+            };
+
+            // SaveGallery API
+            SaveGallery(newGallery, onSuccess, onError);
+        }, onError);
+    }
+
+
+
+
 
     /// <summary>
     /// 获取指定 Gallery 数据。如果共享组不存在则直接报错。
