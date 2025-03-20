@@ -39,25 +39,35 @@ public class MainMenuUIControls : MonoBehaviour
     }
     private void OnRefreshPublicClicked()
     {
-        // Retrieve lobby name from input field
-        //string lobbyName = lobbyNameInputField.text;
-        //
-        //if (string.IsNullOrEmpty(lobbyName))
-        //{
-        //    Debug.LogWarning("Lobby name cannot be empty.");
-        //    return;
-        //}
-        //
-        //// Call JoinLobby function from LobbyManager
-        //lobbyManager.GetComponent<LobbyManager>().JoinLobby(lobbyName);
+        // Clear list of existing galleries (now inactive galleries will be removed)
+        // publicGalleryList.clear();
+
+        // Get new list of public lobbies
+        // allPublicGalleries = lobbyManager.getListOfGalleries(filter public);
+
+        // For each lobby create a button
+        // for (Gallery gallery : allPublicGalleries)
+        // {
+        //    galleryButton = createButton(gallery.name, gallery.players);
+        //    galleryButton.addListener(joinGalleryWithLobbyID);
+        //    publicGalleriesList.append(galleryButton);
+        // }
     }
     private void OnRefreshPrivateClicked()
     {
-        // Clear list of 
+        // Clear list of existing galleries (now inactive galleries will be removed)
+        // privateGalleryList.clear();
 
         // Get new list of private lobbies
-        
-        // Iterate over list and see if 
+        // allPrivateGalleries = lobbyManager.getListOfGalleries(filter private);
+
+        // For each lobby create a button
+        // for (Gallery gallery : allPrivateGalleries)
+        // {
+        //    galleryButton = createButton(gallery.name, gallery.players);
+        //    galleryButton.addListener(joinGalleryWithLobbyID);
+        //    privateGalleriesList.append(galleryButton);
+        // }
     }
     private void OnProfileClicked()
     {
