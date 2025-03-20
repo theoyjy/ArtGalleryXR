@@ -51,6 +51,7 @@ public class TextureSyncManager : NetworkBehaviour
     // Update intervals for full texture and strokes.
     private float strokeUpdateInterval = 0.1f; // 100 ms
 
+    bool IsClearing = false;
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -132,6 +133,14 @@ public class TextureSyncManager : NetworkBehaviour
                     {
                         ApplyStroke(whiteboard.texture, stroke);
                     }
+
+                    if(IsClearing)
+                    {
+                        whiteboard.ClearWhiteboard();
+                        IsClearing = false;
+                        continue;
+                    }
+
                     whiteboard.texture.Apply();
 
                     // Clear the buffer after processing.
@@ -336,11 +345,56 @@ public class TextureSyncManager : NetworkBehaviour
             {
                 Debug.Log("[Client] Received draw command from server.");
                 ApplyStroke(whiteboard.texture, stroke);
+                whiteboard.texture.Apply();
             }
         }
         catch (Exception e)
         {
             Debug.LogError($"[SendDrawCommandClientRpc] Error applying draw command on client: {e.Message}\n{e.StackTrace}");
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SendClearWhiteboardOprServerRpc(ServerRpcParams serverRpcParams = default)
+    {
+        try
+        {
+            Debug.Log($"[Server] Received clear command from client {serverRpcParams.Receive.SenderClientId}.");
+            strokeBuffer.Clear();
+            whiteboard.ClearWhiteboard();
+            IsClearing = true;
+
+            // Broadcast the update to all clients except the sender
+            SendClearClientRpc(new ClientRpcParams
+            {
+                Send = new ClientRpcSendParams
+                {
+                    TargetClientIds = NetworkManager.Singleton.ConnectedClientsIds
+                        .Where(id => id != serverRpcParams.Receive.SenderClientId)
+                        .ToArray()
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[SendClearWhiteboardOprServerRpc] Error receiving clear command from client: {e.Message}\n{e.StackTrace}");
+        }
+    }
+
+    [ClientRpc]
+    public void SendClearClientRpc(ClientRpcParams clientRpcParams = default)
+    {
+        try
+        {
+            if (!IsServer)
+            {
+                Debug.Log("[Client] Received clear command from server.");
+                whiteboard.ClearWhiteboard();
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[SendClearClientRpc] Error applying clear command on client: {e.Message}\n{e.StackTrace}");
         }
     }
 
@@ -359,7 +413,6 @@ public class TextureSyncManager : NetworkBehaviour
                 int lerpY = Mathf.RoundToInt(Mathf.Lerp(stroke.posStart.y, stroke.posEnd.y, f));
                 texture.SetPixels(lerpX, lerpY, stroke.brushSize, stroke.brushSize, stroke.colors);
             }
-            texture.Apply();
         }
         catch (Exception e)
         {

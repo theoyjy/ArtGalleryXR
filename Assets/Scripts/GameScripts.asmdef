@@ -11,7 +11,7 @@
         "Unity.Services.Multiplayer",
         "Unity.Services.Multiplayer.Server",
         "Unity.TextMeshPro",
-        "UnityEngine.UI"
+        "UnityUIExtensions"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
