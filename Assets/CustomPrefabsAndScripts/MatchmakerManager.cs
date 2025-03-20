@@ -14,12 +14,21 @@ using NUnit.Framework;
 using Unity.VisualScripting;
 using Unity.Netcode;
 using System.Net.Http;
+using System.Collections;
+using UnityEngine.UIElements;
+using TMPro;
 
 public class MatchmakerManager : MonoBehaviour
 {
     public bool isAllocated = false;
     public string allocatedIpAddress;
     public ushort allocatedPort;
+
+    // [SerializeField] private TMP_InputField lobbyNameField;
+    // [SerializeField] private Toggle isPrivateToggle;
+
+    public bool isPrivate = false;
+    public String lobbyName;
 
     bool isDeallocating = false;
     public string backfillIpAddress;
@@ -30,9 +39,12 @@ public class MatchmakerManager : MonoBehaviour
     private string backfillTicketId;
     private bool isBackfilling = false;
 
+    public LobbyManager lbyManager;
+
     public async void Start()
     {
         mpManager = GetComponent<MultiplayManager>();
+        lbyManager = GetComponent<LobbyManager>();
         authManager = GetComponent<AuthenticationManager>();
         await UnityServices.InitializeAsync();
         
@@ -97,6 +109,8 @@ public class MatchmakerManager : MonoBehaviour
                 CancelBackfill();
             }
         }
+
+        // await QueryAvailableServers();
     }
 
     public async void BackfillServer()
@@ -129,10 +143,10 @@ public class MatchmakerManager : MonoBehaviour
         isBackfilling = false;
     }
 
-    public async void AllocateServer()
+    public async Task<Tuple<string, ushort>> AllocateServer(string playerId, string galleryId)
     {
-        var players = new List<Unity.Services.Matchmaker.Models.Player> { new("Player1", new Dictionary<string, object>()) };
-        var options = new CreateTicketOptions("Gallery-A", new Dictionary<string, object>());
+        var players = new List<Unity.Services.Matchmaker.Models.Player> { new(playerId, new Dictionary<string, object>()) };
+        var options = new CreateTicketOptions(galleryId, new Dictionary<string, object>());
         var ticketResponse = await MatchmakerService.Instance.CreateTicketAsync(players, options);
 
         Debug.Log(ticketResponse.Id);
@@ -179,10 +193,16 @@ public class MatchmakerManager : MonoBehaviour
         mpManager.ipAddress = allocatedIpAddress;
         mpManager.port = (ushort)allocatedPort;
         mpManager.hasServerData = isAllocated;
+
+        return new Tuple<string, ushort>(allocatedIpAddress, allocatedPort);
+
+        // await lbyManager.CreateLobby(lobbyName, isPrivate, allocatedIpAddress, allocatedPort);
+
     }
 
-    async Task QueryAvailableServers()
+    async Task<List<Lobby>> QueryAvailableLobbies()
     {
+        List<Lobby> lobbies = new List<Lobby>();
         QueryLobbiesOptions queryOptions = new QueryLobbiesOptions { Count = 25 };
 
         try
@@ -192,24 +212,27 @@ public class MatchmakerManager : MonoBehaviour
 
             if (queryResponse.Results.Count > 0)
             {
-                foreach (Lobby lobby in queryResponse.Results)
+                lobbies =  queryResponse.Results;
+                foreach (Lobby lobby in lobbies)
                 {
                     string lobbyId = lobby.Id;
-                    string serverIp = lobby.Data != null && lobby.Data.ContainsKey("ip") ? lobby.Data["ip"].Value : "Unknown";
-                    string serverPort = lobby.Data != null && lobby.Data.ContainsKey("port") ? lobby.Data["port"].Value : "Unknown";
+                    string galleryId = lobby.Name;
+                    string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";
+                    string serverPort = lobby.Data != null && lobby.Data.ContainsKey("serverPort") ? lobby.Data["serverPort"].Value : "Unknown";
 
-                    Debug.Log($"Lobby ID: {lobbyId} - Server IP: {serverIp} | Port: {serverPort}");
+                    Debug.Log($"Lobby ID: {lobbyId} attached to gallery {galleryId} - Server IP: {serverIp} | Port: {serverPort}");
                     isServerAvailable = true;
                 }
             }
             else
             {
-                Debug.Log("NO AVAILABLE SERVER CURRENTLY");
+                Debug.Log("NO AVAILABLE LOBBIES FOUND");
             }
         }
         catch (LobbyServiceException ex)
         {
             Debug.LogError("Error querying Lobby:" + ex.Message);
         }
+        return lobbies;
     }
 }

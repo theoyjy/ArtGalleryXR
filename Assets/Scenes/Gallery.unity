@@ -9371,6 +9371,7 @@ GameObject:
   - component: {fileID: 1187899825}
   - component: {fileID: 1187899823}
   - component: {fileID: 1187899826}
+  - component: {fileID: 1187899827}
   m_Layer: 0
   m_Name: MultiplayManager
   m_TagString: Untagged
@@ -9415,7 +9416,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187899822}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a07c10b20c94d4a3396584d5a7487748, type: 3}
   m_Name: 
@@ -9423,10 +9424,14 @@ MonoBehaviour:
   isAllocated: 1
   allocatedIpAddress: 
   allocatedPort: 0
+  isPrivate: 1
+  lobbyName: 
   backfillIpAddress: 20.47.115.186
   backfillPort: 9100
   isServerAvailable: 1
   mpManager: {fileID: 0}
+  authManager: {fileID: 0}
+  lbyManager: {fileID: 0}
 --- !u!114 &1187899826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9442,6 +9447,22 @@ MonoBehaviour:
   lobbyName: Tim's Lobby
   isLobbyServer: 0
   lobbyCapacity: 150
+  lobbyCount: 0
+  authManager: {fileID: 0}
+  matchManager: {fileID: 0}
+--- !u!114 &1187899827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187899822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d45dfaa54744c78b60c00747196442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSignedIn: 0
 --- !u!1 &1190616309
 GameObject:
   m_ObjectHideFlags: 0
