@@ -4,7 +4,7 @@ using TMPro;
 public class MainMenuUIControls : MonoBehaviour
 {
     // Reference to the LobbyManager GameObject
-    //public GameObject lobbyManager;
+    public LobbyManager lobbyManager;
 
     /*************** BUTTONS ********************/
     // Reference to refresh public lobbies button
@@ -20,11 +20,12 @@ public class MainMenuUIControls : MonoBehaviour
     public Button logoutButton;
     /*******************************************/
 
-    /*************** INPUT FIELDS ********************/
-
     private void Start()
     {
-        // Attach click event to the button
+        // Set lobby manager
+        lobbyManager = GetComponent<LobbyManager>();
+
+        // Attach click events to the buttons
         refreshPublicGalleriesButton = transform.Find("RefreshPublicGalleriesButton").GetComponent<Button>();
         refreshPublicGalleriesButton.onClick.AddListener(OnRefreshPublicClicked);
 
@@ -39,6 +40,7 @@ public class MainMenuUIControls : MonoBehaviour
     }
     private void OnRefreshPublicClicked()
     {
+        //lobbyManager.
         // Clear list of existing galleries (now inactive galleries will be removed)
         // publicGalleryList.clear();
 
