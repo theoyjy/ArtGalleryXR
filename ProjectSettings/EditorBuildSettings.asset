@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Gallery Decagon.unity
     guid: e02836aca458341dca8455e507026293
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LoginScreen.unity
     guid: 9ca99347072c53a42a84a5cb23030313
   - enabled: 0
@@ -29,6 +29,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/LoginScreen_FixedKeyboard.unity
     guid: e6d420efaad570e49893f0e0a629756f
+  - enabled: 0
+    path: Assets/Samples/XR Interaction Toolkit/3.0.7/Spatial Keyboard/KeyboardDemo.unity
+    guid: ad3bc6be3dfc6fe4c93410327d58b369
+  - enabled: 1
+    path: Assets/Scenes/KeyboardDemo.unity
+    guid: 62eb7a9c13c04ec40bb628c3da20abb8
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 02f3598b1640c4b2e8e15d1f52bf2fbc, type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: 27cb7a0c542a6407a9838de7d4b3ad07, type: 2}

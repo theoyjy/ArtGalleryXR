@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard; // ✅ 解决找不到 XRKeyboardDisplay
+using UnityEngine.XR;
 
 public class VRKeyboardManager : MonoBehaviour
 {

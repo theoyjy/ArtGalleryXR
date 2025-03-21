@@ -4,6 +4,8 @@ using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.XR;
+using System.Collections.Generic;
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -13,11 +15,31 @@ public class PlayFabManager : MonoBehaviour
     public Text messageText;
     public GameObject loginUI;
 
+    private bool isVRController;
+
     public static bool IsLoginActive = true;
 
     private void Start()
     {
         ShowLoginScreen(); // Block the inputs using deltaTime
+    }
+    private void Update()
+    {
+        if (!isVRController)
+        {
+            if (XRSettings.enabled)
+            {
+                var inputDevices = new List<InputDevice>();
+                InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Controller, inputDevices);
+
+                if (inputDevices.Count > 0)
+                {
+                    Time.timeScale = 1;
+                    isVRController = true;
+                }
+            }
+        }
+        
     }
 
     private void ShowLoginScreen()
@@ -25,8 +47,10 @@ public class PlayFabManager : MonoBehaviour
         loginUI.SetActive(true); // Show login UI
         IsLoginActive = true;
         Cursor.lockState = CursorLockMode.None; // set cursor visible
-        Cursor.visible = true;
-        //Time.timeScale = 0; // Pause game
+        Cursor.visible = true;    
+
+        isVRController = false;
+        Time.timeScale = 0; // Pause game
     }
 
     private void HideLoginScreen()
