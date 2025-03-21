@@ -43,7 +43,7 @@ public class MultiplayManager : MonoBehaviour
 
     IEnumerator waitForServerConfiguration() {
         yield return new WaitUntil(() => hasServerData);
-        JoinToServer();
+        // JoinToServer();
     }
 
 
@@ -60,17 +60,14 @@ public class MultiplayManager : MonoBehaviour
 #endif
     }
 
-    private void OnApplicationQuit()
-    {
-        DisconnectFromServer();
-    }
 
-    public void JoinToServer()
+
+    public void JoinToServer(string serverIp, ushort serverPort)
     {
         UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
-        transport.SetConnectionData(ipAddress, port);
+        transport.SetConnectionData(serverIp, serverPort);
         NetworkManager.Singleton.StartClient();
-        Debug.Log("join to server called");
+        Debug.Log($"Joined server: {serverIp}:{serverPort}");
     }
 
     public void DisconnectFromServer()
