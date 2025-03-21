@@ -6,7 +6,7 @@ using TMPro;
 using PlayFab.ClientModels;
 using PlayFab;
 using System.Security.Cryptography;
-public class MainMenuUIControls : MonoBehaviour
+public class LobbyPanelControls : MonoBehaviour
 {
     // Reference to the LobbyManager GameObject
     public LobbyManager lobbyManager;
@@ -26,7 +26,7 @@ public class MainMenuUIControls : MonoBehaviour
     // Reference to logout button
     public Button logoutButton;
 
-    public Button CreateGalleryButton;
+    public Button createGalleryButton;
     /*******************************************/
 
     /****************** PRIVATE ****************/
@@ -52,10 +52,14 @@ public class MainMenuUIControls : MonoBehaviour
 
         logoutButton = transform.Find("LogoutButton").GetComponent<Button>();
         logoutButton.onClick.AddListener(OnLogoutClicked);
+
+        createGalleryButton = transform.Find("CreateNewGalleryButton").GetComponent<Button>();
+        createGalleryButton.onClick.AddListener(OnCreateGalleryClicked);
     }
-    private async void OnRefreshPublicClicked()
+    private void OnRefreshPublicClicked()
     {
-        List<Lobby> availableLobbies = await lobbyManager.QueryAvailableLobbies();
+        Debug.Log("ACK: Clicked on refresh public galleries button");
+        //List<Lobby> availableLobbies = await lobbyManager.QueryAvailableLobbies();
 
         // Clear list of existing galleries (now inactive galleries will be removed)
         // publicGalleryList.clear();
@@ -73,6 +77,7 @@ public class MainMenuUIControls : MonoBehaviour
     }
     private void OnRefreshPrivateClicked()
     {
+        Debug.Log("ACK: Clicked on refresh private galleries button");
         // Clear list of existing galleries (now inactive galleries will be removed)
         // privateGalleryList.clear();
 
@@ -89,37 +94,40 @@ public class MainMenuUIControls : MonoBehaviour
     }
     private void OnProfileClicked()
     {
+        Debug.Log("ACK: Clicked on profile button");
         // Open profile UI
         // profileReference.Open();
     }
     private void OnLogoutClicked()
     {
+        Debug.Log("ACK: Clicked on logout button");
         // Opens are you sure dialog
         // areYouSure.Open();
     }
 
-    private void OnCreateNewGalleryClicked()
+    private void OnCreateGalleryClicked()
     {
-        while(!IfLogin)
-        {
-            Debug.Log("111111111111111111111");
-            return;
-        }
-        Debug.Log("2222222222222222222222");
+        Debug.Log("ACK: Clicked on create new gallery button");
+        //while (!IfLogin)
+        //{
+        //    Debug.Log("111111111111111111111");
+        //    return;
+        //}
+        //Debug.Log("2222222222222222222222");
 
-        string ownID = "TestPlayer001";
-        string galleryName = "Test Gallery";
-        bool isPublic = true;
+        //string ownID = "TestPlayer001";
+        //string galleryName = "Test Gallery";
+        //bool isPublic = true;
 
-        SharedDataManager.CreateNewGallery(ownID, galleryName, isPublic,
-        onSuccess: () =>
-        {
-            Debug.Log("Gallery create success!");
-        },
-        onError: (error) =>
-        {
-            Debug.LogError("Gallery create failed: " + error.ErrorMessage);
-        });
+        //SharedDataManager.CreateNewGallery(ownID, galleryName, isPublic,
+        //onSuccess: () =>
+        //{
+        //    Debug.Log("Gallery create success!");
+        //},
+        //onError: (error) =>
+        //{
+        //    Debug.LogError("Gallery create failed: " + error.ErrorMessage);
+        //});
     }
 
     //playfab login
@@ -139,9 +147,8 @@ public class MainMenuUIControls : MonoBehaviour
         Debug.Log("PlayFab ID: " + result.PlayFabId);
         username = result.PlayFabId;
         IfLogin = true;
-        OnCreateNewGalleryClicked();
+        OnCreateGalleryClicked();
     }
-
 
     void OnError(PlayFabError error)
     {
