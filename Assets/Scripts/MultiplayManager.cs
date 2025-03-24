@@ -58,7 +58,8 @@ public class MultiplayManager : MonoBehaviour
         UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         transport.SetConnectionData(ipAddress, port);
 
-        NetworkManager.Singleton.StartClient();
+        //NetworkManager.Singleton.StartClient();
+        NetworkManager.Singleton.StartHost();
     }
 
 }
