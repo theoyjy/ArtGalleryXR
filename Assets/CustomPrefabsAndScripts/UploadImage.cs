@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.IO;
 using System.Security.Cryptography;
@@ -83,12 +83,15 @@ public class UploadImage : MonoBehaviour
             {
                 Debug.Log("Upload Request Success: " + request.downloadHandler.text);
                 string signedUrl = ExtractSignedUrl(request.downloadHandler.text);
-                Debug.Log("Image URL: " + signedUrl);
                 if (!string.IsNullOrEmpty(signedUrl))
                 {
                     Debug.Log("Uploading file to signed URL...");
                     StartCoroutine(UploadToSignedUrl(signedUrl, pngData));
                 }
+
+                string download_url = ExtractContentLink(request.downloadHandler.text);
+                Debug.Log(download_url);
+                
             }
             else
             {
@@ -147,6 +150,20 @@ public class UploadImage : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError("Error parsing signed URL: " + e.Message);
+            return null;
+        }
+    }
+
+    private string ExtractContentLink(string jsonResponse)
+    {
+        try
+        {
+            var json = JObject.Parse(jsonResponse);
+            return json["content_link"]?.ToString(); // ✅ Extract direct download URL
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error parsing content link: " + e.Message);
             return null;
         }
     }
