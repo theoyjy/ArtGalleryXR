@@ -55,7 +55,7 @@ public class StabilityAIImage : MonoBehaviour
     public IEnumerator GenerateAIImage(string prompt)
     {
         this.prompt = prompt;
-        apiKey = Environment.GetEnvironmentVariable("STABILITY_API_KEY");
+        apiKey = "sk-uid5gUNQFyUvpwNUIzIfCC36dmgorwiIknlW3yR895Jydkih";
         Debug.Log("GenerateAIImage with prompt: "+prompt);
         Debug.Log(apiKey);
         string url = "https://api.stability.ai/v2beta/stable-image/generate/core";
@@ -139,6 +139,7 @@ public class StabilityAIImage : MonoBehaviour
         if (texture.LoadImage(imageData))
         {
             Debug.Log("Setting Texture");
+            texture = whiteboard.HandleFlip(texture);
             whiteboard.texture = texture;
             targetRenderer.material.mainTexture = texture;
             textureSyncManager.SendTextureToServer();
