@@ -426,8 +426,9 @@ GameObject:
   - component: {fileID: 476160854003359639}
   - component: {fileID: 6639842958558287515}
   - component: {fileID: 1634951125961218949}
+  - component: {fileID: 5869413120581753032}
   m_Layer: 5
-  m_Name: PasswordPanel
+  m_Name: EnterPasswordPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -496,6 +497,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5869413120581753032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795210720157905488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0da43b00ceb7f840a84bac37f5709fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &887207411197049106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2863,7 +2876,7 @@ RectTransform:
   m_Father: {fileID: 794885044051155839}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6786,8 +6799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lobbyManager: {fileID: 0}
-  refreshPublicGalleriesButton: {fileID: 0}
-  refreshPrivateGalleriesButton: {fileID: 0}
+  refreshGalleriesButton: {fileID: 0}
   profileButton: {fileID: 0}
   logoutButton: {fileID: 0}
   createGalleryButton: {fileID: 0}
@@ -6892,6 +6904,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da327bc51208df4c8e6814e859d6956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lobbyManager: {fileID: 0}
+  eyeOpenIcon: {fileID: 21300000, guid: a30cde819f55004458cdc10a9e6d198a, type: 3}
+  eyeClosedIcon: {fileID: 21300000, guid: d2e610e884aa3ef42af1ff6207fa8dc4, type: 3}
 --- !u!1 &8677545328795502429
 GameObject:
   m_ObjectHideFlags: 0

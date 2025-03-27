@@ -58,7 +58,7 @@ public class LobbyManager : MonoBehaviour
         // await Task.Delay(1000);
         // await CreateLobby("test5", "player5", 12, false, "");
         // await Task.Delay(1000);
-        List<Lobby> lobbyResults = await QueryAvailableLobbies();
+         List<Lobby> lobbyResults = await QueryAvailableLobbies();
         // lobby = lobbyResults[0];
         // await JoinLobby(lobby);
     }

@@ -12,11 +12,8 @@ public class LobbyPanelControls : MonoBehaviour
     public LobbyManager lobbyManager;
 
     /*************** BUTTONS ********************/
-    // Reference to refresh public lobbies button
-    public Button refreshPublicGalleriesButton;
-
-    // Reference to refresh private button
-    public Button refreshPrivateGalleriesButton;
+    // Reference to refresh lobbies button
+    public Button refreshGalleriesButton;
 
     // Reference to profile button
     public Button profileButton;
@@ -35,16 +32,13 @@ public class LobbyPanelControls : MonoBehaviour
     private void Start()
     {
         // Set lobby manager
-        lobbyManager = GetComponent<LobbyManager>();
-        if (!lobbyManager)
-            Debug.LogError("Lobby Panel: no lobby manager found");
+        //lobbyManager = GetComponent<LobbyManager>();
+        //if (!lobbyManager)
+        //    Debug.LogError("Lobby Panel: no lobby manager found");
 
         // Attach click events to the buttons
-        refreshPublicGalleriesButton = transform.Find("RefreshPublicGalleriesButton").GetComponent<Button>();
-        refreshPublicGalleriesButton.onClick.AddListener(OnRefreshPublicClicked);
-
-        refreshPrivateGalleriesButton = transform.Find("RefreshPrivateGalleriesButton").GetComponent<Button>();
-        refreshPrivateGalleriesButton.onClick.AddListener(OnRefreshPrivateClicked);
+        refreshGalleriesButton = transform.Find("RefreshGalleriesButton").GetComponent<Button>();
+        refreshGalleriesButton.onClick.AddListener(OnRefreshGalleriesClicked);
 
         profileButton = transform.Find("ProfileButton").GetComponent<Button>();
         profileButton.onClick.AddListener(OnProfileClicked);
@@ -55,9 +49,9 @@ public class LobbyPanelControls : MonoBehaviour
         createGalleryButton = transform.Find("CreateNewGalleryButton").GetComponent<Button>();
         createGalleryButton.onClick.AddListener(OnCreateGalleryClicked);
     }
-    private void OnRefreshPublicClicked()
+    private void OnRefreshGalleriesClicked()
     {
-        Debug.Log("ACK: Clicked on refresh public galleries button");
+        Debug.Log("ACK: Clicked on refresh galleries button");
         //List<Lobby> availableLobbies = await lobbyManager.QueryAvailableLobbies();
 
         // Clear list of existing galleries (now inactive galleries will be removed)
@@ -72,23 +66,6 @@ public class LobbyPanelControls : MonoBehaviour
         //    galleryButton = createButton(gallery.name, gallery.players);
         //    galleryButton.addListener(joinGalleryWithLobbyID);
         //    publicGalleriesList.append(galleryButton);
-        // }
-    }
-    private void OnRefreshPrivateClicked()
-    {
-        Debug.Log("ACK: Clicked on refresh private galleries button");
-        // Clear list of existing galleries (now inactive galleries will be removed)
-        // privateGalleryList.clear();
-
-        // Get new list of private lobbies
-        // allPrivateGalleries = lobbyManager.getListOfGalleries(filter private);
-
-        // For each lobby create a button
-        // for (Gallery gallery : allPrivateGalleries)
-        // {
-        //    galleryButton = createButton(gallery.name, gallery.players);
-        //    galleryButton.addListener(joinGalleryWithLobbyID);
-        //    privateGalleriesList.append(galleryButton);
         // }
     }
     private void OnProfileClicked()
@@ -128,4 +105,27 @@ public class LobbyPanelControls : MonoBehaviour
         //    Debug.LogError("Gallery create failed: " + error.ErrorMessage);
         //});
     }
+
+    //public RectTransform contentPanel;   // The ScrollRect's content panel
+    //public Button buttonPrefab;          // Assign a Button prefab with TMP_Text
+
+    //// Call this function to add buttons dynamically
+    //public void AddLobbyToList(string buttonText)
+    //{
+    //    // Instantiate a button
+    //    Button newButton = Instantiate(buttonPrefab, contentPanel);
+
+    //    // Set button dimensions (180x32 pixels)
+    //    RectTransform rt = newButton.GetComponent<RectTransform>();
+    //    rt.sizeDelta = new Vector2(180, 32);
+
+    //    // Set the button text
+    //    TMP_Text text = newButton.GetComponentInChildren<TMP_Text>();
+    //    text.text = buttonText;
+
+    //    // Optionally, add button click listener here
+    //    newButton.onClick.AddListener(() => {
+    //        Debug.Log("Button clicked: " + buttonText);
+    //    });
+    //}
 }
