@@ -19,50 +19,15 @@ public class Whiteboard : MonoBehaviour
         projectPath = Application.dataPath.Replace("/Assets", "/exports/"); // Get root project folder
         saveFileName = "testImageSave.png";
         savePath = Path.Combine(projectPath, saveFileName);
-        var r = GetComponent<Renderer>();
-        texture = new Texture2D((int)textureSize.x, (int)textureSize.y);    
 
-        //// Create a small white texture (1x1) instead of modifying every pixel manually
-        Texture2D whiteTex = new Texture2D(1, 1, TextureFormat.RGBA32, false);
-
-        //// Fill the texture with white
-        Color[] whitePixels = new Color[(int)(textureSize.x * textureSize.y)];
-        for (int i = 0; i < whitePixels.Length; i++)
-        {
-            whitePixels[i] = Color.white;
-        }
-        texture.SetPixels(whitePixels);
-        texture.Apply(); // Apply the changes
-
-        //// Assign the texture to the material
-        r.material.mainTexture = texture;
-    }
-
-    public void ClearWhiteboard()
-    {
-        if (texture == null)
-        {
-            Debug.LogWarning("Whiteboard texture is null.");
-            return;
-        }
-
-        // Create an array filled with white pixels.
-        Color[] whitePixels = new Color[texture.width * texture.height];
-        for (int i = 0; i < whitePixels.Length; i++)
-        {
-            whitePixels[i] = Color.white;
-        }
-
-        // Apply the white color array to the texture and update it.
-        texture.SetPixels(whitePixels);
-        texture.Apply();
-
-        Debug.Log("Whiteboard cleared.");
+        whiteboardRenderer = GetComponent<Renderer>();
+        texture = new Texture2D((int)textureSize.x, (int)textureSize.y);
+        whiteboardRenderer.material.mainTexture = texture;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             SaveTextureToPNG(saveFileName);
         }
@@ -89,8 +54,6 @@ public class Whiteboard : MonoBehaviour
         Debug.Log($"Saved whiteboard image to: {savePath}");
     }
 
-    
-
     void LoadImageFromFile(string readFileName)
     {
         string filePath = Path.Combine(projectPath, readFileName);
@@ -113,4 +76,6 @@ public class Whiteboard : MonoBehaviour
             Debug.LogError("Failed to load image file.");
         }
     }
+
+    // Test: material changing function for eg
 }

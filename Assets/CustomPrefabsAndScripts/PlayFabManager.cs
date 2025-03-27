@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -153,10 +153,10 @@ public class PlayFabManager : MonoBehaviour
             messageText.text = "Login Successful";
             Debug.Log("Login Successful");
 
-            // ±£´æÓÃ»§ÃûÖ®Ç°£¬²»Òþ²Ø½çÃæ
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½
             SaveUsername(username, password);
 
-            // µÇÂ¼³É¹¦ºó¼ÓÔØÐÂ³¡¾°
+            // ï¿½ï¿½Â¼ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â³ï¿½ï¿½ï¿½
             LoadAnotherScene();
 
         }, error =>

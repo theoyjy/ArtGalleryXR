@@ -1,4 +1,4 @@
-#if TEXT_MESH_PRO_PRESENT || (UGUI_2_0_PRESENT && UNITY_6000_0_OR_NEWER)
+﻿#if TEXT_MESH_PRO_PRESENT || (UGUI_2_0_PRESENT && UNITY_6000_0_OR_NEWER)
 using TMPro;
 using UnityEngine.Events;
 
@@ -267,6 +267,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
             // Update private keyboard
             m_ActiveKeyboard = m_Keyboard;
 
+            m_Keyboard.GetComponent<XRKeyboardDisplay>().inputField.contentType = m_InputField.contentType;
+
             if (m_ActiveKeyboard != null && (observeKeyboard || m_AlwaysObserveKeyboard))
                 StartObservingKeyboard(m_ActiveKeyboard);
         }
@@ -333,6 +335,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
             m_OnKeyboardOpened.Invoke();
 
             StartObservingKeyboard(m_ActiveKeyboard);
+
+            
         }
 
         void OnTextSubmit(KeyboardTextEventArgs args)
