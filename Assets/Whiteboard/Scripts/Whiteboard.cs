@@ -49,10 +49,10 @@ public class Whiteboard : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    SaveTextureToPNG(saveFileName);
-        //}
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            SaveTextureToPNG(saveFileName);
+        }
         if (Input.GetKeyDown(KeyCode.I))
         {
             LoadImageFromFile("testImageRead.png");
@@ -88,32 +88,13 @@ public class Whiteboard : MonoBehaviour
             return;
         }
 
-        int width = texture.width;
-        int height = texture.height;
-
-        // Get all pixels from the texture texture.
-        Color[] originalPixels = texture.GetPixels();
-        Color[] rotatedPixels = new Color[originalPixels.Length];
-
-        // Re-map each pixel to its 180?rotated position.
-        // The pixel at (x, y) goes to (width - 1 - x, height - 1 - y).
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                int originalIndex = y * width + x;
-                int rotatedIndex = (height - 1 - y) * width + (width - 1 - x);
-                rotatedPixels[rotatedIndex] = originalPixels[originalIndex];
-            }
-        }
-
         // Create a new texture and set the rotated pixel data.
-        Texture2D rotatedTexture = new Texture2D(width, height, texture.format, false);
-        rotatedTexture.SetPixels(rotatedPixels);
-        rotatedTexture.Apply();
+        Texture2D rotatedTexture = HandleFlip(texture);
+
 
         // Encode texture into PNG format
         byte[] bytes = rotatedTexture.EncodeToPNG();
+       
 
         // Write to file
         File.WriteAllBytes(savePath, bytes);
@@ -137,32 +118,8 @@ public class Whiteboard : MonoBehaviour
 
         if (texture.LoadImage(fileData)) // Load image data into texture
         {
-            int width = texture.width;
-            int height = texture.height;
-
-            // Get all pixels from the texture texture.
-            Color[] originalPixels = texture.GetPixels();
-            Color[] rotatedPixels = new Color[originalPixels.Length];
-
-            // Re-map each pixel to its 180?rotated position.
-            // The pixel at (x, y) goes to (width - 1 - x, height - 1 - y).
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    int originalIndex = y * width + x;
-                    int rotatedIndex = (height - 1 - y) * width + (width - 1 - x);
-                    rotatedPixels[rotatedIndex] = originalPixels[originalIndex];
-                }
-            }
-
             // Create a new texture and set the rotated pixel data.
-            Texture2D rotatedTexture = new Texture2D(width, height, texture.format, false);
-            rotatedTexture.SetPixels(rotatedPixels);
-            rotatedTexture.Apply();
-
-            // Encode texture into PNG format
-            texture = rotatedTexture;
+            texture = HandleFlip(texture);
             whiteboardRenderer.material.mainTexture = texture;
             Debug.Log($"Loaded whiteboard image from: {filePath}");
         }
@@ -176,5 +133,33 @@ public class Whiteboard : MonoBehaviour
     {
         texture = newTexture;
         whiteboardRenderer.material.mainTexture = texture;
+    }
+
+    public Texture2D HandleFlip(Texture2D texture)
+    {
+        int width = texture.width;
+        int height = texture.height;
+
+        // Get all pixels from the texture texture.
+        Color[] originalPixels = texture.GetPixels();
+        Color[] rotatedPixels = new Color[originalPixels.Length];
+
+        // Re-map each pixel to its 180?rotated position.
+        // The pixel at (x, y) goes to (width - 1 - x, height - 1 - y).
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                int originalIndex = y * width + x;
+                int rotatedIndex = (height - 1 - y) * width + (width - 1 - x);
+                rotatedPixels[rotatedIndex] = originalPixels[originalIndex];
+            }
+        }
+
+        // Create a new texture and set the rotated pixel data.
+        Texture2D rotatedTexture = new Texture2D(width, height, texture.format, false);
+        rotatedTexture.SetPixels(rotatedPixels);
+        rotatedTexture.Apply();
+        return rotatedTexture;
     }
 }
