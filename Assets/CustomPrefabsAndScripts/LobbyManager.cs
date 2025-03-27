@@ -48,12 +48,22 @@ public class LobbyManager : MonoBehaviour
         lobbyCount = response.Results.Count;
 
         // TODO: remove
-        await CreateLobby("test", "player", 8, false);
-        await Task.Delay(10000);
-        await QueryAvailableLobbies();
+        // await CreateLobby("test", "player", 8, false, "");
+        // await Task.Delay(1000);
+        // await CreateLobby("test2private", "player2", 12, true, "898804djk");
+        // await Task.Delay(1000);
+        // await CreateLobby("test3", "player3", 12, false, "");
+        // await Task.Delay(1000);
+        // await CreateLobby("test4", "player4", 12, false, "");
+        // await Task.Delay(1000);
+        // await CreateLobby("test5", "player5", 12, false, "");
+        // await Task.Delay(1000);
+        List<Lobby> lobbyResults = await QueryAvailableLobbies();
+        // lobby = lobbyResults[0];
+        // await JoinLobby(lobby);
     }
 
-    public async void JoinLobby(Lobby lobby)
+    public async Task JoinLobby(Lobby lobby)
     {
         try
         {
@@ -63,12 +73,11 @@ public class LobbyManager : MonoBehaviour
         {
             Debug.Log("Could not join lobby due to Exception: " + e);
         }
-        Debug.Log("Joined lobby: " + lobby.Data["serverIP"].Value);
 
         string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";
         ushort serverPort = (ushort)(lobby.Data != null && lobby.Data.ContainsKey("serverPort") ? Convert.ToUInt16(lobby.Data["serverPort"].Value) : 0);
-
         mpManager.JoinToServer(serverIp, serverPort);
+        Debug.Log($"Joined lobby with server: {serverIp}:{serverPort}");
     }
 
     // Update is called once per frame
@@ -78,27 +87,33 @@ public class LobbyManager : MonoBehaviour
     }
 
     // galleryId (fixed) != lobbyId (dynamic)
-    public async Task CreateLobby(string galleryId, string playerId, int lobbyCapacity, bool isPrivate)
+    public async Task CreateLobby(string galleryId, string playerId, int lobbyCapacity, bool isPrivate, string password)
     {
         // TODO: maybe check if there already exists another lobby with the same galleryId
 
         Tuple<string, ushort> serverData = await matchManager.AllocateServer(playerId, galleryId);
         try
         {
-            Debug.Log("attempting to create lobby");
-            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(galleryId, lobbyCapacity, new CreateLobbyOptions
+            CreateLobbyOptions lobbyOptions = new CreateLobbyOptions
             {
-                IsPrivate = isPrivate,
                 Data = new Dictionary<string, DataObject>{
-            { "serverIP", new DataObject(DataObject.VisibilityOptions.Public, serverData.Item1) },
-            { "serverPort", new DataObject(DataObject.VisibilityOptions.Public, serverData.Item2.ToString()) }}
-            });
+                    { "serverIP", new DataObject(DataObject.VisibilityOptions.Public, serverData.Item1) },
+                    { "serverPort", new DataObject(DataObject.VisibilityOptions.Public, serverData.Item2.ToString()) }
+                }
+            };
+
+            if (isPrivate)
+            {
+                lobbyOptions.Password = password;
+            }
+
+            Debug.Log("attempting to create lobby");
+            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(galleryId, lobbyCapacity, lobbyOptions);
             Debug.Log("Lobby created: " + lobby.Id);
         }
         catch (LobbyServiceException e)
         {
-            Debug.Log("Error while creating lobby");
-            Debug.Log(e.Message);
+            Debug.Log("Error while creating lobby: " + e);
         }
     }
 
@@ -119,7 +134,7 @@ public class LobbyManager : MonoBehaviour
                 {
                     string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";
                     string serverPort = lobby.Data != null && lobby.Data.ContainsKey("serverPort") ? lobby.Data["serverPort"].Value : "Unknown";
-                    Debug.Log($"Lobby ID: {lobby.Id} attached to gallery {lobby.Name} with capacity {lobby.MaxPlayers} - Server IP: {serverIp} | Port: {serverPort}");
+                    Debug.Log($"{(lobby.HasPassword ? "(PRIVATE)" : "(PUBLIC)")} Lobby ID: {lobby.Id} created by: {lobby.HostId} attached to: Gallery '{lobby.Name}' with capacity: {lobby.MaxPlayers}, Member count: {lobby.Players.Count} - Server IP: {serverIp} | Port: {serverPort}");
                 }
             }
             else
@@ -129,7 +144,7 @@ public class LobbyManager : MonoBehaviour
         }
         catch (LobbyServiceException ex)
         {
-            Debug.LogError("Error querying Lobby:" + ex.Message);
+            Debug.LogError("Error querying Lobby:" + ex);
         }
         return lobbies;
     }
