@@ -207,6 +207,6 @@ public class PlayFabManager : MonoBehaviour
     private void LoadAnotherScene()
     {
         Debug.Log("Loading Lobby...");
-        SceneManager.LoadScene("Lobby");  // 请替换为目标场景名称
+        SceneManager.LoadScene("Lobby");
     }
 }
