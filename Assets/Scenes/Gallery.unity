@@ -7563,6 +7563,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423625558452385250, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+      propertyPath: whiteboard
+      value: 
+      objectReference: {fileID: 797639108}
+    - target: {fileID: 2423625558452385250, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+      propertyPath: textureSyncManager
+      value: 
+      objectReference: {fileID: 797639107}
     - target: {fileID: 2853718943783438338, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7696,6 +7704,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+--- !u!114 &797639107 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6481459381182762346, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+  m_PrefabInstance: {fileID: 797639106}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d6671701259594395f50591a42dfa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &797639108 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7086280231193675317, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+  m_PrefabInstance: {fileID: 797639106}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff32982d426dd5e438a03359880ac2ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &802934789
 PrefabInstance:
   m_ObjectHideFlags: 0
