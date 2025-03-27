@@ -25,7 +25,7 @@ public class PlatformChecker : MonoBehaviour
         if (IsVRDevicePresent())
         {
             Debug.Log("VR Headset detected. Loading VR Scene...");
-            SceneManager.LoadScene("Lobby");  // 修改为你的 VR 场景名称
+            SceneManager.LoadScene("LoginUI");  // 修改为你的 VR 场景名称
         }
         else
         {
