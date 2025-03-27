@@ -267,6 +267,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
             // Update private keyboard
             m_ActiveKeyboard = m_Keyboard;
 
+            m_Keyboard.GetComponent<XRKeyboardDisplay>().inputField.contentType = m_InputField.contentType;
+
             if (m_ActiveKeyboard != null && (observeKeyboard || m_AlwaysObserveKeyboard))
                 StartObservingKeyboard(m_ActiveKeyboard);
         }
@@ -333,6 +335,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
             m_OnKeyboardOpened.Invoke();
 
             StartObservingKeyboard(m_ActiveKeyboard);
+
+            
         }
 
         void OnTextSubmit(KeyboardTextEventArgs args)

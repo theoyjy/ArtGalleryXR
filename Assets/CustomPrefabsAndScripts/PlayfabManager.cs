@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.XR;
 using System.Collections.Generic;
+using System.Collections;
+
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class PlayFabManager : MonoBehaviour
     public TMP_InputField passwordInput;
     public Text messageText;
     public GameObject loginUI;
+    public GameObject functionButtons;
+    public GameObject spinner;
 
     private bool isVRController;
 
@@ -22,6 +26,7 @@ public class PlayFabManager : MonoBehaviour
     private void Start()
     {
         ShowLoginScreen(); // Block the inputs using deltaTime
+        //Time.timeScale = 0; // Pause game
     }
     private void Update()
     {
@@ -39,7 +44,11 @@ public class PlayFabManager : MonoBehaviour
                 }
             }
         }
-        
+    }
+    public void ButtonTest()
+    {
+        functionButtons.SetActive(false);
+        spinner.SetActive(true);
     }
 
     private void ShowLoginScreen()
@@ -47,10 +56,9 @@ public class PlayFabManager : MonoBehaviour
         loginUI.SetActive(true); // Show login UI
         IsLoginActive = true;
         Cursor.lockState = CursorLockMode.None; // set cursor visible
-        Cursor.visible = true;    
+        Cursor.visible = true;
 
         isVRController = false;
-        Time.timeScale = 0; // Pause game
     }
 
     private void HideLoginScreen()
@@ -86,7 +94,7 @@ public class PlayFabManager : MonoBehaviour
             Debug.Log("Register Successful");
 
             // Login
-            Login(username, password);
+            StartCoroutine(Login(username, password));
 
         }, error =>
         {
@@ -100,17 +108,24 @@ public class PlayFabManager : MonoBehaviour
         string username = userIDInput.text;
         string password = passwordInput.text;
         messageText.text = "Login Button Pressed";
+
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
             messageText.text = "ID or Password Can Not Be Empty!";
             return;
         }
-
-        Login(username, password);
+        StartCoroutine(Login(username, password));
     }
 
-    private void Login(string username, string password)
+    private IEnumerator Login(string username, string password)
     {
+        bool isLoginSuccessful = true;
+        bool isDone = true;
+
+        functionButtons.SetActive(false);
+        spinner.SetActive(true);
+
+
         var request = new LoginWithPlayFabRequest
         {
             Username = username,
@@ -123,12 +138,39 @@ public class PlayFabManager : MonoBehaviour
             Debug.Log("Login Successful");
 
             // login successful and play game
-            HideLoginScreen();
+            //HideLoginScreen();    
+            isLoginSuccessful = true;
+            isDone = true;
 
         }, error =>
         {
             messageText.text = "Login Failed: " + error.ErrorMessage;
             Debug.LogError("Login Failed: " + error.GenerateErrorReport());
+            isLoginSuccessful = false;
+            isDone = true;
         });
+
+        while (!isDone)
+        {
+            yield return null;
+        }
+        //Debug.LogError("is down");
+        // 等待0.5秒展示loading效果
+        yield return new WaitForSeconds(1.5f);
+        //loadingIcon.SetActive(false);
+
+        if (isLoginSuccessful)
+        {
+            // 播放成功动画（你可以用Animator代替SetActive）
+            //successIcon.SetActive(true);
+            //yield return new WaitForSeconds(1.0f); // 播放打钩动画的时间
+            HideLoginScreen(); // 进入游戏
+        }
+        else
+        {
+            //loginButton.interactable = true;
+            functionButtons.SetActive(false);
+            spinner.SetActive(true);
+        }
     }
 }
