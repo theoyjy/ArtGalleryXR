@@ -10,8 +10,6 @@ public class LobbyPanelControls : MonoBehaviour
 {
     // Reference to the LobbyManager GameObject
     public LobbyManager lobbyManager;
-    public bool IfLogin;
-    public string username;
 
     /*************** BUTTONS ********************/
     // Reference to refresh public lobbies button
@@ -26,6 +24,7 @@ public class LobbyPanelControls : MonoBehaviour
     // Reference to logout button
     public Button logoutButton;
 
+    // Reference to create gallery button
     public Button createGalleryButton;
     /*******************************************/
 
@@ -35,10 +34,10 @@ public class LobbyPanelControls : MonoBehaviour
     /*******************************************/
     private void Start()
     {
-        IfLogin = false;
-        Login();
         // Set lobby manager
         lobbyManager = GetComponent<LobbyManager>();
+        if (!lobbyManager)
+            Debug.LogError("Lobby Panel: no lobby manager found");
 
         // Attach click events to the buttons
         refreshPublicGalleriesButton = transform.Find("RefreshPublicGalleriesButton").GetComponent<Button>();
@@ -128,30 +127,5 @@ public class LobbyPanelControls : MonoBehaviour
         //{
         //    Debug.LogError("Gallery create failed: " + error.ErrorMessage);
         //});
-    }
-
-    //playfab login
-    void Login()
-    {
-        var request = new LoginWithCustomIDRequest
-        {
-            CustomId = SystemInfo.deviceUniqueIdentifier,
-            CreateAccount = true
-        };
-
-        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnError);
-    }
-
-    void OnLoginSuccess(LoginResult result)
-    {
-        Debug.Log("PlayFab ID: " + result.PlayFabId);
-        username = result.PlayFabId;
-        IfLogin = true;
-        OnCreateGalleryClicked();
-    }
-
-    void OnError(PlayFabError error)
-    {
-        Debug.LogError("PlayFab : " + error.GenerateErrorReport());
     }
 }

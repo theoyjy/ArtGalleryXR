@@ -254,6 +254,7 @@ MonoBehaviour:
   lobbyCount: 0
   authManager: {fileID: 0}
   matchManager: {fileID: 0}
+  mpManager: {fileID: 0}
 --- !u!114 &992618660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,6 +563,22 @@ PrefabInstance:
     - target: {fileID: 129293558566577184, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 146227104483688486, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 146227104483688486, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_MaxValue
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 146227104483688486, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_MinValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 146227104483688486, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_WholeNumbers
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 658094436495499641, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
       propertyPath: m_AnchorMax.x
