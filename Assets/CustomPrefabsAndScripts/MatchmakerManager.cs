@@ -17,6 +17,7 @@ using System.Net.Http;
 using System.Collections;
 using UnityEngine.UIElements;
 using TMPro;
+using Unity.Services.Multiplayer;
 
 public class MatchmakerManager : MonoBehaviour
 {
@@ -81,13 +82,63 @@ public class MatchmakerManager : MonoBehaviour
 #endif
     }
 
+
+    //     public async Task<Tuple<string, ushort>> AllocateServerManually()
+    // {
+    //     isAllocated = false;
+    //     allocatedIpAddress = null;
+    //     allocatedPort = 0;
+
+    //     try
+    //     {
+    //         // Request a server allocation directly from Multiplay
+    //         var allocation = await MultiplayService.Instance.RequestServerAsync();
+
+    //         if (allocation != null)
+    //         {
+    //             allocatedIpAddress = allocation.ServerIp;
+    //             allocatedPort = (ushort)allocation.ServerPort;
+    //             isAllocated = true;
+
+    //             Debug.Log($"Server manually allocated! IP: {allocatedIpAddress}, Port: {allocatedPort}");
+    //         }
+    //         else
+    //         {
+    //             Debug.LogError("Failed to manually allocate a server. Allocation returned null.");
+    //         }
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         Debug.LogError($"Error during manual server allocation: {ex.Message}");
+    //     }
+
+    //     // Update MultiplayManager with the new server data
+    //     mpManager.ipAddress = allocatedIpAddress;
+    //     mpManager.port = allocatedPort;
+    //     mpManager.hasServerData = isAllocated;
+
+    //     return new Tuple<string, ushort>(allocatedIpAddress, allocatedPort);
+    // }
+
     public async Task<Tuple<string, ushort>> AllocateServer(string playerId, string galleryId)
     {
-        var players = new List<Unity.Services.Matchmaker.Models.Player> { new(playerId, new Dictionary<string, object>()) };
-        var options = new CreateTicketOptions("Gallery-A", new Dictionary<string, object>());
-        var ticketResponse = await MatchmakerService.Instance.CreateTicketAsync(players, options);
+        isAllocated = false;
+        allocatedIpAddress = null;
+        allocatedPort = 0;
+        CreateTicketResponse ticketResponse = null;
 
-        Debug.Log(ticketResponse.Id);
+        try
+        {
+            var players = new List<Unity.Services.Matchmaker.Models.Player> { new(playerId, new Dictionary<string, object>()) };
+            var options = new CreateTicketOptions("Lobbies", new Dictionary<string, object>());
+            ticketResponse = await MatchmakerService.Instance.CreateTicketAsync(players, options);
+            Debug.Log("New Ticket Created: " + ticketResponse.Id);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
+
 
         MultiplayAssignment assignment = null;
 

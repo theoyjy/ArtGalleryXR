@@ -191,6 +191,10 @@ PrefabInstance:
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 458352789
       objectReference: {fileID: 0}
+    - target: {fileID: 4955478965381442498, guid: 09536e5132315fd4bbeefda7e5e75ea2, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 458352789
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -254,6 +258,7 @@ MonoBehaviour:
   lobbyCount: 0
   authManager: {fileID: 0}
   matchManager: {fileID: 0}
+  mpManager: {fileID: 0}
 --- !u!114 &992618660
 MonoBehaviour:
   m_ObjectHideFlags: 0
