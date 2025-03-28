@@ -11,16 +11,15 @@ public class Whiteboard : MonoBehaviour
 
     // Determine the save path
     private string projectPath;
-    private string savePath;
-    private string saveFileName;
+    //private string savePath;
+    //private string saveFileName;
     public Renderer whiteboardRenderer;
     public TextureSyncManager textureSyncManager;
+    ExtensionFilter[] extensionFilters;
 
     private void Start()
     {
-        projectPath = Application.dataPath.Replace("/Assets", "/exports"); // Get root project folder
-        saveFileName = "testImageSave.png";
-        savePath = Path.Combine(projectPath, saveFileName);
+        projectPath = Application.dataPath; // Get root project folder
         var r = GetComponent<Renderer>();
         texture = new Texture2D((int)textureSize.x, (int)textureSize.y);    
 
@@ -38,6 +37,9 @@ public class Whiteboard : MonoBehaviour
 
         //// Assign the texture to the material
         r.material.mainTexture = texture;
+
+        ExtensionFilter extensionFilter = new ExtensionFilter("Image Files", "png", "jpg", "jpeg");
+        extensionFilters = new ExtensionFilter[] { extensionFilter };
     }
 
     private void Awake()
@@ -47,13 +49,19 @@ public class Whiteboard : MonoBehaviour
             texture = new Texture2D((int)textureSize.x, (int)textureSize.y);
             Debug.Log("No texture assigned to whiteboard, creating a new one.");
         }
+
+        if(textureSyncManager == null)
+        {
+            ExtensionFilter extensionFilter = new ExtensionFilter("Image Files", "png", "jpg", "jpeg");
+            extensionFilters = new ExtensionFilter[] { extensionFilter };
+        }
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
-            SaveTextureToPNG(saveFileName);
+            SaveTextureToPNG();
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -82,7 +90,7 @@ public class Whiteboard : MonoBehaviour
         r.material.mainTexture = texture;
     }
 
-    void SaveTextureToPNG(string filename)
+    void SaveTextureToPNG()
     {
         if (texture == null)
         {
@@ -96,20 +104,24 @@ public class Whiteboard : MonoBehaviour
 
         // Encode texture into PNG format
         byte[] bytes = rotatedTexture.EncodeToPNG();
-       
+
 
         // Write to file
-        File.WriteAllBytes(savePath, bytes);
-
-        Debug.Log($"Saved whiteboard image to: {savePath}");
+        StandaloneFileBrowserWindows windows = new StandaloneFileBrowserWindows();
+        Debug.Log("projectPath: " + projectPath);
+        string selectedSavePath = windows.SaveFilePanel("Save whiteboard image", projectPath, "Canvas.png", extensionFilters);
+        if (selectedSavePath != null)
+        {
+            File.WriteAllBytes(selectedSavePath, bytes);
+            Debug.Log($"Saved whiteboard image to: {selectedSavePath}");
+        }
     }
 
     
 
     void LoadImageFromFile()
     {
-        ExtensionFilter extensionFilter = new ExtensionFilter("Image Files", "png", "jpg", "jpeg");
-        ExtensionFilter[] extensionFilters = { extensionFilter };
+
         StandaloneFileBrowserWindows windows = new StandaloneFileBrowserWindows();
         string[] paths = windows.OpenFilePanel("Select an image", "", extensionFilters, false);
         if (paths.Length > 0 && !string.IsNullOrEmpty(paths[0]))
@@ -135,7 +147,7 @@ public class Whiteboard : MonoBehaviour
         if (texture.LoadImage(fileData)) // Load image data into texture
         {
             // Create a new texture and set the rotated pixel data.
-            //texture = HandleFlip(texture);
+            texture = HandleFlip(texture);
             whiteboardRenderer.material.mainTexture = texture;
 
             // sync texture to server
