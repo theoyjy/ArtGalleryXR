@@ -8,6 +8,10 @@ using PlayFab;
 using System.Security.Cryptography;
 public class LobbyPanelControls : MonoBehaviour
 {
+
+    //temp code for login
+    public bool IfLogin;
+
     // Reference to the LobbyManager GameObject
     public LobbyManager lobbyManager;
 
@@ -31,6 +35,10 @@ public class LobbyPanelControls : MonoBehaviour
     /*******************************************/
     private void Start()
     {
+        //tempcode for login
+        IfLogin = false;
+        Login();
+
         // Set lobby manager
         //lobbyManager = GetComponent<LobbyManager>();
         //if (!lobbyManager)
@@ -84,26 +92,33 @@ public class LobbyPanelControls : MonoBehaviour
     private void OnCreateGalleryClicked()
     {
         Debug.Log("ACK: Clicked on create new gallery button");
-        //while (!IfLogin)
-        //{
-        //    Debug.Log("111111111111111111111");
-        //    return;
-        //}
-        //Debug.Log("2222222222222222222222");
+        if (!IfLogin)
+        {
+            Login();
+        }
 
-        //string ownID = "TestPlayer001";
-        //string galleryName = "Test Gallery";
-        //bool isPublic = true;
+        SharedDataManager.CreateGallery("TestGallery-01154", "G1", true);
+    }
 
-        //SharedDataManager.CreateNewGallery(ownID, galleryName, isPublic,
-        //onSuccess: () =>
-        //{
-        //    Debug.Log("Gallery create success!");
-        //},
-        //onError: (error) =>
-        //{
-        //    Debug.LogError("Gallery create failed: " + error.ErrorMessage);
-        //});
+    //playfab login
+    void Login()
+    {
+        var request = new LoginWithCustomIDRequest
+        {
+            CustomId = SystemInfo.deviceUniqueIdentifier,
+            CreateAccount = true
+        };
+
+        PlayFabClientAPI.LoginWithCustomID(request, result =>
+        {
+            Debug.Log("PlayFab login success?");
+            IfLogin = true;
+            // ???????????
+            //TestUpdateSharedGroupData();
+        }, error =>
+        {
+            Debug.LogError("PlayFab login failed: " + error.ErrorMessage);
+        });
     }
 
     //public RectTransform contentPanel;   // The ScrollRect's content panel

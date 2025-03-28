@@ -45,11 +45,57 @@ public static class SharedDataManager
 
     /// <summary>
     /// 使用 CloudScript 更新 Gallery 数据。
-    /// 这里将 GalleryDetail 对象序列化为 JSON，通过 CloudScript 将数据写入共享组。
+    /// 修改后：先检查共享组是否存在，不存在则创建，然后再调用CloudScript保存数据。
     /// </summary>
     public static void SaveGalleryUsingCloudScript(GalleryDetail gallery, Action onSuccess, Action<PlayFabError> onError)
     {
-        // 将 GalleryDetail 序列化为 JSON 字符串
+        // 第一步：先判断共享组是否存在
+        var checkGroupRequest = new GetSharedGroupDataRequest
+        {
+            SharedGroupId = GallerySharedGroupId,
+            Keys = null
+        };
+
+        PlayFabClientAPI.GetSharedGroupData(checkGroupRequest,
+        groupResult =>
+        {
+        // 若成功获取数据（即使为空），表示共享组存在，可直接调用CloudScript更新数据
+        ExecuteUpdateGalleryCloudScript(gallery, onSuccess, onError);
+        },
+        error =>
+        {
+            if (error.ErrorMessage.Contains("Shared group does not exist"))
+            {
+            // 第二步：如果共享组不存在则创建
+            PlayFabClientAPI.CreateSharedGroup(new CreateSharedGroupRequest
+                {
+                    SharedGroupId = GallerySharedGroupId
+                }, createResult =>
+                {
+                    Debug.Log("已成功创建共享组: " + GallerySharedGroupId);
+                // 创建成功后，调用CloudScript更新数据
+                ExecuteUpdateGalleryCloudScript(gallery, onSuccess, onError);
+                },
+                createError =>
+                {
+                    Debug.LogError("创建共享组失败: " + createError.ErrorMessage);
+                    onError?.Invoke(createError);
+                });
+            }
+            else
+            {
+            // 若是其他错误则直接返回
+            Debug.LogError("检查共享组存在失败: " + error.ErrorMessage);
+                onError?.Invoke(error);
+            }
+        });
+    }
+
+    /// <summary>
+    /// 实际调用CloudScript去更新Gallery数据的函数
+    /// </summary>
+    private static void ExecuteUpdateGalleryCloudScript(GalleryDetail gallery, Action onSuccess, Action<PlayFabError> onError)
+    {
         string json = JsonUtility.ToJson(gallery);
         var request = new ExecuteCloudScriptRequest
         {
@@ -59,26 +105,33 @@ public static class SharedDataManager
                 sharedGroupId = GallerySharedGroupId,
                 key = gallery.GalleryID,
                 value = json,
-                // 注意：CloudScript 中权限参数为字符串，此处传 "Public"
                 permission = "Public"
             },
             GeneratePlayStreamEvent = true
         };
 
-        PlayFabClientAPI.ExecuteCloudScript(request, result => {
-            // FunctionResult 是 object，需要转成 JSON 字符串后解析
-            var json = result.FunctionResult.ToString();
+        PlayFabClientAPI.ExecuteCloudScript(request, result =>
+        {
+            if (result.FunctionResult != null)
+            {
+                var responseJson = result.FunctionResult.ToString();
+                var response = JsonUtility.FromJson<CloudScriptResponse>(responseJson);
+                Debug.Log("CloudScript message: " + response.message);
+            }
+            else
+            {
+                Debug.LogWarning("CloudScript返回为空");
+            }
 
-            // 使用 Unity 的 JsonUtility 或 Newtonsoft.Json 解析
-            var response = JsonUtility.FromJson<CloudScriptResponse>(json);
-
-            Debug.Log("CloudScript message: " + response.message);
             onSuccess?.Invoke();
-        }, error => {
+        },
+        error =>
+        {
             Debug.LogError("CloudScript 执行出错: " + error.ErrorMessage);
             onError?.Invoke(error);
         });
     }
+
 
     /// <summary>
     /// 使用 CloudScript 更新 Canva 数据。
