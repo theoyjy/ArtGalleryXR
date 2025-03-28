@@ -7663,6 +7663,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7086280231193675317, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
+      propertyPath: textureSyncManager
+      value: 
+      objectReference: {fileID: 797639107}
     - target: {fileID: 7143686026746167119, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -10718,7 +10722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e013e0aedde4ad1a4be5ccf6a7f1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipAddress: 127.0.0.1
+  ipAddress: 20.153.141.70
   port: 9100
 --- !u!4 &1187899824
 Transform:
@@ -16611,7 +16615,7 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 20.33.86.24
+    Address: 20.153.141.70
     Port: 9100
     ServerListenAddress: 0.0.0.0
   DebugSimulator:

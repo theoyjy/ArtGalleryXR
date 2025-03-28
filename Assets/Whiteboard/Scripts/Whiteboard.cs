@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using SFB;
 
 public class Whiteboard : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Whiteboard : MonoBehaviour
     private string savePath;
     private string saveFileName;
     public Renderer whiteboardRenderer;
+    public TextureSyncManager textureSyncManager;
 
     private void Start()
     {
@@ -55,7 +57,7 @@ public class Whiteboard : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            LoadImageFromFile("testImageRead.png");
+            LoadImageFromFile();
         }
     }
 
@@ -104,9 +106,23 @@ public class Whiteboard : MonoBehaviour
 
     
 
-    void LoadImageFromFile(string readFileName)
+    void LoadImageFromFile()
     {
-        string filePath = Path.Combine(projectPath, readFileName);
+        ExtensionFilter extensionFilter = new ExtensionFilter("Image Files", "png", "jpg", "jpeg");
+        ExtensionFilter[] extensionFilters = { extensionFilter };
+        StandaloneFileBrowserWindows windows = new StandaloneFileBrowserWindows();
+        string[] paths = windows.OpenFilePanel("Select an image", "", extensionFilters, false);
+        if (paths.Length > 0 && !string.IsNullOrEmpty(paths[0]))
+        {
+            Debug.Log("Selected image: " + paths[0]);
+        }
+        else
+        {
+            Debug.Log("No file selected.");
+            return;
+        }
+
+        string filePath = paths[0];
         if (!File.Exists(filePath))
         {
             Debug.LogError($"File not found: {filePath}");
@@ -119,8 +135,11 @@ public class Whiteboard : MonoBehaviour
         if (texture.LoadImage(fileData)) // Load image data into texture
         {
             // Create a new texture and set the rotated pixel data.
-            texture = HandleFlip(texture);
+            //texture = HandleFlip(texture);
             whiteboardRenderer.material.mainTexture = texture;
+
+            // sync texture to server
+            textureSyncManager.SendTextureToServer();
             Debug.Log($"Loaded whiteboard image from: {filePath}");
         }
         else
