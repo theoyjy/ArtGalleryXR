@@ -97,7 +97,6 @@ public class LobbyPanelControls : MonoBehaviour
             Login();
         }
 
-        SharedDataManager.CreateGallery("TestGallery-01154", "G1", true);
     }
 
     //playfab login
@@ -113,6 +112,7 @@ public class LobbyPanelControls : MonoBehaviour
         {
             Debug.Log("PlayFab login success?");
             IfLogin = true;
+            SharedDataManager.CurrentUserName = SystemInfo.deviceUniqueIdentifier;
             // ???????????
             //TestUpdateSharedGroupData();
         }, error =>

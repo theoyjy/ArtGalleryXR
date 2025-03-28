@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
+using Unity.Services.Lobbies.Models;
 
 /// <summary>
 /// 表示共享组的状态
@@ -32,6 +33,7 @@ public static class SharedDataManager
     public static readonly string PlayerSharedGroupId = "Players";
 
     public static string CurrentUserName;
+    public static Lobby CurrentLobby;
 
     [Serializable]
     public class CloudScriptResponse
