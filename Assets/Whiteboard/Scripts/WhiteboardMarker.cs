@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.XR;
 //using Unity.Netcode;
 
 public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -30,8 +31,14 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private Vector3 _offset;
     private Card card;
 
+    private UnityEngine.XR.InputDevice leftController;
+    private float debounceTime = 0.3f;    
+    private float lastPressedTime = 0f;
+
+
     void Start()
     {
+        leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
         _renderer = _tip.GetComponent<Renderer>();
         _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
         _tipHeight = _tip.localScale.y;
@@ -39,6 +46,7 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         StartCoroutine(getCamera());
     }
+
 
     private IEnumerator getCamera()
     {
@@ -63,16 +71,26 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     void Update()
     {
+
         _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
+#if UNITY_ANDROID
+        transform.rotation = Quaternion.Euler(0, 90, 90);
+
+        if (leftController.TryGetFeatureValue(CommonUsages.primaryButton, out bool xPressed) ){
+            if(xPressed && Time.time - lastPressedTime > debounceTime){
+                lastPressedTime = Time.time;
+                _isSnapped = !_isSnapped;
+            }
+        }
+        Draw();
+        //Debug.Log("Android");
+#else
+
+
         transform.localRotation = Quaternion.Euler(90, 180, 0);// 90);
         card = transform.parent.GetComponentInChildren<Card>();
         Quaternion quat = card.GetWorldQuatRot();
         transform.rotation *= quat;
-
-#if UNITY_ANDROID
-        Draw();
-        //Debug.Log("Android");
-#else
         if (_isHolding && Input.GetMouseButtonDown(0))
         {
             DropPen();
@@ -157,27 +175,11 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
 
 #if UNITY_ANDROID
-        if (_playerCamera == null || _whiteboardTransform == null) return;
+        if (_isSnapped)
+            transform.position = new Vector3(transform.position.x, transform.position.y, _whiteboardTransform.position.z - 0.8f);
+        else
+             transform.position = new Vector3(transform.position.x, transform.position.y, _whiteboardTransform.position.z - 2.8f);
 
-        // Get the normal of the whiteboard
-        card = transform.parent.GetComponentInChildren<Card>();
-        Vector3 whiteboardNormal = card.GetNormal(); // Assuming forward is the normal direction
-
-        // Create a plane representing the whiteboard's surface
-        Plane whiteboardPlane = new Plane(whiteboardNormal, _whiteboardTransform.position);
-        
-        // Convert VR controller position to world space ray
-        Ray ray = new Ray(transform.position, -transform.forward);
-
-        // Find intersection of the ray with the whiteboard's plane
-        if (whiteboardPlane.Raycast(ray, out float distance))
-        {
-            // Get the world position where the mouse ray hits the whiteboard plane
-            Vector3 hitPoint = ray.GetPoint(distance);
-
-            // Set the pen's position to the hit point (so it "snaps" onto the board)
-            transform.position = hitPoint - 0.8f * whiteboardNormal;
-        }
 #endif
         if (Physics.Raycast(_tip.position, transform.up, out _touch, _tipHeight))
         {
