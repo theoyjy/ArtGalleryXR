@@ -4,7 +4,7 @@ using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using UnityEngine;
 using Unity.Services.Lobbies.Models;
-using UnityEditor.Search;
+//using UnityEditor.Search;
 using UnityEngine.AI;
 using System.Linq.Expressions;
 using System;

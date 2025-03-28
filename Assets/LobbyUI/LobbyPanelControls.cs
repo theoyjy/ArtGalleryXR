@@ -6,31 +6,28 @@ using TMPro;
 using PlayFab.ClientModels;
 using PlayFab;
 using System.Security.Cryptography;
+
 public class LobbyPanelControls : MonoBehaviour
 {
-
     //temp code for login
     public bool IfLogin;
 
     // Reference to the LobbyManager GameObject
     public LobbyManager lobbyManager;
 
-    /*************** BUTTONS ********************/
-    // Reference to refresh lobbies button
+    // <Buttons>
     public Button refreshGalleriesButton;
-
-    // Reference to profile button
     public Button profileButton;
-
-    // Reference to logout button
     public Button logoutButton;
-
-    // Reference to create gallery button
     public Button createGalleryButton;
-    /*******************************************/
+    // </Buttons>
 
-    /****************** PRIVATE ****************/
-
+    // <Enter Password Elements>
+    private bool enterPasswordIsDisplayed;
+    private GameObject enterPasswordUIPanel;
+    private EnterPasswordPanelControls enterPasswordControls;
+    private Button enterPasswordExitButton;
+    // </Enter Password Elements>
 
     /*******************************************/
     private void Start()
@@ -56,6 +53,21 @@ public class LobbyPanelControls : MonoBehaviour
 
         createGalleryButton = transform.Find("CreateNewGalleryButton").GetComponent<Button>();
         createGalleryButton.onClick.AddListener(OnCreateGalleryClicked);
+
+        enterPasswordUIPanel = transform.parent.Find("EnterPasswordPanel").gameObject;
+        if (!enterPasswordUIPanel)
+            Debug.LogError("NO ENTER PASSWORD UI");
+        enterPasswordControls = enterPasswordUIPanel.GetComponent<EnterPasswordPanelControls>();
+        if (!enterPasswordControls)
+            Debug.LogError("NO ENTER PASSWORD CONTROLS");
+        // Set Button reference (Button is child of enterPasswordUIPanel)
+        enterPasswordExitButton = enterPasswordUIPanel.transform.Find("ExitButton").GetComponent<Button>();
+        if (!enterPasswordExitButton)
+            Debug.LogError("NO ENTER PASSWORD EXIT BUTTON");
+        else
+            enterPasswordExitButton.onClick.AddListener(OnEnterPasswordExitClicked);
+        enterPasswordUIPanel.SetActive(false);
+        enterPasswordIsDisplayed = false;
     }
     private void OnRefreshGalleriesClicked()
     {
@@ -81,6 +93,18 @@ public class LobbyPanelControls : MonoBehaviour
         Debug.Log("ACK: Clicked on profile button");
         // Open profile UI
         // profileReference.Open();
+        //enterPasswordUIPanel.SetActive(true);
+        if (!enterPasswordIsDisplayed)
+        {
+            enterPasswordUIPanel.SetActive(true);
+            enterPasswordIsDisplayed = true;
+        }
+    }
+
+    private void OnEnterPasswordExitClicked()
+    {
+        enterPasswordUIPanel.SetActive(false);
+        enterPasswordIsDisplayed = false;
     }
     private void OnLogoutClicked()
     {

@@ -29,6 +29,10 @@ public class EnterPasswordPanelControls : MonoBehaviour
         else
             eyeButton.onClick.AddListener(OnEyeButtonClicked);
 
+        galleryPasswordIF = transform.Find("PasswordInputField").GetComponent<TMP_InputField>();
+        if (!galleryPasswordIF)
+            Debug.LogError("Enter Password Controls: No gallery password IF found");
+
         // Hide password as default
         galleryPasswordIF.contentType = TMP_InputField.ContentType.Password;
         eyeButton.image.sprite = eyeClosedIcon;

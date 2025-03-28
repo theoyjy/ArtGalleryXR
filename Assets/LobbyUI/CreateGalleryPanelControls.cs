@@ -44,7 +44,6 @@ public class CreateGalleryPanelControls : MonoBehaviour
         else
             eyeButton.onClick.AddListener(OnEyeButtonClicked);
 
-
         galleryNameIF = transform.Find("GalleryNameInputField").GetComponent<TMP_InputField>();
         if (!galleryNameIF)
             Debug.LogError("Canvas Panel Controls: No gallery name IF found");
