@@ -136,6 +136,7 @@ public class TextureSyncManager : NetworkBehaviour
 
                     if(IsClearing)
                     {
+                        Debug.Log("[Server] Clearing whiteboard.");
                         whiteboard.ClearWhiteboard();
                         IsClearing = false;
                         continue;
@@ -245,7 +246,7 @@ public class TextureSyncManager : NetworkBehaviour
             // Store the latest texture on the server
             latestTextureData = textureBytes;
             whiteboard.texture.LoadImage(textureBytes);
-            
+            ApplyTextureToUIOrObject(whiteboard.texture);
 
             // Broadcast to all clients except the sender
             ulong senderClientId = serverRpcParams.Receive.SenderClientId;

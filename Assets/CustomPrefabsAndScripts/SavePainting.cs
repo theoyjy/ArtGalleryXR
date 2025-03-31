@@ -68,10 +68,12 @@ public class SavePainting : MonoBehaviour
         return EditorUtility.SaveFilePanel("Save Painting", "", "painting.png", "png");
 #elif UNITY_ANDROID
         return Path.Combine("/storage/emulated/0/Download/", "painting.png"); // Saves to Downloads folder on Quest 2
-#else
+#elif !SERVER_BUILD
         var extensions = new[] { new ExtensionFilter("PNG Files", "png") };
         string[] paths = StandaloneFileBrowser.SaveFilePanel("Save Painting", "", "painting", extensions);
         return paths.Length > 0 ? paths[0] : null;
+#else
+        return Application.persistentDataPath + "/painting.png";
 #endif
     }
 

@@ -15,7 +15,9 @@ public class Whiteboard : MonoBehaviour
     //private string saveFileName;
     public Renderer whiteboardRenderer;
     public TextureSyncManager textureSyncManager;
+#if !SERVER_BUILD
     ExtensionFilter[] extensionFilters;
+#endif
 
     private void Start()
     {
@@ -37,9 +39,10 @@ public class Whiteboard : MonoBehaviour
 
         //// Assign the texture to the material
         r.material.mainTexture = texture;
-
+#if !SERVER_BUILD
         ExtensionFilter extensionFilter = new ExtensionFilter("Image Files", "png", "jpg", "jpeg");
         extensionFilters = new ExtensionFilter[] { extensionFilter };
+#endif
     }
 
     private void Awake()
@@ -52,9 +55,11 @@ public class Whiteboard : MonoBehaviour
 
         if(textureSyncManager == null)
         {
+#if !SERVER_BUILD
             ExtensionFilter extensionFilter = new ExtensionFilter("Image Files", "png", "jpg", "jpeg");
             extensionFilters = new ExtensionFilter[] { extensionFilter };
-        }
+#endif
+          }
     }
 
     void Update()
@@ -104,8 +109,7 @@ public class Whiteboard : MonoBehaviour
 
         // Encode texture into PNG format
         byte[] bytes = rotatedTexture.EncodeToPNG();
-
-
+#if !SERVER_BUILD
         // Write to file
         StandaloneFileBrowserWindows windows = new StandaloneFileBrowserWindows();
         Debug.Log("projectPath: " + projectPath);
@@ -115,13 +119,14 @@ public class Whiteboard : MonoBehaviour
             File.WriteAllBytes(selectedSavePath, bytes);
             Debug.Log($"Saved whiteboard image to: {selectedSavePath}");
         }
+#endif
     }
 
-    
+
 
     void LoadImageFromFile()
     {
-
+#if !SERVER_BUILD
         StandaloneFileBrowserWindows windows = new StandaloneFileBrowserWindows();
         string[] paths = windows.OpenFilePanel("Select an image", "", extensionFilters, false);
         if (paths.Length > 0 && !string.IsNullOrEmpty(paths[0]))
@@ -158,6 +163,8 @@ public class Whiteboard : MonoBehaviour
         {
             Debug.LogError("Failed to load image file.");
         }
+#endif
+
     }
 
     public void ApplyTexture(Texture2D newTexture)
