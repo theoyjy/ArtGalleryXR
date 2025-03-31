@@ -6584,10 +6584,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasComponent
       objectReference: {fileID: 0}
-    - target: {fileID: 8032628762914440571, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
-      propertyPath: canvasComponent
-      value: 
-      objectReference: {fileID: 1255771533}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10118,11 +10114,6 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!1 &1255771533 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5666307368449052307, guid: 9fc47804bed17904a9db10085d22ea53, type: 3}
-  m_PrefabInstance: {fileID: 797639106}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1261793852
 GameObject:
   m_ObjectHideFlags: 0
