@@ -141,8 +141,8 @@ public class CreateGalleryPanelControls : MonoBehaviour
                 bool sameNameExist = false;
                 foreach (var gallery in Galleries)
                 {
-                    Debug.Log($"ID: {gallery.GalleryID}, 名称: {gallery.GalleryName}, 权限: {gallery.permission}");
-                    if (galleryName.Equals(gallery.GalleryName))
+                    Debug.Log($"ID: {gallery.GalleryID}, 名称: {gallery.LobbyID}, 权限: {gallery.permission}");
+                    if (galleryName.Equals(gallery.LobbyID))
                     {
                         Debug.Log("The name has existed! Change to another one.");
                         sameNameExist = true;
@@ -163,7 +163,7 @@ public class CreateGalleryPanelControls : MonoBehaviour
                     "Password: " + password + "\n");
 
                 string username = SharedDataManager.CurrentUserName;
-                SharedDataManager.CreateGallery(galleryName, !isPrivate);
+                SharedDataManager.CreateGallery(galleryName,"LobbyID", !isPrivate);
 
                 await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
                 SharedDataManager.SetCanva(galleryName, "https://canva.link/xxx", 3,

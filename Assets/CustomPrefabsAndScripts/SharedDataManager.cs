@@ -13,7 +13,7 @@ using Unity.Services.Lobbies.Models;
 public class GalleryDetail
 {
     public string GalleryID;           // GalleryID
-    public string GalleryName;         // GalleryID same as above
+    public string LobbyID;         // LobbyID
     public List<string> Canvas;         // include Canva ID's URL 3.28changing
     public string OwnID;
     public string permission;          // 权限，仅有 "public" 或 "private"
@@ -128,14 +128,14 @@ public static class SharedDataManager
     }
 
 
-    public static void CreateGallery(string GalleryName, bool IsPublic)
+    public static void CreateGallery(string GalleryID,string LobbyID, bool IsPublic)
     {
         GetAllGalleries(existingGalleries =>
         {
             GalleryDetail NewGallery = new GalleryDetail
             {
-                GalleryID = GalleryName,
-                GalleryName = GalleryName,
+                GalleryID = GalleryID,
+                LobbyID = LobbyID,
                 Canvas = new List<string>(),
                 OwnID = CurrentUserName,
                 permission = IsPublic ? "public" : "private"
@@ -144,11 +144,11 @@ public static class SharedDataManager
             SaveGalleryUsingCloudScript(NewGallery,
             onSuccess: () =>
             {
-                Debug.Log($"CloudScript 测试：Gallery {GalleryName} 数据保存成功！");
+                Debug.Log($"CloudScript 测试：Gallery {GalleryID} 数据保存成功！");
             },
             onError: (error) =>
             {
-                Debug.LogError($"CloudScript 测试：Gallery {GalleryName} 数据保存失败！");
+                Debug.LogError($"CloudScript 测试：Gallery {GalleryID} 数据保存失败！");
             });
         },
         onError: error =>
