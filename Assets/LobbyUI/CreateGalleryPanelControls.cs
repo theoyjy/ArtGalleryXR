@@ -2,6 +2,9 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using PlayFab;
+using PlayFab.ClientModels;
 
 public class CreateGalleryPanelControls : MonoBehaviour
 {
@@ -93,20 +96,18 @@ public class CreateGalleryPanelControls : MonoBehaviour
         bool isPrivate = privateToggle.isOn;
         string password = galleryPasswordIF.text;
 
-        // Check all params are valid
-        // Check if there was no gallery name provided
-        if (galleryName == null || galleryName == string.Empty)
+        if (string.IsNullOrEmpty(galleryName))
         {
             TMP_Text namePlaceholder = galleryNameIF.placeholder.GetComponent<TMP_Text>();
             galleryNameIF.text = "";
             namePlaceholder.text = "SET A GALLERY NAME";
+            return;
         }
 
-        // Check password 8 - 64 characters (only if private)
         if (isPrivate)
         {
             TMP_Text passwordPlaceholder = galleryPasswordIF.placeholder.GetComponent<TMP_Text>();
-            if (password == null)
+            if (string.IsNullOrEmpty(password))
             {
                 galleryPasswordIF.text = "";
                 passwordPlaceholder.text = "SET PASSWORD";
@@ -126,15 +127,54 @@ public class CreateGalleryPanelControls : MonoBehaviour
             }
         }
 
-        Debug.Log("Attempting to create gallery...\n" +
-            "Name: " + galleryName + "\n" +
-            "Max Players: " + maxPlayers + "\n" +
-            "Private: " + isPrivate + "\n" +
-            "Password: " + password + "\n");
+        CheckAndCreateGallery(galleryName, maxPlayers, isPrivate, password);
+    }
 
-        string username = SharedDataManager.CurrentUserName;
-        SharedDataManager.CreateGallery(galleryName, !isPrivate);
-        await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
+
+
+    private async void CheckAndCreateGallery(string galleryName, int maxPlayers, bool isPrivate, string password)
+    {
+        SharedDataManager.GetAllGalleries(
+            onSuccess: async (List<GalleryDetail> Galleries) =>
+            {
+                Debug.Log("public Galleries count: " + Galleries.Count);
+                bool sameNameExist = false;
+                foreach (var gallery in Galleries)
+                {
+                    Debug.Log($"ID: {gallery.GalleryID}, 名称: {gallery.GalleryName}, 权限: {gallery.permission}");
+                    if (galleryName.Equals(gallery.GalleryName))
+                    {
+                        Debug.Log("The name has existed! Change to another one.");
+                        sameNameExist = true;
+                        break;
+                    }
+                }
+
+                if (sameNameExist)
+                {
+                // 可选：设置提示 UI
+                return;
+                }
+
+                Debug.Log("Attempting to create gallery...\n" +
+                    "Name: " + galleryName + "\n" +
+                    "Max Players: " + maxPlayers + "\n" +
+                    "Private: " + isPrivate + "\n" +
+                    "Password: " + password + "\n");
+
+                string username = SharedDataManager.CurrentUserName;
+                SharedDataManager.CreateGallery(galleryName, !isPrivate);
+                SharedDataManager.SetCanva(galleryName, "https://canva.link/xxx", 3,
+                    onSuccess: result => Debug.Log("设置成功: " + result),
+                    onError: error => Debug.LogError("设置失败: " + error.ErrorMessage));
+
+                await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
+            },
+            onError: (PlayFabError error) =>
+            {
+                Debug.LogError("Get public Galleries failed: " + error.GenerateErrorReport());
+            }
+        );
     }
 
     private void ToggleValueChanged(bool value)

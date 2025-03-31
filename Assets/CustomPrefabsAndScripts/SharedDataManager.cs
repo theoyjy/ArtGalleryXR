@@ -12,9 +12,9 @@ using Unity.Services.Lobbies.Models;
 [Serializable]
 public class GalleryDetail
 {
-    public string GalleryID;           // 画廊ID
-    public string GalleryName;         // 画廊名称
-    public List<string> Canva;         // include Canva ID's URL 3.28changing
+    public string GalleryID;           // GalleryID
+    public string GalleryName;         // GalleryID same as above
+    public List<string> Canvas;         // include Canva ID's URL 3.28changing
     public string OwnID;
     public string permission;          // 权限，仅有 "public" 或 "private"
 }
@@ -27,6 +27,7 @@ public static class SharedDataManager
 
     public static string CurrentUserName;
     public static Lobby CurrentLobby;
+
 
     [Serializable]
     public class CloudScriptResponse
@@ -131,26 +132,11 @@ public static class SharedDataManager
     {
         GetAllGalleries(existingGalleries =>
         {
-            // 自动编号 GalleryID
-            int maxId = 0;
-            foreach (var gallery in existingGalleries)
-            {
-                string numberPart = gallery.GalleryID.Substring(7);
-                if (int.TryParse(numberPart, out int num))
-                {
-                    if (num > maxId)
-                        maxId = num;
-                }
-            }
-
-            // 新ID为当前最大ID+1
-            string newGalleryID = $"gallery{(maxId + 1).ToString("D3")}";
-
             GalleryDetail NewGallery = new GalleryDetail
             {
-                GalleryID = newGalleryID,
+                GalleryID = GalleryName,
                 GalleryName = GalleryName,
-                Canva = new List<string>(),
+                Canvas = new List<string>(),
                 OwnID = CurrentUserName,
                 permission = IsPublic ? "public" : "private"
             };
@@ -158,11 +144,11 @@ public static class SharedDataManager
             SaveGalleryUsingCloudScript(NewGallery,
             onSuccess: () =>
             {
-                Debug.Log($"CloudScript 测试：Gallery {newGalleryID} 数据保存成功！");
+                Debug.Log($"CloudScript 测试：Gallery {GalleryName} 数据保存成功！");
             },
             onError: (error) =>
             {
-                Debug.LogError($"CloudScript 测试：Gallery {newGalleryID} 数据保存失败！");
+                Debug.LogError($"CloudScript 测试：Gallery {GalleryName} 数据保存失败！");
             });
         },
         onError: error =>
@@ -289,11 +275,47 @@ public static class SharedDataManager
 
     #region Canva 模块
     /// <summary>
-    /// 获取指定 Canva 的图片地址。如果共享组不存在则直接报错。
+    /// 向指定gallery添加canvas
     /// </summary>
-    public static void GetCanva(string canvaID, Action<string> onSuccess, Action<PlayFabError> onError)
+    public static void SetCanva(string GalleryID, string canvaURL, int Slot, Action<string> onSuccess, Action<PlayFabError> onError)
     {
+        GetGallery(GalleryID, gallery =>
+        {
+            // 初始化 Canvas（若为空）
+            if (gallery.Canvas == null)
+            {
+                gallery.Canvas = new List<string>(new string[40]);
+            }
+            else if (gallery.Canvas.Count < 40)
+            {
+                // 补全 Canvas 到 40 个 slot
+                while (gallery.Canvas.Count < 40)
+                {
+                    gallery.Canvas.Add(string.Empty);
+                }
+            }
 
+            // 检查 slot 合法性
+            if (Slot < 0 || Slot >= 40)
+            {
+                Debug.LogError($"invalid slot : {Slot}, need to between 0 and 39.");
+                onSuccess?.Invoke("invalid_slot");
+                return;
+            }
+
+            // 设置指定 slot 的 URL
+            gallery.Canvas[Slot] = canvaURL;
+
+            // 保存更新
+            SaveGalleryUsingCloudScript(gallery,
+                () =>
+                {
+                    Debug.Log($"成功将 canvaURL 写入 gallery {GalleryID} 的 slot {Slot}");
+                    onSuccess?.Invoke("success");
+                },
+                onError);
+
+        }, onError);
     }
 
 
@@ -333,21 +355,21 @@ public static class SharedDataManager
     /// </summary>
     /// <param name="onSuccess">成功回调，返回符合条件的 GalleryID 列表</param>
     /// <param name="onError">错误回调</param>
-    public static void GetPublicGalleryIDs(Action<List<string>> onSuccess, Action<PlayFabError> onError)
+    public static void GetPublicGalleries(Action<List<GalleryDetail>> onSuccess, Action<PlayFabError> onError)
     {
         GetAllGalleries(galleries =>
         {
-            List<string> publicGalleryIDs = new List<string>();
+            List<GalleryDetail> publicGalleryDetails = new List<GalleryDetail>();
             foreach (GalleryDetail gallery in galleries)
             {
                 // 如果 permission 不为空且为 "public"（不区分大小写），则添加 GalleryID
                 if (!string.IsNullOrEmpty(gallery.permission) &&
                     gallery.permission.Equals("public", StringComparison.OrdinalIgnoreCase))
                 {
-                    publicGalleryIDs.Add(gallery.GalleryID);
+                    publicGalleryDetails.Add(gallery);
                 }
             }
-            onSuccess?.Invoke(publicGalleryIDs);
+            onSuccess?.Invoke(publicGalleryDetails);
         }, onError);
     }
 
