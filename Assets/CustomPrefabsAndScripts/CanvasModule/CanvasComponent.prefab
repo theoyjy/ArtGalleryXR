@@ -1459,6 +1459,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4753916706674653192, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: textureSyncManager
+      value: 
+      objectReference: {fileID: 6481459381182762346}
     - target: {fileID: 4847566322516340851, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
