@@ -15,6 +15,12 @@ public class LobbyPanelControls : MonoBehaviour
     // Reference to the LobbyManager GameObject
     public LobbyManager lobbyManager;
 
+    // <Scroll Rects>
+    public Button buttonPrefab;
+    public RectTransform availableGalleriesScrollTransform;
+    public RectTransform yourGalleriesScrollTransform;
+    // </Scroll Rects>
+
     // <Buttons>
     public Button refreshGalleriesButton;
     public Button profileButton;
@@ -72,6 +78,15 @@ public class LobbyPanelControls : MonoBehaviour
     private void OnRefreshGalleriesClicked()
     {
         Debug.Log("ACK: Clicked on refresh galleries button");
+
+        // GetGalleries()
+        AddGalleryToList("Public 1", availableGalleriesScrollTransform);
+        AddGalleryToList("Public 2", availableGalleriesScrollTransform);
+        AddGalleryToList("Public 3", availableGalleriesScrollTransform);
+        AddGalleryToList("Public 4", availableGalleriesScrollTransform);
+
+        AddGalleryToList("Own 1", yourGalleriesScrollTransform);
+        AddGalleryToList("Own 2", yourGalleriesScrollTransform);
         //List<Lobby> availableLobbies = await lobbyManager.QueryAvailableLobbies();
 
         // Clear list of existing galleries (now inactive galleries will be removed)
@@ -87,6 +102,25 @@ public class LobbyPanelControls : MonoBehaviour
         //    galleryButton.addListener(joinGalleryWithLobbyID);
         //    publicGalleriesList.append(galleryButton);
         // }
+    }
+
+    private void AddGalleryToList(string buttonText, RectTransform galleryList)
+    {
+        // Instantiate a button
+        Button newButton = Instantiate(buttonPrefab, galleryList, false);
+
+        // Set button dimensions (180x32 pixels)
+        RectTransform rt = newButton.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(0, 32);
+        
+        // Set the button text
+        TMP_Text text = newButton.GetComponentInChildren<TMP_Text>();
+        text.text = buttonText;
+        
+        // Optionally, add button click listener here
+        newButton.onClick.AddListener(() => {
+            Debug.Log("Button clicked: " + buttonText);
+        });
     }
     private void OnProfileClicked()
     {
