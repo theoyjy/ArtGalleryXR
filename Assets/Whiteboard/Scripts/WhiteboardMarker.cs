@@ -220,9 +220,10 @@ public class WhiteboardMarker : MonoBehaviour, IPointerEnterHandler, IPointerExi
                     _whiteboard.texture.Apply();
                     //Send to network
                     //TextureSyncManager mgr = GetComponent<TextureSyncManager>();
-                    Vector2 currentPos = new Vector2(x, y);
+                    
                     if (_textureSyncManager != null)
                     {
+                        Vector2 currentPos = new Vector2(x, y);
                         _textureSyncManager.SendDrawCommandServerRpc(_lastTouchPos, currentPos, _colors, _penSize);
                     }
                     else
