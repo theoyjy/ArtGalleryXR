@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/LobbyUI/GalleryButtonPrefab.prefab.meta
 guid: dc63313ddbd38204e98fc2051e75e962
 PrefabImporter:
+========
+guid: 7f91b28128a62194c8c2febf15c9ed8e
+TextScriptImporter:
+>>>>>>>> cf4bb3ffa0add7fc8952bca372040db968a0c9c2:Assets/AddressableAssetsData/link.xml.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

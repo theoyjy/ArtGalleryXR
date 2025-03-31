@@ -21,15 +21,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Gallery Decagon.unity
     guid: e02836aca458341dca8455e507026293
   - enabled: 1
-    path: Assets/Scenes/Lobby.unity
-    guid: a123e8ee72801994590726547f1fa043
-  - enabled: 0
     path: Assets/Scenes/Init.unity
     guid: e77ea1afafccec445bf2f8658d1580c2
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: a123e8ee72801994590726547f1fa043
+  - enabled: 1
     path: Assets/Scenes/Login.unity
     guid: c2783be197c4aeb4a96ba6918f9f4643
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/LoginUI.unity
     guid: 62eb7a9c13c04ec40bb628c3da20abb8
   m_configObjects:
