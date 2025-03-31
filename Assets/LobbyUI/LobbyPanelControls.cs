@@ -78,15 +78,30 @@ public class LobbyPanelControls : MonoBehaviour
     private void OnRefreshGalleriesClicked()
     {
         Debug.Log("ACK: Clicked on refresh galleries button");
+        SharedDataManager.GetAllGalleries(
+            onSuccess: (List<GalleryDetail> Galleries) =>
+            {
+                Debug.Log("Total galleries count: " + Galleries.Count);
+                foreach (var gallery in Galleries)
+                {
+                    // Button connections handled in AddGalleryToList
+                    AddGalleryToList(gallery, availableGalleriesScrollTransform);
+                }
+            },
+            onError: (PlayFabError error) =>
+            {
+                Debug.LogError("Get public Galleries failed: " + error.GenerateErrorReport());
+            }
+        );
 
         // GetGalleries()
-        AddGalleryToList("Public 1", availableGalleriesScrollTransform);
-        AddGalleryToList("Public 2", availableGalleriesScrollTransform);
-        AddGalleryToList("Public 3", availableGalleriesScrollTransform);
-        AddGalleryToList("Public 4", availableGalleriesScrollTransform);
-
-        AddGalleryToList("Own 1", yourGalleriesScrollTransform);
-        AddGalleryToList("Own 2", yourGalleriesScrollTransform);
+        //AddGalleryToList("Public 1", availableGalleriesScrollTransform);
+        //AddGalleryToList("Public 2", availableGalleriesScrollTransform);
+        //AddGalleryToList("Public 3", availableGalleriesScrollTransform);
+        //AddGalleryToList("Public 4", availableGalleriesScrollTransform);
+        //
+        //AddGalleryToList("Own 1", yourGalleriesScrollTransform);
+        //AddGalleryToList("Own 2", yourGalleriesScrollTransform);
         //List<Lobby> availableLobbies = await lobbyManager.QueryAvailableLobbies();
 
         // Clear list of existing galleries (now inactive galleries will be removed)
@@ -104,7 +119,7 @@ public class LobbyPanelControls : MonoBehaviour
         // }
     }
 
-    private void AddGalleryToList(string buttonText, RectTransform galleryList)
+    private void AddGalleryToList(GalleryDetail gallery, RectTransform galleryList)
     {
         // Instantiate a button
         Button newButton = Instantiate(buttonPrefab, galleryList, false);
@@ -115,12 +130,18 @@ public class LobbyPanelControls : MonoBehaviour
         
         // Set the button text
         TMP_Text text = newButton.GetComponentInChildren<TMP_Text>();
-        text.text = buttonText;
+        text.text = gallery.GalleryName;
         
         // Optionally, add button click listener here
         newButton.onClick.AddListener(() => {
             Debug.Log("Button clicked: " + buttonText);
         });
+    }
+
+    private void OnGalleryButtonClicked(string label, bool isPublic, int galleryId)
+    {
+        Debug.Log($"Clicked: {label}, Public: {isPublic}, ID: {galleryId}");
+        // Handle logic here...
     }
     private void OnProfileClicked()
     {
