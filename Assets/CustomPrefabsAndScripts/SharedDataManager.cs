@@ -22,7 +22,7 @@ public class GalleryDetail
 public static class SharedDataManager
 {
     // 两个模块的共享组 ID
-    public static readonly string GallerySharedGroupId = "Galleries";
+    public static readonly string GallerySharedGroupId = "Gallery";
     public static readonly string PlayerSharedGroupId = "Players";
 
     public static string CurrentUserName;
