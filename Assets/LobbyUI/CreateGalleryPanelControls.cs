@@ -81,11 +81,13 @@ public class CreateGalleryPanelControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //Debug.Log($"content: '{galleryNameIF.text}'");
     }
 
     private async void OnCreateGalleryClicked()
     {
+        Debug.Log("OnCreateGalleryClicked");
+        Debug.Log($"contentONCreate: '{galleryNameIF.text}'");
         string galleryName = galleryNameIF.text;
         int maxPlayers = (int)maxPlayersSlider.value;
         bool isPrivate = privateToggle.isOn;
@@ -130,8 +132,8 @@ public class CreateGalleryPanelControls : MonoBehaviour
             "Private: " + isPrivate + "\n" +
             "Password: " + password + "\n");
 
-        string username = "testUser";
-
+        string username = SharedDataManager.CurrentUserName;
+        SharedDataManager.CreateGallery(galleryName, !isPrivate);
         await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
     }
 

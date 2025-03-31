@@ -5,22 +5,16 @@ using PlayFab;
 using PlayFab.ClientModels;
 using Unity.Services.Lobbies.Models;
 
-/// <summary>
-/// 表示共享组的状态
-/// </summary>
-public enum SharedGroupState
-{
-    NotCreated,       // 共享组不存在
-    CreatedEmpty,     // 共享组已存在，但没有任何数据
-    CreatedWithData   // 共享组已存在且包含数据
-}
+
+
+//
 
 [Serializable]
 public class GalleryDetail
 {
     public string GalleryID;           // 画廊ID
     public string GalleryName;         // 画廊名称
-    public List<string> Canva;         // 包含所有 Canva ID 的列表
+    public List<string> Canva;         // include Canva ID's URL 3.28changing
     public string OwnID;
     public string permission;          // 权限，仅有 "public" 或 "private"
 }
@@ -29,7 +23,6 @@ public static class SharedDataManager
 {
     // 两个模块的共享组 ID
     public static readonly string GallerySharedGroupId = "Galleries";
-    public static readonly string CanvaSharedGroupId = "Canvas";
     public static readonly string PlayerSharedGroupId = "Players";
 
     public static string CurrentUserName;
@@ -39,7 +32,6 @@ public static class SharedDataManager
     public class CloudScriptResponse
     {
         public string message;
-        // 如果你还想用 result，可以加上
         public object result;
     }
 
@@ -135,62 +127,136 @@ public static class SharedDataManager
     }
 
 
+    public static void CreateGallery(string GalleryName, bool IsPublic)
+    {
+        GetAllGalleries(existingGalleries =>
+        {
+            // 自动编号 GalleryID
+            int maxId = 0;
+            foreach (var gallery in existingGalleries)
+            {
+                string numberPart = gallery.GalleryID.Substring(7);
+                if (int.TryParse(numberPart, out int num))
+                {
+                    if (num > maxId)
+                        maxId = num;
+                }
+            }
+
+            // 新ID为当前最大ID+1
+            string newGalleryID = $"gallery{(maxId + 1).ToString("D3")}";
+
+            GalleryDetail NewGallery = new GalleryDetail
+            {
+                GalleryID = newGalleryID,
+                GalleryName = GalleryName,
+                Canva = new List<string>(),
+                OwnID = CurrentUserName,
+                permission = IsPublic ? "public" : "private"
+            };
+
+            SaveGalleryUsingCloudScript(NewGallery,
+            onSuccess: () =>
+            {
+                Debug.Log($"CloudScript 测试：Gallery {newGalleryID} 数据保存成功！");
+            },
+            onError: (error) =>
+            {
+                Debug.LogError($"CloudScript 测试：Gallery {newGalleryID} 数据保存失败！");
+            });
+        },
+        onError: error =>
+        {
+            Debug.LogError("获取已有Gallery失败：" + error.ErrorMessage);
+        });
+    }
+
+
     /// <summary>
-    /// 使用 CloudScript 更新 Canva 数据。
+    /// 通用函数：创建共享数据（若共享组不存在则自动创建）
     /// </summary>
-    public static void SaveCanvaUsingCloudScript(string canvaID, string imageUrl, Action onSuccess, Action<PlayFabError> onError)
-    { 
+    private static void CreateSharedData(string sharedGroupId, string key, object value, Action onSuccess, Action<PlayFabError> onError)
+    {
+        var request = new GetSharedGroupDataRequest
+        {
+            SharedGroupId = sharedGroupId,
+            Keys = null
+        };
+
+        PlayFabClientAPI.GetSharedGroupData(request, result =>
+        {
+            ExecuteSaveUsingCloudScript(sharedGroupId, key, value, onSuccess, onError);
+        },
+        error =>
+        {
+            if (error.ErrorMessage.Contains("Shared group does not exist"))
+            {
+                PlayFabClientAPI.CreateSharedGroup(new CreateSharedGroupRequest
+                {
+                    SharedGroupId = sharedGroupId
+                }, createResult =>
+                {
+                    Debug.Log($"成功创建共享组：{sharedGroupId}");
+                    ExecuteSaveUsingCloudScript(sharedGroupId, key, value, onSuccess, onError);
+                }, createError =>
+                {
+                    Debug.LogError($"创建共享组 {sharedGroupId} 失败: {createError.ErrorMessage}");
+                    onError?.Invoke(createError);
+                });
+            }
+            else
+            {
+                Debug.LogError($"检查共享组 {sharedGroupId} 失败: {error.ErrorMessage}");
+                onError?.Invoke(error);
+            }
+        });
+    }
+
+    /// <summary>
+    /// 执行 CloudScript 保存数据
+    /// </summary>
+    private static void ExecuteSaveUsingCloudScript(string sharedGroupId, string key, object value, Action onSuccess, Action<PlayFabError> onError)
+    {
+        string json = value is string ? value.ToString() : JsonUtility.ToJson(value);
         var request = new ExecuteCloudScriptRequest
         {
             FunctionName = "updateSharedGroupData",
             FunctionParameter = new
             {
-                sharedGroupId = CanvaSharedGroupId,
-                key = canvaID,
-                value = imageUrl,
+                sharedGroupId = sharedGroupId,
+                key = key,
+                value = json,
                 permission = "Public"
             },
             GeneratePlayStreamEvent = true
         };
 
-        PlayFabClientAPI.ExecuteCloudScript(request, result => {
+        PlayFabClientAPI.ExecuteCloudScript(request, result =>
+        {
             Debug.Log("CloudScript 执行成功: " + result.FunctionResult);
             onSuccess?.Invoke();
-        }, error => {
+        }, error =>
+        {
             Debug.LogError("CloudScript 执行出错: " + error.ErrorMessage);
             onError?.Invoke(error);
         });
     }
 
-    public static void CreateGallery(string GalleryID, string GalleryName,bool IsPublic)
-    {
-        GalleryDetail NewGallery = new GalleryDetail
-        {
-            GalleryID = GalleryID,
-            GalleryName = GalleryName,
-            Canva = new List<string> {},
-            OwnID = PlayFabManager.CurrentUsername,
-            permission = IsPublic ? "public" : "private"
-        };
 
-        SharedDataManager.SaveGalleryUsingCloudScript(NewGallery,
-        onSuccess: () =>
-        {
-            Debug.Log("CloudScript 测试：Gallery 数据保存成功！");
-        },
-        onError: (error) =>
-        {
-            Debug.LogError("CloudScript 测试：Gallery 数据保存失败！");
-        }
-        );
+
+    /// <summary>
+    /// 创建 Player 数据
+    /// </summary>
+    public static void CreatePlayer(string playerID, List<string> galleryIDs)
+    {
+        CreateSharedData(PlayerSharedGroupId, playerID, galleryIDs,
+        () => Debug.Log($"Player {playerID} 保存成功！"),
+        error => Debug.LogError($"保存 Player {playerID} 失败: {error.ErrorMessage}"));
     }
 
 
+
     #endregion
-
-
-
-
     #region GET PART(DON'T NEED CLOUD SCRIPT)
     /// <summary>
     /// 获取指定 Gallery 数据。如果共享组不存在则直接报错。
@@ -227,24 +293,7 @@ public static class SharedDataManager
     /// </summary>
     public static void GetCanva(string canvaID, Action<string> onSuccess, Action<PlayFabError> onError)
     {
-        var request = new GetSharedGroupDataRequest
-        {
-            SharedGroupId = CanvaSharedGroupId,
-            Keys = new List<string> { canvaID }
-        };
 
-        PlayFabClientAPI.GetSharedGroupData(request, result =>
-        {
-            if (result.Data != null && result.Data.ContainsKey(canvaID))
-            {
-                string url = result.Data[canvaID].Value;
-                onSuccess?.Invoke(url);
-            }
-            else
-            {
-                onError?.Invoke(new PlayFabError {  ErrorMessage = "未找到指定 Canva 数据或共享组不存在" });
-            }
-        }, onError);
     }
 
 
