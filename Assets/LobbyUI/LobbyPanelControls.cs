@@ -150,10 +150,10 @@ public class LobbyPanelControls : MonoBehaviour
     private void OnCreateGalleryClicked()
     {
         Debug.Log("ACK: Clicked on create new gallery button");
-        if (!IfLogin)
-        {
-            Login();
-        }
+        //if (!IfLogin)
+        //{
+        //    Login();
+        //}
 
     }
 
