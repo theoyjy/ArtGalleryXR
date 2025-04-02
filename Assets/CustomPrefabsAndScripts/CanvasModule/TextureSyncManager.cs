@@ -218,7 +218,7 @@ public class TextureSyncManager : NetworkBehaviour
 
             Texture2D textureToSend = whiteboard.texture;
 
-            textureToSend = ResizeTexture(textureToSend, 1024, 1024);
+            textureToSend = whiteboard.ResizeTexture(textureToSend, 1024, 1024);
            
 
             int rate = 75;
@@ -251,7 +251,7 @@ public class TextureSyncManager : NetworkBehaviour
             // Store the latest texture on the server
             latestTextureData = textureBytes;
             whiteboard.texture.LoadImage(textureBytes);
-            whiteboard.texture = ResizeTexture(whiteboard.texture, 2048, 2048);
+            whiteboard.texture = whiteboard.ResizeTexture(whiteboard.texture, 2048, 2048);
 
             ApplyTextureToUIOrObject(whiteboard.texture);
 
@@ -293,7 +293,7 @@ public class TextureSyncManager : NetworkBehaviour
                 Debug.LogWarning("[Client] Failed to load texture from received bytes!");
                 return;
             }
-            receivedTexture = ResizeTexture(receivedTexture, 2048, 2048);
+            receivedTexture = whiteboard.ResizeTexture(receivedTexture, 2048, 2048);
 
             // Apply the texture to the whiteboard
             ApplyTextureToUIOrObject(receivedTexture);
@@ -435,26 +435,6 @@ public class TextureSyncManager : NetworkBehaviour
         }
     }
 
-    public static Texture2D ResizeTexture(Texture2D source, int newWidth, int newHeight)
-    {
-        // Create a temporary RenderTexture with the desired dimensions.
-        RenderTexture rt = RenderTexture.GetTemporary(newWidth, newHeight);
-        RenderTexture.active = rt;
-
-        // Copy (blit) the source texture to the RenderTexture.
-        Graphics.Blit(source, rt);
-
-        // Create a new Texture2D to hold the resized image.
-        Texture2D resizedTex = new Texture2D(newWidth, newHeight, source.format, false);
-        // Read the pixel data from the RenderTexture.
-        resizedTex.ReadPixels(new Rect(0, 0, newWidth, newHeight), 0, 0);
-        resizedTex.Apply();
-
-        // Cleanup
-        RenderTexture.active = null;
-        RenderTexture.ReleaseTemporary(rt);
-
-        return resizedTex;
-    }
+    
 
 }

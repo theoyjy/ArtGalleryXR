@@ -152,6 +152,7 @@ public class Whiteboard : MonoBehaviour
         if (texture.LoadImage(fileData)) // Load image data into texture
         {
             // Create a new texture and set the rotated pixel data.
+            texture = ResizeTexture(texture, (int)textureSize.x, (int)textureSize.y);
             texture = HandleFlip(texture);
             whiteboardRenderer.material.mainTexture = texture;
 
@@ -199,5 +200,27 @@ public class Whiteboard : MonoBehaviour
         rotatedTexture.SetPixels(rotatedPixels);
         rotatedTexture.Apply();
         return rotatedTexture;
+    }
+
+    public Texture2D ResizeTexture(Texture2D source, int newWidth, int newHeight)
+    {
+        // Create a temporary RenderTexture with the desired dimensions.
+        RenderTexture rt = RenderTexture.GetTemporary(newWidth, newHeight);
+        RenderTexture.active = rt;
+
+        // Copy (blit) the source texture to the RenderTexture.
+        Graphics.Blit(source, rt);
+
+        // Create a new Texture2D to hold the resized image.
+        Texture2D resizedTex = new Texture2D(newWidth, newHeight, source.format, false);
+        // Read the pixel data from the RenderTexture.
+        resizedTex.ReadPixels(new Rect(0, 0, newWidth, newHeight), 0, 0);
+        resizedTex.Apply();
+
+        // Cleanup
+        RenderTexture.active = null;
+        RenderTexture.ReleaseTemporary(rt);
+
+        return resizedTex;
     }
 }

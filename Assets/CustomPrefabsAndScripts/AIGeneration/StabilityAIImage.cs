@@ -139,6 +139,7 @@ public class StabilityAIImage : MonoBehaviour
         if (texture.LoadImage(imageData))
         {
             Debug.Log("Setting Texture");
+            texture = whiteboard.ResizeTexture(texture, (int)whiteboard.textureSize.x, (int)whiteboard.textureSize.y);
             texture = whiteboard.HandleFlip(texture);
             whiteboard.texture = texture;
             targetRenderer.material.mainTexture = texture;
