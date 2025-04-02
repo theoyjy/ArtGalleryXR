@@ -14,6 +14,10 @@ public class StabilityAIImage : MonoBehaviour
     public string prompt;
     public TMP_InputField generateImageInputField;
 
+    public TextureSyncManager textureSyncManager;
+    public Whiteboard whiteboard;
+
+
     void Start()
     {
         //Run CMD. setx STABILITY_API_KEY "your-api-key"
@@ -68,7 +72,7 @@ public class StabilityAIImage : MonoBehaviour
         formData.AppendLine($"--{boundary}");
         formData.AppendLine("Content-Disposition: form-data; name=\"output_format\"");
         formData.AppendLine();
-        formData.AppendLine("png");
+        formData.AppendLine("jpeg");
         formData.AppendLine($"--{boundary}--");
 
         byte[] bodyRaw = Encoding.UTF8.GetBytes(formData.ToString());
@@ -131,10 +135,14 @@ public class StabilityAIImage : MonoBehaviour
         //}
 
         Texture2D texture = new Texture2D(2, 2);
+
         if (texture.LoadImage(imageData))
         {
             Debug.Log("Setting Texture");
+            texture = whiteboard.HandleFlip(texture);
+            whiteboard.texture = texture;
             targetRenderer.material.mainTexture = texture;
+            textureSyncManager.SendTextureToServer();
         }
         else
         {
@@ -143,6 +151,7 @@ public class StabilityAIImage : MonoBehaviour
         yield return null;
     }
 }
+
 
 // 用于 JSON 解析的类
 [System.Serializable]

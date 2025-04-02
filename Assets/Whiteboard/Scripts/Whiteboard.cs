@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using SFB;
 
 public class Whiteboard : MonoBehaviour
 {
@@ -10,15 +11,17 @@ public class Whiteboard : MonoBehaviour
 
     // Determine the save path
     private string projectPath;
-    private string savePath;
-    private string saveFileName;
+    //private string savePath;
+    //private string saveFileName;
     public Renderer whiteboardRenderer;
+    public TextureSyncManager textureSyncManager;
+#if !SERVER_BUILD
+    ExtensionFilter[] extensionFilters;
+#endif
 
     private void Start()
     {
-        projectPath = Application.dataPath.Replace("/Assets", "/exports"); // Get root project folder
-        saveFileName = "testImageSave.png";
-        savePath = Path.Combine(projectPath, saveFileName);
+        projectPath = Application.dataPath; // Get root project folder
         var r = GetComponent<Renderer>();
         texture = new Texture2D((int)textureSize.x, (int)textureSize.y);    
 
@@ -36,6 +39,10 @@ public class Whiteboard : MonoBehaviour
 
         //// Assign the texture to the material
         r.material.mainTexture = texture;
+#if !SERVER_BUILD
+        ExtensionFilter extensionFilter = new ExtensionFilter("Image Files", "png", "jpg", "jpeg");
+        extensionFilters = new ExtensionFilter[] { extensionFilter };
+#endif
     }
 
     private void Awake()
@@ -45,17 +52,25 @@ public class Whiteboard : MonoBehaviour
             texture = new Texture2D((int)textureSize.x, (int)textureSize.y);
             Debug.Log("No texture assigned to whiteboard, creating a new one.");
         }
+
+        if(textureSyncManager == null)
+        {
+#if !SERVER_BUILD
+            ExtensionFilter extensionFilter = new ExtensionFilter("Image Files", "png", "jpg", "jpeg");
+            extensionFilters = new ExtensionFilter[] { extensionFilter };
+#endif
+          }
     }
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    SaveTextureToPNG(saveFileName);
-        //}
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            SaveTextureToPNG();
+        }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            LoadImageFromFile("testImageRead.png");
+            LoadImageFromFile();
         }
     }
 
@@ -80,7 +95,7 @@ public class Whiteboard : MonoBehaviour
         r.material.mainTexture = texture;
     }
 
-    void SaveTextureToPNG(string filename)
+    void SaveTextureToPNG()
     {
         if (texture == null)
         {
@@ -88,6 +103,78 @@ public class Whiteboard : MonoBehaviour
             return;
         }
 
+        // Create a new texture and set the rotated pixel data.
+        Texture2D rotatedTexture = HandleFlip(texture);
+
+
+        // Encode texture into PNG format
+        byte[] bytes = rotatedTexture.EncodeToPNG();
+#if !SERVER_BUILD
+        // Write to file
+        StandaloneFileBrowserWindows windows = new StandaloneFileBrowserWindows();
+        Debug.Log("projectPath: " + projectPath);
+        string selectedSavePath = windows.SaveFilePanel("Save whiteboard image", projectPath, "Canvas.png", extensionFilters);
+        if (selectedSavePath != null)
+        {
+            File.WriteAllBytes(selectedSavePath, bytes);
+            Debug.Log($"Saved whiteboard image to: {selectedSavePath}");
+        }
+#endif
+    }
+
+
+
+    void LoadImageFromFile()
+    {
+#if !SERVER_BUILD
+        StandaloneFileBrowserWindows windows = new StandaloneFileBrowserWindows();
+        string[] paths = windows.OpenFilePanel("Select an image", "", extensionFilters, false);
+        if (paths.Length > 0 && !string.IsNullOrEmpty(paths[0]))
+        {
+            Debug.Log("Selected image: " + paths[0]);
+        }
+        else
+        {
+            Debug.Log("No file selected.");
+            return;
+        }
+
+        string filePath = paths[0];
+        if (!File.Exists(filePath))
+        {
+            Debug.LogError($"File not found: {filePath}");
+            return;
+        }
+
+        byte[] fileData = File.ReadAllBytes(filePath);
+        texture = new Texture2D(2048, 2048); // Ensure correct dimensions
+
+        if (texture.LoadImage(fileData)) // Load image data into texture
+        {
+            // Create a new texture and set the rotated pixel data.
+            texture = HandleFlip(texture);
+            whiteboardRenderer.material.mainTexture = texture;
+
+            // sync texture to server
+            textureSyncManager.SendTextureToServer();
+            Debug.Log($"Loaded whiteboard image from: {filePath}");
+        }
+        else
+        {
+            Debug.LogError("Failed to load image file.");
+        }
+#endif
+
+    }
+
+    public void ApplyTexture(Texture2D newTexture)
+    {
+        texture = newTexture;
+        whiteboardRenderer.material.mainTexture = texture;
+    }
+
+    public Texture2D HandleFlip(Texture2D texture)
+    {
         int width = texture.width;
         int height = texture.height;
 
@@ -111,70 +198,6 @@ public class Whiteboard : MonoBehaviour
         Texture2D rotatedTexture = new Texture2D(width, height, texture.format, false);
         rotatedTexture.SetPixels(rotatedPixels);
         rotatedTexture.Apply();
-
-        // Encode texture into PNG format
-        byte[] bytes = rotatedTexture.EncodeToPNG();
-
-        // Write to file
-        File.WriteAllBytes(savePath, bytes);
-
-        Debug.Log($"Saved whiteboard image to: {savePath}");
-    }
-
-    
-
-    void LoadImageFromFile(string readFileName)
-    {
-        string filePath = Path.Combine(projectPath, readFileName);
-        if (!File.Exists(filePath))
-        {
-            Debug.LogError($"File not found: {filePath}");
-            return;
-        }
-
-        byte[] fileData = File.ReadAllBytes(filePath);
-        texture = new Texture2D(2048, 2048); // Ensure correct dimensions
-
-        if (texture.LoadImage(fileData)) // Load image data into texture
-        {
-            int width = texture.width;
-            int height = texture.height;
-
-            // Get all pixels from the texture texture.
-            Color[] originalPixels = texture.GetPixels();
-            Color[] rotatedPixels = new Color[originalPixels.Length];
-
-            // Re-map each pixel to its 180?rotated position.
-            // The pixel at (x, y) goes to (width - 1 - x, height - 1 - y).
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    int originalIndex = y * width + x;
-                    int rotatedIndex = (height - 1 - y) * width + (width - 1 - x);
-                    rotatedPixels[rotatedIndex] = originalPixels[originalIndex];
-                }
-            }
-
-            // Create a new texture and set the rotated pixel data.
-            Texture2D rotatedTexture = new Texture2D(width, height, texture.format, false);
-            rotatedTexture.SetPixels(rotatedPixels);
-            rotatedTexture.Apply();
-
-            // Encode texture into PNG format
-            texture = rotatedTexture;
-            whiteboardRenderer.material.mainTexture = texture;
-            Debug.Log($"Loaded whiteboard image from: {filePath}");
-        }
-        else
-        {
-            Debug.LogError("Failed to load image file.");
-        }
-    }
-
-    public void ApplyTexture(Texture2D newTexture)
-    {
-        texture = newTexture;
-        whiteboardRenderer.material.mainTexture = texture;
+        return rotatedTexture;
     }
 }

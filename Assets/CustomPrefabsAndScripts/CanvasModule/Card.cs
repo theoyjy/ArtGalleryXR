@@ -33,29 +33,7 @@ public class Card : MonoBehaviour
         }
 
         coroutineAllowed = true;
-        lastClickTime = 0;
     }
-
-    private float lastClickTime;
-    private const float doubleClickTime = 0.3f; // Adjust the time interval for double-click detection
-
-    private void OnMouseDown()
-    {
-        if(lastClickTime == 0)
-        {
-            lastClickTime = Time.time;
-            return;
-        }
-
-        float timeSinceLastClick = Time.time - lastClickTime;
-        if (timeSinceLastClick <= doubleClickTime && coroutineAllowed)
-        {
-            Debug.Log("Try Trigger Canvas Flip");
-            StartCoroutine(RotateCard());
-        }
-        lastClickTime = Time.time;
-    }
-
 
     public void DeleteDrawing()
     {

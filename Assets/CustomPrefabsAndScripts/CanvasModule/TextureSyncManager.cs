@@ -136,6 +136,7 @@ public class TextureSyncManager : NetworkBehaviour
 
                     if(IsClearing)
                     {
+                        Debug.Log("[Server] Clearing whiteboard.");
                         whiteboard.ClearWhiteboard();
                         IsClearing = false;
                         continue;
@@ -223,6 +224,7 @@ public class TextureSyncManager : NetworkBehaviour
                 rate -= 5;
             } while (texData.Length > 65000 && rate > 0);
 
+
             SendTextureToServerRpc(texData);
         }
         catch (Exception e)
@@ -238,8 +240,13 @@ public class TextureSyncManager : NetworkBehaviour
         {
             Debug.Log($"[Server] Received texture from client, size: {textureBytes.Length} bytes.");
 
+
+            strokeBuffer.Clear();
+
             // Store the latest texture on the server
             latestTextureData = textureBytes;
+            whiteboard.texture.LoadImage(textureBytes);
+            ApplyTextureToUIOrObject(whiteboard.texture);
 
             // Broadcast to all clients except the sender
             ulong senderClientId = serverRpcParams.Receive.SenderClientId;
