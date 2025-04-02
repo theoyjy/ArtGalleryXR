@@ -7,6 +7,7 @@ using System;
 using Unity.Collections;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public struct StrokeCommand : INetworkSerializable
@@ -56,6 +57,12 @@ public class TextureSyncManager : NetworkBehaviour
     {
         base.OnNetworkSpawn();
         Debug.Log("TextureSyncManager spawned. IsSpawned: " + GetComponent<NetworkObject>().IsSpawned);
+
+        string messageName = "TextureMessage" + NetworkObjectId;
+        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler(
+            messageName,
+            OnTextureMessageReceivedDelegate
+        );
 
         try
         {
@@ -192,7 +199,7 @@ public class TextureSyncManager : NetworkBehaviour
                 writer.WriteValueSafe(totalSize);
                 writer.WriteBytesSafe(textureBytes, totalSize);
                 NetworkManager.Singleton.CustomMessagingManager.SendNamedMessage(
-                    "TextureMessage",
+                    "TextureMessage" + NetworkObjectId,
                     clientId,
                     writer,
                     NetworkDelivery.ReliableFragmentedSequenced
@@ -273,6 +280,11 @@ public class TextureSyncManager : NetworkBehaviour
     }
 
     // ---------- Handle Received Texture Data ----------
+    void OnTextureMessageReceivedDelegate(ulong senderClientId, FastBufferReader reader)
+    {
+        Debug.Log($"Received texture data from client {senderClientId}");
+        OnTextureMessageReceived(reader);
+    }
     private void OnTextureMessageReceived(FastBufferReader reader)
     {
         try
