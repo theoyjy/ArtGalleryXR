@@ -157,6 +157,33 @@ public static class SharedDataManager
         });
     }
 
+    //change lobby ID
+    public static void ChangeLobbyID(string GalleryID, string LobbyID)
+    {
+        // 先尝试获取指定的 Gallery
+        GetGallery(GalleryID, gallery =>
+        {
+            // 如果获取成功，则更新 LobbyID
+            gallery.LobbyID = LobbyID;
+
+            // 接着保存更新后的数据
+            SaveGalleryUsingCloudScript(gallery,
+                onSuccess: () =>
+                {
+                    Debug.Log($"成功更新 Gallery [{GalleryID}] 的 LobbyID 为: {LobbyID}");
+                },
+                onError: (error) =>
+                {
+                    Debug.LogError($"更新 Gallery [{GalleryID}] LobbyID 失败: {error.ErrorMessage}");
+                });
+        },
+        error =>
+        {
+        // 如果在 GetGallery 时出现错误，说明该 Gallery 不存在或无法获取
+        Debug.LogError($"Gallery [{GalleryID}] 不存在，无法更新 LobbyID。错误信息: {error.ErrorMessage}");
+        });
+    }
+
 
     /// <summary>
     /// 通用函数：创建共享数据（若共享组不存在则自动创建）
