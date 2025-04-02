@@ -18,7 +18,6 @@ public class PlayFabManager : MonoBehaviour
     public GameObject loginUI;
 
     public static bool IsLoginActive = true;
-    public string CurrentUsername;
 
     private void Start()
     {
@@ -155,7 +154,6 @@ public class PlayFabManager : MonoBehaviour
             Debug.Log("Login Successful");
 
             SaveUsername(username, password);
-            CurrentUsername = username;
             SharedDataManager.CurrentUserName = username;
 
             LoadAnotherScene();

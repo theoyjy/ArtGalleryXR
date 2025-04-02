@@ -154,10 +154,9 @@ public class PlayFabManagerVR : MonoBehaviour
             messageText.text = "Login Successful";
             Debug.Log("Login Successful");
 
-            // �����û���֮ǰ�������ؽ���
             SaveUsername(username, password);
+            SharedDataManager.CurrentUserName = username;
 
-            // ��¼�ɹ�������³���
             LoadAnotherScene();
 
         }, error =>
