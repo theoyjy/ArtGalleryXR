@@ -39,8 +39,8 @@ public class LobbyPanelControls : MonoBehaviour
     private void Start()
     {
         //tempcode for login
-        IfLogin = false;
-        Login();
+        //IfLogin = false;
+        //Login();
 
         // Set lobby manager
         //lobbyManager = GetComponent<LobbyManager>();
