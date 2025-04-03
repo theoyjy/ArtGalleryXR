@@ -185,6 +185,7 @@ public static class SharedDataManager
     }
 
 
+
     /// <summary>
     /// 通用函数：创建共享数据（若共享组不存在则自动创建）
     /// </summary>
@@ -301,6 +302,54 @@ public static class SharedDataManager
     #endregion
 
     #region Canva 模块
+    /// <summary>
+    //add canvas automatically to the empty one
+    /// 向指定gallery添加canvas，自动寻找空的slot
+    /// </summary>
+    public static void AddCanva(string GalleryID, string canvaURL, Action<string> onSuccess, Action<PlayFabError> onError)
+    {
+        GetGallery(GalleryID, gallery =>
+        {
+            // 初始化 Canvas（若为空）
+            if (gallery.Canvas == null)
+            {
+                gallery.Canvas = new List<string>(new string[40]);
+            }
+            else if (gallery.Canvas.Count < 40)
+            {
+                // 补全 Canvas 到 40 个 slot
+                while (gallery.Canvas.Count < 40)
+                {
+                    gallery.Canvas.Add(string.Empty);
+                }
+            }
+
+            // 找到第一个空的 slot
+            int firstEmptyIndex = gallery.Canvas.IndexOf(string.Empty);
+            if (firstEmptyIndex == -1)
+            {
+                // 若不存在空 slot，则返回
+                Debug.LogError($"没有可用的空slot，画布已满: {GalleryID}");
+                onSuccess?.Invoke("no_empty_slot");
+                return;
+            }
+
+            // 将 URL 填入第一个空 slot
+            gallery.Canvas[firstEmptyIndex] = canvaURL;
+
+            // 保存更新
+            SaveGalleryUsingCloudScript(gallery,
+                () =>
+                {
+                    Debug.Log($"成功将 canvaURL 写入 gallery {GalleryID} 的 slot {firstEmptyIndex}");
+                    onSuccess?.Invoke("success");
+                },
+                onError);
+        },
+        onError);
+    }
+
+
     /// <summary>
     /// 向指定gallery添加canvas
     /// </summary>

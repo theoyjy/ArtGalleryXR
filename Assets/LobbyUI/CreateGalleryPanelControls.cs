@@ -163,10 +163,11 @@ public class CreateGalleryPanelControls : MonoBehaviour
                     "Password: " + password + "\n");
 
                 string username = SharedDataManager.CurrentUserName;
-                SharedDataManager.CreateGallery(galleryName,"LobbyID", !isPrivate);
 
                 await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
-                SharedDataManager.SetCanva(galleryName, "https://canva.link/xxx", 3,
+                SharedDataManager.CreateGallery(galleryName, "LobbyID", !isPrivate);
+
+                SharedDataManager.AddCanva(galleryName, "https://canva.link/xxx",
                 onSuccess: result => Debug.Log("设置成功: " + result),
                 onError: error => Debug.LogError("设置失败: " + error.ErrorMessage));
             },
