@@ -55,7 +55,7 @@ public class StabilityAIImage : MonoBehaviour
     public IEnumerator GenerateAIImage(string prompt)
     {
         this.prompt = prompt;
-        apiKey = Environment.GetEnvironmentVariable("STABILITY_API_KEY");
+        apiKey = "sk-eBc9hOGjOZDwwazplMw3Fnt3VEBcbuNSjaxWqiEJv6jGAoaB";
         Debug.Log("GenerateAIImage with prompt: "+prompt);
         Debug.Log(apiKey);
         string url = "https://api.stability.ai/v2beta/stable-image/generate/core";

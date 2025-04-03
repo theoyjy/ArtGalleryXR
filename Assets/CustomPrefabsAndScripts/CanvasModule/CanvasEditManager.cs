@@ -61,9 +61,26 @@ public class CanvasEditManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        EditUI.SetActive(true);
         NetworkObject player = GetCurrentPlayer();
         Camera playerCamera = player.GetComponentInChildren<Camera>();
+
+        if (other.CompareTag("Player"))
+        {
+            Camera cam = other.GetComponentInChildren<Camera>();
+            if (playerCamera != cam)
+            {
+                Debug.Log("This is not the local player's camera");
+                return;
+            }
+        }
+        else
+        {
+            Debug.Log("Trigger entered with: " + other.tag);
+            return;
+        }
+
+
+        EditUI.SetActive(true);
         Canvas canvas = EditUI.GetComponent<Canvas>();
         canvas.worldCamera = playerCamera;
         Debug.Log("Trigger Entered: Setting EditUI Active");

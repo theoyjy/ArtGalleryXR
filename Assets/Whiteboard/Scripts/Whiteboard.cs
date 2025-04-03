@@ -170,8 +170,12 @@ public class Whiteboard : MonoBehaviour
 
     public void ApplyTexture(Texture2D newTexture)
     {
-        texture = newTexture;
-        whiteboardRenderer.material.mainTexture = texture;
+        texture = new Texture2D(newTexture.width, newTexture.height, newTexture.format, false);
+        texture.SetPixels(newTexture.GetPixels());
+        texture.Apply();
+
+        // Assign the texture to the material or renderer
+        GetComponent<Renderer>().material.mainTexture = texture;
     }
 
     public Texture2D HandleFlip(Texture2D texture)
