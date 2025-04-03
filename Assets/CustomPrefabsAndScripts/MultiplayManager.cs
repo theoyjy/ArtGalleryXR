@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,12 +10,17 @@ using Unity.Services.Multiplay;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using System.Threading.Tasks;
+using Unity.Services.Lobbies.Models;
 
 public class MultiplayManager : MonoBehaviour
 {
     public string ipAddress;
     public ushort port;
     public bool hasServerData = false;
+
+    public GalleryManager galleryManager;
+
+    public Lobby lobby;
 
 #if SERVER_BUILD
     private IServerQueryHandler serverQueryHandler;
@@ -38,14 +44,33 @@ public class MultiplayManager : MonoBehaviour
                 await MultiplayService.Instance.ReadyServerForPlayersAsync();
             }
 #endif
-        StartCoroutine(waitForServerConfiguration());
-    }
 
-    IEnumerator waitForServerConfiguration() {
-        yield return new WaitUntil(() => hasServerData);
-        // JoinToServer();
-    }
+#if !SERVER_BUILD
+        galleryManager = GameObject.Find("GalleryManager").GetComponent<GalleryManager>();
 
+        while (!hasServerData)
+        {
+            if (galleryManager.currentLobby != null)
+            {
+                lobby = galleryManager.currentLobby;
+                hasServerData = true;
+                break;
+            }
+        }
+
+        ipAddress = lobby.Data["serverIP"].Value;
+        port = Convert.ToUInt16(lobby.Data["serverPort"].Value);
+        try
+        {
+            JoinToServer(ipAddress, port);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Could not join gallery: " + e);
+            galleryManager.GoToLobbies();
+        }
+#endif
+    }
 
     private async void Update()
     {
