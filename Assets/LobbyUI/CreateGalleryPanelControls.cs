@@ -153,7 +153,7 @@ public class CreateGalleryPanelControls : MonoBehaviour
                 if (sameNameExist)
                 {
                 // 可选：设置提示 UI
-                return;
+                   return;
                 }
 
                 Debug.Log("Attempting to create gallery...\n" +
@@ -164,12 +164,20 @@ public class CreateGalleryPanelControls : MonoBehaviour
 
                 string username = SharedDataManager.CurrentUserName;
 
-                await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
-                SharedDataManager.CreateGallery(galleryName, "LobbyID", !isPrivate);
+                //await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
+                if(isPrivate)
+                {
+                    SharedDataManager.CreateGallery(galleryName, "LobbyID", password, false);
+                }
+                else
+                {
+                    SharedDataManager.CreateGallery(galleryName, "LobbyID", "", true);
+                }
 
-                SharedDataManager.AddCanva(galleryName, "https://canva.link/xxx",
-                onSuccess: result => Debug.Log("set successful: " + result),
-                onError: error => Debug.LogError("set failed: " + error.ErrorMessage));
+                //gallery should exist or be wrong
+                //SharedDataManager.AddCanva(galleryName, "https://canva.link/xxx",
+                //onSuccess: result => Debug.Log("set successful: " + result),
+                //onError: error => Debug.LogError("set failed: " + error.ErrorMessage));
             },
             onError: (PlayFabError error) =>
             {
