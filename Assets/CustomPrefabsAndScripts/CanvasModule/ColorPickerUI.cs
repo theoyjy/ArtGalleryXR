@@ -16,7 +16,7 @@ public class ColorPickerUI : MonoBehaviour
     private Color selectedColor = Color.red;
     private MarkerColorChanger markerColorChanger;
 
-    private GameObject canvasComponent;
+    public GameObject canvasComponent;
 
     GameObject FindTopLevelGameObject(string objectName)
     {
@@ -37,27 +37,27 @@ public class ColorPickerUI : MonoBehaviour
 
     void Start()
     {
-        canvasComponent = FindTopLevelGameObject("CanvasComponent");
+        //canvasComponent = FindTopLevelGameObject("CanvasComponent");
 
         if (canvasComponent != null)
         {
-            Debug.Log("✅ 找到 CanvasComponent：" + canvasComponent.name);
+            Debug.Log("Found CanvasComponent：" + canvasComponent.name);
             // 在 CanvasComponent 及其所有子节点查找 MarkerColorChanger 组件
             markerColorChanger = canvasComponent.GetComponentInChildren<MarkerColorChanger>();
 
             if (markerColorChanger != null)
             {
-                Debug.Log("✅ 成功找到 MarkerColorChanger：" + markerColorChanger.gameObject.name);
+                Debug.Log("Found MarkerColorChanger：" + markerColorChanger.gameObject.name);
                 
             }
             else
             {
-                Debug.LogWarning("⚠️ CanvasComponent 下面没有找到 MarkerColorChanger 组件！");
+                Debug.LogWarning("Could not find MarkerColorChanger！");
             }
         }
         else
         {
-            Debug.LogError("❌ 场景中没有找到 CanvasComponent！");
+            Debug.LogError("Unable to find CanvasComponent！");
         }
 
         // 默认隐藏颜色选择 UI

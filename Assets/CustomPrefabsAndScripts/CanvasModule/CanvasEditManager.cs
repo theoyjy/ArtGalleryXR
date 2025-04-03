@@ -5,6 +5,7 @@ using Unity.XR.CoreUtils;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using Unity.Netcode;
+using UnityEngine.UI;
 
 public class CanvasEditManager : MonoBehaviour
 {
@@ -12,8 +13,8 @@ public class CanvasEditManager : MonoBehaviour
     private float zoomedInFOV = 30.0f;
     private float zoomDistance = 10.0f;
     public float ToolSpawnOffset = 100.0f;
-    GameObject editedCanvas;
-    GameObject enterEditCanvasUI;
+    private Button editButton;
+   
     Vector3 cameraBeforeEnterPosition;
     Quaternion cameraBeforeEnterRotation;
     NetworkObject localPlayer = null;
@@ -23,16 +24,13 @@ public class CanvasEditManager : MonoBehaviour
     [Header("UI Prefab (Must be a World-Space Canvas)")]
     [SerializeField] private GameObject ToolUI;
 
+    [SerializeField] private GameObject EditUI;
+
+    public Card card;
+
     private bool isEditMode = false;
 
     public static CanvasEditManager Instance { get; private set; }
-
-    void Start()
-    {
-        isEditMode = false;
-        cameraBeforeEnterPosition = Vector3.zero;
-        cameraBeforeEnterRotation = Quaternion.identity;
-    }
 
     void Awake()
     {
@@ -48,13 +46,47 @@ public class CanvasEditManager : MonoBehaviour
         }
 
     }
+
+    void Start()
+    {
+        isEditMode = false;
+        cameraBeforeEnterPosition = Vector3.zero;
+        cameraBeforeEnterRotation = Quaternion.identity;
+
+        EditUI.SetActive(false);
+        ToolUI.SetActive(false);
+    }
+
+    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        EditUI.SetActive(true);
+        NetworkObject player = GetCurrentPlayer();
+        Camera playerCamera = player.GetComponentInChildren<Camera>();
+        Canvas canvas = EditUI.GetComponent<Canvas>();
+        canvas.worldCamera = playerCamera;
+        Debug.Log("Trigger Entered: Setting EditUI Active");
+        editButton = EditUI.GetComponentInChildren<Button>();
+        editButton.onClick.AddListener(() => EnterEditMode(gameObject));
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+
+        EditUI.SetActive(false);
+        ToolUI.SetActive(false);
+        isEditMode = false;
+    }
+
+
     NetworkObject GetCurrentPlayer()
     {
         if(localPlayer == null)
         {
             foreach (var player in FindObjectsOfType<NetworkObject>())
             {
-                if (player.IsOwner) // This is the local player
+                if (player.CompareTag("Player") && player.IsOwner) // This is the local player
                 {
                     localPlayer = player;
                     break;
@@ -69,22 +101,14 @@ public class CanvasEditManager : MonoBehaviour
         if (isEditMode)
         {
             Debug.Log("Already in Edit Mode");
-            //return;
-        }
-
-        enterEditCanvasUI = EditCanvasUI;
-        EnterEditController UIController = EditCanvasUI.GetComponent<EnterEditController>();
-        if (UIController == null)
-        {
-            Debug.LogError("UIController component is missing from: " + EditCanvasUI.name);
             return;
         }
-        editedCanvas = UIController.Canvas;
+
         isEditMode = true;
 
         Debug.Log("ToggleEditMode after " + isEditMode);
 
-        Card card = editedCanvas.GetComponentInChildren<Card>();
+       
         if (card == null)
         {
             Debug.LogError("Card component is missing from: " + gameObject.name);
@@ -95,18 +119,23 @@ public class CanvasEditManager : MonoBehaviour
 
         NetworkObject player = GetCurrentPlayer();
         Camera playerCamera = player.GetComponentInChildren<Camera>();
-        Canvas ui_canvas = EditCanvasUI.GetComponent<Canvas>();
-        ui_canvas.enabled = false;
+        EditUI.SetActive(false);
 #if UNITY_ANDROID
 
 #else
-        MoveCameraToOrthographic(player, playerCamera, card);
-#endif        
+        MoveCameraToOrthographic(player, playerCamera);
+#endif  
+        ToolUI.SetActive(true);
         Canvas canvas = ToolUI.GetComponent<Canvas>();
-        canvas.enabled = true;
-        if(canvas.worldCamera == null)
+        canvas.worldCamera = playerCamera;
+        Button[] buttons = ToolUI.GetComponentsInChildren<Button>();
+        foreach (Button button in buttons)
         {
-            canvas.worldCamera = playerCamera;
+            if (button.name == "ExitBtn")
+                button.onClick.AddListener(() => ExitEditMode());
+            else if (button.name == "DeleteBtn")
+                button.onClick.AddListener(() => DeleteCanvas());
+
         }
     }
 
@@ -114,31 +143,18 @@ public class CanvasEditManager : MonoBehaviour
     {
         Debug.Log("Exiting edit mode");
         isEditMode = false;
+        ToolUI.SetActive(false);
+
 #if UNITY_ANDROID
 
 #else
-        NetworkObject player = GetCurrentPlayer();
-        Camera playerCamera = player.GetComponentInChildren<Camera>();
-        var trackedPoseDriver = playerCamera.transform.parent.GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>(true);
-        enterEditCanvasUI.SetActive(true);
-
-        Debug.Log("TrackedPoseDriver count: " + trackedPoseDriver.Length);
-        for (int i = 0; i < trackedPoseDriver.Length; i++)
-        {
-            trackedPoseDriver[i].enabled = true;
-        }
-        playerCamera.transform.parent.transform.parent.GetComponent<ObjectMovementWithCamera>().enabled = true;
-        playerCamera.aspect = (float)Screen.width / Screen.height;
-        playerCamera.orthographic = false;
-        Screen.SetResolution(oriWidth, oriHeight, false);
-        MoveXRToTargetTrans(cameraBeforeEnterPosition, cameraBeforeEnterRotation);
+        MoveCameraToPerspective();
 #endif
     }
 
     public void DeleteCanvas()
     {
         Debug.Log("Deleting canvas");
-        Card card = editedCanvas.GetComponentInChildren<Card>();
         if (card == null)
         {
             Debug.LogError("Card component is missing from: " + gameObject.name);
@@ -155,7 +171,7 @@ public class CanvasEditManager : MonoBehaviour
         player.transform.rotation = CameraRotation;
     }
 
-    public void MoveCameraToOrthographic(NetworkObject player, Camera playerCamera, Card card)
+    public void MoveCameraToOrthographic(NetworkObject player, Camera playerCamera)
     {
         // struct value copy
         cameraBeforeEnterPosition = player.transform.position;
@@ -190,6 +206,24 @@ public class CanvasEditManager : MonoBehaviour
             trackedPoseDriver[i].enabled = false;
         }
         playerCamera.transform.parent.transform.parent.GetComponent<ObjectMovementWithCamera>().enabled = false;
+    }
+
+    private void MoveCameraToPerspective()
+    {
+        NetworkObject player = GetCurrentPlayer();
+        Camera playerCamera = player.GetComponentInChildren<Camera>();
+        var trackedPoseDriver = playerCamera.transform.parent.GetComponentsInChildren<UnityEngine.InputSystem.XR.TrackedPoseDriver>(true);
+
+        Debug.Log("TrackedPoseDriver count: " + trackedPoseDriver.Length);
+        for (int i = 0; i < trackedPoseDriver.Length; i++)
+        {
+            trackedPoseDriver[i].enabled = true;
+        }
+        playerCamera.transform.parent.transform.parent.GetComponent<ObjectMovementWithCamera>().enabled = true;
+        playerCamera.aspect = (float)Screen.width / Screen.height;
+        playerCamera.orthographic = false;
+        Screen.SetResolution(oriWidth, oriHeight, false);
+        MoveXRToTargetTrans(cameraBeforeEnterPosition, cameraBeforeEnterRotation);
     }
 
 
