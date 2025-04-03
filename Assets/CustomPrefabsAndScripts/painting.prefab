@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 5326828463914114419}
   - component: {fileID: 4604087739230181130}
   - component: {fileID: 8725025519759050349}
+  - component: {fileID: 2774071540622024573}
   m_Layer: 5
   m_Name: SaveButton
   m_TagString: Untagged
@@ -268,6 +269,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paintingRenderer: {fileID: 2217499368628173712}
+--- !u!114 &2774071540622024573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3607039795138063146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b3638c2f5db5b479ff24c2859713d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PokeFollowTransform: {fileID: 2655691809712870055}
+  m_SmoothingSpeed: 16
+  m_ReturnToInitialPosition: 1
+  m_ApplyIfChildIsTarget: 1
+  m_ClampToMaxDistance: 1
+  m_MaxDistance: 0
+  m_PokeFilter: {fileID: 0}
 --- !u!1 &4553136074827090770
 GameObject:
   m_ObjectHideFlags: 0
