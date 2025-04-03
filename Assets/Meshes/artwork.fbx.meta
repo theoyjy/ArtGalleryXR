@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 5b0306287ea204014973b5df628108ec
+guid: 04ca5e1dc3ff0495f9eb1d7129d84895
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: canvas
-    second: {fileID: 2100000, guid: 5fa25c670b8f84129a9b318787bc611d, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

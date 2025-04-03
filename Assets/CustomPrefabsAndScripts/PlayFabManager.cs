@@ -26,6 +26,7 @@ public class PlayFabManager : MonoBehaviour
 
     private void ShowLoginScreen()
     {
+    
         loginUI.SetActive(true);
         IsLoginActive = true;
         Cursor.lockState = CursorLockMode.None;

@@ -189,7 +189,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: More than 6 numbers
 --- !u!222 &67715681
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -879,6 +879,10 @@ PrefabInstance:
     - target: {fileID: 2680348550112195683, guid: 09536e5132315fd4bbeefda7e5e75ea2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2694992209424223148, guid: 09536e5132315fd4bbeefda7e5e75ea2, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4007473694
       objectReference: {fileID: 0}
     - target: {fileID: 2810912792671193272, guid: 09536e5132315fd4bbeefda7e5e75ea2, type: 3}
       propertyPath: m_Enabled
@@ -2098,7 +2102,6 @@ MonoBehaviour:
   passwordInput: {fileID: 97279732}
   messageText: {fileID: 865395124}
   loginUI: {fileID: 2602797888811575843}
-  CurrentUsername: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
