@@ -168,8 +168,8 @@ public class CreateGalleryPanelControls : MonoBehaviour
                 SharedDataManager.CreateGallery(galleryName, "LobbyID", !isPrivate);
 
                 SharedDataManager.AddCanva(galleryName, "https://canva.link/xxx",
-                onSuccess: result => Debug.Log("设置成功: " + result),
-                onError: error => Debug.LogError("设置失败: " + error.ErrorMessage));
+                onSuccess: result => Debug.Log("set successful: " + result),
+                onError: error => Debug.LogError("set failed: " + error.ErrorMessage));
             },
             onError: (PlayFabError error) =>
             {
