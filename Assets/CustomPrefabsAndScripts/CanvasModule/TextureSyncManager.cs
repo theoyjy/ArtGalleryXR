@@ -259,8 +259,7 @@ public class TextureSyncManager : NetworkBehaviour
             latestTextureData = textureBytes;
             whiteboard.texture.LoadImage(textureBytes);
             whiteboard.texture = whiteboard.ResizeTexture(whiteboard.texture, 2048, 2048);
-
-            ApplyTextureToUIOrObject(whiteboard.texture);
+            whiteboard.texture.Apply();
 
             // Broadcast to all clients except the sender
             ulong senderClientId = serverRpcParams.Receive.SenderClientId;
@@ -389,6 +388,8 @@ public class TextureSyncManager : NetworkBehaviour
             Debug.Log($"[Server] Received clear command from client {serverRpcParams.Receive.SenderClientId}.");
             strokeBuffer.Clear();
             whiteboard.ClearWhiteboard();
+            latestTextureData = whiteboard.texture.EncodeToJPG(100);
+
             IsClearing = true;
 
             // Broadcast the update to all clients except the sender

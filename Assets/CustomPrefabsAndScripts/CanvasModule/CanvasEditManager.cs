@@ -62,6 +62,11 @@ public class CanvasEditManager : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         NetworkObject player = GetCurrentPlayer();
+        if (player == null)
+        {
+            Debug.Log("No local player yet in the scene.");
+            return;
+        }
         Camera playerCamera = player.GetComponentInChildren<Camera>();
 
         if (other.CompareTag("Player"))
