@@ -138,8 +138,8 @@ public class CreateGalleryPanelControls : MonoBehaviour
                 bool sameNameExist = false;
                 foreach (var gallery in Galleries)
                 {
-                    Debug.Log($"ID: {gallery.GalleryID}, 名称: {gallery.GalleryName}, 权限: {gallery.permission}");
-                    if (galleryName.Equals(gallery.GalleryName))
+                    Debug.Log($"ID: {gallery.GalleryID}, 名称: {gallery.LobbyID}, 权限: {gallery.permission}");
+                    if (galleryName.Equals(gallery.LobbyID))
                     {
                         Debug.Log("The name has existed! Change to another one.");
                         sameNameExist = true;
@@ -160,12 +160,13 @@ public class CreateGalleryPanelControls : MonoBehaviour
                     "Password: " + password + "\n");
 
                 string username = SharedDataManager.CurrentUserName;
-                SharedDataManager.CreateGallery(galleryName, !isPrivate);
-                SharedDataManager.SetCanva(galleryName, "https://canva.link/xxx", 3,
-                    onSuccess: result => Debug.Log("设置成功: " + result),
-                    onError: error => Debug.LogError("设置失败: " + error.ErrorMessage));
 
                 await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
+                SharedDataManager.CreateGallery(galleryName, "LobbyID", !isPrivate);
+
+                SharedDataManager.AddCanva(galleryName, "https://canva.link/xxx",
+                onSuccess: result => Debug.Log("set successful: " + result),
+                onError: error => Debug.LogError("set failed: " + error.ErrorMessage));
             },
             onError: (PlayFabError error) =>
             {

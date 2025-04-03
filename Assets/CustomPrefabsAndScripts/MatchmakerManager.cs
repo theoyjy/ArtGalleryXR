@@ -6,7 +6,6 @@ using Unity.Services.Matchmaker;
 using Unity.Services.Matchmaker.Models;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
-using Unity.Services.Authentication;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
@@ -25,22 +24,14 @@ public class MatchmakerManager : MonoBehaviour
     public string allocatedIpAddress;
     public ushort allocatedPort;
 
-    public bool isPrivate = false;
-    public String lobbyName;
-
     bool isDeallocating = false;
     public string backfillIpAddress;
-    public ushort backfillPort;
-    public bool isServerAvailable = false;
     public MultiplayManager mpManager;
     public AuthenticationManager authManager;
-
-    public LobbyManager lbyManager;
 
     public async void Start()
     {
         mpManager = GetComponent<MultiplayManager>();
-        lbyManager = GetComponent<LobbyManager>();
         authManager = GetComponent<AuthenticationManager>();
         await UnityServices.InitializeAsync();
 
@@ -55,9 +46,9 @@ public class MatchmakerManager : MonoBehaviour
 
     async void Update()
     {
-        int playerCount = NetworkManager.Singleton.ConnectedClientsList.Count;
 
 #if SERVER_BUILD
+        int playerCount = NetworkManager.Singleton.ConnectedClientsList.Count;
 
         if (playerCount == 0)
         {
@@ -81,44 +72,6 @@ public class MatchmakerManager : MonoBehaviour
 
 #endif
     }
-
-
-    //     public async Task<Tuple<string, ushort>> AllocateServerManually()
-    // {
-    //     isAllocated = false;
-    //     allocatedIpAddress = null;
-    //     allocatedPort = 0;
-
-    //     try
-    //     {
-    //         // Request a server allocation directly from Multiplay
-    //         var allocation = await MultiplayService.Instance.RequestServerAsync();
-
-    //         if (allocation != null)
-    //         {
-    //             allocatedIpAddress = allocation.ServerIp;
-    //             allocatedPort = (ushort)allocation.ServerPort;
-    //             isAllocated = true;
-
-    //             Debug.Log($"Server manually allocated! IP: {allocatedIpAddress}, Port: {allocatedPort}");
-    //         }
-    //         else
-    //         {
-    //             Debug.LogError("Failed to manually allocate a server. Allocation returned null.");
-    //         }
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         Debug.LogError($"Error during manual server allocation: {ex.Message}");
-    //     }
-
-    //     // Update MultiplayManager with the new server data
-    //     mpManager.ipAddress = allocatedIpAddress;
-    //     mpManager.port = allocatedPort;
-    //     mpManager.hasServerData = isAllocated;
-
-    //     return new Tuple<string, ushort>(allocatedIpAddress, allocatedPort);
-    // }
 
     public async Task<Tuple<string, ushort>> AllocateServer(string playerId, string galleryId)
     {
@@ -179,9 +132,9 @@ public class MatchmakerManager : MonoBehaviour
             }
         } while (!isAllocated);
 
-        mpManager.ipAddress = allocatedIpAddress;
-        mpManager.port = (ushort)allocatedPort;
-        mpManager.hasServerData = isAllocated;
+        // mpManager.ipAddress = allocatedIpAddress;
+        // mpManager.port = (ushort)allocatedPort;
+        // mpManager.hasServerData = isAllocated;
 
         return new Tuple<string, ushort>(allocatedIpAddress, allocatedPort);
 

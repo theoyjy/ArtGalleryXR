@@ -13,7 +13,7 @@ using Unity.Services.Lobbies.Models;
 public class GalleryDetail
 {
     public string GalleryID;           // GalleryID
-    public string GalleryName;         // GalleryID same as above
+    public string LobbyID;         // LobbyID
     public List<string> Canvas;         // include Canva ID's URL 3.28changing
     public string OwnID;
     public string permission;          // 权限，仅有 "public" 或 "private"
@@ -22,7 +22,7 @@ public class GalleryDetail
 public static class SharedDataManager
 {
     // 两个模块的共享组 ID
-    public static readonly string GallerySharedGroupId = "Galleries";
+    public static readonly string GallerySharedGroupId = "Gallery";
     public static readonly string PlayerSharedGroupId = "Players";
 
     public static string CurrentUserName;
@@ -128,14 +128,14 @@ public static class SharedDataManager
     }
 
 
-    public static void CreateGallery(string GalleryName, bool IsPublic)
+    public static void CreateGallery(string GalleryID,string LobbyID, bool IsPublic)
     {
         GetAllGalleries(existingGalleries =>
         {
             GalleryDetail NewGallery = new GalleryDetail
             {
-                GalleryID = GalleryName,
-                GalleryName = GalleryName,
+                GalleryID = GalleryID,
+                LobbyID = LobbyID,
                 Canvas = new List<string>(),
                 OwnID = CurrentUserName,
                 permission = IsPublic ? "public" : "private"
@@ -144,11 +144,11 @@ public static class SharedDataManager
             SaveGalleryUsingCloudScript(NewGallery,
             onSuccess: () =>
             {
-                Debug.Log($"CloudScript 测试：Gallery {GalleryName} 数据保存成功！");
+                Debug.Log($"CloudScript 测试：Gallery {GalleryID} 数据保存成功！");
             },
             onError: (error) =>
             {
-                Debug.LogError($"CloudScript 测试：Gallery {GalleryName} 数据保存失败！");
+                Debug.LogError($"CloudScript 测试：Gallery {GalleryID} 数据保存失败！");
             });
         },
         onError: error =>
@@ -156,6 +156,34 @@ public static class SharedDataManager
             Debug.LogError("获取已有Gallery失败：" + error.ErrorMessage);
         });
     }
+
+    //change lobby ID
+    public static void ChangeLobbyID(string GalleryID, string LobbyID)
+    {
+        // 先尝试获取指定的 Gallery
+        GetGallery(GalleryID, gallery =>
+        {
+            // 如果获取成功，则更新 LobbyID
+            gallery.LobbyID = LobbyID;
+
+            // 接着保存更新后的数据
+            SaveGalleryUsingCloudScript(gallery,
+                onSuccess: () =>
+                {
+                    Debug.Log($"成功更新 Gallery [{GalleryID}] 的 LobbyID 为: {LobbyID}");
+                },
+                onError: (error) =>
+                {
+                    Debug.LogError($"更新 Gallery [{GalleryID}] LobbyID 失败: {error.ErrorMessage}");
+                });
+        },
+        error =>
+        {
+        // 如果在 GetGallery 时出现错误，说明该 Gallery 不存在或无法获取
+        Debug.LogError($"Gallery [{GalleryID}] 不存在，无法更新 LobbyID。错误信息: {error.ErrorMessage}");
+        });
+    }
+
 
 
     /// <summary>
@@ -274,6 +302,54 @@ public static class SharedDataManager
     #endregion
 
     #region Canva 模块
+    /// <summary>
+    //add canvas automatically to the empty one
+    /// 向指定gallery添加canvas，自动寻找空的slot
+    /// </summary>
+    public static void AddCanva(string GalleryID, string canvaURL, Action<string> onSuccess, Action<PlayFabError> onError)
+    {
+        GetGallery(GalleryID, gallery =>
+        {
+            // 初始化 Canvas（若为空）
+            if (gallery.Canvas == null)
+            {
+                gallery.Canvas = new List<string>(new string[40]);
+            }
+            else if (gallery.Canvas.Count < 40)
+            {
+                // 补全 Canvas 到 40 个 slot
+                while (gallery.Canvas.Count < 40)
+                {
+                    gallery.Canvas.Add(string.Empty);
+                }
+            }
+
+            // 找到第一个空的 slot
+            int firstEmptyIndex = gallery.Canvas.IndexOf(string.Empty);
+            if (firstEmptyIndex == -1)
+            {
+                // 若不存在空 slot，则返回
+                Debug.LogError($"没有可用的空slot，画布已满: {GalleryID}");
+                onSuccess?.Invoke("no_empty_slot");
+                return;
+            }
+
+            // 将 URL 填入第一个空 slot
+            gallery.Canvas[firstEmptyIndex] = canvaURL;
+
+            // 保存更新
+            SaveGalleryUsingCloudScript(gallery,
+                () =>
+                {
+                    Debug.Log($"成功将 canvaURL 写入 gallery {GalleryID} 的 slot {firstEmptyIndex}");
+                    onSuccess?.Invoke("success");
+                },
+                onError);
+        },
+        onError);
+    }
+
+
     /// <summary>
     /// 向指定gallery添加canvas
     /// </summary>

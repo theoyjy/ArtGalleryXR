@@ -39,8 +39,8 @@ public class LobbyPanelControls : MonoBehaviour
     private void Start()
     {
         //tempcode for login
-        IfLogin = false;
-        Login();
+        //IfLogin = false;
+        //Login();
 
         // Set lobby manager
         //lobbyManager = GetComponent<LobbyManager>();
@@ -171,10 +171,10 @@ public class LobbyPanelControls : MonoBehaviour
     private void OnCreateGalleryClicked()
     {
         Debug.Log("ACK: Clicked on create new gallery button");
-        if (!IfLogin)
-        {
-            Login();
-        }
+        //if (!IfLogin)
+        //{
+        //    Login();
+        //}
 
     }
 
