@@ -134,7 +134,7 @@ public class LobbyPanelControls : MonoBehaviour
         
         // Optionally, add button click listener here
         newButton.onClick.AddListener(() => {
-            Debug.Log("Button clicked: " + buttonText);
+            //lobbyManager.JoinLobby();
         });
     }
 

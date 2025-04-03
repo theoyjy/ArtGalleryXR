@@ -192,6 +192,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
         /// </summary>
         void Awake()
         {
+#if UNITY_ANDROID
             // Set active keyboard to any serialized keyboard
             m_ActiveKeyboard = m_Keyboard;
 
@@ -206,6 +207,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
 
             if (m_AlwaysObserveKeyboard && m_ActiveKeyboard != null)
                 StartObservingKeyboard(m_ActiveKeyboard);
+#endif // UNITY_ANDROID
         }
 
         /// <summary>
@@ -213,8 +215,10 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
         /// </summary>
         void OnEnable()
         {
+#if UNITY_ANDROID
             if (m_InputField != null)
                 m_InputField.onSelect.AddListener(OnInputFieldGainedFocus);
+#endif // UNITY_ANDROID
         }
 
         /// <summary>
@@ -244,6 +248,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
         /// </summary>
         void Start()
         {
+#if UNITY_ANDROID
             // Set active keyboard to global keyboard if needed
             if (m_ActiveKeyboard == null || !m_UseSceneKeyboard)
                 m_ActiveKeyboard = GlobalNonNativeKeyboard.instance.keyboard;
@@ -252,6 +257,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
             var observeOnStart = m_AlwaysObserveKeyboard && m_ActiveKeyboard != null & !m_IsActivelyObservingKeyboard;
             if (observeOnStart)
                 StartObservingKeyboard(m_ActiveKeyboard);
+#endif // UNITY_ANDROID
         }
 
         void SetKeyboard(XRKeyboard updateKeyboard, bool observeKeyboard = true)
@@ -275,6 +281,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
 
         void StartObservingKeyboard(XRKeyboard activeKeyboard)
         {
+#if UNITY_ANDROID
             if (activeKeyboard == null || m_IsActivelyObservingKeyboard)
                 return;
 
@@ -285,6 +292,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
             activeKeyboard.onFocusChanged.AddListener(KeyboardFocusChanged);
 
             m_IsActivelyObservingKeyboard = true;
+#endif // UNITY_ANDROID
         }
 
         void StopObservingKeyboard(XRKeyboard activeKeyboard)

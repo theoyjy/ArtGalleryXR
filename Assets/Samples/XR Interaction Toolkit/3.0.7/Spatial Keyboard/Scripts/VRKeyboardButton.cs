@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+//#if UNITY_ANDROID
 public class VRKeyboardButton : MonoBehaviour
 {
     public string keyCharacter; // °´¼ü×Ö·û
@@ -13,3 +14,5 @@ public class VRKeyboardButton : MonoBehaviour
         keyboardManager = FindObjectOfType<VRKeyboardManager>();
     }
 }
+
+//#endif // UNITY_ANDROID

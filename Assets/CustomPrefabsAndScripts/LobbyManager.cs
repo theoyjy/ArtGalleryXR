@@ -87,8 +87,9 @@ public class LobbyManager : MonoBehaviour
     }
 
     // galleryId (fixed) != lobbyId (dynamic)
-    public async Task CreateLobby(string galleryId, string playerId, int lobbyCapacity, bool isPrivate, string password)
+    public async Task<string> CreateLobby(string galleryId, string playerId, int lobbyCapacity, bool isPrivate, string password)
     {
+        string lobbyId =  "";
         // TODO: maybe check if there already exists another lobby with the same galleryId
 
         Tuple<string, ushort> serverData = await matchManager.AllocateServer(playerId, galleryId);
@@ -109,12 +110,14 @@ public class LobbyManager : MonoBehaviour
 
             Debug.Log("attempting to create lobby");
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(galleryId, lobbyCapacity, lobbyOptions);
-            Debug.Log("Lobby created: " + lobby.Id);
+            lobbyId = lobby.Id;
+            Debug.Log("Lobby created: " + lobbyId);
         }
         catch (LobbyServiceException e)
         {
             Debug.Log("Error while creating lobby: " + e);
         }
+        return lobby.Id;
     }
 
     public async Task<List<Lobby>> QueryAvailableLobbies()

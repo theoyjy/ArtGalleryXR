@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard; // ✅ 解决找不到 XRKeyboardDisplay
 using UnityEngine.XR;
 
+//#if UNITY_ANDROID
 public class VRKeyboardManager : MonoBehaviour
 {
     public GameObject keyboardPanel; // XRI Keyboard 面板
@@ -35,3 +36,4 @@ public class VRKeyboardManager : MonoBehaviour
     }
    
 }
+//#endif // UNITY_ANDROID

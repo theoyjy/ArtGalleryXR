@@ -129,9 +129,6 @@ public class CreateGalleryPanelControls : MonoBehaviour
 
         CheckAndCreateGallery(galleryName, maxPlayers, isPrivate, password);
     }
-
-
-
     private async void CheckAndCreateGallery(string galleryName, int maxPlayers, bool isPrivate, string password)
     {
         SharedDataManager.GetAllGalleries(
