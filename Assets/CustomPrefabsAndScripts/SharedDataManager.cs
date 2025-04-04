@@ -17,12 +17,13 @@ public class GalleryDetail
     public List<string> Canvas;         // include Canva ID's URL 3.28changing
     public string OwnID;
     public string permission;          // 权限，仅有 "public" 或 "private"
+    public string password;         //is private
 }
 
 public static class SharedDataManager
 {
     // 两个模块的共享组 ID
-    public static readonly string GallerySharedGroupId = "Gallery";
+    public static readonly string GallerySharedGroupId = "GalleriesWithPassword";
     public static readonly string PlayerSharedGroupId = "Players";
 
     public static string CurrentUserName;
@@ -128,7 +129,7 @@ public static class SharedDataManager
     }
 
 
-    public static void CreateGallery(string GalleryID,string LobbyID, bool IsPublic)
+    public static void CreateGallery(string GalleryID,string LobbyID,string Password, bool IsPublic)
     {
         GetAllGalleries(existingGalleries =>
         {
@@ -138,7 +139,8 @@ public static class SharedDataManager
                 LobbyID = LobbyID,
                 Canvas = new List<string>(),
                 OwnID = CurrentUserName,
-                permission = IsPublic ? "public" : "private"
+                permission = IsPublic ? "public" : "private",
+                password = Password
             };
 
             SaveGalleryUsingCloudScript(NewGallery,
