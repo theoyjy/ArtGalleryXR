@@ -18,6 +18,9 @@ public class MultiplayManager : MonoBehaviour
     public ushort port;
     public bool hasServerData = false;
 
+    private float deallocationTimer = 0f;
+    private bool isWaitingForDeallocation = false;
+
     public GalleryManager galleryManager;
 
     public Lobby lobby;
@@ -34,7 +37,7 @@ public class MultiplayManager : MonoBehaviour
             await UnityServices.InitializeAsync();
 
             ServerConfig serverConfig = MultiplayService.Instance.ServerConfig;
-            serverQueryHandler = await MultiplayService.Instance.StartServerQueryHandlerAsync(10, "MyServer", "MyGameType", "0", "TestMap");
+            serverQueryHandler = await MultiplayService.Instance.StartServerQueryHandlerAsync(40, "gallery", "standard", "0", "gallery");
 
             if (serverConfig.AllocationId != string.Empty)
             {
@@ -60,6 +63,7 @@ public class MultiplayManager : MonoBehaviour
 
         ipAddress = lobby.Data["serverIP"].Value;
         port = Convert.ToUInt16(lobby.Data["serverPort"].Value);
+
         try
         {
             JoinToServer(ipAddress, port);
@@ -75,13 +79,34 @@ public class MultiplayManager : MonoBehaviour
     private async void Update()
     {
 #if SERVER_BUILD
-        
-            if (serverQueryHandler != null)
+
+        if (serverQueryHandler != null)
+        {
+            serverQueryHandler.CurrentPlayers = (ushort)NetworkManager.Singleton.ConnectedClientsIds.Count;
+            serverQueryHandler.UpdateServerCheck();
+            await Task.Delay(100);
+        }
+
+        int playerCount = NetworkManager.Singleton.ConnectedClientsList.Count;
+
+        if (playerCount == 0)
+        {
+            if (!isWaitingForDeallocation)
             {
-                serverQueryHandler.CurrentPlayers = (ushort)NetworkManager.Singleton.ConnectedClientsIds.Count;
-                serverQueryHandler.UpdateServerCheck();
-                await Task.Delay(100);
+                isWaitingForDeallocation = true;
+                deallocationTimer = Time.time + 60f;
             }
+
+            if (Time.time >= deallocationTimer)
+            {
+                Application.Quit();
+                Debug.Log("Deallocating Server");
+            }
+        }
+        else
+        {
+            isWaitingForDeallocation = false;
+        }
 #endif
     }
 
@@ -97,14 +122,10 @@ public class MultiplayManager : MonoBehaviour
 
     public void DisconnectFromServer()
     {
-        if (Application.platform != RuntimePlatform.LinuxServer)
+        if (NetworkManager.Singleton.IsConnectedClient)
         {
-            if (NetworkManager.Singleton.IsConnectedClient)
-            {
-                NetworkManager.Singleton.Shutdown(true);
-                NetworkManager.Singleton.DisconnectClient(NetworkManager.Singleton.LocalClientId);
-            }
+            NetworkManager.Singleton.Shutdown();
+            Debug.Log("Disconnected from server.");
         }
     }
-
 }

@@ -5,21 +5,11 @@ using UnityEngine;
 using Unity.Services.Lobbies.Models;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using UnityEngine.SceneManagement;
-using NUnit.Framework;
-using PlayFab.AuthenticationModels;
 
 public class LobbyManager : MonoBehaviour
 {
-
-    public string lobbyName;
-    public bool isLobbyServer = false;
-
     public Lobby lobby;
-
-    //public int lobbyCount;
-
     public AuthenticationManager authManager;
     public MatchmakerManager matchManager;
 
@@ -34,9 +24,6 @@ public class LobbyManager : MonoBehaviour
         {
             await Task.Delay(1000);
         }
-
-        //QueryResponse response = await LobbyService.Instance.QueryLobbiesAsync();
-        //lobbyCount = response.Results.Count;
 
         // TODO: remove
         // await CreateLobby("test", "player", 8, false, "");
@@ -57,21 +44,24 @@ public class LobbyManager : MonoBehaviour
     public async Task JoinLobby(Lobby lobby, string password, bool isGuest)
     {
         var joinOptions = new JoinLobbyByIdOptions { };
-        if (lobby.HasPassword)
-        {
-            joinOptions.Password = password;
-        }
+
         if (isGuest)
         {
+            if (lobby.HasPassword)
+            {
+                joinOptions.Password = password;
+            }
+
             try
             {
-
                 await LobbyService.Instance.JoinLobbyByIdAsync(lobby.Id, joinOptions);
             }
-            catch (Exception e)
+            catch (LobbyServiceException ex)
             {
-                Debug.Log("Could not join lobby due to Exception: " + e);
+                Debug.LogError("Failed to join lobby: " + ex);
+                return;
             }
+
         }
 
         string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";

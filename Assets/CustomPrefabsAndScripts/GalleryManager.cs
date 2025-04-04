@@ -1,19 +1,14 @@
 using UnityEngine;
 using Unity.Services.Lobbies.Models;
-using System.Security.Cryptography;
 using UnityEngine.SceneManagement;
-using TMPro.EditorUtilities;
-using Unity.Services.Ccd.Management;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
-using NUnit.Framework;
-
 public class GalleryManager : MonoBehaviour
 {
     public Lobby currentLobby;
     public string galleryId;
-    public string cloudPlayerId = AuthenticationService.Instance.PlayerId;
+    public string cloudPlayerId;
     public MultiplayManager mpManager;
     public bool playerIsHost;
     public bool isOpen = true;
@@ -23,41 +18,36 @@ public class GalleryManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     async void Start()
     {
+        #if !SERVER_BUILD
+        mpManager = GameObject.Find("MultiplayManager").GetComponent<MultiplayManager>();
+        cloudPlayerId = AuthenticationService.Instance.PlayerId;
         currentLobby = SharedDataManager.CurrentLobby;
         galleryId = currentLobby.Name;
         await LoadGalleryState();
         isLocked = false;
-        
-        if (playerIsHost) {
+
+        if (playerIsHost)
+        {
             PingLobby();
         }
+        #endif
     }
 
-    public async void GoToLobbies() {
-        await SceneManager.LoadSceneAsync("Lobby");
-        Scene galleryScene = SceneManager.GetSceneByName("Lobby");
-        SceneManager.SetActiveScene(galleryScene);
-    }
-
-    public async void LeaveLobby()
+    public async Task GoToLobbies()
     {
-        try
-        {
-            await LobbyService.Instance.RemovePlayerAsync(currentLobby.Id, cloudPlayerId);
-            Debug.Log("Successfully left the lobby.");
-        }
-        catch (LobbyServiceException e)
-        {
-            Debug.LogError($"Error leaving lobby: {e.Message}");
-        }
+        await SceneManager.LoadSceneAsync("Lobby");
+        Scene lobbyScene = SceneManager.GetSceneByName("Lobby");
+        SceneManager.SetActiveScene(lobbyScene);
+    }
 
+    public async void LeaveGallery()
+    {
         if (playerIsHost)
         {
             try
             {
                 await LobbyService.Instance.DeleteLobbyAsync(currentLobby.Id);
                 Debug.Log("Lobby deleted successfully.");
-                // TODO: call database to remove lobbyId from gallery entry
                 SharedDataManager.ChangeLobbyID(galleryId, "LobbyID");
             }
             catch (LobbyServiceException e)
@@ -65,15 +55,27 @@ public class GalleryManager : MonoBehaviour
                 Debug.LogError($"Error deleting lobby: {e.Message}");
             }
         }
-
-        GoToLobbies();
-
+        else
+        {
+            try
+            {
+                await LobbyService.Instance.RemovePlayerAsync(currentLobby.Id, cloudPlayerId);
+                Debug.Log("Successfully left the lobby.");
+            }
+            catch (LobbyServiceException e)
+            {
+                Debug.LogError($"Error leaving lobby: {e.Message}");
+            }
+        }
         mpManager.DisconnectFromServer();
+        await GoToLobbies();
     }
 
     private void OnApplicationQuit()
     {
-        LeaveLobby();
+#if !SERVER_BUILD
+        LeaveGallery();
+#endif
     }
 
     // should be called periodically while inside a gallery session to keep it alive
@@ -90,9 +92,12 @@ public class GalleryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isOpen) {
-            LeaveLobby();
+        # if !SERVER_BUILD
+        if (!isOpen)
+        {
+            LeaveGallery();
         }
+        #endif
     }
 
     public async Task LoadGalleryState()

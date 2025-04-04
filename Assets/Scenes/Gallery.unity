@@ -10695,7 +10695,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78e9f525d7ce456488f106d8993b31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLocked: 1
+  galleryId: 
+  cloudPlayerId: 
+  mpManager: {fileID: 0}
+  playerIsHost: 0
+  isOpen: 1
+  isLocked: 0
 --- !u!4 &1162920405
 Transform:
   m_ObjectHideFlags: 0
@@ -10958,7 +10963,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1187899824}
   - component: {fileID: 1187899823}
-  - component: {fileID: 1187899825}
   m_Layer: 0
   m_Name: MultiplayManager
   m_TagString: Untagged
@@ -10997,19 +11001,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1187899825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1187899822}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6d45dfaa54744c78b60c00747196442, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSignedIn: 0
 --- !u!1 &1190616309
 GameObject:
   m_ObjectHideFlags: 0
