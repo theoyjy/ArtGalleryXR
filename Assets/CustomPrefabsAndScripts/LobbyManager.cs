@@ -18,7 +18,7 @@ public class LobbyManager : MonoBehaviour
 
     public Lobby lobby;
 
-    public int lobbyCount;
+    //public int lobbyCount;
 
     public AuthenticationManager authManager;
     public MatchmakerManager matchManager;
@@ -35,21 +35,21 @@ public class LobbyManager : MonoBehaviour
             await Task.Delay(1000);
         }
 
-        QueryResponse response = await LobbyService.Instance.QueryLobbiesAsync();
-        lobbyCount = response.Results.Count;
+        //QueryResponse response = await LobbyService.Instance.QueryLobbiesAsync();
+        //lobbyCount = response.Results.Count;
 
         // TODO: remove
         // await CreateLobby("test", "player", 8, false, "");
         // await Task.Delay(1000);
-        await CreateLobby("test2private", "player2", 12, true, "898804djk");
+        //await CreateLobby("test2private", "player2", 12, true, "898804djk");
         // await Task.Delay(1000);
         // await CreateLobby("test3", "player3", 12, false, "");
         // await Task.Delay(1000);
         // await CreateLobby("test4", "player4", 12, false, "");
         // await Task.Delay(1000);
         // await CreateLobby("test5", "player5", 12, false, "");
-        await Task.Delay(1000);
-        List<Lobby> lobbyResults = await QueryAvailableLobbies();
+        //await Task.Delay(1000);
+        //List<Lobby> lobbyResults = await QueryAvailableLobbies();
         // lobby = lobbyResults[0];
         // await JoinLobby(lobby);
     }
@@ -97,9 +97,8 @@ public class LobbyManager : MonoBehaviour
     // galleryId (fixed) != lobbyId (dynamic)
     public async Task<string> CreateLobby(string galleryId, string playerId, int lobbyCapacity, bool isPrivate, string password)
     {
-        string lobbyId =  "";
         // TODO: maybe check if there already exists another lobby with the same galleryId
-
+        string lobbyID = "";
         Tuple<string, ushort> serverData = await matchManager.AllocateServer(playerId, galleryId);
         try
         {
@@ -120,6 +119,7 @@ public class LobbyManager : MonoBehaviour
             Debug.Log("attempting to create lobby");
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(galleryId, lobbyCapacity, lobbyOptions);
             Debug.Log("Lobby created: " + lobby.Id);
+            lobbyID = lobby.Id;
 
             // await JoinLobby(lobby, false);
         }
@@ -127,7 +127,7 @@ public class LobbyManager : MonoBehaviour
         {
             Debug.Log("Error while creating lobby: " + e);
         }
-        return lobby.Id;
+        return lobbyID;
     }
 
 

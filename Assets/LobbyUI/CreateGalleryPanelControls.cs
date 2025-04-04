@@ -87,7 +87,7 @@ public class CreateGalleryPanelControls : MonoBehaviour
         //Debug.Log($"content: '{galleryNameIF.text}'");
     }
 
-    private async void OnCreateGalleryClicked()
+    private void OnCreateGalleryClicked()
     {
         Debug.Log("OnCreateGalleryClicked");
         Debug.Log($"contentONCreate: '{galleryNameIF.text}'");
@@ -129,7 +129,7 @@ public class CreateGalleryPanelControls : MonoBehaviour
 
         CheckAndCreateGallery(galleryName, maxPlayers, isPrivate, password);
     }
-    private async void CheckAndCreateGallery(string galleryName, int maxPlayers, bool isPrivate, string password)
+    private void CheckAndCreateGallery(string galleryName, int maxPlayers, bool isPrivate, string password)
     {
         SharedDataManager.GetAllGalleries(
             onSuccess: async (List<GalleryDetail> Galleries) =>
@@ -161,12 +161,12 @@ public class CreateGalleryPanelControls : MonoBehaviour
 
                 string username = SharedDataManager.CurrentUserName;
 
-                await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
-                SharedDataManager.CreateGallery(galleryName, "LobbyID", !isPrivate);
+                string lobbyID = await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
+                SharedDataManager.CreateGallery(galleryName, lobbyID, !isPrivate);
 
-                SharedDataManager.AddCanva(galleryName, "https://canva.link/xxx",
-                onSuccess: result => Debug.Log("set successful: " + result),
-                onError: error => Debug.LogError("set failed: " + error.ErrorMessage));
+                //SharedDataManager.AddCanva(galleryName, "https://canva.link/xxx",
+                //onSuccess: result => Debug.Log("set successful: " + result),
+                //onError: error => Debug.LogError("set failed: " + error.ErrorMessage));
             },
             onError: (PlayFabError error) =>
             {

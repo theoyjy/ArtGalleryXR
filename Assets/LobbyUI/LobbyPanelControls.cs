@@ -6,6 +6,8 @@ using TMPro;
 using PlayFab.ClientModels;
 using PlayFab;
 using System.Security.Cryptography;
+using PlayFab.MultiplayerModels;
+using Unity.Services.Lobbies;
 
 public class LobbyPanelControls : MonoBehaviour
 {
@@ -77,6 +79,7 @@ public class LobbyPanelControls : MonoBehaviour
     }
     private void OnRefreshGalleriesClicked()
     {
+        ClearContent(availableGalleriesScrollTransform);
         Debug.Log("ACK: Clicked on refresh galleries button");
         SharedDataManager.GetAllGalleries(
             onSuccess: (List<GalleryDetail> Galleries) =>
@@ -119,6 +122,14 @@ public class LobbyPanelControls : MonoBehaviour
         // }
     }
 
+    public void ClearContent(RectTransform galleryList)
+    {
+        foreach (Transform child in galleryList)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
     private void AddGalleryToList(GalleryDetail gallery, RectTransform galleryList)
     {
         // Instantiate a button
@@ -130,19 +141,15 @@ public class LobbyPanelControls : MonoBehaviour
         
         // Set the button text
         TMP_Text text = newButton.GetComponentInChildren<TMP_Text>();
-        text.text = gallery.GalleryName;
+        text.text = gallery.GalleryID;
         
         // Optionally, add button click listener here
-        newButton.onClick.AddListener(() => {
-            //lobbyManager.JoinLobby();
+        newButton.onClick.AddListener(async () => {
+            Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(gallery.LobbyID);
+            await lobbyManager.JoinLobby(lobby, "", true);
         });
     }
 
-    private void OnGalleryButtonClicked(string label, bool isPublic, int galleryId)
-    {
-        Debug.Log($"Clicked: {label}, Public: {isPublic}, ID: {galleryId}");
-        // Handle logic here...
-    }
     private void OnProfileClicked()
     {
         Debug.Log("ACK: Clicked on profile button");

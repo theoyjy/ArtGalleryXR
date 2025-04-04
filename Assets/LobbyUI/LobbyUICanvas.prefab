@@ -6692,7 +6692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IfLogin: 0
   lobbyManager: {fileID: 0}
-  buttonPrefab: {fileID: 6505204997266527202, guid: dc63313ddbd38204e98fc2051e75e962, type: 3}
+  buttonPrefab: {fileID: 6505204997266527202, guid: 38b2a90d29b68434abe2c186bec5e69e, type: 3}
   availableGalleriesScrollTransform: {fileID: 8071720432103247567}
   yourGalleriesScrollTransform: {fileID: 1099345018963783805}
   refreshGalleriesButton: {fileID: 0}

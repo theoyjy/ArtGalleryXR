@@ -79,7 +79,7 @@ public class LobbyCanvasControls : MonoBehaviour
         createGalleryButton.onClick.AddListener(ShowCreateGalleryUI);
         exitCreateGalleryButton.onClick.AddListener(ShowLobbyUI);
         //exitEnterPasswordButton.onClick.AddListener(ShowLobbyUI);
-        createNewGalleryButton.onClick.AddListener(ShowLobbyUI);
+        //createNewGalleryButton.onClick.AddListener(ShowLobbyUI);
 
         // Active panel starts with lobby UI
         allUIPanels = new GameObject[]
