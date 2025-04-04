@@ -227,4 +227,6 @@ public class Whiteboard : MonoBehaviour
 
         return resizedTex;
     }
+
+    // Test: material changing function for eg
 }

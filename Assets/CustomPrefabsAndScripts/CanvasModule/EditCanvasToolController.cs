@@ -20,8 +20,8 @@ public class EditCanvasToolController : MonoBehaviour
                 button.onClick.AddListener(() => CanvasEditManager.Instance.DeleteCanvas());
             //else if(button.name == "SaveBtn")
             //    button.onClick.AddListener(() => CanvasEditManager.Instance.SaveCanvas());
-            //else
-            //    Debug.LogError("Button not found in " + gameObject.name);
+            else
+                Debug.LogError("Button not found in " + gameObject.name);
         }
     }
 
@@ -34,7 +34,6 @@ public class EditCanvasToolController : MonoBehaviour
     void ExitEditMode()
     {
         CanvasEditManager.Instance.ExitEditMode();
-        Canvas canvas= gameObject.GetComponent<Canvas>();
-        canvas.enabled = false;
+        Destroy(gameObject);
     }
 }

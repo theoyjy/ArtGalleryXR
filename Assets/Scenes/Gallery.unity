@@ -9359,6 +9359,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159206772}
   m_CullTransparentMesh: 0
+--- !u!1 &1162920403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1162920405}
+  - component: {fileID: 1162920404}
+  m_Layer: 0
+  m_Name: GalleryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1162920404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162920403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d78e9f525d7ce456488f106d8993b31b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLocked: 1
+--- !u!4 &1162920405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162920403}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 130.94362, y: 77.98664, z: 1076.7719}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1174433265
 GameObject:
   m_ObjectHideFlags: 0
@@ -9606,6 +9651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1187899824}
   - component: {fileID: 1187899823}
+  - component: {fileID: 1187899825}
   m_Layer: 0
   m_Name: MultiplayManager
   m_TagString: Untagged
@@ -9622,7 +9668,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1187899822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e013e0aedde4ad1a4be5ccf6a7f1f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 96d6260279b484ba6a6106b603a792fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ipAddress: 20.47.115.219
@@ -9642,6 +9688,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1187899825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187899822}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d45dfaa54744c78b60c00747196442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSignedIn: 0
 --- !u!1 &1190616309
 GameObject:
   m_ObjectHideFlags: 0
@@ -16777,3 +16836,4 @@ SceneRoots:
   - {fileID: 1465752194}
   - {fileID: 797639106}
   - {fileID: 667979491}
+  - {fileID: 1162920405}

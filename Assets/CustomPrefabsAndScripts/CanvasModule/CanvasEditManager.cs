@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class CanvasEditManager : MonoBehaviour
 {
+    private Camera playerCamera;
     private float defaultFOV = 60.0f;
     private float zoomedInFOV = 30.0f;
     private float zoomDistance = 10.0f;
@@ -19,7 +20,6 @@ public class CanvasEditManager : MonoBehaviour
     Quaternion cameraBeforeEnterRotation;
     NetworkObject localPlayer = null;
     float originAspect;
-    int oriWidth, oriHeight;
 
     [Header("UI Prefab (Must be a World-Space Canvas)")]
     [SerializeField] private GameObject ToolUI;
@@ -44,6 +44,14 @@ public class CanvasEditManager : MonoBehaviour
             Destroy(gameObject);  // Only one instance of this object is allowed
             return;
         }
+        
+        if (playerCamera == null)
+            playerCamera = Camera.main;
+
+        if (teleportationProvider == null)
+        {
+            teleportationProvider = Object.FindAnyObjectByType<TeleportationProvider>();
+        };
 
     }
 
@@ -138,6 +146,8 @@ public class CanvasEditManager : MonoBehaviour
         }
 
         // record the camera position before entering edit mode
+        cameraTransformBeforeEnter = playerCamera.transform.parent.transform.parent.transform;
+        originAspect = playerCamera.aspect;
 
         NetworkObject player = GetCurrentPlayer();
         Camera playerCamera = player.GetComponentInChildren<Camera>();
@@ -159,6 +169,9 @@ public class CanvasEditManager : MonoBehaviour
                 button.onClick.AddListener(() => DeleteCanvas());
 
         }
+        playerCamera.transform.parent.transform.parent.GetComponent<ObjectMovementWithCamera>().enabled = false;
+        Instantiate(ToolUI);
+
     }
 
     public void ExitEditMode()
@@ -185,7 +198,7 @@ public class CanvasEditManager : MonoBehaviour
         card.DeleteDrawing();
     }
 
-    public void MoveXRToTargetTrans(Vector3 CameraPosition, Quaternion CameraRotation)
+    public void TeleportToTarget(Transform targetTransform)
     {
         Debug.Log("Teleport to: " + CameraPosition + " rotation: " + CameraRotation);
         NetworkObject player = GetCurrentPlayer();
@@ -225,9 +238,20 @@ public class CanvasEditManager : MonoBehaviour
         Debug.Log("TrackedPoseDriver count: " + trackedPoseDriver.Length);
         for (int i = 0; i < trackedPoseDriver.Length; i++)
         {
-            trackedPoseDriver[i].enabled = false;
+            Debug.LogWarning("TeleportationProvider or Target is missing!");
+            return;
         }
-        playerCamera.transform.parent.transform.parent.GetComponent<ObjectMovementWithCamera>().enabled = false;
+
+        // Create the teleport request
+        TeleportRequest teleportRequest = new TeleportRequest
+        {
+            destinationPosition = targetTransform.position,
+            destinationRotation = targetTransform.rotation,
+            matchOrientation = MatchOrientation.TargetUpAndForward
+        };
+
+        // Queue the teleport request
+        teleportationProvider.QueueTeleportRequest(teleportRequest);
     }
 
     private void MoveCameraToPerspective()

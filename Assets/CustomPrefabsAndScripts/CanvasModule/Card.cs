@@ -4,52 +4,24 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    //private MeshRenderer rend;
-    private MeshFilter meshFilter;
-    //private UnityEngine.Plane plane;
+    private SpriteRenderer rend;
 
     [SerializeField]
-    private Mesh EmptyMesh;
+    private Sprite EmptySprite;
 
     private bool coroutineAllowed;
 
     // Start is called before the first frame update
     void Start()
     {
-        //rend = GetComponent<MeshRenderer>();
-        //plane = GetComponent<UnityEngine.Plane>();
-        //rend.mesh = EmptyMesh;
-        
-        // Get the MeshFilter component from the GameObject.
-        meshFilter = GetComponent<MeshFilter>();
-        if (meshFilter != null && EmptyMesh != null)
-        {
-            // Initialize the canvas with an empty mesh.
-            meshFilter.mesh = EmptyMesh;
-        }
-        else
-        {
-            Debug.LogWarning("MeshFilter or EmptyMesh not assigned on " + gameObject.name);
-        }
-
+        rend = GetComponent<SpriteRenderer>();
+        rend.sprite = EmptySprite;
         coroutineAllowed = true;
     }
 
     public void DeleteDrawing()
     {
         Debug.Log("DeleteDrawing");
-
-        Whiteboard whiteboard = GetComponentInChildren<Whiteboard>();
-        if (whiteboard != null)
-        {
-            whiteboard.ClearWhiteboard();
-        }
-        else
-        {
-            Debug.LogWarning("Whiteboard component not found on Card or its children.");
-        }
-
-        ClearCanvas();
         StartCoroutine(RotateCard());
 
         Whiteboard wbm = transform.parent.GetComponentInChildren<Whiteboard>();
@@ -65,28 +37,14 @@ public class Card : MonoBehaviour
         }
     }
 
-    // Resets the MeshFilter's mesh to the empty mesh.
-    private void ClearCanvas()
-    {
-        if (meshFilter != null && EmptyMesh != null)
-        {
-            meshFilter.mesh = EmptyMesh;
-            Debug.Log("Canvas cleared");
-        }
-        else
-        {
-            Debug.LogWarning("Cannot clear canvas. MeshFilter or EmptyMesh not assigned.");
-        }
-    }
-
     private IEnumerator RotateCard()
     {
         Debug.Log("Trigger Canvas Flip");
         coroutineAllowed = false;
 
-        for (float i = 360f; i >= 180f; i -= 10f)
+        for (float i = 180f; i >= 0f; i -= 10f)
         {
-            transform.localRotation = Quaternion.Euler(-90, i, 0f);
+            transform.localRotation = Quaternion.Euler(-7.7f, i, 0f);
             yield return new WaitForSeconds(0.01f);
         }
 
@@ -98,17 +56,9 @@ public class Card : MonoBehaviour
         return transform.position;
     }
 
-    public Quaternion GetWorldQuatRot()
-    {
-        Quaternion quat = transform.parent.transform.rotation; // parent's world rotation
-        quat *= Quaternion.Euler(0f, 180f, 0f);
-        return quat;
-    }
-
     public Vector3 GetNormal()
     {
-        Quaternion quat = GetWorldQuatRot();
-        return quat * Vector3.forward;
+        return transform.forward;
     }
 
 }
