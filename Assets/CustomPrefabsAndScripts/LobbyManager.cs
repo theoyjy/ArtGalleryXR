@@ -38,7 +38,7 @@ public class LobbyManager : MonoBehaviour
         //await Task.Delay(1000);
         List<Lobby> lobbyResults = await QueryAvailableLobbies();
         lobby = lobbyResults[0];
-        await JoinLobby(lobby, "", false);
+        // await JoinLobby(lobby, "", false);
     }
 
     public async Task JoinLobby(Lobby lobby, string password, bool isGuest)

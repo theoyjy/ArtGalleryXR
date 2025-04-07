@@ -74,7 +74,7 @@ public class GalleryManager : MonoBehaviour
     private void OnApplicationQuit()
     {
 #if !SERVER_BUILD
-        LeaveGallery();
+        // LeaveGallery();
 #endif
     }
 
