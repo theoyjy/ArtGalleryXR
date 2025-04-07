@@ -2768,6 +2768,56 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &343653004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 343653006}
+  - component: {fileID: 343653005}
+  m_Layer: 0
+  m_Name: GalleryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &343653005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343653004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d78e9f525d7ce456488f106d8993b31b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  galleryId: 
+  cloudPlayerId: 
+  mpManager: {fileID: 1187899823}
+  playerIsHost: 0
+  isOpen: 0
+  isLocked: 0
+--- !u!4 &343653006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343653004}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.25, z: 4.5746255}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &344023323
 GameObject:
   m_ObjectHideFlags: 0
@@ -9622,11 +9672,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1187899822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e013e0aedde4ad1a4be5ccf6a7f1f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 96d6260279b484ba6a6106b603a792fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipAddress: 20.47.115.219
-  port: 9100
+  ipAddress: 
+  port: 0
+  hasServerData: 0
+  galleryManager: {fileID: 343653005}
 --- !u!4 &1187899824
 Transform:
   m_ObjectHideFlags: 0
@@ -15518,8 +15570,8 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 20.47.115.219
-    Port: 9100
+    Address: 
+    Port: 0
     ServerListenAddress: 0.0.0.0
   DebugSimulator:
     PacketDelayMS: 0
@@ -16777,3 +16829,4 @@ SceneRoots:
   - {fileID: 1465752194}
   - {fileID: 797639106}
   - {fileID: 667979491}
+  - {fileID: 343653006}

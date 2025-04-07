@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
+using Unity.Services.Lobbies;
 
 public class CreateGalleryPanelControls : MonoBehaviour
 {
@@ -161,20 +162,18 @@ public class CreateGalleryPanelControls : MonoBehaviour
 
                 string username = SharedDataManager.CurrentUserName;
 
-                //await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
+                string lobbyID = await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
                 if(isPrivate)
                 {
-                    SharedDataManager.CreateGallery(galleryName, "LobbyID", password, false);
+                    SharedDataManager.CreateGallery(galleryName, lobbyID, password, false);
                 }
                 else
                 {
-                    SharedDataManager.CreateGallery(galleryName, "LobbyID", "", true);
+                    SharedDataManager.CreateGallery(galleryName, lobbyID, "", true);
                 }
 
-                //gallery should exist or be wrong
-                //SharedDataManager.AddCanva(galleryName, "https://canva.link/xxx",
-                //onSuccess: result => Debug.Log("set successful: " + result),
-                //onError: error => Debug.LogError("set failed: " + error.ErrorMessage));
+                Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(lobbyID);
+                await lobbyManager.JoinLobby(lobby, password, false);
             },
             onError: (PlayFabError error) =>
             {

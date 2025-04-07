@@ -5,21 +5,11 @@ using UnityEngine;
 using Unity.Services.Lobbies.Models;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using UnityEngine.SceneManagement;
-using NUnit.Framework;
-using PlayFab.AuthenticationModels;
 
 public class LobbyManager : MonoBehaviour
 {
-
-    public string lobbyName;
-    public bool isLobbyServer = false;
-
     public Lobby lobby;
-
-    //public int lobbyCount;
-
     public AuthenticationManager authManager;
     public MatchmakerManager matchManager;
 
@@ -34,9 +24,6 @@ public class LobbyManager : MonoBehaviour
         {
             await Task.Delay(1000);
         }
-
-        //QueryResponse response = await LobbyService.Instance.QueryLobbiesAsync();
-        //lobbyCount = response.Results.Count;
 
         // TODO: remove
         // await CreateLobby("test", "player", 8, false, "");
@@ -57,21 +44,24 @@ public class LobbyManager : MonoBehaviour
     public async Task JoinLobby(Lobby lobby, string password, bool isGuest)
     {
         var joinOptions = new JoinLobbyByIdOptions { };
-        if (lobby.HasPassword)
-        {
-            joinOptions.Password = password;
-        }
+
         if (isGuest)
         {
+            if (lobby.HasPassword)
+            {
+                joinOptions.Password = password;
+            }
+
             try
             {
-
                 await LobbyService.Instance.JoinLobbyByIdAsync(lobby.Id, joinOptions);
             }
-            catch (Exception e)
+            catch (LobbyServiceException ex)
             {
-                Debug.Log("Could not join lobby due to Exception: " + e);
+                Debug.LogError("Failed to join lobby: " + ex);
+                return;
             }
+
         }
 
         string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";
@@ -81,11 +71,27 @@ public class LobbyManager : MonoBehaviour
 
         // Save a reference to the selected lobby so that we can access it inside the gallery
         SharedDataManager.CurrentLobby = lobby;
+        SceneManager.LoadScene("Gallery");
 
-        // Load the gallery scene
-        await SceneManager.LoadSceneAsync("Gallery");
-        Scene galleryScene = SceneManager.GetSceneByName("Gallery");
-        SceneManager.SetActiveScene(galleryScene);
+        //var asyncOp = SceneManager.LoadSceneAsync("Gallery", LoadSceneMode.Single);
+
+        //// Wait until the scene is fully loaded
+        //while (!asyncOp.isDone)
+        //{
+        //    await Task.Yield(); // or use a coroutine if you're not using async/await
+        //}
+
+        //// Now it's safe to get and activate the scene
+        //Scene galleryScene = SceneManager.GetSceneByName("Gallery");
+
+        //if (galleryScene.IsValid() && galleryScene.isLoaded)
+        //{
+        //    SceneManager.SetActiveScene(galleryScene);
+        //}
+        //else
+        //{
+        //    Debug.LogError("Failed to load or find the 'Gallery' scene.");
+        //}
     }
 
     // Update is called once per frame
@@ -164,4 +170,3 @@ public class LobbyManager : MonoBehaviour
         return lobbies;
     }
 }
-

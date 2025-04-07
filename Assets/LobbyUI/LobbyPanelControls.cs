@@ -145,6 +145,8 @@ public class LobbyPanelControls : MonoBehaviour
         
         // Optionally, add button click listener here
         newButton.onClick.AddListener(async () => {
+            Debug.Log("Gallery ID is: " + gallery.GalleryID);
+            Debug.Log("Lobby ID is: " + gallery.LobbyID);
             Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(gallery.LobbyID);
             await lobbyManager.JoinLobby(lobby, "", true);
         });

@@ -41,36 +41,8 @@ public class MatchmakerManager : MonoBehaviour
         }
     }
 
-    private float deallocationTimer = 0f;
-    private bool isWaitingForDeallocation = false;
-
     async void Update()
     {
-
-#if SERVER_BUILD
-        int playerCount = NetworkManager.Singleton.ConnectedClientsList.Count;
-
-        if (playerCount == 0)
-        {
-            if (!isWaitingForDeallocation)
-            {
-                isWaitingForDeallocation = true;
-                deallocationTimer = Time.time + 60f;
-            }
-
-            if (Time.time >= deallocationTimer)
-            {
-                isDeallocating = true;
-                Application.Quit();
-                Debug.Log("Deallocating Server");
-            }
-        }
-        else
-        {
-            isWaitingForDeallocation = false;
-        }
-
-#endif
     }
 
     public async Task<Tuple<string, ushort>> AllocateServer(string playerId, string galleryId)
