@@ -2801,7 +2801,7 @@ MonoBehaviour:
   cloudPlayerId: 
   mpManager: {fileID: 1187899823}
   playerIsHost: 0
-  isOpen: 0
+  isOpen: 1
   isLocked: 0
 --- !u!4 &343653006
 Transform:

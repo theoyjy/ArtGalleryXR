@@ -26,7 +26,7 @@ public class LobbyManager : MonoBehaviour
         }
 
         // TODO: remove
-        // await CreateLobby("test", "player", 8, false, "");
+        await CreateLobby("test", "player", 8, false, "");
         // await Task.Delay(1000);
         //await CreateLobby("test2private", "player2", 12, true, "898804djk");
         // await Task.Delay(1000);
@@ -36,9 +36,9 @@ public class LobbyManager : MonoBehaviour
         // await Task.Delay(1000);
         // await CreateLobby("test5", "player5", 12, false, "");
         //await Task.Delay(1000);
-        //List<Lobby> lobbyResults = await QueryAvailableLobbies();
-        // lobby = lobbyResults[0];
-        // await JoinLobby(lobby);
+        List<Lobby> lobbyResults = await QueryAvailableLobbies();
+        lobby = lobbyResults[0];
+        await JoinLobby(lobby, "", false);
     }
 
     public async Task JoinLobby(Lobby lobby, string password, bool isGuest)

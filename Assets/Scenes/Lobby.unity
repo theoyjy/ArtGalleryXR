@@ -304,8 +304,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf4f3829dff84733ab6f9d7255168e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyName: 
-  isLobbyServer: 0
   authManager: {fileID: 0}
   matchManager: {fileID: 0}
 --- !u!114 &992618660
@@ -1045,6 +1043,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1963542972825669996, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963542972825669996, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -96.24
+      objectReference: {fileID: 0}
     - target: {fileID: 2486194636265513113, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1052,6 +1058,14 @@ PrefabInstance:
     - target: {fileID: 2486194636265513113, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486194636265513113, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 100.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486194636265513113, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 96.24
       objectReference: {fileID: 0}
     - target: {fileID: 2996806167604651390, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
       propertyPath: m_Pivot.x
@@ -1145,6 +1159,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4064466217909668398, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4064466217909668398, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 96.24
+      objectReference: {fileID: 0}
     - target: {fileID: 4661845300943943863, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
       propertyPath: lobbyManager
       value: 
@@ -1156,6 +1178,14 @@ PrefabInstance:
     - target: {fileID: 4802363064764233198, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802363064764233198, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -100.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802363064764233198, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -96.24
       objectReference: {fileID: 0}
     - target: {fileID: 4880964314579141379, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1180,6 +1210,14 @@ PrefabInstance:
     - target: {fileID: 5181357952064227843, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5181357952064227843, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -100.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 5181357952064227843, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 96.24
       objectReference: {fileID: 0}
     - target: {fileID: 5771039981027435983, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1224,6 +1262,14 @@ PrefabInstance:
     - target: {fileID: 8458771300894179780, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458771300894179780, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458771300894179780, guid: 8ea512918dc1e854cba3be084bed19be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 96.24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

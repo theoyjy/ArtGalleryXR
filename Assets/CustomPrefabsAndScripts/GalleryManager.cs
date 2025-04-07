@@ -93,10 +93,10 @@ public class GalleryManager : MonoBehaviour
     void Update()
     {
 #if !SERVER_BUILD
-        if (!isOpen)
-        {
-            LeaveGallery();
-        }
+        // if (!isOpen)
+        // {
+        //     LeaveGallery();
+        // }
 #endif
     }
 
