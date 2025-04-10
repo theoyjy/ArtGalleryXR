@@ -1,0 +1,30 @@
+{
+    "name": "CustomScripts",
+    "rootNamespace": "",
+    "references": [
+        "Unity.Netcode.Runtime",
+        "Unity.TextMeshPro",
+        "Unity.XR.Interaction.Toolkit",
+        "Unity.InputSystem",
+        "UnityEngine.UI",
+        "PlayFab",
+        "Unity.XR.CoreUtils",
+        "Unity.Networking.Transport",
+        "Unity.Services.Multiplayer.Multiplay",
+        "UnityUIExtensions",
+        "Unity.Services.Core",
+        "StandaloneFileBrowser",
+        "FlexibleColorPicker",
+        "GameScripts",
+        "Unity.Collections"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
