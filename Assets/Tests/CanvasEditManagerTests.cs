@@ -3,6 +3,7 @@ using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.UI;
 
 
 public class CanvasEditManagerTests
@@ -11,25 +12,38 @@ public class CanvasEditManagerTests
     private CanvasEditManager manager;
     private GameObject editUI;
     private GameObject toolUI;
-    private GameObject cardObj;
+    private MockCard card;
     private GameObject player;
+    private Button editButton;
 
     [UnitySetUp]
     public IEnumerator SetUp()
     {
+        editUI = new GameObject("EditUI");
+        var canvas = editUI.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.WorldSpace; // Required for world-space canvas
+        editUI.SetActive(false); // Start inactive
+        
+
+        // Create and add a Button to the EditUI
+        editButton = new GameObject("EditButton").AddComponent<Button>();
+        editButton.transform.SetParent(editUI.transform);
+
         // Create mock Card object
-        cardObj = new GameObject("Card");
-        cardObj.AddComponent<Card>(); // assumes you have a Card class
-        cardObj.tag = "Card";
+       
+        //cardObj.AddComponent<Card>(); // assumes you have a Card class
+        //cardObj.tag = "Card";
 
         // Create CanvasEditManager GameObject
         managerGO = new GameObject("CanvasEditManager");
         manager = managerGO.AddComponent<CanvasEditManager>();
-        manager.card = cardObj.GetComponent<Card>();
+
+        card = managerGO.AddComponent<MockCard>();
+        manager.card = card;
+        //manager.card = cardObj.GetComponent<Card>();
 
         // Create UI GameObjects
-        editUI = new GameObject("EditUI", typeof(Canvas));
-        editUI.SetActive(false);
+
         manager.EditUI = editUI;
 
         toolUI = new GameObject("ToolUI", typeof(Canvas));
@@ -39,12 +53,36 @@ public class CanvasEditManagerTests
         // Create local player with camera
         player = new GameObject("Player");
         player.tag = "Player";
-        var networkObj = player.AddComponent<NetworkObject>();
-        networkObj.SpawnWithOwnership(NetworkManager.Singleton.LocalClientId, true);
 
-        GameObject cameraGO = new GameObject("Camera", typeof(Camera));
-        cameraGO.transform.SetParent(player.transform);
-        cameraGO.GetComponent<Camera>().orthographic = false;
+        var netObj = player.AddComponent<NetworkObject>();
+
+        var netManagerGO = new GameObject("NetManager");
+        var netManager = netManagerGO.AddComponent<NetworkManager>();
+        netManager.NetworkConfig = new NetworkConfig
+        {
+            NetworkTransport = netManagerGO.AddComponent<Unity.Netcode.Transports.UTP.UnityTransport>()
+        };
+        netManagerGO.SetActive(true);
+        netManager.StartHost();
+
+        yield return null; // wait one frame
+
+        //netObj.SpawnWithOwnership(NetworkManager.Singleton.LocalClientId, true);
+        GameObject cameraGO = new GameObject("Camera");
+        Camera cameraComponent = cameraGO.AddComponent<Camera>();  // Add Camera component
+        cameraComponent.orthographic = false; // Set it to perspective
+
+        // Set the cameraGO as a child of the netObj (so it's part of the networked object)
+        
+
+        var parentGO = new GameObject("Parent"); // This represents the parent of the camera
+        cameraGO.transform.SetParent(parentGO.transform);
+        parentGO.transform.SetParent(player.transform); // Set camera as a child of parentGO
+
+        // Create another empty GameObject to match the second level parent
+        
+        // Add ObjectMovementWithCamera to the grandparent (or the desired GameObject in the hierarchy)
+        var objectMovement = parentGO.AddComponent<ObjectMovementWithCamera>();
 
         yield return null;
     }
@@ -75,6 +113,8 @@ public class CanvasEditManagerTests
 
         manager.EnterEditMode(editUI);
 
+        Assert.IsTrue(manager.ToolUI.activeSelf, "ToolUI Should be Active");
+
         yield return null;
 
 #if !UNITY_ANDROID
@@ -87,7 +127,7 @@ public class CanvasEditManagerTests
     {
         var networkObj = player.GetComponent<NetworkObject>();
         var camera = player.GetComponentInChildren<Camera>();
-
+        player.AddComponent<ObjectMovementWithCamera>();
         camera.orthographic = true;
         manager.ToolUI.SetActive(true);
 
@@ -98,4 +138,24 @@ public class CanvasEditManagerTests
         Assert.IsFalse(manager.ToolUI.activeSelf, "ToolUI should be disabled after exiting edit mode.");
         Assert.IsFalse(camera.orthographic, "Camera should no longer be in orthographic mode.");
     }
+}
+
+public class MockCard : Card
+{
+    public override Vector3 GetNormal()
+    {
+        return Vector3.zero; 
+    }
+    
+    public override Vector3 GetWorldLoc()
+    {
+        return Vector3.zero;
+    }
+    public override Quaternion GetWorldQuatRot()
+    {
+        // Return a fixed rotation (e.g., identity rotation)
+        return Quaternion.Euler(0, 90, 0);  // Example: 90 degrees rotation around the Y-axis
+    }
+    
+
 }
