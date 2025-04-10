@@ -478,5 +478,89 @@ public static class SharedDataManager
         }, onError);
     }
 
+
+    /// <summary>
+    /// 从共享组中删除指定 Gallery
+    /// </summary>
+    /// <param name="galleryID">要删除的 Gallery ID</param>
+    /// <param name="onSuccess">成功删除后的回调</param>
+    /// <param name="onError">删除失败的回调</param>
+    public static void DeleteGallery(string galleryID, Action onSuccess, Action<PlayFabError> onError)
+    {
+        // 1. 先检查这个 Gallery 是否存在
+        GetGallery(galleryID,
+            gallery =>
+            {
+            // 2. 如果存在，则调用 CloudScript 删除
+            var request = new ExecuteCloudScriptRequest
+                {
+                    FunctionName = "removeSharedGroupData",  // 你需要在 PlayFab 端实现这个云脚本函数
+                FunctionParameter = new
+                    {
+                        sharedGroupId = GallerySharedGroupId,
+                        key = galleryID
+                    },
+                    GeneratePlayStreamEvent = true
+                };
+
+                PlayFabClientAPI.ExecuteCloudScript(request,
+                    result =>
+                    {
+                        if (result.FunctionResult != null)
+                        {
+                            var responseJson = result.FunctionResult.ToString();
+                            var response = JsonUtility.FromJson<CloudScriptResponse>(responseJson);
+                            Debug.Log("DeleteGallery -> CloudScript message: " + response.message);
+                        }
+                        else
+                        {
+                            Debug.LogWarning("DeleteGallery -> CloudScript返回为空");
+                        }
+
+                        onSuccess?.Invoke();
+                    },
+                    error =>
+                    {
+                        Debug.LogError("DeleteGallery -> 调用 removeSharedGroupData 出错: " + error.ErrorMessage);
+                        onError?.Invoke(error);
+                    });
+            },
+            error =>
+            {
+            // 如果这里进了 error 回调，说明 GetGallery 获取不到对应的 key(即Gallery)
+            Debug.LogError("DeleteGallery -> Gallery 不存在，无法删除: " + error.ErrorMessage);
+                onError?.Invoke(error);
+            });
+    }
+
+
+    /// <summary>
+    /// 先根据 GalleryID 获取 Gallery 数据，如果成功则调用现有的 DeleteGallery 进行删除。
+    /// </summary>
+    public static void DeleteGalleryByID(string galleryID)
+    {
+        // 先尝试获取指定的 Gallery
+        GetGallery(galleryID,
+            gallery =>
+            {
+            // 如果获取成功，则调用已存在的 DeleteGallery
+            DeleteGallery(galleryID,
+                    onSuccess: () =>
+                    {
+                        Debug.Log($"成功删除 Gallery [{galleryID}]！");
+                    },
+                    onError: (error) =>
+                    {
+                        Debug.LogError($"删除 Gallery [{galleryID}] 失败：{error.ErrorMessage}");
+                    });
+            },
+            error =>
+            {
+            // 如果在 GetGallery 时出现错误（没有找到），这里会进回调
+            Debug.LogError($"Gallery [{galleryID}] 不存在，无法删除。错误信息: {error.ErrorMessage}");
+            });
+    }
+
+
     #endregion
 }
