@@ -38,7 +38,7 @@ public class GalleryManager : MonoBehaviour
     public void GoToLobbies()
     {
         // TODO: maybe try loading another scene
-        SceneManager.LoadScene("Init");
+        SceneManager.LoadScene("Lobby");
     }
 
     public async void LeaveGallery()

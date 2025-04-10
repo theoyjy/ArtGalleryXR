@@ -208,5 +208,7 @@ public class PlayFabManager : MonoBehaviour
     {
         Debug.Log("Loading Lobby...");
         SceneManager.LoadScene("Lobby");
+        Scene lobbyScene = SceneManager.GetActiveScene();
+
     }
 }

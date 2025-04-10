@@ -350,6 +350,10 @@ PrefabInstance:
       value: Whiteboard
       objectReference: {fileID: 0}
     - target: {fileID: 1920862780993413749, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_ClampToMaxDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1920862780993413749, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       propertyPath: m_PokeFollowTransform
       value: 
       objectReference: {fileID: 5254666703639646526}
@@ -1366,6 +1370,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3882189546298372713, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_ClampToMaxDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882189546298372713, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       propertyPath: m_PokeFollowTransform
       value: 
       objectReference: {fileID: 4787111635648879042}
@@ -1569,6 +1577,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -32
       objectReference: {fileID: 0}
+    - target: {fileID: 7081161879168457500, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_ClampToMaxDistance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7358885131615960438, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1614,6 +1626,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7697995420826650433, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_ClampToMaxDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7697995420826650433, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       propertyPath: m_PokeFollowTransform
       value: 
       objectReference: {fileID: 5821300368951872615}
@@ -1640,6 +1656,10 @@ PrefabInstance:
     - target: {fileID: 7793457928711563933, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -32
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794188745236235274, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_ClampToMaxDistance
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7794188745236235274, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       propertyPath: m_PokeFollowTransform
@@ -1678,6 +1698,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3244014165297616743, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2860784555095415452}
+    - targetCorrespondingSourceObject: {fileID: 3947678459327404665, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6271022596632564108}
   m_SourcePrefab: {fileID: 100100000, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
 --- !u!114 &889890524337677273 stripped
 MonoBehaviour:
@@ -1708,11 +1731,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apiKey: 
-  targetRenderer: {fileID: 0}
+  targetRenderer: {fileID: 6277023077541216848}
   prompt: 
   generateImageInputField: {fileID: 1559714468845699183}
   textureSyncManager: {fileID: 1905542612780041676}
   whiteboard: {fileID: 7086280231193675317}
+--- !u!1 &1541973770466812996 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3947678459327404665, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+  m_PrefabInstance: {fileID: 2571212742892404285}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6271022596632564108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541973770466812996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aacadd4dd475feb4e9d9b2ea566fe9f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1550718370367639177 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3903365757200806068, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
@@ -1804,7 +1844,7 @@ PrefabInstance:
     - target: {fileID: 5235948850848460999, guid: aab778226fc966f48b78e57f89ec9530, type: 3}
       propertyPath: _textureSyncManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1905542612780041676}
     - target: {fileID: 5235948850848460999, guid: aab778226fc966f48b78e57f89ec9530, type: 3}
       propertyPath: _whiteboardTransform
       value: 

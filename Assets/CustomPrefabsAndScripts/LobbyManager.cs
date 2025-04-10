@@ -19,7 +19,11 @@ public class LobbyManager : MonoBehaviour
         authManager = GetComponent<AuthenticationManager>();
         matchManager = GetComponent<MatchmakerManager>();
 
+        if (UnityServices.State.Equals(ServicesInitializationState.Initialized))
+        {
         await UnityServices.InitializeAsync();
+        }
+
         while (!authManager.isSignedIn)
         {
             await Task.Delay(1000);
