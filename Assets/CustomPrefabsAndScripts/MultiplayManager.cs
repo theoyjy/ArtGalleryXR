@@ -71,7 +71,7 @@ public class MultiplayManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.Log("Could not join gallery: " + e);
-            await galleryManager.GoToLobbies();
+            galleryManager.GoToLobbies();
         }
 #endif
     }

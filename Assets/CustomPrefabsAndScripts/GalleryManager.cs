@@ -10,7 +10,9 @@ public class GalleryManager : MonoBehaviour
     public string galleryId;
     public string cloudPlayerId;
     public MultiplayManager mpManager;
-    public bool playerIsHost;
+    public bool playerIsHost = true;
+    public bool isLeaving = false;
+    private bool isPingingLobby = false;
     public bool isOpen = true;
     // setting this to true will block any user interaction
     public bool isLocked = true;
@@ -33,11 +35,10 @@ public class GalleryManager : MonoBehaviour
 #endif
     }
 
-    public async Task GoToLobbies()
+    public void GoToLobbies()
     {
-        await SceneManager.LoadSceneAsync("Lobby");
-        Scene lobbyScene = SceneManager.GetSceneByName("Lobby");
-        SceneManager.SetActiveScene(lobbyScene);
+        // TODO: maybe try loading another scene
+        SceneManager.LoadScene("Init");
     }
 
     public async void LeaveGallery()
@@ -68,35 +69,41 @@ public class GalleryManager : MonoBehaviour
             }
         }
         mpManager.DisconnectFromServer();
-        await GoToLobbies();
     }
 
     private void OnApplicationQuit()
     {
 #if !SERVER_BUILD
-        // LeaveGallery();
+        LeaveGallery();
 #endif
     }
 
-    // should be called periodically while inside a gallery session to keep it alive
-    public async void PingLobby()
+// should be called periodically while inside a gallery session to keep it alive
+public async void PingLobby()
+{
+    isPingingLobby = true;
+
+    while (isPingingLobby && isOpen)
     {
-        while (true)
-        {
-            if (currentLobby == null) return;
-            await LobbyService.Instance.SendHeartbeatPingAsync(currentLobby.Id);
-            await Task.Delay(60 * 1000);
-        }
-    }
+        if (currentLobby == null) return;
+        await LobbyService.Instance.SendHeartbeatPingAsync(currentLobby.Id);
+        Debug.Log("Heartbeat sent to lobby.");
+
+        await Task.Delay(60 * 1000);
+}
+}
 
     // Update is called once per frame
     void Update()
     {
 #if !SERVER_BUILD
-        // if (!isOpen)
-        // {
-        //     LeaveGallery();
-        // }
+        if (!isOpen && !isLeaving)
+        {
+            isLeaving = true;
+            isPingingLobby = false;
+            LeaveGallery();
+            GoToLobbies();
+        }
 #endif
     }
 
