@@ -192,6 +192,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
         /// </summary>
         void Awake()
         {
+#if UNITY_ANDROID
             // Set active keyboard to any serialized keyboard
             m_ActiveKeyboard = m_Keyboard;
 
@@ -206,6 +207,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
 
             if (m_AlwaysObserveKeyboard && m_ActiveKeyboard != null)
                 StartObservingKeyboard(m_ActiveKeyboard);
+#endif
         }
 
         /// <summary>
@@ -301,6 +303,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
 
         void OnInputFieldGainedFocus(string text)
         {
+#if UNITY_ANDROID
             // If this display is already observing keyboard, sync, attempt to reposition, and early out
             // Displays that are always observing keyboards call open to ensure they sync with the keyboard
             if (m_IsActivelyObservingKeyboard && !alwaysObserveKeyboard)
@@ -333,6 +336,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
             m_OnKeyboardOpened.Invoke();
 
             StartObservingKeyboard(m_ActiveKeyboard);
+#endif // UNITY_ANDROID
         }
 
         void OnTextSubmit(KeyboardTextEventArgs args)
