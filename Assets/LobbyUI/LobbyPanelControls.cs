@@ -35,20 +35,13 @@ public class LobbyPanelControls : MonoBehaviour
     private GameObject enterPasswordUIPanel;
     private EnterPasswordPanelControls enterPasswordControls;
     private Button enterPasswordExitButton;
+    private Button enterPasswordEnterButton;
+    private TMP_InputField enterPasswordIF;
     // </Enter Password Elements>
 
     /*******************************************/
     private void Start()
     {
-        //tempcode for login
-        //IfLogin = false;
-        //Login();
-
-        // Set lobby manager
-        //lobbyManager = GetComponent<LobbyManager>();
-        //if (!lobbyManager)
-        //    Debug.LogError("Lobby Panel: no lobby manager found");
-
         // Attach click events to the buttons
         refreshGalleriesButton = transform.Find("RefreshGalleriesButton").GetComponent<Button>();
         refreshGalleriesButton.onClick.AddListener(OnRefreshGalleriesClicked);
@@ -68,12 +61,22 @@ public class LobbyPanelControls : MonoBehaviour
         enterPasswordControls = enterPasswordUIPanel.GetComponent<EnterPasswordPanelControls>();
         if (!enterPasswordControls)
             Debug.LogError("NO ENTER PASSWORD CONTROLS");
+
         // Set Button reference (Button is child of enterPasswordUIPanel)
         enterPasswordExitButton = enterPasswordUIPanel.transform.Find("ExitButton").GetComponent<Button>();
         if (!enterPasswordExitButton)
             Debug.LogError("NO ENTER PASSWORD EXIT BUTTON");
         else
             enterPasswordExitButton.onClick.AddListener(OnEnterPasswordExitClicked);
+
+        enterPasswordEnterButton = enterPasswordUIPanel.transform.Find("EnterButton").GetComponent<Button>();
+        if (!enterPasswordEnterButton)
+            Debug.LogError("NO ENTER PASSWORD ENTER BUTTON");
+
+        enterPasswordIF = enterPasswordUIPanel.transform.Find("PasswordInputField").GetComponent<TMP_InputField>();
+        if (!enterPasswordIF)
+            Debug.LogError("NO ENTER PASSWORD INPUT FIELD");
+
         enterPasswordUIPanel.SetActive(false);
         enterPasswordIsDisplayed = false;
     }
@@ -96,30 +99,6 @@ public class LobbyPanelControls : MonoBehaviour
                 Debug.LogError("Get public Galleries failed: " + error.GenerateErrorReport());
             }
         );
-
-        // GetGalleries()
-        //AddGalleryToList("Public 1", availableGalleriesScrollTransform);
-        //AddGalleryToList("Public 2", availableGalleriesScrollTransform);
-        //AddGalleryToList("Public 3", availableGalleriesScrollTransform);
-        //AddGalleryToList("Public 4", availableGalleriesScrollTransform);
-        //
-        //AddGalleryToList("Own 1", yourGalleriesScrollTransform);
-        //AddGalleryToList("Own 2", yourGalleriesScrollTransform);
-        //List<Lobby> availableLobbies = await lobbyManager.QueryAvailableLobbies();
-
-        // Clear list of existing galleries (now inactive galleries will be removed)
-        // publicGalleryList.clear();
-
-        // Get new list of public lobbies
-        // allPublicGalleries = lobbyManager.getListOfGalleries(filter public);
-
-        // For each lobby create a button
-        // for (Gallery gallery : allPublicGalleries)
-        // {
-        //    galleryButton = createButton(gallery.name, gallery.players);
-        //    galleryButton.addListener(joinGalleryWithLobbyID);
-        //    publicGalleriesList.append(galleryButton);
-        // }
     }
 
     public void ClearContent(RectTransform galleryList)
@@ -148,21 +127,56 @@ public class LobbyPanelControls : MonoBehaviour
             Debug.Log("Gallery ID is: " + gallery.GalleryID);
             Debug.Log("Lobby ID is: " + gallery.LobbyID);
             Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(gallery.LobbyID);
-            await lobbyManager.JoinLobby(lobby, "", true);
+
+            if (gallery.permission == "public")
+                await lobbyManager.JoinLobby(lobby, "", true);
+            else
+            {
+                enterPasswordUIPanel.SetActive(true);
+                enterPasswordEnterButton.onClick.AddListener(() =>
+                {
+                    OnEnterPasswordEnterClicked(lobby);
+                });
+            }
         });
     }
 
     private void OnProfileClicked()
     {
         Debug.Log("ACK: Clicked on profile button");
-        // Open profile UI
-        // profileReference.Open();
-        //enterPasswordUIPanel.SetActive(true);
-        if (!enterPasswordIsDisplayed)
+    }
+
+    private void OnEnterPasswordEnterClicked(Unity.Services.Lobbies.Models.Lobby lobby)
+    {
+        enterPasswordEnterButton.onClick.AddListener(async () =>
         {
-            enterPasswordUIPanel.SetActive(true);
-            enterPasswordIsDisplayed = true;
-        }
+            string password = enterPasswordIF.text;
+            // Check valid password
+            TMP_Text passwordPlaceholder = enterPasswordIF.placeholder.GetComponent<TMP_Text>();
+            if (string.IsNullOrEmpty(password))
+            {
+                enterPasswordIF.text = "";
+                passwordPlaceholder.text = "SET PASSWORD";
+                return;
+            }
+            else if (password.Length < 8)
+            {
+                enterPasswordIF.text = "";
+                passwordPlaceholder.text = "PW > 8 CHARACTERS";
+                return;
+            }
+            else if (password.Length > 64)
+            {
+                enterPasswordIF.text = "";
+                passwordPlaceholder.text = "PW < 64 CHARACTERS";
+                return;
+            }
+
+            Debug.Log("ACK: Clicked on enter button. Attempting to join with PW: " + password);
+
+            // If it gets here its valid, try join
+            await lobbyManager.JoinLobby(lobby, password, true);
+        });
     }
 
     private void OnEnterPasswordExitClicked()
@@ -208,27 +222,4 @@ public class LobbyPanelControls : MonoBehaviour
             Debug.LogError("PlayFab login failed: " + error.ErrorMessage);
         });
     }
-
-    //public RectTransform contentPanel;   // The ScrollRect's content panel
-    //public Button buttonPrefab;          // Assign a Button prefab with TMP_Text
-
-    //// Call this function to add buttons dynamically
-    //public void AddLobbyToList(string buttonText)
-    //{
-    //    // Instantiate a button
-    //    Button newButton = Instantiate(buttonPrefab, contentPanel);
-
-    //    // Set button dimensions (180x32 pixels)
-    //    RectTransform rt = newButton.GetComponent<RectTransform>();
-    //    rt.sizeDelta = new Vector2(180, 32);
-
-    //    // Set the button text
-    //    TMP_Text text = newButton.GetComponentInChildren<TMP_Text>();
-    //    text.text = buttonText;
-
-    //    // Optionally, add button click listener here
-    //    newButton.onClick.AddListener(() => {
-    //        Debug.Log("Button clicked: " + buttonText);
-    //    });
-    //}
 }

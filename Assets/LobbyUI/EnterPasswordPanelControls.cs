@@ -74,12 +74,12 @@ public class EnterPasswordPanelControls : MonoBehaviour
 
     private void OnClearButtonClicked()
     {
-        // TODO
+        galleryPasswordIF.text = string.Empty;
     }
 
     private void OnEnterButtonClicked()
     {
-
+        // Handled elsewhere
     }
 
     public void ClearAllFields()

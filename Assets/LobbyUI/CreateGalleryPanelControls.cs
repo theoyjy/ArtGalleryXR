@@ -142,7 +142,7 @@ public class CreateGalleryPanelControls : MonoBehaviour
                     Debug.Log($"ID: {gallery.GalleryID}, 名称: {gallery.LobbyID}, 权限: {gallery.permission}");
                     if (galleryName.Equals(gallery.LobbyID))
                     {
-                        Debug.Log("The name has existed! Change to another one.");
+                        Debug.Log("The name already exists! Change to another one.");
                         sameNameExist = true;
                         break;
                     }
