@@ -6,7 +6,13 @@
         "UnityEditor.TestRunner",
         "Unity.InputSystem",
         "Unity.InputSystem.TestFramework",
-        "GameScripts"
+        "GameScripts",
+        "CanvasModule",
+        "Unity.Netcode.Runtime",
+        "Unity.Netcode.TestHelpers.Runtime",
+        "Unity.Netcode.RuntimeTests",
+        "Unity.Netcode.Editor",
+        "Unity.Netcode.Editor.CodeGen"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
