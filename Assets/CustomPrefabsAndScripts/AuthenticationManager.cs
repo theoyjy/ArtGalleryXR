@@ -10,7 +10,10 @@ public class AuthenticationManager : MonoBehaviour
 
     async void Start()
     {
-        await InitializeAuthentication();
+        if (!SharedDataManager.isAuthenticated)
+        {
+            await InitializeAuthentication();
+        }
     }
 
     private async Task InitializeAuthentication()
@@ -32,7 +35,9 @@ public class AuthenticationManager : MonoBehaviour
         if (isSignedIn || AuthenticationService.Instance.IsAuthorized)
         {
             Debug.Log("Instance is signed in now.");
-        } else {
+        }
+        else
+        {
             Debug.Log("Instance not signed in.");
         }
     }

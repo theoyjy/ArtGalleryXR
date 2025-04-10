@@ -29,6 +29,8 @@ public static class SharedDataManager
     public static string CurrentUserName;
     public static Lobby CurrentLobby;
 
+    public static bool isAuthenticated;
+
 
     [Serializable]
     public class CloudScriptResponse

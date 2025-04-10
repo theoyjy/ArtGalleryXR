@@ -6,6 +6,7 @@ using Unity.Services.Lobbies.Models;
 using System;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -27,26 +28,34 @@ public class LobbyManager : MonoBehaviour
         authManager = GetComponent<AuthenticationManager>();
         matchManager = GetComponent<MatchmakerManager>();
 
-        await UnityServices.InitializeAsync();
-        while (!authManager.isSignedIn)
+        if (!SharedDataManager.isAuthenticated)
         {
-            await Task.Delay(1000);
-        }
+            if (!UnityServices.State.Equals(ServicesInitializationState.Initialized))
+            {
+                await UnityServices.InitializeAsync();
+            }
 
-        // TODO: remove
-        // await CreateLobby("test", "player", 8, false, "");
-        // await Task.Delay(1000);
-        //await CreateLobby("test2private", "player2", 12, true, "898804djk");
-        // await Task.Delay(1000);
-        // await CreateLobby("test3", "player3", 12, false, "");
-        // await Task.Delay(1000);
-        // await CreateLobby("test4", "player4", 12, false, "");
-        // await Task.Delay(1000);
-        // await CreateLobby("test5", "player5", 12, false, "");
-        //await Task.Delay(1000);
-        // List<Lobby> lobbyResults = await QueryAvailableLobbies();
-        // lobby = lobbyResults[0];
-        // await JoinLobby(lobby, "", false);
+
+            while (!authManager.isSignedIn)
+            {
+                await Task.Delay(1000);
+            }
+
+            // TODO: remove
+            // await CreateLobby("test", "player", 8, false, "");
+            // await Task.Delay(1000);
+            //await CreateLobby("test2private", "player2", 12, true, "898804djk");
+            // await Task.Delay(1000);
+            // await CreateLobby("test3", "player3", 12, false, "");
+            // await Task.Delay(1000);
+            // await CreateLobby("test4", "player4", 12, false, "");
+            // await Task.Delay(1000);
+            // await CreateLobby("test5", "player5", 12, false, "");
+            //await Task.Delay(1000);
+            // List<Lobby> lobbyResults = await QueryAvailableLobbies();
+            // lobby = lobbyResults[0];
+            // await JoinLobby(lobby, "", false);
+        }
     }
 
     public async Task<JoinStatus> JoinLobby(Lobby lobby, string password, bool isGuest)
@@ -90,6 +99,7 @@ public class LobbyManager : MonoBehaviour
 
         // Save a reference to the selected lobby so that we can access it inside the gallery
         SharedDataManager.CurrentLobby = lobby;
+        SharedDataManager.isAuthenticated = true;
         SceneManager.LoadScene("Gallery");
 
         return status;

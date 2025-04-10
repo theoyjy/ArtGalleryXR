@@ -33,11 +33,14 @@ public class MatchmakerManager : MonoBehaviour
     {
         mpManager = GetComponent<MultiplayManager>();
         authManager = GetComponent<AuthenticationManager>();
-        await UnityServices.InitializeAsync();
-
-        while (!authManager.isSignedIn)
+        if (!SharedDataManager.isAuthenticated)
         {
-            await Task.Delay(1000);
+            await UnityServices.InitializeAsync();
+
+            while (!authManager.isSignedIn)
+            {
+                await Task.Delay(1000);
+            }
         }
     }
 
