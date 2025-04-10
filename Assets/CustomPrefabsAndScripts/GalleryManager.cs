@@ -6,7 +6,6 @@ using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using System.Collections.Generic;
 using PlayFab;
-using PlayFab.ClientModels;
 using System;
 using System.Collections;
 
@@ -29,7 +28,6 @@ public class GalleryManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     async void Start()
     {
-#if !SERVER_BUILD
 #if !SERVER_BUILD
         mpManager = GameObject.Find("MultiplayManager").GetComponent<MultiplayManager>();
         cloudPlayerId = AuthenticationService.Instance.PlayerId;
@@ -118,20 +116,20 @@ public class GalleryManager : MonoBehaviour
 #endif
     }
 
-// should be called periodically while inside a gallery session to keep it alive
-public async void PingLobby()
-{
-    isPingingLobby = true;
-
-    while (isPingingLobby && isOpen)
+    // should be called periodically while inside a gallery session to keep it alive
+    public async void PingLobby()
     {
-        if (currentLobby == null) return;
-        await LobbyService.Instance.SendHeartbeatPingAsync(currentLobby.Id);
-        Debug.Log("Heartbeat sent to lobby.");
+        isPingingLobby = true;
 
-        await Task.Delay(60 * 1000);
-}
-}
+        while (isPingingLobby && isOpen)
+        {
+            if (currentLobby == null) return;
+            await LobbyService.Instance.SendHeartbeatPingAsync(currentLobby.Id);
+            Debug.Log("Heartbeat sent to lobby.");
+
+            await Task.Delay(60 * 1000);
+        }
+    }
 
     // Update is called once per frame
     void Update()
