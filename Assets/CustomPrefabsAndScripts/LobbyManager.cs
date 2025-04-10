@@ -13,6 +13,14 @@ public class LobbyManager : MonoBehaviour
     public AuthenticationManager authManager;
     public MatchmakerManager matchManager;
 
+    public enum JoinStatus
+    {
+        SUCCESS,
+        GALLERY_FULL,
+        WRONG_PASSWORD,
+        GALLERY_OFFLINE
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public async void Start()
     {
@@ -45,8 +53,10 @@ public class LobbyManager : MonoBehaviour
         // await JoinLobby(lobby, "", false);
     }
 
-    public async Task JoinLobby(Lobby lobby, string password, bool isGuest)
+    public async Task<JoinStatus> JoinLobby(Lobby lobby, string password, bool isGuest)
     {
+        var status = JoinStatus.SUCCESS;
+
         var joinOptions = new JoinLobbyByIdOptions { };
 
         if (isGuest)
@@ -63,8 +73,17 @@ public class LobbyManager : MonoBehaviour
             catch (LobbyServiceException ex)
             {
                 Debug.LogError("Failed to join lobby: " + ex);
-                return;
+                switch (ex.Reason)
+                {
+                    case LobbyExceptionReason.LobbyFull:
+                        return JoinStatus.GALLERY_FULL;
+                    case LobbyExceptionReason.LobbyNotFound:
+                        return JoinStatus.GALLERY_OFFLINE;
+                    case LobbyExceptionReason.IncorrectPassword:
+                        return JoinStatus.WRONG_PASSWORD;
+                }
             }
+
 
         }
 
@@ -77,25 +96,7 @@ public class LobbyManager : MonoBehaviour
         SharedDataManager.CurrentLobby = lobby;
         SceneManager.LoadScene("Gallery");
 
-        //var asyncOp = SceneManager.LoadSceneAsync("Gallery", LoadSceneMode.Single);
-
-        //// Wait until the scene is fully loaded
-        //while (!asyncOp.isDone)
-        //{
-        //    await Task.Yield(); // or use a coroutine if you're not using async/await
-        //}
-
-        //// Now it's safe to get and activate the scene
-        //Scene galleryScene = SceneManager.GetSceneByName("Gallery");
-
-        //if (galleryScene.IsValid() && galleryScene.isLoaded)
-        //{
-        //    SceneManager.SetActiveScene(galleryScene);
-        //}
-        //else
-        //{
-        //    Debug.LogError("Failed to load or find the 'Gallery' scene.");
-        //}
+        return status;
     }
 
     // Update is called once per frame
