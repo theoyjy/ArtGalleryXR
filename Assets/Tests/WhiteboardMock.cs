@@ -19,4 +19,5 @@ public class MockWhiteboard : Whiteboard
     {
         return input;
     }
+    public override Texture2D HandleFlip(Texture2D tex) => tex;
 }

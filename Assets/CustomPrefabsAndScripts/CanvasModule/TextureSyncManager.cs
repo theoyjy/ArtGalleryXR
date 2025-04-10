@@ -214,7 +214,7 @@ public class TextureSyncManager : NetworkBehaviour
     }
 
     // ---------- Client Sends Texture to Server ----------
-    public void SendTextureToServer()
+    public virtual void SendTextureToServer()
     {
         try
         {

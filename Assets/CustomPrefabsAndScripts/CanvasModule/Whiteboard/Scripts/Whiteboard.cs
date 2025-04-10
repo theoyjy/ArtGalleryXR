@@ -178,7 +178,7 @@ public class Whiteboard : MonoBehaviour
         GetComponent<Renderer>().material.mainTexture = texture;
     }
 
-    public Texture2D HandleFlip(Texture2D texture)
+    public virtual Texture2D HandleFlip(Texture2D texture)
     {
         int width = texture.width;
         int height = texture.height;
