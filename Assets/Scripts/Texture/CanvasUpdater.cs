@@ -35,7 +35,7 @@ public class CanvasUpdater : MonoBehaviour
             {
                 Texture2D texture = DownloadHandlerTexture.GetContent(req);
                 current_canvas_texture = texture;
-                materials[1].mainTexture = current_canvas_texture;
+                materials[0].mainTexture = current_canvas_texture;
             }
             else
             {
