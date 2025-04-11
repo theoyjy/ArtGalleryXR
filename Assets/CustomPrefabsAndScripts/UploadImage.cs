@@ -16,9 +16,16 @@ public class UploadImage : MonoBehaviour
     private string keyId; // Replace with Unity API key ID
     private string apiKey; // Replace with Unity API secret key
 
+    public GalleryManager galleryManager;
+
     private string baseUrl = "https://services.api.unity.com/ccd/management/v1/projects/";
 
-    public void UploadTexture()
+  public void Start()
+  {
+    galleryManager = GameObject.Find("GalleryManager").GetComponent<GalleryManager>();
+  }
+
+  public void UploadTexture()
     {
         if (targetRenderer == null || targetRenderer.material == null || targetRenderer.material.mainTexture == null)
         {
@@ -38,7 +45,8 @@ public class UploadImage : MonoBehaviour
 
     private IEnumerator UploadToCCD(Texture2D texture)
     {
-        apiKey = Environment.GetEnvironmentVariable("UNITY_CCD_API_KEY");
+        // apiKey = Environment.GetEnvironmentVariable("UNITY_CCD_API_KEY");
+        apiKey = "XXkUa9GHrmFpruDUL5Kniu1jmewaVES1";
         projectId = "d6be0271-d571-42d8-a09b-305d7f148d1f";
         environmentId = "a692e5af-8842-4289-bb91-ad105fd3e95d";
         bucketId = "29e6096a-5d6c-4985-a63c-ed8a16000af9";
@@ -91,6 +99,12 @@ public class UploadImage : MonoBehaviour
 
                 string download_url = ExtractContentLink(request.downloadHandler.text);
                 Debug.Log(download_url);
+
+                SharedDataManager.AddCanva(SharedDataManager.CurrentLobby.Name, download_url,onSuccess:result=>{
+                    Debug.Log("Add canvas successfully!");
+                    galleryManager.LoadGalleryState();
+                },onError:result=>{});
+                
                 
             }
             else
@@ -159,7 +173,7 @@ public class UploadImage : MonoBehaviour
         try
         {
             var json = JObject.Parse(jsonResponse);
-            return json["content_link"]?.ToString(); // ✅ Extract direct download URL
+            return json["content_link"]?.ToString();
         }
         catch (Exception e)
         {

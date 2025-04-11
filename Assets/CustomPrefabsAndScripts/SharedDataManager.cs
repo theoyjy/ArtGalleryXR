@@ -28,6 +28,8 @@ public static class SharedDataManager
     public static readonly string PlayerSharedGroupId = "Players";
 
     public static string CurrentUserName;
+
+    public static bool playerIsGuest;
     public static Lobby CurrentLobby;
 
     public static bool isAuthenticated;

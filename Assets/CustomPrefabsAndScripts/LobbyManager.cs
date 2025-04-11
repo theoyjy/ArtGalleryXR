@@ -6,7 +6,6 @@ using Unity.Services.Lobbies.Models;
 using System;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -62,6 +61,8 @@ public class LobbyManager : MonoBehaviour
         var status = JoinStatus.SUCCESS;
 
         var joinOptions = new JoinLobbyByIdOptions { };
+
+        SharedDataManager.playerIsGuest = isGuest;
 
         if (isGuest)
         {
