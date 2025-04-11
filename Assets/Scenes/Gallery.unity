@@ -2934,7 +2934,7 @@ MonoBehaviour:
   isLeaving: 0
   isOpen: 1
   isLocked: 0
-  hooks: {fileID: 0}
+  hooks: {fileID: 1465752195}
 --- !u!4 &343653006
 Transform:
   m_ObjectHideFlags: 0
@@ -12161,46 +12161,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 02e790d259f0c4bd2aeae44c6c3d1312, type: 3}
 --- !u!1 &1465752195 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 4423045620967985251, guid: 02e790d259f0c4bd2aeae44c6c3d1312, type: 3}
-  m_PrefabInstance: {fileID: 1465752194}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1465752196
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465752195}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.06380216, y: 0.05990785, z: 0.034999993}
-  m_Center: {x: -0.00024538164, y: 0.028626654, z: 0.017499998}
---- !u!114 &1465752197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465752195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 893298dbcc8456d43986daeb46b42eb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  exitButton: {fileID: 237255427}
---- !u!4 &1465752198 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2647898422681595148, guid: 02e790d259f0c4bd2aeae44c6c3d1312, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3167103486880558248, guid: 02e790d259f0c4bd2aeae44c6c3d1312, type: 3}
   m_PrefabInstance: {fileID: 1465752194}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1469493077

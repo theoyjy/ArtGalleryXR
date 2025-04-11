@@ -18,15 +18,18 @@ public class GalleryDetail
     public string OwnID;
     public string permission;          // 权限，仅有 "public" 或 "private"
     public string password;         //is private
+    public int MaxPlayers;
 }
 
 public static class SharedDataManager
 {
     // 两个模块的共享组 ID
-    public static readonly string GallerySharedGroupId = "GalleriesWithPassword";
+    public static readonly string GallerySharedGroupId = "GalleriesWithPasswordAndMaxPlayers";
     public static readonly string PlayerSharedGroupId = "Players";
 
     public static string CurrentUserName;
+
+    public static bool playerIsGuest;
     public static Lobby CurrentLobby;
 
     public static bool isAuthenticated;
@@ -131,7 +134,7 @@ public static class SharedDataManager
     }
 
 
-    public static void CreateGallery(string GalleryID,string LobbyID,string Password, bool IsPublic)
+    public static void CreateGallery(string GalleryID,string LobbyID,string Password,int MaxPlayers, bool IsPublic)
     {
         GetAllGalleries(existingGalleries =>
         {
@@ -142,7 +145,8 @@ public static class SharedDataManager
                 Canvas = new List<string>(),
                 OwnID = CurrentUserName,
                 permission = IsPublic ? "public" : "private",
-                password = Password
+                password = Password,
+                MaxPlayers = MaxPlayers
             };
 
             SaveGalleryUsingCloudScript(NewGallery,
@@ -306,6 +310,35 @@ public static class SharedDataManager
     #endregion
 
     #region Canva 模块
+
+    /// <summary>
+    /// 这是“新建的”简化调用函数。只需要传入 GalleryID 和 canvaURL
+    /// 成功时或失败时，直接在函数内部处理
+    /// </summary>
+    public static void AddCanvaSimple(string GalleryID, string canvaURL)
+    {
+        // 调用已有的 AddCanva，并在此处定义 onSuccess 和 onError 的逻辑
+        AddCanva(
+            GalleryID,
+            canvaURL,
+            onSuccess: result =>
+            {
+                if (result == "success")
+                {
+                    Debug.Log("AddCanvaSimple: 画布添加成功！");
+                }
+                else if (result == "no_empty_slot")
+                {
+                    Debug.LogWarning("AddCanvaSimple: 没有空余的 slot！");
+                }
+            },
+            onError: error =>
+            {
+                Debug.LogError($"AddCanvaSimple: 添加画布失败，错误信息: {error.ErrorMessage}");
+            }
+        );
+    }
+
     /// <summary>
     //add canvas automatically to the empty one
     /// 向指定gallery添加canvas，自动寻找空的slot

@@ -15,7 +15,7 @@ public class GalleryManager : MonoBehaviour
     public string galleryId;
     public string cloudPlayerId;
     public MultiplayManager mpManager;
-    public bool playerIsHost = true;
+    public bool playerIsHost = false;
     public bool isLeaving = false;
     private bool isPingingLobby = false;
     public bool isOpen = true;
@@ -33,8 +33,13 @@ public class GalleryManager : MonoBehaviour
         cloudPlayerId = AuthenticationService.Instance.PlayerId;
         currentLobby = SharedDataManager.CurrentLobby;
         galleryId = currentLobby.Name;
+        playerIsHost = !SharedDataManager.playerIsGuest;
         await LoadGalleryState();
         isLocked = false;
+
+        //RefreshGallery();
+        // 启动协程，每3秒循环调用异步函数
+        StartCoroutine(CallLoadGalleryStateEvery3s());
 
         if (playerIsHost)
         {
@@ -77,6 +82,18 @@ public class GalleryManager : MonoBehaviour
     {
         // TODO: maybe try loading another scene
         SceneManager.LoadScene("Lobby");
+    }
+
+    private IEnumerator CallLoadGalleryStateEvery3s()
+    {
+        while (true)
+        {
+            // 调用异步函数（如果你需要等待它执行完，可以在协程中改为等待Task完成）
+            _ = LoadGalleryState();
+
+            // 等待3秒后再调用下一次
+            yield return new WaitForSeconds(30f);
+        }
     }
 
     public async void LeaveGallery()
@@ -151,6 +168,7 @@ public class GalleryManager : MonoBehaviour
         // Load the gallery state from the current lobby
         Debug.Log("Loading gallery state from lobby: " + galleryId);//galleryId
     }
+
 
     IEnumerator WaitAndDo(Action action, float delay)
     {

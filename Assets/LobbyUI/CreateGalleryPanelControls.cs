@@ -11,7 +11,6 @@ public class CreateGalleryPanelControls : MonoBehaviour
 {
     // These two are handled in editor
     public LobbyManager lobbyManager;
-    //public SharedDataManager sharedDataManager;
 
     // These are set in Start()
     private Button exitButton;
@@ -165,11 +164,11 @@ public class CreateGalleryPanelControls : MonoBehaviour
                 string lobbyID = await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
                 if(isPrivate)
                 {
-                    SharedDataManager.CreateGallery(galleryName, lobbyID, password, false);
+                    SharedDataManager.CreateGallery(galleryName, lobbyID, password, maxPlayers, false);
                 }
                 else
                 {
-                    SharedDataManager.CreateGallery(galleryName, lobbyID, "", true);
+                    SharedDataManager.CreateGallery(galleryName, lobbyID, "", maxPlayers, true);
                 }
 
                 Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(lobbyID);
