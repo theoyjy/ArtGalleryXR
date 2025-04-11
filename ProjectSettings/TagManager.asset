@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Whiteboard
   - Pen
+  - LobbyUI
+  - Exit
   layers:
   - Default
   - TransparentFX
