@@ -2793,6 +2793,7 @@ MonoBehaviour:
   isLeaving: 0
   isOpen: 1
   isLocked: 0
+  hooks: {fileID: 1465752195}
 --- !u!4 &343653006
 Transform:
   m_ObjectHideFlags: 0
@@ -11765,6 +11766,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8981583584026469802}
   m_SourcePrefab: {fileID: 100100000, guid: 02e790d259f0c4bd2aeae44c6c3d1312, type: 3}
+--- !u!1 &1465752195 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3167103486880558248, guid: 02e790d259f0c4bd2aeae44c6c3d1312, type: 3}
+  m_PrefabInstance: {fileID: 1465752194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1469493077
 GameObject:
   m_ObjectHideFlags: 0
