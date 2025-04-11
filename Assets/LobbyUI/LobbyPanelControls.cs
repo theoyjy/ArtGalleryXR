@@ -127,15 +127,24 @@ public class LobbyPanelControls : MonoBehaviour
             Debug.Log("Gallery ID is: " + gallery.GalleryID);
             Debug.Log("Lobby ID is: " + gallery.LobbyID);
             Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(gallery.LobbyID);
+            bool lobbyIsActive = gallery.LobbyID == "LobbyID" ? false : true;
 
             if (gallery.permission == "public")
-                await lobbyManager.JoinLobby(lobby, "", true);
+            {
+                if (lobbyIsActive)
+                    await lobbyManager.JoinLobby(lobby, "", true);
+                else
+                {
+                    string username = SharedDataManager.CurrentUserName;
+                    string newLobbyId = await lobbyManager.CreateLobby(gallery.GalleryID, username, gallery.maxPlayers, false, "");
+                }
+            }
             else
             {
                 enterPasswordUIPanel.SetActive(true);
                 enterPasswordEnterButton.onClick.AddListener(() =>
                 {
-                    OnEnterPasswordEnterClicked(lobby);
+                    OnEnterPasswordEnterClicked(lobby, gallery, lobbyIsActive);
                 });
             }
         });
@@ -146,7 +155,7 @@ public class LobbyPanelControls : MonoBehaviour
         Debug.Log("ACK: Clicked on profile button");
     }
 
-    private void OnEnterPasswordEnterClicked(Unity.Services.Lobbies.Models.Lobby lobby)
+    private void OnEnterPasswordEnterClicked(Unity.Services.Lobbies.Models.Lobby lobby, GalleryDetail gallery, bool lobbyIsActive)
     {
         enterPasswordEnterButton.onClick.AddListener(async () =>
         {
@@ -175,7 +184,13 @@ public class LobbyPanelControls : MonoBehaviour
             Debug.Log("ACK: Clicked on enter button. Attempting to join with PW: " + password);
 
             // If it gets here its valid, try join
-            await lobbyManager.JoinLobby(lobby, password, true);
+            if (lobbyIsActive)
+                await lobbyManager.JoinLobby(lobby, password, true);
+            else
+            {
+                string username = SharedDataManager.CurrentUserName;
+                string newLobbyId = await lobbyManager.CreateLobby(gallery.GalleryID, username, gallery.maxPlayers, true, password);
+            }
         });
     }
 
