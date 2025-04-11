@@ -6,7 +6,6 @@ using Unity.Services.Lobbies.Models;
 using System;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -34,7 +33,6 @@ public class LobbyManager : MonoBehaviour
             {
                 await UnityServices.InitializeAsync();
             }
-
 
             while (!authManager.isSignedIn)
             {
@@ -64,6 +62,8 @@ public class LobbyManager : MonoBehaviour
 
         var joinOptions = new JoinLobbyByIdOptions { };
 
+        SharedDataManager.playerIsGuest = isGuest;
+
         if (isGuest)
         {
             if (lobby.HasPassword)
@@ -88,8 +88,6 @@ public class LobbyManager : MonoBehaviour
                         return JoinStatus.WRONG_PASSWORD;
                 }
             }
-
-
         }
 
         string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";
