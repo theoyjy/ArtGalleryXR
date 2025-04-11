@@ -124,6 +124,7 @@ public class GalleryManager : MonoBehaviour
             }
         }
         mpManager.DisconnectFromServer();
+        GoToLobbies();
     }
 
     private void OnApplicationQuit()
@@ -157,7 +158,6 @@ public class GalleryManager : MonoBehaviour
             isLeaving = true;
             isPingingLobby = false;
             LeaveGallery();
-            GoToLobbies();
         }
 #endif
     }
