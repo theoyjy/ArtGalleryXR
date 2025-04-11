@@ -22,9 +22,9 @@ public class CanvasEditManager : MonoBehaviour
     int oriWidth, oriHeight;
 
     [Header("UI Prefab (Must be a World-Space Canvas)")]
-    [SerializeField] private GameObject ToolUI;
+    [SerializeField] public GameObject ToolUI;
 
-    [SerializeField] private GameObject EditUI;
+    [SerializeField] public GameObject EditUI;
 
     public Card card;
 
@@ -112,6 +112,10 @@ public class CanvasEditManager : MonoBehaviour
                 {
                     localPlayer = player;
                     break;
+                }
+                if(player.CompareTag("Player") && !player.IsOwner)
+                {
+                    Debug.Log("Found Non Owner Player");
                 }
             }
         }

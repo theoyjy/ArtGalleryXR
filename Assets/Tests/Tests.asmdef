@@ -6,7 +6,12 @@
         "UnityEditor.TestRunner",
         "Unity.InputSystem",
         "Unity.InputSystem.TestFramework",
-        "GameScripts"
+        "GameScripts",
+        "CustomScripts",
+        "Unity.Netcode.Runtime",
+        "UnityUIExtensions",
+        "Unity.TextMeshPro",
+        "FlexibleColorPicker"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -93,19 +93,19 @@ public class Card : MonoBehaviour
         coroutineAllowed = true;
     }
 
-    public Vector3 GetWorldLoc()
+    public virtual Vector3 GetWorldLoc()
     {
         return transform.position;
     }
 
-    public Quaternion GetWorldQuatRot()
+    public virtual Quaternion GetWorldQuatRot()
     {
         Quaternion quat = transform.parent.transform.rotation; // parent's world rotation
         quat *= Quaternion.Euler(0f, 180f, 0f);
         return quat;
     }
 
-    public Vector3 GetNormal()
+    public virtual Vector3 GetNormal()
     {
         Quaternion quat = GetWorldQuatRot();
         return quat * Vector3.forward;
