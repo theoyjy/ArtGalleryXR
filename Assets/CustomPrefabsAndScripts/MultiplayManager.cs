@@ -124,6 +124,16 @@ public class MultiplayManager : MonoBehaviour
         {
             NetworkManager.Singleton.Shutdown();
             Debug.Log("Disconnected from server.");
+
+            // Manually destroy the NetworkManager object (which is DontDestroyOnLoad)
+            Destroy(NetworkManager.Singleton.gameObject);
+
+            // If CanvasComponent is another persistent object, destroy it too
+            GameObject canvas = GameObject.FindGameObjectWithTag("CanvasComponent");
+            if (canvas != null)
+            {
+                Destroy(canvas.gameObject);
+            }
         }
     }
 }

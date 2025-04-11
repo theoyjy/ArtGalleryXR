@@ -11,7 +11,6 @@ public class CreateGalleryPanelControls : MonoBehaviour
 {
     // These two are handled in editor
     public LobbyManager lobbyManager;
-    //public SharedDataManager sharedDataManager;
 
     // These are set in Start()
     private Button exitButton;

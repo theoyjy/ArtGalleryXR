@@ -34,7 +34,6 @@ public class LobbyManager : MonoBehaviour
                 await UnityServices.InitializeAsync();
             }
 
-
             while (!authManager.isSignedIn)
             {
                 await Task.Delay(1000);
@@ -89,7 +88,6 @@ public class LobbyManager : MonoBehaviour
                         return JoinStatus.WRONG_PASSWORD;
                 }
             }
-
         }
 
         string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";

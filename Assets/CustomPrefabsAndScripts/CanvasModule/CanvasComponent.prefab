@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 7407524342512395116}
   m_Layer: 0
   m_Name: CanvasComponent
-  m_TagString: Untagged
+  m_TagString: CanvasComponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -279,6 +279,10 @@ PrefabInstance:
     - target: {fileID: 5551651429857113905, guid: e9517ae8974614d47b1fa825ea8b7fe8, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2856750997
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551651429857113905, guid: e9517ae8974614d47b1fa825ea8b7fe8, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5826621016631287483, guid: e9517ae8974614d47b1fa825ea8b7fe8, type: 3}
       propertyPath: whiteboard
