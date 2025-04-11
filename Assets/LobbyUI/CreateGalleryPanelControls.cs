@@ -165,11 +165,11 @@ public class CreateGalleryPanelControls : MonoBehaviour
                 string lobbyID = await lobbyManager.CreateLobby(galleryName, username, maxPlayers, isPrivate, password);
                 if(isPrivate)
                 {
-                    SharedDataManager.CreateGallery(galleryName, lobbyID, password, false);
+                    SharedDataManager.CreateGallery(galleryName, lobbyID, password, maxPlayers, false);
                 }
                 else
                 {
-                    SharedDataManager.CreateGallery(galleryName, lobbyID, "", true);
+                    SharedDataManager.CreateGallery(galleryName, lobbyID, "", maxPlayers, true);
                 }
 
                 Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(lobbyID);
