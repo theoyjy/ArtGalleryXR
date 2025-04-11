@@ -37,7 +37,9 @@ public class GalleryManager : MonoBehaviour
         await LoadGalleryState();
         isLocked = false;
 
-        RefreshGallery();
+        //RefreshGallery();
+        // 启动协程，每3秒循环调用异步函数
+        StartCoroutine(CallLoadGalleryStateEvery3s());
 
         if (playerIsHost)
         {
@@ -82,9 +84,16 @@ public class GalleryManager : MonoBehaviour
         SceneManager.LoadScene("Lobby");
     }
 
-    public async void RefreshGallery() {
-        LoadGalleryState();
-        await Task.Delay(3000);
+    private IEnumerator CallLoadGalleryStateEvery3s()
+    {
+        while (true)
+        {
+            // 调用异步函数（如果你需要等待它执行完，可以在协程中改为等待Task完成）
+            _ = LoadGalleryState();
+
+            // 等待3秒后再调用下一次
+            yield return new WaitForSeconds(30f);
+        }
     }
 
     public async void LeaveGallery()
@@ -159,6 +168,7 @@ public class GalleryManager : MonoBehaviour
         // Load the gallery state from the current lobby
         Debug.Log("Loading gallery state from lobby: " + galleryId);//galleryId
     }
+
 
     IEnumerator WaitAndDo(Action action, float delay)
     {
