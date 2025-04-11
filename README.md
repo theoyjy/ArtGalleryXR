@@ -125,3 +125,8 @@ In Unity: **File → Build Settings**
 - Choose an output folder, e.g., `Builds/Android/`.
 - Wait for Unity to compile and generate the APK file.
 
+### Deploy to Meta Quest 2
+After the build completes, deploy the APK to your Meta Quest 2 headset using your preferred method (such as ADB or the Oculus Developer Hub).
+Alternatively if you chose Build and Run, the application will be deployed and started on your Meta Quest 2.
+
+
