@@ -80,25 +80,62 @@ public class LobbyPanelControls : MonoBehaviour
         enterPasswordUIPanel.SetActive(false);
         enterPasswordIsDisplayed = false;
     }
-    private void OnRefreshGalleriesClicked()
+    private async void OnRefreshGalleriesClicked()
     {
         ClearContent(availableGalleriesScrollTransform);
         Debug.Log("ACK: Clicked on refresh galleries button");
+
+        // 1. Get all database galleries
+        List<GalleryDetail> allDatabaseGalleries = new List<GalleryDetail>();
         SharedDataManager.GetAllGalleries(
             onSuccess: (List<GalleryDetail> Galleries) =>
             {
-                Debug.Log("Total galleries count: " + Galleries.Count);
-                foreach (var gallery in Galleries)
-                {
-                    // Button connections handled in AddGalleryToList
-                    AddGalleryToList(gallery, availableGalleriesScrollTransform);
-                }
+                allDatabaseGalleries = Galleries;
+                Debug.Log("Successfull retrieved all galleris from database. Total galleries count: " + Galleries.Count);
             },
             onError: (PlayFabError error) =>
             {
                 Debug.LogError("Get public Galleries failed: " + error.GenerateErrorReport());
+                return;
             }
         );
+
+        // 2. Get all lobbies
+        List<Unity.Services.Lobbies.Models.Lobby> allAvailableLobbies = await lobbyManager.QueryAvailableLobbies();
+
+        // 3. Find out if a gallery is yours (if it is its inactive, button connection will be to create)
+        string username = SharedDataManager.CurrentUserName;
+        foreach (GalleryDetail gallery in allDatabaseGalleries)
+        {
+            // If its yours its inactive, add it to your list and connect "createLobby" to click
+            if (gallery.OwnID == username)
+                AddGalleryToYourList(gallery, yourGalleriesScrollTransform);
+            // Else its not yours, find out if its active. If it is, add it to the list and connect private/public check and link pw window if private
+            else
+            {
+                // The active check works as follows: check what the database has stored for this gallery's lobby ID. Then loop through all active lobbies
+                // if an active lobby ID matches the database lobby ID, then the gallery is active, add it to the list. Else if there is no match in the
+                // list, the gallery is inactive so don't add it to the list
+                bool isActive = false;
+                string currentDatabaseLobbyID = gallery.LobbyID;
+                foreach (Unity.Services.Lobbies.Models.Lobby currentLobby in allAvailableLobbies)
+                {
+                    string currentLobbyId = currentLobby.Id;
+                    if (currentLobbyId == currentDatabaseLobbyID)
+                    {
+                        isActive = true; 
+                        break;
+                    }
+                }
+
+                // Check if a match was found
+                if (isActive)
+                {
+                    AddGalleryToAllGalleriesList(gallery, availableGalleriesScrollTransform);
+                }
+            }
+
+        }
     }
 
     public void ClearContent(RectTransform galleryList)
@@ -109,7 +146,34 @@ public class LobbyPanelControls : MonoBehaviour
         }
     }
 
-    private void AddGalleryToList(GalleryDetail gallery, RectTransform galleryList)
+    private void AddGalleryToYourList(GalleryDetail gallery, RectTransform galleryList)
+    {
+        // Instantiate a button
+        Button newButton = Instantiate(buttonPrefab, galleryList, false);
+
+        // Set button dimensions (180x32 pixels)
+        RectTransform rt = newButton.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(0, 32);
+
+        // Set the button text
+        TMP_Text text = newButton.GetComponentInChildren<TMP_Text>();
+        text.text = gallery.GalleryID;
+
+        // Optionally, add button click listener here
+        newButton.onClick.AddListener(async () => {
+            Debug.Log("Attempting to create new lobby instance for the gallery: " + gallery.GalleryID);
+            string username = SharedDataManager.CurrentUserName;
+            bool isPrivate = gallery.permission == "public" ? false : true;
+            // If its public password is just "" so call below works for both public and private
+            string newLobbyId = await lobbyManager.CreateLobby(gallery.GalleryID, username, gallery.MaxPlayers, isPrivate, gallery.password);
+            SharedDataManager.ChangeLobbyID(gallery.GalleryID, newLobbyId);
+            // Send database new lobbyId for this gallery
+            Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(newLobbyId);
+            // Just use password from database, its already your own
+            await lobbyManager.JoinLobby(lobby, gallery.password, false); // HANDLE RETURN CODE
+        });
+    }
+    private void AddGalleryToAllGalleriesList(GalleryDetail gallery, RectTransform galleryList)
     {
         // Instantiate a button
         Button newButton = Instantiate(buttonPrefab, galleryList, false);
@@ -124,27 +188,17 @@ public class LobbyPanelControls : MonoBehaviour
         
         // Optionally, add button click listener here
         newButton.onClick.AddListener(async () => {
-            Debug.Log("Gallery ID is: " + gallery.GalleryID);
-            Debug.Log("Lobby ID is: " + gallery.LobbyID);
+            Debug.Log("Attempting to join lobby instance for the gallery: " + gallery.GalleryID);
             Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(gallery.LobbyID);
-            bool lobbyIsActive = gallery.LobbyID == "LobbyID" ? false : true;
 
             if (gallery.permission == "public")
-            {
-                if (lobbyIsActive)
-                    await lobbyManager.JoinLobby(lobby, "", true);
-                else
-                {
-                    string username = SharedDataManager.CurrentUserName;
-                    string newLobbyId = await lobbyManager.CreateLobby(gallery.GalleryID, username, gallery.maxPlayers, false, "");
-                }
-            }
+                await lobbyManager.JoinLobby(lobby, "", true); // HANDLE JOIN STATUS RETURN
             else
             {
                 enterPasswordUIPanel.SetActive(true);
                 enterPasswordEnterButton.onClick.AddListener(() =>
                 {
-                    OnEnterPasswordEnterClicked(lobby, gallery, lobbyIsActive);
+                    OnEnterPasswordEnterClicked(lobby, gallery);
                 });
             }
         });
@@ -155,7 +209,7 @@ public class LobbyPanelControls : MonoBehaviour
         Debug.Log("ACK: Clicked on profile button");
     }
 
-    private void OnEnterPasswordEnterClicked(Unity.Services.Lobbies.Models.Lobby lobby, GalleryDetail gallery, bool lobbyIsActive)
+    private void OnEnterPasswordEnterClicked(Unity.Services.Lobbies.Models.Lobby lobby, GalleryDetail gallery)
     {
         enterPasswordEnterButton.onClick.AddListener(async () =>
         {
@@ -182,15 +236,7 @@ public class LobbyPanelControls : MonoBehaviour
             }
 
             Debug.Log("ACK: Clicked on enter button. Attempting to join with PW: " + password);
-
-            // If it gets here its valid, try join
-            if (lobbyIsActive)
-                await lobbyManager.JoinLobby(lobby, password, true);
-            else
-            {
-                string username = SharedDataManager.CurrentUserName;
-                string newLobbyId = await lobbyManager.CreateLobby(gallery.GalleryID, username, gallery.maxPlayers, true, password);
-            }
+            await lobbyManager.JoinLobby(lobby, password, true); // HANDLE STATUS RETURN
         });
     }
 
