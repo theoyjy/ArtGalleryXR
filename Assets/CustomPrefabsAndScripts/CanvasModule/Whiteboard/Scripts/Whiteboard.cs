@@ -21,7 +21,7 @@ public class Whiteboard : MonoBehaviour
     ExtensionFilter[] extensionFilters;
 #endif
 
-    private void Start()
+    public void Start()
     {
         projectPath = Application.dataPath; // Get root project folder
         var r = GetComponent<Renderer>();
@@ -47,7 +47,7 @@ public class Whiteboard : MonoBehaviour
 #endif
     }
 
-    private void Awake()
+    public void Awake()
     {
         if(!texture)
         {
@@ -68,7 +68,7 @@ public class Whiteboard : MonoBehaviour
     {
     }
 
-    public void ClearWhiteboard()
+    public virtual void ClearWhiteboard()
     {
         var r = GetComponent<Renderer>();
         texture = new Texture2D((int)textureSize.x, (int)textureSize.y);
@@ -192,8 +192,7 @@ public class Whiteboard : MonoBehaviour
         }
     }
 
-
-    public void ApplyTexture(Texture2D newTexture)
+    public virtual void ApplyTexture(Texture2D newTexture)
     {
         texture = new Texture2D(newTexture.width, newTexture.height, newTexture.format, false);
         texture.SetPixels(newTexture.GetPixels());
@@ -203,7 +202,7 @@ public class Whiteboard : MonoBehaviour
         GetComponent<Renderer>().material.mainTexture = texture;
     }
 
-    public Texture2D HandleFlip(Texture2D texture)
+    public virtual Texture2D HandleFlip(Texture2D texture)
     {
         int width = texture.width;
         int height = texture.height;
@@ -231,7 +230,7 @@ public class Whiteboard : MonoBehaviour
         return rotatedTexture;
     }
 
-    public Texture2D ResizeTexture(Texture2D source, int newWidth, int newHeight)
+    public virtual Texture2D ResizeTexture(Texture2D source, int newWidth, int newHeight)
     {
         Texture2D result = new Texture2D(newWidth, newHeight, source.format, false);
         float incX = 1.0f / (float)newWidth;

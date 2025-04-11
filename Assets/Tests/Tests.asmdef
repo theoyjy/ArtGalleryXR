@@ -8,7 +8,10 @@
         "Unity.InputSystem.TestFramework",
         "GameScripts",
         "CustomScripts",
-        "Unity.Netcode.Runtime"
+        "Unity.Netcode.Runtime",
+        "UnityUIExtensions",
+        "Unity.TextMeshPro",
+        "FlexibleColorPicker"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
