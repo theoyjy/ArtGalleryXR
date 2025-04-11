@@ -101,6 +101,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
         /// </summary>
         void Awake()
         {
+#if UNITY_ANDROID
             if (instance != null && instance != this)
             {
                 Destroy(this);
@@ -123,6 +124,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
                 keyboard = Instantiate(m_KeyboardPrefab, m_PlayerRoot).GetComponent<XRKeyboard>();
                 keyboard.gameObject.SetActive(false);
             }
+#endif
         }
 
 
