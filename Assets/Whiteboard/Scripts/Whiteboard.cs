@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using SFB;
+using System;
+using UnityEditor;
 
 public class Whiteboard : MonoBehaviour
 {
@@ -64,14 +66,6 @@ public class Whiteboard : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            SaveTextureToPNG();
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            LoadImageFromFile();
-        }
     }
 
     public void ClearWhiteboard()
@@ -95,38 +89,61 @@ public class Whiteboard : MonoBehaviour
         r.material.mainTexture = texture;
     }
 
-    void SaveTextureToPNG()
+    public void SaveImage()
     {
-        if (texture == null)
+        // Open Save File Dialog
+        string path = GetSaveFilePath();
+        if (!string.IsNullOrEmpty(path))
         {
-            Debug.LogError("No texture assigned!");
-            return;
+            // Handle the texture flipping
+            Texture2D rotatedTexture = HandleFlip(texture);
+            byte[] bytes = rotatedTexture.EncodeToPNG();
+         
+            File.WriteAllBytes(path, bytes);
+            Debug.Log("Easel Painting saved to: " + path);
+#if UNITY_ANDROID
+            RefreshAndroidGallery(path);
+#endif
         }
+    }
 
-        // Create a new texture and set the rotated pixel data.
-        Texture2D rotatedTexture = HandleFlip(texture);
-
-
-        // Encode texture into PNG format
-        byte[] bytes = rotatedTexture.EncodeToPNG();
-#if !SERVER_BUILD && !UNITY_ANDROID
-        // Write to file
-        StandaloneFileBrowserWindows windows = new StandaloneFileBrowserWindows();
-        Debug.Log("projectPath: " + projectPath);
-        string selectedSavePath = windows.SaveFilePanel("Save whiteboard image", projectPath, "Canvas.png", extensionFilters);
-        if (selectedSavePath != null)
-        {
-            File.WriteAllBytes(selectedSavePath, bytes);
-            Debug.Log($"Saved whiteboard image to: {selectedSavePath}");
-        }
+    private string GetSaveFilePath()
+    {
+#if UNITY_EDITOR
+        return EditorUtility.SaveFilePanel("Save Painting", "", "painting.png", "png");
+#elif UNITY_ANDROID
+        return Path.Combine("/storage/emulated/0/Download/", "painting.png"); // Saves to Downloads folder on Quest 2
+#elif !SERVER_BUILD
+        var extensions = new[] { new ExtensionFilter("PNG Files", "png") };
+        string[] paths = StandaloneFileBrowser.SaveFilePanel("Save Painting", "", "painting", extensions);
+        return paths.Length > 0 ? paths[0] : null;
+#else
+        return Application.persistentDataPath + "/painting.png";
 #endif
     }
 
-
-
-    void LoadImageFromFile()
+#if UNITY_ANDROID
+    private void RefreshAndroidGallery(string path)
     {
-#if !SERVER_BUILD && !UNITY_ANDROID
+        AndroidJavaClass player = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        AndroidJavaObject activity = player.GetStatic<AndroidJavaObject>("currentActivity");
+        AndroidJavaObject context = activity.Call<AndroidJavaObject>("getApplicationContext");
+
+        AndroidJavaClass mediaScanner = new AndroidJavaClass("android.media.MediaScannerConnection");
+        mediaScanner.CallStatic("scanFile", context, new string[] { path }, null, null);
+
+        Debug.Log("Android gallery refreshed: " + path);
+    }
+#endif
+
+
+    public void LoadImageFromFile()
+    {
+        string filePath;
+
+#if UNITY_ANDROID
+        filePath = Path.Combine("/storage/emulated/0/Download/", "painting.png");
+#elif !SERVER_BUILD
         StandaloneFileBrowserWindows windows = new StandaloneFileBrowserWindows();
         string[] paths = windows.OpenFilePanel("Select an image", "", extensionFilters, false);
         if (paths.Length > 0 && !string.IsNullOrEmpty(paths[0]))
@@ -139,34 +156,42 @@ public class Whiteboard : MonoBehaviour
             return;
         }
 
-        string filePath = paths[0];
+        filePath = paths[0];
+#endif
         if (!File.Exists(filePath))
         {
             Debug.LogError($"File not found: {filePath}");
             return;
         }
 
-        byte[] fileData = File.ReadAllBytes(filePath);
-        texture = new Texture2D(2048, 2048); // Ensure correct dimensions
-
-        if (texture.LoadImage(fileData)) // Load image data into texture
+        try
         {
-            // Create a new texture and set the rotated pixel data.
-            texture = ResizeTexture(texture, (int)textureSize.x, (int)textureSize.y);
-            texture = HandleFlip(texture);
-            whiteboardRenderer.material.mainTexture = texture;
+            byte[] fileData = File.ReadAllBytes(filePath);
+            texture = new Texture2D(2048, 2048); // Ensure correct dimensions
 
-            // sync texture to server
-            textureSyncManager.SendTextureToServer();
-            Debug.Log($"Loaded whiteboard image from: {filePath}");
+            if (texture.LoadImage(fileData)) // Load image data into texture
+            {
+                // Create a new texture and set the rotated pixel data.
+                texture = ResizeTexture(texture, (int)textureSize.x, (int)textureSize.y);
+                texture = HandleFlip(texture);
+                whiteboardRenderer.material.mainTexture = texture;
+
+                // sync texture to server
+                textureSyncManager.SendTextureToServer();
+                Debug.Log($"Loaded whiteboard image from: {filePath}");
+            }
+            else
+            {
+                Debug.LogError("Failed to load image file.");
+            }
         }
-        else
+        catch (Exception e)
         {
-            Debug.LogError("Failed to load image file.");
+            Debug.LogError($"Failed to read file from: {filePath}\n{e}");
+            return;
         }
-#endif
-
     }
+
 
     public void ApplyTexture(Texture2D newTexture)
     {
@@ -208,23 +233,21 @@ public class Whiteboard : MonoBehaviour
 
     public Texture2D ResizeTexture(Texture2D source, int newWidth, int newHeight)
     {
-        // Create a temporary RenderTexture with the desired dimensions.
-        RenderTexture rt = RenderTexture.GetTemporary(newWidth, newHeight);
-        RenderTexture.active = rt;
+        Texture2D result = new Texture2D(newWidth, newHeight, source.format, false);
+        float incX = 1.0f / (float)newWidth;
+        float incY = 1.0f / (float)newHeight;
 
-        // Copy (blit) the source texture to the RenderTexture.
-        Graphics.Blit(source, rt);
-
-        // Create a new Texture2D to hold the resized image.
-        Texture2D resizedTex = new Texture2D(newWidth, newHeight, source.format, false);
-        // Read the pixel data from the RenderTexture.
-        resizedTex.ReadPixels(new Rect(0, 0, newWidth, newHeight), 0, 0);
-        resizedTex.Apply();
-
-        // Cleanup
-        RenderTexture.active = null;
-        RenderTexture.ReleaseTemporary(rt);
-
-        return resizedTex;
+        for (int y = 0; y < newHeight; y++)
+        {
+            for (int x = 0; x < newWidth; x++)
+            {
+                // Use bilinear interpolation from the source texture
+                Color newColor = source.GetPixelBilinear(x * incX, y * incY);
+                result.SetPixel(x, y, newColor);
+            }
+        }
+        result.Apply();
+        return result;
     }
+
 }
