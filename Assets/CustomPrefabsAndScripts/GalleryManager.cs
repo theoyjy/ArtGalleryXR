@@ -37,6 +37,8 @@ public class GalleryManager : MonoBehaviour
         await LoadGalleryState();
         isLocked = false;
 
+        RefreshGallery();
+
         if (playerIsHost)
         {
             PingLobby();
