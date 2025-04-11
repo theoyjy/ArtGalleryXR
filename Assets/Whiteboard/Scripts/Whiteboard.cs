@@ -109,7 +109,7 @@ public class Whiteboard : MonoBehaviour
 
         // Encode texture into PNG format
         byte[] bytes = rotatedTexture.EncodeToPNG();
-#if !SERVER_BUILD && !UNITY_ANDROID
+#if !SERVER_BUILD && !UNITY_ANDROID && !UNITY_STANDALONE_OSX
         // Write to file
         StandaloneFileBrowserWindows windows = new StandaloneFileBrowserWindows();
         Debug.Log("projectPath: " + projectPath);
@@ -126,7 +126,7 @@ public class Whiteboard : MonoBehaviour
 
     void LoadImageFromFile()
     {
-#if !SERVER_BUILD && !UNITY_ANDROID
+#if !SERVER_BUILD && !UNITY_ANDROID && !UNITY_STANDALONE_OSX
         StandaloneFileBrowserWindows windows = new StandaloneFileBrowserWindows();
         string[] paths = windows.OpenFilePanel("Select an image", "", extensionFilters, false);
         if (paths.Length > 0 && !string.IsNullOrEmpty(paths[0]))
