@@ -191,8 +191,8 @@ public class LobbyPanelControls : MonoBehaviour
             // Send database new lobbyId for this gallery
             Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(newLobbyId);
             // Just use password from database, its already your own
-            handleReturnMessageBox(await lobbyManager.JoinLobby(lobby, gallery.password, false)); // HANDLE RETURN CODE
-        });
+            await lobbyManager.JoinLobby(lobby, gallery.password, false); // HANDLE RETURN CODE handleReturnMessageBox(
+    });
     }
     private void AddGalleryToAllGalleriesList(GalleryDetail gallery, RectTransform galleryList)
     {

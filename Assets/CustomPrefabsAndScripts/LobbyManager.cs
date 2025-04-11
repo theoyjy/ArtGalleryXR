@@ -65,8 +65,8 @@ public class LobbyManager : MonoBehaviour
 
         SharedDataManager.playerIsGuest = isGuest;
 
-        //if (isGuest)
-        //{
+        if (isGuest)
+        {
             if (lobby.HasPassword)
             {
                 joinOptions.Password = password;
@@ -75,21 +75,11 @@ public class LobbyManager : MonoBehaviour
             try
             {
                 await LobbyService.Instance.JoinLobbyByIdAsync(lobby.Id, joinOptions);
-                string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";
-                ushort serverPort = (ushort)(lobby.Data != null && lobby.Data.ContainsKey("serverPort") ? Convert.ToUInt16(lobby.Data["serverPort"].Value) : 0);
-
-                Debug.Log($"Joined lobby with server: {serverIp}:{serverPort}");
-
-                // Save a reference to the selected lobby so that we can access it inside the gallery
-                SharedDataManager.CurrentLobby = lobby;
-                SharedDataManager.isAuthenticated = true;
-                SceneManager.LoadScene("Gallery");
-
-                return status;
             }
             catch (LobbyServiceException ex)
             {
                 Debug.LogError("Failed to join lobby: " + ex);
+
                 switch (ex.Reason)
                 {
                     case LobbyExceptionReason.LobbyFull:
@@ -98,13 +88,25 @@ public class LobbyManager : MonoBehaviour
                         return JoinStatus.GALLERY_OFFLINE;
                     case LobbyExceptionReason.IncorrectPassword:
                         return JoinStatus.WRONG_PASSWORD;
+                    case LobbyExceptionReason.AlreadySubscribedToLobby:
+                        break;
                     default:
                         return JoinStatus.OTHER;
                 }
             }
-        //}
+        }
 
-        //return status;
+        string serverIp = lobby.Data != null && lobby.Data.ContainsKey("serverIP") ? lobby.Data["serverIP"].Value : "Unknown";
+        ushort serverPort = (ushort)(lobby.Data != null && lobby.Data.ContainsKey("serverPort") ? Convert.ToUInt16(lobby.Data["serverPort"].Value) : 0);
+
+        Debug.Log($"Joined lobby with server: {serverIp}:{serverPort}");
+
+        // Save a reference to the selected lobby so that we can access it inside the gallery
+        SharedDataManager.CurrentLobby = lobby;
+        SharedDataManager.isAuthenticated = true;
+        SceneManager.LoadScene("Gallery");
+
+        return status;
     }
 
     // Update is called once per frame
