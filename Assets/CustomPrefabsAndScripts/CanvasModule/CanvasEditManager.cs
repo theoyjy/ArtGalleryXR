@@ -95,6 +95,29 @@ public class CanvasEditManager : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        NetworkObject player = GetCurrentPlayer();
+        if (player == null)
+        {
+            Debug.Log("No local player exit editing");
+            return;
+        }
+
+        Camera playerCamera = player.GetComponentInChildren<Camera>();
+
+        if (other.CompareTag("Player"))
+        {
+            Camera cam = other.GetComponentInChildren<Camera>();
+            if (playerCamera != cam)
+            {
+                Debug.Log("This is not the local player's camera");
+                return;
+            }
+        }
+        else
+        {
+            Debug.Log("Trigger exit with: " + other.tag);
+            return;
+        }
 
         EditUI.SetActive(false);
         ToolUI.SetActive(false);
