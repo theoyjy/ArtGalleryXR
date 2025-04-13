@@ -18,7 +18,8 @@ public class LobbyManager : MonoBehaviour
         SUCCESS,
         GALLERY_FULL,
         WRONG_PASSWORD,
-        GALLERY_OFFLINE
+        GALLERY_OFFLINE,
+        OTHER
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -78,6 +79,7 @@ public class LobbyManager : MonoBehaviour
             catch (LobbyServiceException ex)
             {
                 Debug.LogError("Failed to join lobby: " + ex);
+
                 switch (ex.Reason)
                 {
                     case LobbyExceptionReason.LobbyFull:
@@ -86,6 +88,10 @@ public class LobbyManager : MonoBehaviour
                         return JoinStatus.GALLERY_OFFLINE;
                     case LobbyExceptionReason.IncorrectPassword:
                         return JoinStatus.WRONG_PASSWORD;
+                    case LobbyExceptionReason.AlreadySubscribedToLobby:
+                        break;
+                    default:
+                        return JoinStatus.OTHER;
                 }
             }
         }

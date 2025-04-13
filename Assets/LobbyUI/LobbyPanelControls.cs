@@ -25,7 +25,6 @@ public class LobbyPanelControls : MonoBehaviour
 
     // <Buttons>
     public Button refreshGalleriesButton;
-    public Button profileButton;
     public Button logoutButton;
     public Button createGalleryButton;
     // </Buttons>
@@ -39,15 +38,19 @@ public class LobbyPanelControls : MonoBehaviour
     private TMP_InputField enterPasswordIF;
     // </Enter Password Elements>
 
+    // <Message Box>
+    private GameObject messageBoxUIPanel;
+    private TMP_Text messageBoxText;
+    private Button messageBoxCloseButton;
+    private MessageBoxControls messageBoxControls;
+    // </Message Box>
+
     /*******************************************/
     private void Start()
     {
         // Attach click events to the buttons
         refreshGalleriesButton = transform.Find("RefreshGalleriesButton").GetComponent<Button>();
         refreshGalleriesButton.onClick.AddListener(OnRefreshGalleriesClicked);
-
-        profileButton = transform.Find("ProfileButton").GetComponent<Button>();
-        profileButton.onClick.AddListener(OnProfileClicked);
 
         logoutButton = transform.Find("LogoutButton").GetComponent<Button>();
         logoutButton.onClick.AddListener(OnLogoutClicked);
@@ -61,6 +64,20 @@ public class LobbyPanelControls : MonoBehaviour
         enterPasswordControls = enterPasswordUIPanel.GetComponent<EnterPasswordPanelControls>();
         if (!enterPasswordControls)
             Debug.LogError("NO ENTER PASSWORD CONTROLS");
+
+        messageBoxUIPanel = transform.parent.Find("MessageBoxPanel").gameObject;
+        if (!messageBoxUIPanel)
+            Debug.LogError("NO MESSAGE BOX UI");
+        messageBoxText = messageBoxUIPanel.transform.Find("MessageText").GetComponent<TMP_Text>();
+        if (!messageBoxText)
+            Debug.LogError("NO MESSAGE BOX TEXT");
+        messageBoxCloseButton = messageBoxUIPanel.transform.Find("CloseButton").GetComponent<Button>();
+        if (!messageBoxCloseButton)
+            Debug.LogError("NO MESSAGE BOX CLOSE BUTTON");
+        messageBoxControls = messageBoxUIPanel.GetComponent<MessageBoxControls>();
+        if (!enterPasswordControls)
+            Debug.LogError("NO MESSAGE BOX CONTROLS");
+        messageBoxUIPanel.SetActive(false);
 
         // Set Button reference (Button is child of enterPasswordUIPanel)
         enterPasswordExitButton = enterPasswordUIPanel.transform.Find("ExitButton").GetComponent<Button>();
@@ -170,8 +187,8 @@ public class LobbyPanelControls : MonoBehaviour
             // Send database new lobbyId for this gallery
             Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(newLobbyId);
             // Just use password from database, its already your own
-            await lobbyManager.JoinLobby(lobby, gallery.password, false); // HANDLE RETURN CODE
-        });
+            await lobbyManager.JoinLobby(lobby, gallery.password, false); // HANDLE RETURN CODE handleReturnMessageBox(
+    });
     }
     private void AddGalleryToAllGalleriesList(GalleryDetail gallery, RectTransform galleryList)
     {
@@ -192,7 +209,7 @@ public class LobbyPanelControls : MonoBehaviour
             Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(gallery.LobbyID);
 
             if (gallery.permission == "public")
-                await lobbyManager.JoinLobby(lobby, "", true); // HANDLE JOIN STATUS RETURN
+                handleReturnMessageBox(await lobbyManager.JoinLobby(lobby, "", true)); // HANDLE JOIN STATUS RETURN
             else
             {
                 enterPasswordUIPanel.SetActive(true);
@@ -202,11 +219,6 @@ public class LobbyPanelControls : MonoBehaviour
                 });
             }
         });
-    }
-
-    private void OnProfileClicked()
-    {
-        Debug.Log("ACK: Clicked on profile button");
     }
 
     private void OnEnterPasswordEnterClicked(Unity.Services.Lobbies.Models.Lobby lobby, GalleryDetail gallery)
@@ -236,8 +248,35 @@ public class LobbyPanelControls : MonoBehaviour
             }
 
             Debug.Log("ACK: Clicked on enter button. Attempting to join with PW: " + password);
-            await lobbyManager.JoinLobby(lobby, password, true); // HANDLE STATUS RETURN
+            handleReturnMessageBox(await lobbyManager.JoinLobby(lobby, password, true)); // HANDLE STATUS RETURN
         });
+    }
+
+    private void handleReturnMessageBox(LobbyManager.JoinStatus returnedStatus)
+    {
+        switch(returnedStatus)
+        {
+            case LobbyManager.JoinStatus.SUCCESS:
+                break;
+
+            case LobbyManager.JoinStatus.WRONG_PASSWORD:
+                messageBoxControls.updateMessageBoxText("Incorrect password entered. Please try again.");
+                messageBoxControls.showMessageBox();
+                break;
+
+            case LobbyManager.JoinStatus.GALLERY_FULL:
+                messageBoxControls.updateMessageBoxText("This gallery is currently full. Please try again later.");
+                messageBoxControls.showMessageBox();
+                break;
+
+            case LobbyManager.JoinStatus.GALLERY_OFFLINE:
+                messageBoxControls.updateMessageBoxText("This gallery is currently offline. Please try again later.");
+                messageBoxControls.showMessageBox();
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void OnEnterPasswordExitClicked()
