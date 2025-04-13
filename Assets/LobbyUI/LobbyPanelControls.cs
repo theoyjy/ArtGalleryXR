@@ -8,11 +8,12 @@ using PlayFab;
 using System.Security.Cryptography;
 using PlayFab.MultiplayerModels;
 using Unity.Services.Lobbies;
+using System.Threading.Tasks;
 
 public class LobbyPanelControls : MonoBehaviour
 {
     //temp code for login
-    public bool IfLogin;
+    //public bool IfLogin;
 
     // Reference to the LobbyManager GameObject
     public LobbyManager lobbyManager;
@@ -45,8 +46,13 @@ public class LobbyPanelControls : MonoBehaviour
     private MessageBoxControls messageBoxControls;
     // </Message Box>
 
+    // <Join/Delete Gallery>
+    private GameObject joinOrDeleteGalleryUIPanel;
+    private JoinOrDeleteGalleryControls joinOrDeleteGalleryControls;
+    // </Join/Delete Gallery>
+
     /*******************************************/
-    private void Start()
+    private async void Start()
     {
         // Attach click events to the buttons
         refreshGalleriesButton = transform.Find("RefreshGalleriesButton").GetComponent<Button>();
@@ -79,6 +85,15 @@ public class LobbyPanelControls : MonoBehaviour
             Debug.LogError("NO MESSAGE BOX CONTROLS");
         messageBoxUIPanel.SetActive(false);
 
+        // Join/delete gallery window
+        joinOrDeleteGalleryUIPanel = transform.parent.Find("JoinOrDeleteGalleryPanel").gameObject;
+        if (!joinOrDeleteGalleryUIPanel)
+            Debug.LogError("NO JOIN/DELETE GALLERY GAME OBJECT");
+        joinOrDeleteGalleryControls = joinOrDeleteGalleryUIPanel.GetComponent<JoinOrDeleteGalleryControls>();
+        if (!joinOrDeleteGalleryControls)
+            Debug.LogError("NO JOIN/DELETE GALLERY CONTROLS");
+        joinOrDeleteGalleryUIPanel.SetActive(false);
+
         // Set Button reference (Button is child of enterPasswordUIPanel)
         enterPasswordExitButton = enterPasswordUIPanel.transform.Find("ExitButton").GetComponent<Button>();
         if (!enterPasswordExitButton)
@@ -96,19 +111,67 @@ public class LobbyPanelControls : MonoBehaviour
 
         enterPasswordUIPanel.SetActive(false);
         enterPasswordIsDisplayed = false;
+
+        // Refresh list at start up
+        await Task.Delay(2000);
+        OnRefreshGalleriesClicked();
     }
-    private async void OnRefreshGalleriesClicked()
+    private void OnRefreshGalleriesClicked()
     {
         ClearContent(availableGalleriesScrollTransform);
+        ClearContent(yourGalleriesScrollTransform);
         Debug.Log("ACK: Clicked on refresh galleries button");
 
         // 1. Get all database galleries
         List<GalleryDetail> allDatabaseGalleries = new List<GalleryDetail>();
         SharedDataManager.GetAllGalleries(
-            onSuccess: (List<GalleryDetail> Galleries) =>
+            onSuccess: async (List<GalleryDetail> Galleries) =>
             {
                 allDatabaseGalleries = Galleries;
                 Debug.Log("Successfull retrieved all galleris from database. Total galleries count: " + Galleries.Count);
+                // Testing
+                string galleriesInfo = "Username:\t\t\tGallery:\n";
+                for (int i = 0; i < allDatabaseGalleries.Count; i++)
+                {
+                    galleriesInfo += i.ToString() + ". " + allDatabaseGalleries[i].OwnID + "\t\t\t" + allDatabaseGalleries[i].GalleryID + "\n";
+                }
+                Debug.LogWarning(galleriesInfo);
+
+                // 2. Get all lobbies
+                List<Unity.Services.Lobbies.Models.Lobby> allAvailableLobbies = await lobbyManager.QueryAvailableLobbies();
+
+                // 3. Find out if a gallery is yours (if it is its inactive, button connection will be to create)
+                string username = SharedDataManager.CurrentUserName;
+                foreach (GalleryDetail gallery in allDatabaseGalleries)
+                {
+                    // If its yours its inactive, add it to your list and connect "createLobby" to click
+                    if (gallery.OwnID == username)
+                        AddGalleryToYourList(gallery, yourGalleriesScrollTransform);
+                    // Else its not yours, find out if its active. If it is, add it to the list and connect private/public check and link pw window if private
+                    else
+                    {
+                        // The active check works as follows: check what the database has stored for this gallery's lobby ID. Then loop through all active lobbies
+                        // if an active lobby ID matches the database lobby ID, then the gallery is active, add it to the list. Else if there is no match in the
+                        // list, the gallery is inactive so don't add it to the list
+                        bool isActive = false;
+                        string currentDatabaseLobbyID = gallery.LobbyID;
+                        foreach (Unity.Services.Lobbies.Models.Lobby currentLobby in allAvailableLobbies)
+                        {
+                            string currentLobbyId = currentLobby.Id;
+                            if (currentLobbyId == currentDatabaseLobbyID)
+                            {
+                                isActive = true;
+                                break;
+                            }
+                        }
+
+                        // Check if a match was found
+                        if (isActive)
+                        {
+                            AddGalleryToAllGalleriesList(gallery, availableGalleriesScrollTransform);
+                        }
+                    }
+                }
             },
             onError: (PlayFabError error) =>
             {
@@ -116,43 +179,6 @@ public class LobbyPanelControls : MonoBehaviour
                 return;
             }
         );
-
-        // 2. Get all lobbies
-        List<Unity.Services.Lobbies.Models.Lobby> allAvailableLobbies = await lobbyManager.QueryAvailableLobbies();
-
-        // 3. Find out if a gallery is yours (if it is its inactive, button connection will be to create)
-        string username = SharedDataManager.CurrentUserName;
-        foreach (GalleryDetail gallery in allDatabaseGalleries)
-        {
-            // If its yours its inactive, add it to your list and connect "createLobby" to click
-            if (gallery.OwnID == username)
-                AddGalleryToYourList(gallery, yourGalleriesScrollTransform);
-            // Else its not yours, find out if its active. If it is, add it to the list and connect private/public check and link pw window if private
-            else
-            {
-                // The active check works as follows: check what the database has stored for this gallery's lobby ID. Then loop through all active lobbies
-                // if an active lobby ID matches the database lobby ID, then the gallery is active, add it to the list. Else if there is no match in the
-                // list, the gallery is inactive so don't add it to the list
-                bool isActive = false;
-                string currentDatabaseLobbyID = gallery.LobbyID;
-                foreach (Unity.Services.Lobbies.Models.Lobby currentLobby in allAvailableLobbies)
-                {
-                    string currentLobbyId = currentLobby.Id;
-                    if (currentLobbyId == currentDatabaseLobbyID)
-                    {
-                        isActive = true; 
-                        break;
-                    }
-                }
-
-                // Check if a match was found
-                if (isActive)
-                {
-                    AddGalleryToAllGalleriesList(gallery, availableGalleriesScrollTransform);
-                }
-            }
-
-        }
     }
 
     public void ClearContent(RectTransform galleryList)
@@ -177,18 +203,42 @@ public class LobbyPanelControls : MonoBehaviour
         text.text = gallery.GalleryID;
 
         // Optionally, add button click listener here
-        newButton.onClick.AddListener(async () => {
-            Debug.Log("Attempting to create new lobby instance for the gallery: " + gallery.GalleryID);
-            string username = SharedDataManager.CurrentUserName;
-            bool isPrivate = gallery.permission == "public" ? false : true;
-            // If its public password is just "" so call below works for both public and private
-            string newLobbyId = await lobbyManager.CreateLobby(gallery.GalleryID, username, gallery.MaxPlayers, isPrivate, gallery.password);
-            SharedDataManager.ChangeLobbyID(gallery.GalleryID, newLobbyId);
-            // Send database new lobbyId for this gallery
-            Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(newLobbyId);
-            // Just use password from database, its already your own
-            await lobbyManager.JoinLobby(lobby, gallery.password, false); // HANDLE RETURN CODE handleReturnMessageBox(
-    });
+        newButton.onClick.AddListener(() => 
+        {
+            // Setup join/delete window: change title to gallery name, connect join/delete buttons appropriately
+            joinOrDeleteGalleryControls.updateTitleText(gallery.GalleryID);
+
+            // If join clicked
+            joinOrDeleteGalleryControls.joinButton.onClick.AddListener(async () =>
+            {
+                Debug.Log("Attempting to create new lobby instance for the gallery: " + gallery.GalleryID);
+                string username = SharedDataManager.CurrentUserName;
+                bool isPrivate = gallery.permission == "public" ? false : true;
+                // If its public password is just "" so call below works for both public and private
+                string newLobbyId = await lobbyManager.CreateLobby(gallery.GalleryID, username, gallery.MaxPlayers, isPrivate, gallery.password);
+                SharedDataManager.ChangeLobbyID(gallery.GalleryID, newLobbyId);
+                // Send database new lobbyId for this gallery
+                Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(newLobbyId);
+                // Just use password from database, its already your own
+                handleReturnMessageBox(await lobbyManager.JoinLobby(lobby, gallery.password, false)); // HANDLE RETURN CODE 
+            });
+
+            // If delete clicked
+            joinOrDeleteGalleryControls.deleteButton.onClick.AddListener(async () =>
+            {
+                SharedDataManager.DeleteGalleryByID(gallery.GalleryID);
+                joinOrDeleteGalleryControls.closeJoinDeleteWindow();
+
+                messageBoxControls.updateMessageBoxText(gallery.GalleryID + " deleted successfully!");
+                messageBoxControls.showMessageBox();
+
+                // Refresh list
+                await Task.Delay(2000);
+                OnRefreshGalleriesClicked();
+            });
+
+            joinOrDeleteGalleryControls.showJoinOrDeleteWindow();
+        });
     }
     private void AddGalleryToAllGalleriesList(GalleryDetail gallery, RectTransform galleryList)
     {
@@ -302,24 +352,24 @@ public class LobbyPanelControls : MonoBehaviour
     }
 
     //playfab login
-    void Login()
-    {
-        var request = new LoginWithCustomIDRequest
-        {
-            CustomId = SystemInfo.deviceUniqueIdentifier,
-            CreateAccount = true
-        };
+    //void Login()
+    //{
+    //    var request = new LoginWithCustomIDRequest
+    //    {
+    //        CustomId = SystemInfo.deviceUniqueIdentifier,
+    //        CreateAccount = true
+    //    };
 
-        PlayFabClientAPI.LoginWithCustomID(request, result =>
-        {
-            Debug.Log("PlayFab login success?");
-            IfLogin = true;
-            SharedDataManager.CurrentUserName = SystemInfo.deviceUniqueIdentifier;
-            // ???????????
-            //TestUpdateSharedGroupData();
-        }, error =>
-        {
-            Debug.LogError("PlayFab login failed: " + error.ErrorMessage);
-        });
-    }
+    //    PlayFabClientAPI.LoginWithCustomID(request, result =>
+    //    {
+    //        Debug.Log("PlayFab login success?");
+    //        IfLogin = true;
+    //        SharedDataManager.CurrentUserName = SystemInfo.deviceUniqueIdentifier;
+    //        // ???????????
+    //        //TestUpdateSharedGroupData();
+    //    }, error =>
+    //    {
+    //        Debug.LogError("PlayFab login failed: " + error.ErrorMessage);
+    //    });
+    //}
 }
