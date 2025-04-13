@@ -25,7 +25,6 @@ public class LobbyPanelControls : MonoBehaviour
 
     // <Buttons>
     public Button refreshGalleriesButton;
-    public Button profileButton;
     public Button logoutButton;
     public Button createGalleryButton;
     // </Buttons>
@@ -52,9 +51,6 @@ public class LobbyPanelControls : MonoBehaviour
         // Attach click events to the buttons
         refreshGalleriesButton = transform.Find("RefreshGalleriesButton").GetComponent<Button>();
         refreshGalleriesButton.onClick.AddListener(OnRefreshGalleriesClicked);
-
-        profileButton = transform.Find("ProfileButton").GetComponent<Button>();
-        profileButton.onClick.AddListener(OnProfileClicked);
 
         logoutButton = transform.Find("LogoutButton").GetComponent<Button>();
         logoutButton.onClick.AddListener(OnLogoutClicked);
@@ -223,13 +219,6 @@ public class LobbyPanelControls : MonoBehaviour
                 });
             }
         });
-    }
-
-    private void OnProfileClicked()
-    {
-        Debug.Log("ACK: Clicked on profile button");
-        messageBoxControls.updateMessageBoxText("TESTING MESSAGE BOX");
-        messageBoxControls.showMessageBox();
     }
 
     private void OnEnterPasswordEnterClicked(Unity.Services.Lobbies.Models.Lobby lobby, GalleryDetail gallery)
