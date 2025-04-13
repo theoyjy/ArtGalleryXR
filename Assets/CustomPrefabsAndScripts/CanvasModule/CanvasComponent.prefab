@@ -278,7 +278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5551651429857113905, guid: e9517ae8974614d47b1fa825ea8b7fe8, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2856750997
+      value: 2959977941
       objectReference: {fileID: 0}
     - target: {fileID: 5551651429857113905, guid: e9517ae8974614d47b1fa825ea8b7fe8, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -1452,6 +1452,30 @@ PrefabInstance:
     - target: {fileID: 3947678459006941733, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3947678459327404646, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnTextSubmitted.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3947678459327404646, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnTextSubmitted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2860784555095415452}
+    - target: {fileID: 3947678459327404646, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnTextSubmitted.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3947678459327404646, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnTextSubmitted.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnInputFieldSubmitted
+      objectReference: {fileID: 0}
+    - target: {fileID: 3947678459327404646, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnTextSubmitted.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StabilityAIImage, CustomScripts
+      objectReference: {fileID: 0}
+    - target: {fileID: 3947678459327404646, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnTextSubmitted.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3947678459527548716, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       propertyPath: m_AnchorMax.y
