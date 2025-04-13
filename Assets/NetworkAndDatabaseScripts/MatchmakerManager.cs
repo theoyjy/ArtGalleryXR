@@ -1,22 +1,10 @@
 using UnityEngine;
-using Unity.Collections;
-//using Unity.Services.Multiplay;
 using Unity.Services.Core;
 using Unity.Services.Matchmaker;
 using Unity.Services.Matchmaker.Models;
-using Unity.Services.Lobbies;
-using Unity.Services.Lobbies.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
-using NUnit.Framework;
-using Unity.VisualScripting;
-using Unity.Netcode;
-using System.Net.Http;
-using System.Collections;
-using UnityEngine.UIElements;
-using TMPro;
-using Unity.Services.Multiplayer;
 
 public class MatchmakerManager : MonoBehaviour
 {
@@ -24,7 +12,6 @@ public class MatchmakerManager : MonoBehaviour
     public string allocatedIpAddress;
     public ushort allocatedPort;
 
-    bool isDeallocating = false;
     public string backfillIpAddress;
     public MultiplayManager mpManager;
     public AuthenticationManager authManager;
@@ -67,7 +54,6 @@ public class MatchmakerManager : MonoBehaviour
             Debug.Log(e);
         }
 
-
         MultiplayAssignment assignment = null;
 
         do
@@ -106,10 +92,6 @@ public class MatchmakerManager : MonoBehaviour
                     throw new InvalidOperationException();
             }
         } while (!isAllocated);
-
-        // mpManager.ipAddress = allocatedIpAddress;
-        // mpManager.port = (ushort)allocatedPort;
-        // mpManager.hasServerData = isAllocated;
 
         return new Tuple<string, ushort>(allocatedIpAddress, allocatedPort);
 

@@ -11,45 +11,50 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using System.Threading.Tasks;
 using Unity.Services.Lobbies.Models;
+using Unity.Collections;
 
 public class MultiplayManager : MonoBehaviour
 {
     public string ipAddress;
     public ushort port;
     public bool hasServerData = false;
-
     private float deallocationTimer = 0f;
     private bool isWaitingForDeallocation = false;
-
     public GalleryManager galleryManager;
-
     public Lobby lobby;
 
 #if SERVER_BUILD
     private IServerQueryHandler serverQueryHandler;
+    private ulong hostClientId = ulong.MaxValue;
+    private bool isHostConnected = true;
 #endif
 
     private async void Start()
     {
 #if SERVER_BUILD
-            Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60;
 
-            await UnityServices.InitializeAsync();
+        await UnityServices.InitializeAsync();
 
-            ServerConfig serverConfig = MultiplayService.Instance.ServerConfig;
-            serverQueryHandler = await MultiplayService.Instance.StartServerQueryHandlerAsync(40, "gallery", "standard", "0", "gallery");
+        ServerConfig serverConfig = MultiplayService.Instance.ServerConfig;
+        serverQueryHandler = await MultiplayService.Instance.StartServerQueryHandlerAsync(40, "gallery", "standard", "0", "gallery");
 
-            if (serverConfig.AllocationId != string.Empty)
-            {
-                NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData("0.0.0.0", serverConfig.Port, "0.0.0.0");
-                NetworkManager.Singleton.StartServer();
+        if (serverConfig.AllocationId != string.Empty)
+        {
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData("0.0.0.0", serverConfig.Port, "0.0.0.0");
+            NetworkManager.Singleton.StartServer();
 
-                await MultiplayService.Instance.ReadyServerForPlayersAsync();
-            }
+            NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnect;
+            NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
+
+            await MultiplayService.Instance.ReadyServerForPlayersAsync();
+        }
 #endif
 
 #if !SERVER_BUILD
         galleryManager = GameObject.Find("GalleryManager").GetComponent<GalleryManager>();
+
+        NetworkManager.Singleton.OnClientDisconnectCallback += HandleServerDisconnect;
 
         while (!hasServerData)
         {
@@ -76,10 +81,9 @@ public class MultiplayManager : MonoBehaviour
 #endif
     }
 
+#if SERVER_BUILD
     private async void Update()
     {
-#if SERVER_BUILD
-
         if (serverQueryHandler != null)
         {
             serverQueryHandler.CurrentPlayers = (ushort)NetworkManager.Singleton.ConnectedClientsIds.Count;
@@ -89,7 +93,21 @@ public class MultiplayManager : MonoBehaviour
 
         int playerCount = NetworkManager.Singleton.ConnectedClientsList.Count;
 
-        if (playerCount == 0)
+        if (!isHostConnected)
+        {
+            if (!isWaitingForDeallocation)
+            {
+                isWaitingForDeallocation = true;
+                deallocationTimer = Time.time + 10f;
+            }
+
+            if (Time.time >= deallocationTimer)
+            {
+                Application.Quit();
+                Debug.Log("Deallocating Server because the host left.");
+            }
+        }
+        else if (playerCount == 0)
         {
             if (!isWaitingForDeallocation)
             {
@@ -100,15 +118,15 @@ public class MultiplayManager : MonoBehaviour
             if (Time.time >= deallocationTimer)
             {
                 Application.Quit();
-                Debug.Log("Deallocating Server");
+                Debug.Log("Deallocating Server because no players are connected.");
             }
         }
         else
         {
             isWaitingForDeallocation = false;
         }
-#endif
     }
+#endif
 
     public void JoinToServer(string serverIp, ushort serverPort)
     {
@@ -136,4 +154,38 @@ public class MultiplayManager : MonoBehaviour
             }
         }
     }
+
+#if !SERVER_BUILD
+    private void HandleServerDisconnect(ulong clientId)
+    {
+        if (clientId == NetworkManager.Singleton.LocalClientId)
+        {
+            Debug.LogWarning("Disconnected from server!");
+            galleryManager.LeaveGallery();
+        }
+    }
+#endif
+
+#if SERVER_BUILD
+    private void HandleClientConnect(ulong clientId)
+    {
+        Debug.Log($"Client connected: {clientId}");
+        if (hostClientId == ulong.MaxValue)
+        {
+            hostClientId = clientId;
+            Debug.Log($"Host assigned: ClientId {hostClientId}");
+        }
+    }
+
+    private void HandleClientDisconnect(ulong clientId)
+    {
+        Debug.Log($"Client disconnected: {clientId}");
+
+        if (clientId == hostClientId)
+        {
+            Debug.Log("Host has disconnected. Starting deallocation process.");
+            isHostConnected = false;
+        }
+    }
+#endif
 }
