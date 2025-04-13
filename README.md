@@ -30,6 +30,14 @@ Before you begin building the project, ensure the following steps are completed:
 > - Try **Assets → Reimport All**.
 > - Delete the **Library** folder and re-open the project to force a clean reimport.
 
+### Check the Network Prefabs Asset
+- In the Project Explorer, navigate to `Assets/DefaultNetworkPrefabs.asset` and open its details in the inspector (double-click).
+- In rare instances, the Unity Editor has been found to overwrite this asset.
+- Therefore, verify that only the following 2 entries are present in the list:
+
+  <img width="412" alt="Screenshot 2025-04-13 at 10 11 03 PM" src="https://github.com/user-attachments/assets/4f79640e-be50-4f2d-a48b-26462347253c" />
+
+> If any other entries appear in this list, remove them before you continue.
 ---
 
 ## Setting Up Stability AI API
