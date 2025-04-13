@@ -20,7 +20,6 @@ public class GalleryManager : MonoBehaviour
     private bool isPingingLobby = false;
     public bool isOpen = true;
     // setting this to true will block any user interaction
-    public bool isLocked = true;
 
     public GameObject hooks;
     private List<CanvasUpdater> allCanvasUpdaters = new List<CanvasUpdater>();
@@ -35,7 +34,6 @@ public class GalleryManager : MonoBehaviour
         galleryId = currentLobby.Name;
         playerIsHost = !SharedDataManager.playerIsGuest;
         await LoadGalleryState();
-        isLocked = false;
 
         //RefreshGallery();
         // 启动协程，每3秒循环调用异步函数
@@ -195,8 +193,7 @@ public class GalleryManager : MonoBehaviour
                 continue;
             }
 
-            Updater.texture_url = url;
-            Updater.is_Changed = true;
+            Updater.currentTextureUrl = url;
             Debug.Log($"[{Updater.gameObject.name}] 设置 CanvasUpdater.texture_url 为：{url}");
 
             index++;
