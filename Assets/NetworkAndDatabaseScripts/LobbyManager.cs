@@ -40,6 +40,8 @@ public class LobbyManager : MonoBehaviour
                 await Task.Delay(1000);
             }
 
+            SharedDataManager.isAuthenticated = true;
+
             // TODO: remove
             // await CreateLobby("test", "player", 8, false, "");
             // await Task.Delay(1000);
@@ -103,7 +105,7 @@ public class LobbyManager : MonoBehaviour
 
         // Save a reference to the selected lobby so that we can access it inside the gallery
         SharedDataManager.CurrentLobby = lobby;
-        SharedDataManager.isAuthenticated = true;
+        //SharedDataManager.isAuthenticated = true;
         SceneManager.LoadScene("Gallery");
 
         return status;

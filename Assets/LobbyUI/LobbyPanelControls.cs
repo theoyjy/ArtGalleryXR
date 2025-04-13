@@ -9,12 +9,10 @@ using System.Security.Cryptography;
 using PlayFab.MultiplayerModels;
 using Unity.Services.Lobbies;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class LobbyPanelControls : MonoBehaviour
 {
-    //temp code for login
-    //public bool IfLogin;
-
     // Reference to the LobbyManager GameObject
     public LobbyManager lobbyManager;
 
@@ -28,6 +26,7 @@ public class LobbyPanelControls : MonoBehaviour
     public Button refreshGalleriesButton;
     public Button logoutButton;
     public Button createGalleryButton;
+    public Button exitApplicationButton;
     // </Buttons>
 
     // <Enter Password Elements>
@@ -51,21 +50,40 @@ public class LobbyPanelControls : MonoBehaviour
     private JoinOrDeleteGalleryControls joinOrDeleteGalleryControls;
     // </Join/Delete Gallery>
 
-    /*******************************************/
+    // <Are You Sure>
+    private GameObject areYouSureUIPanel;
+    private AreYouSureControls areYouSureControls;
+    // </Are You Sure>
+
     private async void Start()
     {
         // Attach click events to the buttons
         refreshGalleriesButton = transform.Find("RefreshGalleriesButton").GetComponent<Button>();
-        refreshGalleriesButton.onClick.AddListener(OnRefreshGalleriesClicked);
+        if (refreshGalleriesButton == null)
+            Debug.Log("LOBBY PANEL: NO REFRESH GALLERIES BUTTON");
+        else
+            refreshGalleriesButton.onClick.AddListener(OnRefreshGalleriesClicked);
 
         logoutButton = transform.Find("LogoutButton").GetComponent<Button>();
-        logoutButton.onClick.AddListener(OnLogoutClicked);
+        if (logoutButton == null)
+            Debug.Log("LOBBY PANEL: NO LOGOUT BUTTON");
+        else
+            logoutButton.onClick.AddListener(OnLogoutClicked);
 
         createGalleryButton = transform.Find("CreateNewGalleryButton").GetComponent<Button>();
-        createGalleryButton.onClick.AddListener(OnCreateGalleryClicked);
+        if (createGalleryButton == null)
+            Debug.Log("LOBBY PANEL: NO CREATE GALLERY BUTTON");
+        else
+            createGalleryButton.onClick.AddListener(OnCreateGalleryClicked);
+
+        exitApplicationButton = transform.Find("ExitApplicationButton").GetComponent<Button>();
+        if (logoutButton == null)
+            Debug.Log("LOBBY PANEL: NO LOGOUT BUTTON");
+        else
+            exitApplicationButton.onClick.AddListener(OnExitApplicationClicked);
 
         enterPasswordUIPanel = transform.parent.Find("EnterPasswordPanel").gameObject;
-        if (!enterPasswordUIPanel)
+        if (enterPasswordUIPanel == null)
             Debug.LogError("NO ENTER PASSWORD UI");
         enterPasswordControls = enterPasswordUIPanel.GetComponent<EnterPasswordPanelControls>();
         if (!enterPasswordControls)
@@ -94,6 +112,15 @@ public class LobbyPanelControls : MonoBehaviour
             Debug.LogError("NO JOIN/DELETE GALLERY CONTROLS");
         joinOrDeleteGalleryUIPanel.SetActive(false);
 
+        // Are you sure window
+        areYouSureUIPanel = transform.parent.Find("AreYouSurePanel").gameObject;
+        if (!areYouSureUIPanel)
+            Debug.LogError("NO ARE YOU SURE GAME OBJECT");
+        areYouSureControls = areYouSureUIPanel.GetComponent<AreYouSureControls>();
+        if (!areYouSureControls)
+            Debug.LogError("NO ARE YOU SURE CONTROLS");
+        areYouSureUIPanel.SetActive(false);
+        
         // Set Button reference (Button is child of enterPasswordUIPanel)
         enterPasswordExitButton = enterPasswordUIPanel.transform.Find("ExitButton").GetComponent<Button>();
         if (!enterPasswordExitButton)
@@ -337,39 +364,53 @@ public class LobbyPanelControls : MonoBehaviour
     private void OnLogoutClicked()
     {
         Debug.Log("ACK: Clicked on logout button");
-        // Opens are you sure dialog
-        // areYouSure.Open();
+
+        // Setup are you sure window: set title and text message, remove current listener on yes button, add new ones for yes and no
+        areYouSureControls.updateTitleText("Confirm Logout");
+        areYouSureControls.updateMessageText("Are you sure you want to logout?");
+        areYouSureControls.removeCurrentListeners();
+        areYouSureControls.yesButton.onClick.AddListener(() =>
+        {
+            Debug.Log("Logging user: " + SharedDataManager.CurrentUserName + " out...");
+            PlayFabClientAPI.ForgetAllCredentials();
+            SharedDataManager.CurrentUserName = "";
+#if UNITY_ANDROID
+            SceneManager.LoadScene("LoginUI");
+#else
+            SceneManager.LoadScene("Login");
+#endif
+        });
+        // No button already programmed to close window
+
+        // Display
+        areYouSureControls.showAreYouSureWindow();
+    }
+
+    private void OnExitApplicationClicked()
+    {
+        Debug.Log("ACK: Clicked on exit application button");
+
+        // Setup are you sure window: set title and text message, remove current listener on yes button, add new ones for yes and no
+        areYouSureControls.updateTitleText("Confirm Exit");
+        areYouSureControls.updateMessageText("Are you sure you want to exit the application?");
+        areYouSureControls.removeCurrentListeners();
+        areYouSureControls.yesButton.onClick.AddListener(() =>
+        {
+            Debug.Log("Exiting the application...");
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+            // NEED TO HANDLE ANYTHING ELSE BEFORE THIS? LOGOUT?
+            Application.Quit();
+        });
+        // No button already programmed to close window
+
+        // Display
+        areYouSureControls.showAreYouSureWindow();
     }
 
     private void OnCreateGalleryClicked()
     {
         Debug.Log("ACK: Clicked on create new gallery button");
-        //if (!IfLogin)
-        //{
-        //    Login();
-        //}
-
     }
-
-    //playfab login
-    //void Login()
-    //{
-    //    var request = new LoginWithCustomIDRequest
-    //    {
-    //        CustomId = SystemInfo.deviceUniqueIdentifier,
-    //        CreateAccount = true
-    //    };
-
-    //    PlayFabClientAPI.LoginWithCustomID(request, result =>
-    //    {
-    //        Debug.Log("PlayFab login success?");
-    //        IfLogin = true;
-    //        SharedDataManager.CurrentUserName = SystemInfo.deviceUniqueIdentifier;
-    //        // ???????????
-    //        //TestUpdateSharedGroupData();
-    //    }, error =>
-    //    {
-    //        Debug.LogError("PlayFab login failed: " + error.ErrorMessage);
-    //    });
-    //}
 }
