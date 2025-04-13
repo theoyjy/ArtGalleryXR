@@ -1381,6 +1381,30 @@ PrefabInstance:
       propertyPath: m_PokeFollowTransform
       value: 
       objectReference: {fileID: 4787111635648879042}
+    - target: {fileID: 3894470556369223250, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894470556369223250, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2860784555095415452}
+    - target: {fileID: 3894470556369223250, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894470556369223250, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnInputFieldSubmitted
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894470556369223250, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StabilityAIImage, CustomScripts
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894470556369223250, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3903365757200806068, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       propertyPath: targetRenderer
       value: 
@@ -1585,6 +1609,10 @@ PrefabInstance:
       propertyPath: m_ClampToMaxDistance
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7081161879168457500, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_PokeFollowTransform
+      value: 
+      objectReference: {fileID: 6812567444162469648}
     - target: {fileID: 7358885131615960438, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1812,6 +1840,11 @@ MeshRenderer:
 --- !u!224 &6319208539466661047 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8366736971150213770, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+  m_PrefabInstance: {fileID: 2571212742892404285}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6812567444162469648 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9017844327220437293, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
   m_PrefabInstance: {fileID: 2571212742892404285}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7086280231193675317 stripped
