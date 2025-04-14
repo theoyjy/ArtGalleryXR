@@ -324,7 +324,7 @@ public class LobbyPanelControls : MonoBehaviour
                 return;
             }
 
-            Debug.Log("ACK: Clicked on enter button. Attempting to join with PW: " + password);
+            Debug.Log("ACK: Clicked on enter gallery button."); // Attempting to join with PW: " + password);
             handleReturnMessageBox(await lobbyManager.JoinLobby(lobby, password, true)); // HANDLE STATUS RETURN
         });
     }
