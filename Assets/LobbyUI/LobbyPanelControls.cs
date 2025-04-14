@@ -280,7 +280,7 @@ public class LobbyPanelControls : MonoBehaviour
         TMP_Text text = newButton.GetComponentInChildren<TMP_Text>();
         text.text = gallery.GalleryID;
         
-        // Optionally, add button click listener here
+        // Check if public or private to either join immediately or pass to password window
         newButton.onClick.AddListener(async () => {
             Debug.Log("Attempting to join lobby instance for the gallery: " + gallery.GalleryID);
             Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(gallery.LobbyID);
@@ -361,6 +361,7 @@ public class LobbyPanelControls : MonoBehaviour
         enterPasswordUIPanel.SetActive(false);
         enterPasswordIsDisplayed = false;
     }
+
     private void OnLogoutClicked()
     {
         Debug.Log("ACK: Clicked on logout button");

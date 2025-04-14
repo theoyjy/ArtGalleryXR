@@ -2070,6 +2070,7 @@ GameObject:
   - component: {fileID: 8036078871513956860}
   - component: {fileID: 7425704305638646484}
   - component: {fileID: 5625899308555369454}
+  - component: {fileID: 4783488212958212519}
   m_Layer: 5
   m_Name: PasswordInputField
   m_TagString: Untagged
@@ -2269,6 +2270,18 @@ MonoBehaviour:
   m_OnKeyboardFocusChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4783488212958212519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949547374197076729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad3f9f2778d2f347aca1eca7d015ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2207665312704015579
 GameObject:
   m_ObjectHideFlags: 0
@@ -3630,6 +3643,7 @@ GameObject:
   - component: {fileID: 3197760448249572621}
   - component: {fileID: 1751231968355998041}
   - component: {fileID: 7398036959609871545}
+  - component: {fileID: 5622154414450227008}
   m_Layer: 5
   m_Name: PasswordInputField
   m_TagString: Untagged
@@ -3829,6 +3843,18 @@ MonoBehaviour:
   m_OnKeyboardFocusChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5622154414450227008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3666952532836240197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad3f9f2778d2f347aca1eca7d015ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3685681336309501964
 GameObject:
   m_ObjectHideFlags: 0
@@ -7001,6 +7027,7 @@ GameObject:
   - component: {fileID: 6217765269763525292}
   - component: {fileID: 6146724983214028328}
   - component: {fileID: 4969619318535497168}
+  - component: {fileID: 3668939929825151293}
   m_Layer: 5
   m_Name: GalleryNameInputField
   m_TagString: Untagged
@@ -7200,6 +7227,18 @@ MonoBehaviour:
   m_OnKeyboardFocusChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3668939929825151293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7579778382726134260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad3f9f2778d2f347aca1eca7d015ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7712594708592886120
 GameObject:
   m_ObjectHideFlags: 0
@@ -8636,7 +8675,7 @@ MonoBehaviour:
   refreshGalleriesButton: {fileID: 7130019247657290981}
   logoutButton: {fileID: 4971872940701974555}
   createGalleryButton: {fileID: 3923056281516461652}
-  exitApplicationButton: {fileID: 0}
+  exitApplicationButton: {fileID: 8205672475663996249}
 --- !u!1 &8654490315497659000
 GameObject:
   m_ObjectHideFlags: 0
