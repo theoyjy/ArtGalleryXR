@@ -115,8 +115,10 @@ public class Whiteboard : MonoBehaviour
         return Path.Combine("/storage/emulated/0/Download/", "painting.png"); // Saves to Downloads folder on Quest 2
 #elif !SERVER_BUILD
         var extensions = new[] { new ExtensionFilter("PNG Files", "png") };
-        string[] paths = StandaloneFileBrowser.SaveFilePanel("Save Painting", "", "painting", extensions);
-        return paths.Length > 0 ? paths[0] : null;
+        //string[] paths = StandaloneFileBrowser.SaveFilePanel("Save Painting", "", "painting", extensions);
+        StandaloneFileBrowserWindows windows = new StandaloneFileBrowserWindows();
+        string path = windows.SaveFilePanel("Save Painting", "", "painting", extensions);
+        return path;
 #else
         return Application.persistentDataPath + "/painting.png";
 #endif
