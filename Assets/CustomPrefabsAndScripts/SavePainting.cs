@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.IO;
+using UnityEngine.XR.Interaction.Toolkit.AR;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -29,13 +31,47 @@ public class SavePainting : MonoBehaviour
         string path = GetSaveFilePath();
         if (!string.IsNullOrEmpty(path))
         {
+            // Handle the texture flipping
+            Texture2D rotatedTexture = HandleFlip(paintingTexture);
+            byte[] bytes = rotatedTexture.EncodeToPNG();
+
+            File.WriteAllBytes(path, bytes);
+            Debug.Log("Published painting saved to: " + path);
+
             // Convert to PNG and Save
-            File.WriteAllBytes(path, paintingTexture.EncodeToPNG());
-            Debug.Log("Painting saved to: " + path);
+            //File.WriteAllBytes(path, paintingTexture.EncodeToPNG());
+            //Debug.Log("Painting saved to: " + path);
 #if UNITY_ANDROID
             RefreshAndroidGallery(path);
 #endif
         }
+    }
+    public virtual Texture2D HandleFlip(Texture2D texture)
+    {
+        int width = texture.width;
+        int height = texture.height;
+
+        // Get all pixels from the texture texture.
+        Color[] originalPixels = texture.GetPixels();
+        Color[] rotatedPixels = new Color[originalPixels.Length];
+
+        // Re-map each pixel to its 180?rotated position.
+        // The pixel at (x, y) goes to (width - 1 - x, height - 1 - y).
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                int originalIndex = y * width + x;
+                int rotatedIndex = (height - 1 - y) * width + (width - 1 - x);
+                rotatedPixels[rotatedIndex] = originalPixels[originalIndex];
+            }
+        }
+
+        // Create a new texture and set the rotated pixel data.
+        Texture2D rotatedTexture = new Texture2D(width, height, texture.format, false);
+        rotatedTexture.SetPixels(rotatedPixels);
+        rotatedTexture.Apply();
+        return rotatedTexture;
     }
 
     private Texture2D GetReadableTexture()
@@ -70,8 +106,10 @@ public class SavePainting : MonoBehaviour
         return Path.Combine("/storage/emulated/0/Download/", "painting.png"); // Saves to Downloads folder on Quest 2
 #elif !SERVER_BUILD
         var extensions = new[] { new ExtensionFilter("PNG Files", "png") };
-        string[] paths = StandaloneFileBrowser.SaveFilePanel("Save Painting", "", "painting", extensions);
-        return paths.Length > 0 ? paths[0] : null;
+        string path = StandaloneFileBrowser.SaveFilePanel("Save Painting", "", "painting", extensions);
+        //StandaloneFileBrowserWindows windows = new StandaloneFileBrowserWindows();
+        //string[] paths = windows.OpenFilePanel("Select an image", "", extensions, false);
+        return path;
 #else
         return Application.persistentDataPath + "/painting.png";
 #endif
