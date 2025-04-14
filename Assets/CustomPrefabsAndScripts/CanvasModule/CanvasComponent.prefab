@@ -278,7 +278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5551651429857113905, guid: e9517ae8974614d47b1fa825ea8b7fe8, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2959977941
+      value: 2856750997
       objectReference: {fileID: 0}
     - target: {fileID: 5551651429857113905, guid: e9517ae8974614d47b1fa825ea8b7fe8, type: 3}
       propertyPath: SceneMigrationSynchronization
@@ -352,6 +352,22 @@ PrefabInstance:
     - target: {fileID: 764468070164427977, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       propertyPath: m_Name
       value: Whiteboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101170036398804403, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7086280231193675317}
+    - target: {fileID: 1101170036398804403, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Whiteboard, CustomScripts
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416302950146667742, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7086280231193675317}
+    - target: {fileID: 1416302950146667742, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Whiteboard, CustomScripts
       objectReference: {fileID: 0}
     - target: {fileID: 1920862780993413749, guid: 77110fc5f56a05a43a4eaae7be5c1114, type: 3}
       propertyPath: m_MaxDistance
